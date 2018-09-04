@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F44B5479213C122E0030B370 /* myCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44B5478213C122E0030B370 /* myCell.swift */; };
+		F44B5479213C122E0030B370 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44B5478213C122E0030B370 /* Tile.swift */; };
 		F44B547B213C158E0030B370 /* images in Resources */ = {isa = PBXBuildFile; fileRef = F44B547A213C158E0030B370 /* images */; };
 		F4A31E99213C383700A4EDEC /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A31E98213C383700A4EDEC /* 1.png */; };
 		F4E18B36213AD26E0009763F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E18B35213AD26E0009763F /* AppDelegate.swift */; };
@@ -18,7 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F44B5478213C122E0030B370 /* myCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myCell.swift; sourceTree = "<group>"; };
+		F44B5478213C122E0030B370 /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		F44B547A213C158E0030B370 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; name = images; path = ../../../../Desktop/images; sourceTree = "<group>"; };
 		F4A31E98213C383700A4EDEC /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 1.png; path = ../../../../Desktop/images/1.png; sourceTree = "<group>"; };
 		F4E18B32213AD26E0009763F /* Fuzzy Logic Chess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fuzzy Logic Chess.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,7 +63,7 @@
 			children = (
 				F4E18B35213AD26E0009763F /* AppDelegate.swift */,
 				F4E18B37213AD26E0009763F /* ViewController.swift */,
-				F44B5478213C122E0030B370 /* myCell.swift */,
+				F44B5478213C122E0030B370 /* Tile.swift */,
 				F4E18B39213AD26E0009763F /* Main.storyboard */,
 				F4E18B3C213AD2700009763F /* Assets.xcassets */,
 				F4E18B3E213AD2700009763F /* LaunchScreen.storyboard */,
@@ -148,7 +148,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4E18B38213AD26E0009763F /* ViewController.swift in Sources */,
-				F44B5479213C122E0030B370 /* myCell.swift in Sources */,
+				F44B5479213C122E0030B370 /* Tile.swift in Sources */,
 				F4E18B36213AD26E0009763F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

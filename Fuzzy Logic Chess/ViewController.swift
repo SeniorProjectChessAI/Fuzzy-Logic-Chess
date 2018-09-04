@@ -15,8 +15,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	let dark = UIColor.init(displayP3Red: 54.0/255.0, green: 38.0/255.0, blue: 19.0/255.0, alpha: 1.0)
 	var evenColor = UIColor.init()
 	var oddColor = UIColor.init()
-	var evenCode = "" // used for custom cell images
-	var oddCode = "" // used for custom cell images
+	var evenCode = "" // used for custom tile images
+	var oddCode = "" // used for custom tile images
 	
 	var staggerOn = true
 	var staggerOff = false;
@@ -44,11 +44,11 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 
     // Populate views
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! myCell
-        //cell.myImageView.image = UIImage(named: "images/d1.png")
+        let tile = collectionView.dequeueReusableCell(withReuseIdentifier: "tile", for: indexPath) as! Tile
+        //tile.myImageView.image = UIImage(named: "images/d1.png")
 		
 		
-		cell.myLabel.text = String("")//indexPath.row)
+		tile.myLabel.text = String("")//indexPath.row)
 		
 		// checks if start of new row and turns on staggered colors
 		if(indexPath.row % 8 == 0) {
@@ -59,8 +59,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 				evenColor = dark
 				oddColor = light
 				
-				//evenCode = "d" // used for custom cell images
-				//oddCode = "l" // used for custom cell images
+				//evenCode = "d" // used for custom tile images
+				//oddCode = "l" // used for custom tile images
 			} else {
 				staggerOn = true
 				staggerOff = false
@@ -68,29 +68,29 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 				evenColor = light
 				oddColor = dark
 				
-				//evenCode = "l" // used for custom cell images
-				//oddCode = "d" // used for custom cell images
+				//evenCode = "l" // used for custom tile images
+				//oddCode = "d" // used for custom tile images
 			}
 		}
 
 		
 		if indexPath.row % 2 == 0 {
-			cell.backgroundColor = evenColor
+			tile.backgroundColor = evenColor
 			
-			//cell.myImageView.image = UIImage(named: ("images/cells/\(evenCode)\(arc4random_uniform(8) + 1).png"))
+			//tile.myImageView.image = UIImage(named: ("images/cells/\(evenCode)\(arc4random_uniform(8) + 1).png"))
 			
 		} else {
-			cell.backgroundColor = oddColor
+			tile.backgroundColor = oddColor
 			
-			//cell.myImageView.image = UIImage(named: ("images/cells/\(oddCode)\(arc4random_uniform(8) + 1).png"))
+			//tile.myImageView.image = UIImage(named: ("images/cells/\(oddCode)\(arc4random_uniform(8) + 1).png"))
 		}
 		
 		
-        return cell
+        return tile
     }
 	
-	// Called when cell is clicked
+	// Called when tile is clicked
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		print("Cell clicked: \(indexPath.row)")
+		print("Tile clicked: \(indexPath.row)")
 	}
 }
