@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F44B5479213C122E0030B370 /* myCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44B5478213C122E0030B370 /* myCell.swift */; };
+		F44B547B213C158E0030B370 /* images in Resources */ = {isa = PBXBuildFile; fileRef = F44B547A213C158E0030B370 /* images */; };
+		F4A31E99213C383700A4EDEC /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A31E98213C383700A4EDEC /* 1.png */; };
 		F4E18B36213AD26E0009763F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E18B35213AD26E0009763F /* AppDelegate.swift */; };
 		F4E18B38213AD26E0009763F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E18B37213AD26E0009763F /* ViewController.swift */; };
 		F4E18B3B213AD26E0009763F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4E18B39213AD26E0009763F /* Main.storyboard */; };
@@ -15,6 +18,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F44B5478213C122E0030B370 /* myCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myCell.swift; sourceTree = "<group>"; };
+		F44B547A213C158E0030B370 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; name = images; path = ../../../../Desktop/images; sourceTree = "<group>"; };
+		F4A31E98213C383700A4EDEC /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 1.png; path = ../../../../Desktop/images/1.png; sourceTree = "<group>"; };
 		F4E18B32213AD26E0009763F /* Fuzzy Logic Chess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fuzzy Logic Chess.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4E18B35213AD26E0009763F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4E18B37213AD26E0009763F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -42,6 +48,7 @@
 				F4E18B33213AD26E0009763F /* Products */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 1;
 		};
 		F4E18B33213AD26E0009763F /* Products */ = {
 			isa = PBXGroup;
@@ -56,10 +63,13 @@
 			children = (
 				F4E18B35213AD26E0009763F /* AppDelegate.swift */,
 				F4E18B37213AD26E0009763F /* ViewController.swift */,
+				F44B5478213C122E0030B370 /* myCell.swift */,
 				F4E18B39213AD26E0009763F /* Main.storyboard */,
 				F4E18B3C213AD2700009763F /* Assets.xcassets */,
 				F4E18B3E213AD2700009763F /* LaunchScreen.storyboard */,
 				F4E18B41213AD2700009763F /* Info.plist */,
+				F4A31E98213C383700A4EDEC /* 1.png */,
+				F44B547A213C158E0030B370 /* images */,
 			);
 			path = "Fuzzy Logic Chess";
 			sourceTree = "<group>";
@@ -122,9 +132,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F44B547B213C158E0030B370 /* images in Resources */,
 				F4E18B40213AD2700009763F /* LaunchScreen.storyboard in Resources */,
 				F4E18B3D213AD2700009763F /* Assets.xcassets in Resources */,
 				F4E18B3B213AD26E0009763F /* Main.storyboard in Resources */,
+				F4A31E99213C383700A4EDEC /* 1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,6 +148,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4E18B38213AD26E0009763F /* ViewController.swift in Sources */,
+				F44B5479213C122E0030B370 /* myCell.swift in Sources */,
 				F4E18B36213AD26E0009763F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -284,6 +297,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "Fuzzy Logic Chess/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -301,6 +315,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "Fuzzy Logic Chess/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
