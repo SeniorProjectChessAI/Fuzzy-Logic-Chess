@@ -1,5 +1,5 @@
 //
-//  myCell.swift
+//  Tile.swift
 //  Fuzzy Logic Chess
 //
 //  Created by Illya Balakin on 9/2/18.
@@ -10,7 +10,8 @@ import UIKit
 
 class Tile: UICollectionViewCell {
     
-    @IBOutlet weak var myImageView: UIImageView!
+	
+	@IBOutlet weak var backgroundImageView: UIImageView!
 	@IBOutlet weak var myLabel: UILabel!
 	
 }

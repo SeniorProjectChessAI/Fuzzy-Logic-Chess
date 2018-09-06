@@ -7,9 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F43D5BB7213F1A8C0010ED2C /* 112.png in Resources */ = {isa = PBXBuildFile; fileRef = F43D5BB6213F1A8C0010ED2C /* 112.png */; };
 		F44B5479213C122E0030B370 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44B5478213C122E0030B370 /* Tile.swift */; };
-		F44B547B213C158E0030B370 /* images in Resources */ = {isa = PBXBuildFile; fileRef = F44B547A213C158E0030B370 /* images */; };
-		F4A31E99213C383700A4EDEC /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A31E98213C383700A4EDEC /* 1.png */; };
 		F4E18B36213AD26E0009763F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E18B35213AD26E0009763F /* AppDelegate.swift */; };
 		F4E18B38213AD26E0009763F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E18B37213AD26E0009763F /* ViewController.swift */; };
 		F4E18B3B213AD26E0009763F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4E18B39213AD26E0009763F /* Main.storyboard */; };
@@ -18,9 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F43D5BB6213F1A8C0010ED2C /* 112.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 112.png; path = ../../../../../Desktop/images/112.png; sourceTree = "<group>"; };
 		F44B5478213C122E0030B370 /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
-		F44B547A213C158E0030B370 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; name = images; path = ../../../../Desktop/images; sourceTree = "<group>"; };
-		F4A31E98213C383700A4EDEC /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 1.png; path = ../../../../Desktop/images/1.png; sourceTree = "<group>"; };
 		F4E18B32213AD26E0009763F /* Fuzzy Logic Chess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fuzzy Logic Chess.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4E18B35213AD26E0009763F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4E18B37213AD26E0009763F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -41,6 +39,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F43D5BB5213F1A560010ED2C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F43D5BB8213F1AA00010ED2C /* tiles */,
+				F43D5BB6213F1A8C0010ED2C /* 112.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		F43D5BB8213F1AA00010ED2C /* tiles */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = tiles;
+			sourceTree = "<group>";
+		};
 		F4E18B29213AD26E0009763F = {
 			isa = PBXGroup;
 			children = (
@@ -61,6 +75,7 @@
 		F4E18B34213AD26E0009763F /* Fuzzy Logic Chess */ = {
 			isa = PBXGroup;
 			children = (
+				F43D5BB5213F1A560010ED2C /* Resources */,
 				F4E18B35213AD26E0009763F /* AppDelegate.swift */,
 				F4E18B37213AD26E0009763F /* ViewController.swift */,
 				F44B5478213C122E0030B370 /* Tile.swift */,
@@ -68,8 +83,6 @@
 				F4E18B3C213AD2700009763F /* Assets.xcassets */,
 				F4E18B3E213AD2700009763F /* LaunchScreen.storyboard */,
 				F4E18B41213AD2700009763F /* Info.plist */,
-				F4A31E98213C383700A4EDEC /* 1.png */,
-				F44B547A213C158E0030B370 /* images */,
 			);
 			path = "Fuzzy Logic Chess";
 			sourceTree = "<group>";
@@ -132,11 +145,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F44B547B213C158E0030B370 /* images in Resources */,
 				F4E18B40213AD2700009763F /* LaunchScreen.storyboard in Resources */,
 				F4E18B3D213AD2700009763F /* Assets.xcassets in Resources */,
+				F43D5BB7213F1A8C0010ED2C /* 112.png in Resources */,
 				F4E18B3B213AD26E0009763F /* Main.storyboard in Resources */,
-				F4A31E99213C383700A4EDEC /* 1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

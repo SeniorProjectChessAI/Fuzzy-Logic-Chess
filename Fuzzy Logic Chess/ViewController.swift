@@ -45,7 +45,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     // Populate views
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let tile = collectionView.dequeueReusableCell(withReuseIdentifier: "tile", for: indexPath) as! Tile
-        //tile.myImageView.image = UIImage(named: "images/d1.png")
+        //tile.backgroundImageView.image = UIImage(named: "images/d1.png")
 		
 		
 		tile.myLabel.text = String("")//indexPath.row)
@@ -77,12 +77,12 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		if indexPath.row % 2 == 0 {
 			tile.backgroundColor = evenColor
 			
-			//tile.myImageView.image = UIImage(named: ("images/cells/\(evenCode)\(arc4random_uniform(8) + 1).png"))
+			//tile.backgroundImageView.image = UIImage(named: ("images/cells/\(evenCode)\(arc4random_uniform(8) + 1).png"))
 			
 		} else {
 			tile.backgroundColor = oddColor
 			
-			//tile.myImageView.image = UIImage(named: ("images/cells/\(oddCode)\(arc4random_uniform(8) + 1).png"))
+			//tile.backgroundImageView.image = UIImage(named: ("images/cells/\(oddCode)\(arc4random_uniform(8) + 1).png"))
 		}
 		
 		
@@ -92,5 +92,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	// Called when tile is clicked
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		print("Tile clicked: \(indexPath.row)")
+		
+		//let indexPath2 = IndexPath(item: indexPath.row - 8, section: 0);
+		
+		collectionView.cellForItem(at: indexPath)?.backgroundColor = UIColor.black
 	}
 }
