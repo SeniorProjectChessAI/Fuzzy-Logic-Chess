@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -37,33 +37,29 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wfZ-7t-ebc">
                                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="asdf" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hF1-5N-i7X">
-                                                    <rect key="frame" x="0.0" y="9" width="34" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lt6-co-wF3">
-                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lt6-co-wF3">
+                                                    <rect key="frame" x="5" y="5" width="40" height="40"/>
                                                 </imageView>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="wfZ-7t-ebc" secondAttribute="bottom" id="3yz-hb-SvU"/>
+                                            <constraint firstItem="lt6-co-wF3" firstAttribute="top" secondItem="3Z2-54-rL9" secondAttribute="top" constant="5" id="4u0-6L-nQQ"/>
                                             <constraint firstAttribute="trailing" secondItem="wfZ-7t-ebc" secondAttribute="trailing" id="7FC-Le-dJn"/>
+                                            <constraint firstAttribute="trailing" secondItem="lt6-co-wF3" secondAttribute="trailing" constant="5" id="959-Zg-36H"/>
                                             <constraint firstItem="wfZ-7t-ebc" firstAttribute="leading" secondItem="3Z2-54-rL9" secondAttribute="leading" id="Pjo-Pl-1y3"/>
                                             <constraint firstItem="wfZ-7t-ebc" firstAttribute="leading" secondItem="3Z2-54-rL9" secondAttribute="leading" id="dvs-oF-QYE"/>
                                             <constraint firstAttribute="bottom" secondItem="wfZ-7t-ebc" secondAttribute="bottom" id="dww-W0-oln"/>
+                                            <constraint firstAttribute="bottom" secondItem="lt6-co-wF3" secondAttribute="bottom" constant="5" id="nkV-ws-TfM"/>
                                             <constraint firstItem="wfZ-7t-ebc" firstAttribute="top" secondItem="3Z2-54-rL9" secondAttribute="top" id="oTG-gU-5dO"/>
                                             <constraint firstItem="wfZ-7t-ebc" firstAttribute="top" secondItem="3Z2-54-rL9" secondAttribute="top" id="pJp-Hr-15L"/>
                                             <constraint firstAttribute="trailing" secondItem="wfZ-7t-ebc" secondAttribute="trailing" id="s1Z-1C-DiG"/>
+                                            <constraint firstItem="lt6-co-wF3" firstAttribute="leading" secondItem="3Z2-54-rL9" secondAttribute="leading" constant="5" id="tPR-EY-sSy"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="backgroundImageView" destination="wfZ-7t-ebc" id="3sw-rm-Ozp"/>
-                                            <outlet property="myLabel" destination="hF1-5N-i7X" id="Z9k-E7-sXx"/>
+                                            <outlet property="foregroundImageView" destination="lt6-co-wF3" id="tbs-Au-AbQ"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
