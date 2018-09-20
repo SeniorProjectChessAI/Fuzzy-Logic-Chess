@@ -11,6 +11,9 @@ import UIKit
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 	
 	@IBOutlet weak var myCollectionView: UICollectionView!
+	
+	var board: Board!
+	
 	let light = UIColor.init(displayP3Red: 142.0/255.0, green: 109.0/255.0, blue: 67/255.0, alpha: 1.0)
 	let dark = UIColor.init(displayP3Red: 54.0/255.0, green: 38.0/255.0, blue: 19.0/255.0, alpha: 1.0)
 	var evenColor = UIColor.init()
@@ -20,6 +23,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	
 	var staggerOn = true
 	var staggerOff = false;
+	
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +38,34 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		layout.minimumLineSpacing = 0
 		
 		myCollectionView.collectionViewLayout = layout
+		
+		board = Board()
+		
+		print("view did load")
+		
+		myCollectionView.reloadData()
+		myCollectionView.performBatchUpdates(nil, completion: {
+			(result) in
+			self.setNewBoard()
+		})
+	
     }
+	
+	func setNewBoard() {
+		// set default black pieces
+		for piece in board.blackPieces {
+			print("black index: \(piece.defaultLocation)")
+			let tile = myCollectionView.cellForItem(at: IndexPath(row: piece.defaultLocation, section: 0)) as! Tile
+			tile.foregroundImageView.image = UIImage(named: piece.imageName)
+		}
+		
+		// set default white pieces
+		for piece in board.whitePieces {
+			print("white index: \(piece.defaultLocation)")
+			let tile = myCollectionView.cellForItem(at: IndexPath(row: piece.defaultLocation, section: 0)) as! Tile
+			tile.foregroundImageView.image = UIImage(named: piece.imageName)
+		}
+	}
 
     
     // Number of views in the collectionView
@@ -48,7 +79,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         //tile.backgroundImageView.image = UIImage(named: "images/d1.png")
 		
 		
-		tile.myLabel.text = String("")//indexPath.row)
 		
 		// checks if start of new row and turns on staggered colors
 		if(indexPath.row % 8 == 0) {
@@ -96,5 +126,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		//let indexPath2 = IndexPath(item: indexPath.row - 8, section: 0);
 		
 		collectionView.cellForItem(at: indexPath)?.backgroundColor = UIColor.black
+		
+		
 	}
 }
