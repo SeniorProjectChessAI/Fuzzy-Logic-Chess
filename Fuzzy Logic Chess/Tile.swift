@@ -12,6 +12,7 @@ class Tile: UICollectionViewCell {
     
 	
 	@IBOutlet weak var backgroundImageView: UIImageView!
-	@IBOutlet weak var myLabel: UILabel!
+	@IBOutlet weak var foregroundImageView: UIImageView!
+	
 	
 }
