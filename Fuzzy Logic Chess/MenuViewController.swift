@@ -11,7 +11,7 @@ import UIKit
 class MenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
 
 	//This array of names will apear on the menu
-	let title_arr = ["Home","Welcome to the Fuzzy Chess","How to Play the Game","Difficulty","New Game"]
+	let title_arr = ["Home","Welcome to the Fuzzy Logic Chess","How to Play the Game","Difficulty","New Game"]
 	
 	
     @IBOutlet weak var menu_tableView: UITableView!
