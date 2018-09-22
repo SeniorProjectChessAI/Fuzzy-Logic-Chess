@@ -38,7 +38,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		
 		
 		// divides collectionView into 8 columns and sets spacing
-		let itemSize = UIScreen.main.bounds.width / 8
+		let itemSize = (UIScreen.main.bounds.width - 10) / 8
 		
 		let layout = UICollectionViewFlowLayout()
 		layout.itemSize = CGSize(width: itemSize, height: itemSize)
