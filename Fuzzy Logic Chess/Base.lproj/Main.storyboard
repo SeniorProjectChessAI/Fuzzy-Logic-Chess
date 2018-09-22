@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ugf-Ty-h8X">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ugf-Ty-h8X">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,8 +18,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="KfE-VP-2bj">
-                                <rect key="frame" x="0.0" y="236" width="375" height="331"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="5" y="223.66666666666663" width="365" height="365"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="aBZ-ac-x7Z"/>
+                                    <constraint firstAttribute="width" secondItem="KfE-VP-2bj" secondAttribute="height" multiplier="1:1" id="kIF-kj-cS8"/>
+                                    <constraint firstAttribute="height" priority="750" constant="500" id="xdf-dc-Lpw"/>
+                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="8h1-dk-cpT">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -63,6 +68,11 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="aBZ-ac-x7Z"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="foM-Rc-l8U"/>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="U6S-2U-SYo"/>
@@ -71,10 +81,10 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="W8W-HI-8oh" firstAttribute="bottom" secondItem="KfE-VP-2bj" secondAttribute="bottom" constant="211" id="Tf3-Oa-6O0"/>
-                            <constraint firstItem="KfE-VP-2bj" firstAttribute="leading" secondItem="W8W-HI-8oh" secondAttribute="leading" id="XNb-dK-8j4"/>
-                            <constraint firstItem="KfE-VP-2bj" firstAttribute="trailing" secondItem="W8W-HI-8oh" secondAttribute="trailing" id="dQJ-p7-DKS"/>
-                            <constraint firstItem="KfE-VP-2bj" firstAttribute="top" secondItem="W8W-HI-8oh" secondAttribute="top" constant="148" id="nCk-x4-dTF"/>
+                            <constraint firstItem="KfE-VP-2bj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="W8W-HI-8oh" secondAttribute="leading" constant="5" id="0aS-KI-0x0"/>
+                            <constraint firstItem="KfE-VP-2bj" firstAttribute="top" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="5" id="GK2-cV-0rU"/>
+                            <constraint firstItem="KfE-VP-2bj" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="YRd-BF-l76"/>
+                            <constraint firstItem="KfE-VP-2bj" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="xmX-bu-VH1"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="W8W-HI-8oh"/>
                     </view>
@@ -171,6 +181,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="menu-icon" width="39" height="33"/>
+        <image name="menu-icon" width="32.275863647460938" height="27.310344696044922"/>
     </resources>
 </document>
