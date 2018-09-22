@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		79A9C1F12155D46700E58991 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A9C1F02155D46700E58991 /* MenuViewController.swift */; };
+		79A9C1F32155D49C00E58991 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A9C1F22155D49C00E58991 /* MenuTableViewCell.swift */; };
 		F44B5479213C122E0030B370 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44B5478213C122E0030B370 /* Tile.swift */; };
 		F47E8CD9215440980089B93F /* Piece.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47E8CD8215440980089B93F /* Piece.swift */; };
 		F47E8CDB215440C10089B93F /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47E8CDA215440C10089B93F /* Board.swift */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		79A9C1F02155D46700E58991 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		79A9C1F22155D49C00E58991 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		F44B5478213C122E0030B370 /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		F47E8CD8215440980089B93F /* Piece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Piece.swift; sourceTree = "<group>"; };
 		F47E8CDA215440C10089B93F /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
@@ -65,6 +69,8 @@
 				F4E18B37213AD26E0009763F /* ViewController.swift */,
 				F44B5478213C122E0030B370 /* Tile.swift */,
 				F4E18B39213AD26E0009763F /* Main.storyboard */,
+				79A9C1F02155D46700E58991 /* MenuViewController.swift */,
+				79A9C1F22155D49C00E58991 /* MenuTableViewCell.swift */,
 				F4E18B3C213AD2700009763F /* Assets.xcassets */,
 				F4E18B3E213AD2700009763F /* LaunchScreen.storyboard */,
 				F4E18B41213AD2700009763F /* Info.plist */,
@@ -146,6 +152,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F47E8CD9215440980089B93F /* Piece.swift in Sources */,
+				79A9C1F12155D46700E58991 /* MenuViewController.swift in Sources */,
+				79A9C1F32155D49C00E58991 /* MenuTableViewCell.swift in Sources */,
 				F4E18B38213AD26E0009763F /* ViewController.swift in Sources */,
 				F47E8CDB215440C10089B93F /* Board.swift in Sources */,
 				F44B5479213C122E0030B370 /* Tile.swift in Sources */,

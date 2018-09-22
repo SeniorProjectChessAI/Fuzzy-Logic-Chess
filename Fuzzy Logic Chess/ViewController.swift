@@ -9,8 +9,9 @@
 import UIKit
 
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+	//show the menu 
 	
-	@IBOutlet weak var myCollectionView: UICollectionView!
+    @IBOutlet weak var myCollectionView: UICollectionView!
 	
 	var board: Board!
 	
@@ -24,9 +25,17 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	var staggerOn = true
 	var staggerOff = false;
 	
+	var menu_vc : MenuViewController!
 	
     override func viewDidLoad() {
         super.viewDidLoad()
+		
+		
+		
+		
+		menu_vc = self.storyboard?.instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
+		
+		
 		
 		// divides collectionView into 8 columns and sets spacing
 		let itemSize = UIScreen.main.bounds.width / 8
@@ -129,4 +138,57 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		
 		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//menu button
+	@IBAction func menu_action(_ sender: UIBarButtonItem) {
+		
+		if AppDelegate.menu_bool {
+			//show the menu
+			show_menu()
+		}
+		else{
+			//close the menu
+			close_menu()
+			
+		}
+	}
+	
+	
+	//function to show and open up the menu
+		func show_menu(){
+			
+			UIView.animate(withDuration: 0.3) { ()->Void in
+				
+				self.menu_vc.view.frame = CGRect(x: 0, y: 60, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
+				self.menu_vc.view.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+				self.addChild(self.menu_vc)
+				self.view.addSubview(self.menu_vc.view)
+				AppDelegate.menu_bool = false
+			
+		}
+		
+	}
+	//fucntion to close the menu
+		func close_menu(){
+			
+			
+			UIView.animate(withDuration: 0.3, animations: {()->Void in
+				self.menu_vc.view.frame = CGRect(x: -UIScreen.main.bounds.size.width, y: 60, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)        }) { (finished) in
+					self.menu_vc.view.removeFromSuperview()        }
+			
+			AppDelegate.menu_bool = true
+			
+		}
+	
+	
 }
