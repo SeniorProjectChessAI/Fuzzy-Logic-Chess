@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		79A9C1F12155D46700E58991 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A9C1F02155D46700E58991 /* MenuViewController.swift */; };
 		79A9C1F32155D49C00E58991 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A9C1F22155D49C00E58991 /* MenuTableViewCell.swift */; };
+		C0DF7E8A21571385003711A6 /* Die.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DF7E8921571385003711A6 /* Die.swift */; };
 		F44B5479213C122E0030B370 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44B5478213C122E0030B370 /* Tile.swift */; };
 		F47E8CD9215440980089B93F /* Piece.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47E8CD8215440980089B93F /* Piece.swift */; };
 		F47E8CDB215440C10089B93F /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47E8CDA215440C10089B93F /* Board.swift */; };
@@ -22,6 +23,7 @@
 /* Begin PBXFileReference section */
 		79A9C1F02155D46700E58991 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		79A9C1F22155D49C00E58991 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
+		C0DF7E8921571385003711A6 /* Die.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Die.swift; sourceTree = "<group>"; };
 		F44B5478213C122E0030B370 /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		F47E8CD8215440980089B93F /* Piece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Piece.swift; sourceTree = "<group>"; };
 		F47E8CDA215440C10089B93F /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 				F4E18B41213AD2700009763F /* Info.plist */,
 				F47E8CD8215440980089B93F /* Piece.swift */,
 				F47E8CDA215440C10089B93F /* Board.swift */,
+				C0DF7E8921571385003711A6 /* Die.swift */,
 			);
 			path = "Fuzzy Logic Chess";
 			sourceTree = "<group>";
@@ -157,6 +160,7 @@
 				F4E18B38213AD26E0009763F /* ViewController.swift in Sources */,
 				F47E8CDB215440C10089B93F /* Board.swift in Sources */,
 				F44B5479213C122E0030B370 /* Tile.swift in Sources */,
+				C0DF7E8A21571385003711A6 /* Die.swift in Sources */,
 				F4E18B36213AD26E0009763F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
