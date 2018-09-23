@@ -12,6 +12,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	//show the menu 
 	
     @IBOutlet weak var myCollectionView: UICollectionView!
+	@IBOutlet weak var die_imageView: UIImageView!
 	
 	var board: Board!
 	
@@ -57,7 +58,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 			(result) in
 			self.setNewBoard()
 		})
-	
     }
 	
 	func setNewBoard() {
@@ -124,8 +124,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 			//tile.backgroundImageView.image = UIImage(named: ("images/cells/\(oddCode)\(arc4random_uniform(8) + 1).png"))
 		}
 		
-		
-        return tile
+		return tile
     }
 	
 	// Called when tile is clicked
@@ -138,16 +137,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	//menu button
 	@IBAction func menu_action(_ sender: UIBarButtonItem) {
@@ -163,7 +152,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		}
 	}
 	
-	
 	//function to show and open up the menu
 		func show_menu(){
 			
@@ -178,6 +166,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		}
 		
 	}
+	
 	//fucntion to close the menu
 		func close_menu(){
 			
@@ -190,5 +179,31 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 			
 		}
 	
+	// Called during die roll to display result
+	func displayDie(num: Int) {
+		
+		switch num {
+		case 1:
+			die_imageView.image = die_1
+		case 2:
+			die_imageView.image = die_2
+		case 3:
+			die_imageView.image = die_3
+		case 4:
+			die_imageView.image = die_4
+		case 5:
+			die_imageView.image = die_5
+		case 6:
+			die_imageView.image = die_6
+		default:
+			print("ERROR: Invalid die roll")
+		}
+	}
+	
+	// rolls the 6 sided die
+	func rollDie(){
+		last_rolled = d6.nextInt()
+		displayDie(num: last_rolled)
+	}
 	
 }
