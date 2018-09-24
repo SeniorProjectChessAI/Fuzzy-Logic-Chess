@@ -58,6 +58,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 			(result) in
 			self.setNewBoard()
 		})
+		
+		rollDie() // Rolls die for presentation purposes..
     }
 	
 	func setNewBoard() {
