@@ -17,6 +17,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="White: " borderStyle="roundedRect" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="O3v-A1-Q8H">
+                                <rect key="frame" x="0.0" y="598.66666666666663" width="170" height="64"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" staticText="YES"/>
+                                </accessibility>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="KfE-VP-2bj">
                                 <rect key="frame" x="5" y="223.66666666666663" width="365" height="365"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -86,14 +95,27 @@
                                     <constraint firstAttribute="width" constant="90" id="gdU-fm-GMd"/>
                                 </constraints>
                             </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Black: " borderStyle="roundedRect" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Kw-QK-mmx">
+                                <rect key="frame" x="0.0" y="149.66666666666666" width="162" height="64"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" staticText="YES"/>
+                                </accessibility>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="KfE-VP-2bj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="W8W-HI-8oh" secondAttribute="leading" constant="5" id="0aS-KI-0x0"/>
                             <constraint firstItem="INU-VV-3t3" firstAttribute="bottom" secondItem="KfE-VP-2bj" secondAttribute="top" constant="-5" id="603-QS-oZI"/>
+                            <constraint firstItem="9Kw-QK-mmx" firstAttribute="leading" secondItem="W8W-HI-8oh" secondAttribute="leading" id="6Yv-Hy-CHl"/>
+                            <constraint firstItem="O3v-A1-Q8H" firstAttribute="leading" secondItem="W8W-HI-8oh" secondAttribute="leading" id="7VO-DT-y7b"/>
                             <constraint firstItem="INU-VV-3t3" firstAttribute="centerX" secondItem="KfE-VP-2bj" secondAttribute="centerX" constant="155" id="CEJ-vu-G3Z"/>
                             <constraint firstItem="KfE-VP-2bj" firstAttribute="top" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="5" id="GK2-cV-0rU"/>
+                            <constraint firstItem="KfE-VP-2bj" firstAttribute="top" secondItem="9Kw-QK-mmx" secondAttribute="bottom" constant="10" id="U1w-Gi-Z6Q"/>
                             <constraint firstItem="KfE-VP-2bj" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="YRd-BF-l76"/>
+                            <constraint firstItem="O3v-A1-Q8H" firstAttribute="top" secondItem="KfE-VP-2bj" secondAttribute="bottom" constant="10" id="sMO-ue-Tw4"/>
                             <constraint firstItem="KfE-VP-2bj" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="xmX-bu-VH1"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="W8W-HI-8oh"/>
