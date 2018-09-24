@@ -33,7 +33,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		
 		
 		
-		menu_vc = self.storyboard?.instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
+		menu_vc = self.storyboard?.instantiateViewController(withIdentifier: "MenuViewController") as? MenuViewController
 		
 		
 		
