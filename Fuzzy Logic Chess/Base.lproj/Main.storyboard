@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ugf-Ty-h8X">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ugf-Ty-h8X">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,7 +21,6 @@
                                 <rect key="frame" x="5" y="223.66666666666663" width="365" height="365"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="aBZ-ac-x7Z"/>
                                     <constraint firstAttribute="width" secondItem="KfE-VP-2bj" secondAttribute="height" multiplier="1:1" id="kIF-kj-cS8"/>
                                     <constraint firstAttribute="height" priority="750" constant="500" id="xdf-dc-Lpw"/>
                                 </constraints>
@@ -68,32 +67,33 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="aBZ-ac-x7Z"/>
-                                    </mask>
-                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="foM-Rc-l8U"/>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="U6S-2U-SYo"/>
                                 </connections>
                             </collectionView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="die0" translatesAutoresizingMaskIntoConstraints="NO" id="INU-VV-3t3" userLabel="die">
-                                <rect key="frame" x="270" y="88" width="100" height="100"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="die0" translatesAutoresizingMaskIntoConstraints="NO" id="INU-VV-3t3" userLabel="die">
+                                <rect key="frame" x="254.66666666666666" y="98" width="115.33333333333334" height="115.66666666666669"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="90" id="Cr9-PL-lEw"/>
+                                    <constraint firstAttribute="height" priority="750" constant="90" id="Cr9-PL-lEw"/>
                                     <constraint firstAttribute="width" secondItem="INU-VV-3t3" secondAttribute="height" multiplier="1:1" id="WWD-eW-eD9"/>
                                     <constraint firstAttribute="width" constant="90" id="gdU-fm-GMd"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="gdU-fm-GMd"/>
+                                    </mask>
+                                </variation>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="KfE-VP-2bj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="W8W-HI-8oh" secondAttribute="leading" constant="5" id="0aS-KI-0x0"/>
-                            <constraint firstItem="INU-VV-3t3" firstAttribute="bottom" secondItem="KfE-VP-2bj" secondAttribute="top" constant="-5" id="603-QS-oZI"/>
-                            <constraint firstItem="INU-VV-3t3" firstAttribute="centerX" secondItem="KfE-VP-2bj" secondAttribute="centerX" constant="155" id="CEJ-vu-G3Z"/>
+                            <constraint firstItem="INU-VV-3t3" firstAttribute="top" relation="greaterThanOrEqual" secondItem="W8W-HI-8oh" secondAttribute="top" constant="10" id="0vG-jB-ubx"/>
+                            <constraint firstItem="INU-VV-3t3" firstAttribute="bottom" secondItem="KfE-VP-2bj" secondAttribute="top" constant="-10" id="603-QS-oZI"/>
                             <constraint firstItem="KfE-VP-2bj" firstAttribute="top" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="5" id="GK2-cV-0rU"/>
                             <constraint firstItem="KfE-VP-2bj" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="YRd-BF-l76"/>
+                            <constraint firstItem="W8W-HI-8oh" firstAttribute="trailing" secondItem="INU-VV-3t3" secondAttribute="trailing" constant="5" id="qLm-Sx-b22"/>
                             <constraint firstItem="KfE-VP-2bj" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="xmX-bu-VH1"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="W8W-HI-8oh"/>
@@ -193,6 +193,6 @@
     </scenes>
     <resources>
         <image name="die0" width="2000" height="2000"/>
-        <image name="menu-icon" width="39" height="33"/>
+        <image name="menu-icon" width="32.275863647460938" height="27.310344696044922"/>
     </resources>
 </document>
