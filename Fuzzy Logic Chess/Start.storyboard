@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2KR-zP-u5c">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2KR-zP-u5c">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -32,10 +32,10 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" axis="vertical" distribution="equalCentering" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="bRx-lC-iV9">
-                                <rect key="frame" x="85" y="319" width="205" height="265"/>
+                                <rect key="frame" x="85" y="319" width="215" height="265"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cIM-bE-W2f">
-                                        <rect key="frame" x="4" y="8" width="193" height="109.5"/>
+                                        <rect key="frame" x="4" y="8" width="203" height="115"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="203" id="D0u-Li-42a"/>
                                             <constraint firstAttribute="width" secondItem="cIM-bE-W2f" secondAttribute="height" multiplier="203:115" id="hs2-Kh-bE7"/>
@@ -49,7 +49,7 @@
                                         </connections>
                                     </button>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="N6F-Dn-J58">
-                                        <rect key="frame" x="4" y="118.5" width="193" height="29"/>
+                                        <rect key="frame" x="4" y="124" width="203" height="18"/>
                                         <segments>
                                             <segment title="Easy"/>
                                             <segment title="Medium"/>
@@ -57,7 +57,7 @@
                                         </segments>
                                     </segmentedControl>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hak-XQ-dm9">
-                                        <rect key="frame" x="4" y="147.5" width="193" height="109.5"/>
+                                        <rect key="frame" x="4" y="142" width="203" height="115"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Hak-XQ-dm9" secondAttribute="height" multiplier="203:48" id="cjb-Wy-yLF"/>
                                             <constraint firstAttribute="width" constant="203" id="uGK-i3-bB9"/>
@@ -1510,6 +1510,11 @@ CgkKCQ
                                                 </constraints>
                                             </imageView>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstItem="4op-xK-Smq" firstAttribute="trailing" secondItem="gJx-lV-dK8" secondAttribute="trailingMargin" constant="2" id="Phn-Mw-gmW"/>
+                                            <constraint firstItem="4op-xK-Smq" firstAttribute="leading" secondItem="gJx-lV-dK8" secondAttribute="leadingMargin" constant="2" id="eT3-h5-U3A"/>
+                                            <constraint firstItem="4op-xK-Smq" firstAttribute="bottom" secondItem="gJx-lV-dK8" secondAttribute="bottomMargin" id="v7r-5R-VB0"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
