@@ -25,17 +25,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" text="Fuzzy Logic Chess" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="QIw-PL-PqT">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" text="Fuzzy Logic Chess" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="QIw-PL-PqT">
                                 <rect key="frame" x="67" y="75" width="240" height="210"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="AppleColorEmoji" family="Apple Color Emoji" pointSize="50"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" axis="vertical" distribution="equalCentering" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="bRx-lC-iV9">
-                                <rect key="frame" x="85" y="319" width="205" height="265"/>
+                                <rect key="frame" x="85" y="319" width="215" height="265"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cIM-bE-W2f">
-                                        <rect key="frame" x="4" y="8" width="193" height="109.5"/>
+                                        <rect key="frame" x="4" y="8" width="203" height="115"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="203" id="D0u-Li-42a"/>
                                             <constraint firstAttribute="width" secondItem="cIM-bE-W2f" secondAttribute="height" multiplier="203:115" id="hs2-Kh-bE7"/>
@@ -49,7 +49,7 @@
                                         </connections>
                                     </button>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="N6F-Dn-J58">
-                                        <rect key="frame" x="4" y="118.5" width="193" height="29"/>
+                                        <rect key="frame" x="4" y="124" width="203" height="18"/>
                                         <segments>
                                             <segment title="Easy"/>
                                             <segment title="Medium"/>
@@ -57,7 +57,7 @@
                                         </segments>
                                     </segmentedControl>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hak-XQ-dm9">
-                                        <rect key="frame" x="4" y="147.5" width="193" height="109.5"/>
+                                        <rect key="frame" x="4" y="142" width="203" height="115"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Hak-XQ-dm9" secondAttribute="height" multiplier="203:48" id="cjb-Wy-yLF"/>
                                             <constraint firstAttribute="width" constant="203" id="uGK-i3-bB9"/>
@@ -121,7 +121,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gJx-lV-dK8">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                         <subviews>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fjZ-Hn-fmA">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fjZ-Hn-fmA">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="403"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <attributedString key="attributedText">
