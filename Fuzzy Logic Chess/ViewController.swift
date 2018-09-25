@@ -208,4 +208,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		displayDie(num: last_rolled)
 	}
 	
+	
+
 }

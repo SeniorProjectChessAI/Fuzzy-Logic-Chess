@@ -11,7 +11,7 @@ import UIKit
 class MenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
 
 	//This array of names will apear on the menu
-	let title_arr = ["Home","Welcome to the Fuzzy Logic Chess","How to Play the Game","Difficulty","New Game"]
+	let title_arr = ["Home","How to Play ","Change Difficulty","Restart"]
 	
 	
     @IBOutlet weak var menu_tableView: UITableView!
@@ -35,5 +35,12 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
 	cell.label_title.text = title_arr[indexPath.row]
 	return cell
 }
+
+	func changeView(){
+		let storyboard = UIStoryboard(name: "Start", bundle: nil)
+		let vc = storyboard.instantiateViewController(withIdentifier: "StartController")
+		let appDelegate = UIApplication.shared.delegate as! AppDelegate
+		appDelegate.window?.rootViewController = vc
+	}
 
 }
