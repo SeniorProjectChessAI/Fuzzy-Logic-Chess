@@ -9,10 +9,45 @@
 import UIKit
 
 class Tile: UICollectionViewCell {
-    
+	
 	
 	@IBOutlet weak var backgroundImageView: UIImageView!
 	@IBOutlet weak var foregroundImageView: UIImageView!
+	var location: Int = 0 //default location set to 0
+	var piece: Piece?
+	
+	
+	func setPiece(piece: Piece?) {
+		self.piece = piece
+		self.piece?.changeLocation(location: self.location) // change piece location
+		
+		// checks if piece is in tile and then attempts to set piece image
+		if(hasPiece()) {
+			foregroundImageView.image = UIImage(named: (self.piece?.imageName)!)	// should not abort
+		}
+	}
+	
+	func removePiece() {
+		self.piece = nil
+		self.foregroundImageView.image = nil
+	}
+	
+	func hasPiece() -> Bool {
+		if(piece == nil) {
+			return false
+		} else {
+			return true
+		}
+	}
+	
+	
+	func isEmpty() -> Bool {
+		if (foregroundImageView.image == nil) {
+			return true
+		}
+		else { return false }
+	}
+	
 	
 	
 }
