@@ -8,11 +8,29 @@
 
 class Piece {
 	
+	var type: PieceType
 	var imageName: String
-	var defaultLocation: Int
+	var location: Int
+//	let legalMove: Int = 39
 	
-	init(imageName: String, defaultLocation: Int) {
+	init(type: PieceType, imageName: String, location: Int) {
+		self.type = type
 		self.imageName = imageName
-		self.defaultLocation = defaultLocation
+		self.location = location
 	}
+	
+	// changes location of piece
+	func changeLocation(location: Int) {
+		self.location = location
+	}
+}
+
+
+enum PieceType {
+	case King
+	case Queen
+	case Bishop
+	case Knight
+	case Rook
+	case Pawn
 }
