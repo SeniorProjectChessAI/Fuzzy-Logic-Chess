@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ugf-Ty-h8X">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ugf-Ty-h8X">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -29,7 +29,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="KfE-VP-2bj">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="KfE-VP-2bj" customClass="Board" customModule="Fuzzy_Logic_Chess" customModuleProvider="target">
                                 <rect key="frame" x="5" y="223.66666666666663" width="365" height="365"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -74,8 +74,8 @@
                                             <constraint firstItem="lt6-co-wF3" firstAttribute="leading" secondItem="3Z2-54-rL9" secondAttribute="leading" constant="5" id="tPR-EY-sSy"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="backgroundImageView" destination="wfZ-7t-ebc" id="3sw-rm-Ozp"/>
-                                            <outlet property="foregroundImageView" destination="lt6-co-wF3" id="tbs-Au-AbQ"/>
+                                            <outlet property="backgroundImageView" destination="wfZ-7t-ebc" id="ztD-cm-Pe3"/>
+                                            <outlet property="foregroundImageView" destination="lt6-co-wF3" id="75I-oG-OvA"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -117,8 +117,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="board" destination="KfE-VP-2bj" id="4zg-Ma-din"/>
                         <outlet property="die_imageView" destination="INU-VV-3t3" id="AH0-7a-Nxh"/>
-                        <outlet property="myCollectionView" destination="KfE-VP-2bj" id="Q35-la-ZAD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -203,6 +203,6 @@
     </scenes>
     <resources>
         <image name="die0" width="2000" height="2000"/>
-        <image name="menu-icon" width="39" height="33"/>
+        <image name="menu-icon" width="32.275863647460938" height="27.310344696044922"/>
     </resources>
 </document>
