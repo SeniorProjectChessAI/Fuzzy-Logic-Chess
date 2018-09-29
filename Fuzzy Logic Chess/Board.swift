@@ -6,44 +6,76 @@
 //  Copyright © 2018 KSU CS Seniors Project 6A. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-class Board {
+class Board : UICollectionView {
 	
 	var blackPieces = [Piece]()
 	var whitePieces = [Piece]()
 	
-	init() {
+	override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
+		
+		super.init(frame: frame, collectionViewLayout: layout)
+		
+	}
+	
+	
+	
+	required init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+	}
+	
+	func setup() {
 		
 		// Black pieces
-		blackPieces.append(Piece(imageName: "b rook.png", defaultLocation: 0))
-		blackPieces.append(Piece(imageName: "b knight.png", defaultLocation: 1))
-		blackPieces.append(Piece(imageName: "b bishop.png", defaultLocation: 2))
-		blackPieces.append(Piece(imageName: "b queen.png", defaultLocation: 3))
-		blackPieces.append(Piece(imageName: "b king.png", defaultLocation: 4))
-		blackPieces.append(Piece(imageName: "b bishop.png", defaultLocation: 5))
-		blackPieces.append(Piece(imageName: "b knight.png", defaultLocation: 6))
-		blackPieces.append(Piece(imageName: "b rook.png", defaultLocation: 7))
+		blackPieces.append(Piece(type: PieceType.Rook ,imageName: "b rook.png", location: 0))
+		blackPieces.append(Piece(type: PieceType.Knight ,imageName: "b knight.png", location: 1))
+		blackPieces.append(Piece(type: PieceType.Bishop ,imageName: "b bishop.png", location: 2))
+		blackPieces.append(Piece(type: PieceType.Queen ,imageName: "b queen.png", location: 3))
+		blackPieces.append(Piece(type: PieceType.King ,imageName: "b king.png", location: 4))
+		blackPieces.append(Piece(type: PieceType.Bishop ,imageName: "b bishop.png", location: 5))
+		blackPieces.append(Piece(type: PieceType.Knight ,imageName: "b knight.png", location: 6))
+		blackPieces.append(Piece(type: PieceType.Rook ,imageName: "b rook.png", location: 7))
 		
 		for i in 8...15 {
-			blackPieces.append(Piece(imageName: "b pawn.png", defaultLocation: i))
+			blackPieces.append(Piece(type: PieceType.Pawn, imageName: "b pawn.png", location: i))
 		}
 		
 		
 		// White pieces
 		for i in 48...55 {
-			whitePieces.append(Piece(imageName: "w pawn.png", defaultLocation: i))
+			whitePieces.append(Piece(type: PieceType.Pawn, imageName: "w pawn.png", location: i))
 		}
 		
-		whitePieces.append(Piece(imageName: ("w rook" + ".png"), defaultLocation: 56))
-		whitePieces.append(Piece(imageName: ("w knight" + ".png"), defaultLocation: 57))
-		whitePieces.append(Piece(imageName: ("w bishop" + ".png"), defaultLocation: 58))
-		whitePieces.append(Piece(imageName: ("w queen" + ".png"), defaultLocation: 59))
-		whitePieces.append(Piece(imageName: ("w king" + ".png"), defaultLocation: 60))
-		whitePieces.append(Piece(imageName: ("w bishop" + ".png"), defaultLocation: 61))
-		whitePieces.append(Piece(imageName: ("w knight" + ".png"), defaultLocation: 62))
-		whitePieces.append(Piece(imageName: ("w rook" + ".png"), defaultLocation: 63))
+		whitePieces.append(Piece(type: PieceType.Rook ,imageName: ("w rook" + ".png"), location: 56))
+		whitePieces.append(Piece(type: PieceType.Knight ,imageName: ("w knight" + ".png"), location: 57))
+		whitePieces.append(Piece(type: PieceType.Bishop ,imageName: ("w bishop" + ".png"), location: 58))
+		whitePieces.append(Piece(type: PieceType.Queen ,imageName: ("w queen" + ".png"), location: 59))
+		whitePieces.append(Piece(type: PieceType.King ,imageName: ("w king" + ".png"), location: 60))
+		whitePieces.append(Piece(type: PieceType.Bishop ,imageName: ("w bishop" + ".png"), location: 61))
+		whitePieces.append(Piece(type: PieceType.Knight ,imageName: ("w knight" + ".png"), location: 62))
+		whitePieces.append(Piece(type: PieceType.Rook ,imageName: ("w rook" + ".png"), location: 63))
 	}
 	
+	
+	// Not ideal, but will return nil if no piece at given location is found
+	func getPieceAtLocation(location: Int) -> Piece? {
+		
+		for piece in self.blackPieces {
+			if(location == piece.location) {
+				print("piece found")
+				return piece
+			}
+		}
+		for piece in self.whitePieces {
+			if(location == piece.location) {
+				print("piece found")
+				return piece
+			}
+		}
+		print("piece NOT found")
+		return nil
+
+	}
 	
 }
