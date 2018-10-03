@@ -56,6 +56,14 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lt6-co-wF3">
                                                     <rect key="frame" x="5" y="5" width="40" height="40"/>
                                                 </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xz4-b2-Zq4">
+                                                    <rect key="frame" x="15" y="15" width="20" height="20"/>
+                                                    <color key="tintColor" red="0.41645854918939695" green="1" blue="0.28119279693866317" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" priority="750" constant="40" id="5QA-SX-shA"/>
+                                                        <constraint firstAttribute="width" secondItem="xz4-b2-Zq4" secondAttribute="height" multiplier="1:1" id="WC2-nb-Jpn"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -64,9 +72,13 @@
                                             <constraint firstItem="lt6-co-wF3" firstAttribute="top" secondItem="3Z2-54-rL9" secondAttribute="top" constant="5" id="4u0-6L-nQQ"/>
                                             <constraint firstAttribute="trailing" secondItem="wfZ-7t-ebc" secondAttribute="trailing" id="7FC-Le-dJn"/>
                                             <constraint firstAttribute="trailing" secondItem="lt6-co-wF3" secondAttribute="trailing" constant="5" id="959-Zg-36H"/>
+                                            <constraint firstItem="xz4-b2-Zq4" firstAttribute="top" secondItem="3Z2-54-rL9" secondAttribute="top" constant="15" id="HZm-Tl-raV"/>
                                             <constraint firstItem="wfZ-7t-ebc" firstAttribute="leading" secondItem="3Z2-54-rL9" secondAttribute="leading" id="Pjo-Pl-1y3"/>
+                                            <constraint firstAttribute="bottom" secondItem="xz4-b2-Zq4" secondAttribute="bottom" constant="15" id="ckT-eC-6OV"/>
                                             <constraint firstItem="wfZ-7t-ebc" firstAttribute="leading" secondItem="3Z2-54-rL9" secondAttribute="leading" id="dvs-oF-QYE"/>
                                             <constraint firstAttribute="bottom" secondItem="wfZ-7t-ebc" secondAttribute="bottom" id="dww-W0-oln"/>
+                                            <constraint firstAttribute="trailing" secondItem="xz4-b2-Zq4" secondAttribute="trailing" constant="15" id="ijY-YI-MuC"/>
+                                            <constraint firstItem="xz4-b2-Zq4" firstAttribute="leading" secondItem="3Z2-54-rL9" secondAttribute="leading" constant="15" id="nTk-u1-HkI"/>
                                             <constraint firstAttribute="bottom" secondItem="lt6-co-wF3" secondAttribute="bottom" constant="5" id="nkV-ws-TfM"/>
                                             <constraint firstItem="wfZ-7t-ebc" firstAttribute="top" secondItem="3Z2-54-rL9" secondAttribute="top" id="oTG-gU-5dO"/>
                                             <constraint firstItem="wfZ-7t-ebc" firstAttribute="top" secondItem="3Z2-54-rL9" secondAttribute="top" id="pJp-Hr-15L"/>
@@ -76,6 +88,7 @@
                                         <connections>
                                             <outlet property="backgroundImageView" destination="wfZ-7t-ebc" id="ztD-cm-Pe3"/>
                                             <outlet property="foregroundImageView" destination="lt6-co-wF3" id="75I-oG-OvA"/>
+                                            <outlet property="legalMoveView" destination="xz4-b2-Zq4" id="pag-BB-6S8"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
