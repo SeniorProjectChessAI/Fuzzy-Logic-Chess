@@ -34,14 +34,15 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	// variables for selected/clicked cells
 	var tileIsSelected: Bool = false
 	var previouslySelectedTileColor: UIColor?
-	var previouslySelectedTile: Int?
+	var previouslySelectedTileIndex: Int?
+	var previouslySelectedTileTeam: Team?
+	var legalMoves: [Int] = []
 	
 	
     override func viewDidLoad() {
         super.viewDidLoad()
 		
 		menu_vc = self.storyboard?.instantiateViewController(withIdentifier: "MenuViewController") as? MenuViewController
-		
 		
 		
 		// divides collectionView into 8 columns and sets spacing
@@ -54,34 +55,11 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		layout.minimumLineSpacing = 0
 		
 		board.collectionViewLayout = layout
-
 	
 		board.setup()
 		
-//		board.reloadData()
-//		board.performBatchUpdates(nil, completion: {
-//			(result) in
-//			self.setNewBoard()
-//		})
-		
 		rollDie() // Rolls die for presentation purposes..
     }
-	
-//	func setNewBoard() {
-//		// set default black pieces
-//		for piece in board.blackPieces {
-//			print("black index: \(piece.location)")
-//			let tile = board.cellForItem(at: IndexPath(row: piece.location, section: 0)) as! Tile
-//			tile.foregroundImageView.image = UIImage(named: piece.imageName)
-//		}
-//
-//		// set default white pieces
-//		for piece in board.whitePieces {
-//			print("white index: \(piece.location)")
-//			let tile = board.cellForItem(at: IndexPath(row: piece.location, section: 0)) as! Tile
-//			tile.foregroundImageView.image = UIImage(named: piece.imageName)
-//		}
-//	}
 
     
     // Number of views in the collectionView
@@ -89,20 +67,34 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		return 64
 	}
 
-    // Populate views
+    // Populate UICollectionView with Tile objects
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let tile = collectionView.dequeueReusableCell(withReuseIdentifier: "tile", for: indexPath) as! Tile
 		
 		tile.location = indexPath.row
-		
 		tile.piece = board.getPieceAtLocation(location: indexPath.row)
-		
 		tile.setPiece(piece: board.getPieceAtLocation(location: indexPath.row))
+		tile.setLegalMoveView()
+		setTileColorVariables(index: indexPath.row)
+		
+
+		
+		if indexPath.row % 2 == 0 {
+			tile.backgroundColor = evenColor
+		} else {
+			tile.backgroundColor = oddColor
+		}
 		
 		
+		return tile
+    }
+	
+	
+	// Sets tile color variables according to Tile index
+	func setTileColorVariables(index: Int) {
 		
 		// checks if start of new row and turns on staggered colors
-		if(indexPath.row % 8 == 0) {
+		if(index % 8 == 0) {
 			if(staggerOn) {
 				staggerOn = false
 				staggerOff = true
@@ -123,44 +115,73 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 				//oddCode = "d" // used for custom tile images
 			}
 		}
-
-		
-		if indexPath.row % 2 == 0 {
-			tile.backgroundColor = evenColor
-		} else {
-			tile.backgroundColor = oddColor
-		}
-		
-		return tile
-    }
+	}
 	
 	
-	// Called when tile is clicked
+	// Called when Tile is clicked
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		print("Tile clicked: \(indexPath.row)")
 		
 		let tile = board.cellForItem(at: indexPath) as! Tile
 		
 		if(!tileIsSelected && tile.hasPiece()) {
+			legalMoves = tile.piece?.getLegalMoves() ?? []
+			previouslySelectedTileTeam = tile.piece?.team
+			showLegalMoves()
+			
 			previouslySelectedTileColor = tile.backgroundColor
 			tile.backgroundColor = UIColor.cyan
 			tileIsSelected = true;
-			previouslySelectedTile = indexPath.row
+			previouslySelectedTileIndex = indexPath.row
 		}
-		else if(tileIsSelected && !tile.hasPiece()) {
+		else if(tileIsSelected) {
 			
-			let previousTile = board.cellForItem(at: IndexPath(row: previouslySelectedTile!, section: 0)) as! Tile
+			let previousTile = board.cellForItem(at: IndexPath(row: previouslySelectedTileIndex!, section: 0)) as! Tile
 			
-			// set previously selected piece to newly selected tile
-			tile.setPiece(piece: previousTile.piece)
+			if(previousTile.piece?.getLegalMoves().contains(indexPath.row) ?? false) {
+				// set previously selected piece to newly selected tile
+				tile.setPiece(piece: previousTile.piece)
 				
-			// remove previously selected tile's image and restore original tile color
-			previousTile.removePiece()
-			previousTile.backgroundColor = previouslySelectedTileColor
+				// remove previously selected tile's image and restore original tile color
+				previousTile.removePiece()
+				previousTile.backgroundColor = previouslySelectedTileColor
+				
+				// hide legalMoves indicators
+				hideLegalMoves()
+				
+				// reset variables
+				tileIsSelected = false
+				previouslySelectedTileTeam = nil
+				legalMoves.removeAll()
+				
+				print("piece moved to tile \(indexPath.row) ")
+			}
+		}
+	}
+	
+	
+	func showLegalMoves() {
+			for i in legalMoves {
+				let availableTile = board.cellForItem(at: IndexPath(row: i, section: 0)) as! Tile
+				
+				if(availableTile.hasPiece()) {
+					if(availableTile.piece?.team != previouslySelectedTileTeam) {
+						availableTile.showLegalMoveView(show: true)
+					}
+				}
+				else {
+					availableTile.showLegalMoveView(show: true)
+				}
+			}
+		
+	}
+	
+	
+	func hideLegalMoves() {
+		for i in legalMoves {
+			let availableTile = board.cellForItem(at: IndexPath(row: i, section: 0)) as! Tile
 			
-			tileIsSelected = false
-			
-			print("piece moved to tile \(indexPath.row) ")
+			availableTile.showLegalMoveView(show: false)
 		}
 	}
 
