@@ -16,45 +16,43 @@ class Board : UICollectionView {
 	override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
 		
 		super.init(frame: frame, collectionViewLayout: layout)
-		
 	}
-	
-	
 	
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 	}
 	
+	
 	func setup() {
 		
 		// Black pieces
-		blackPieces.append(Piece(type: PieceType.Rook ,imageName: "b rook.png", location: 0))
-		blackPieces.append(Piece(type: PieceType.Knight ,imageName: "b knight.png", location: 1))
-		blackPieces.append(Piece(type: PieceType.Bishop ,imageName: "b bishop.png", location: 2))
-		blackPieces.append(Piece(type: PieceType.Queen ,imageName: "b queen.png", location: 3))
-		blackPieces.append(Piece(type: PieceType.King ,imageName: "b king.png", location: 4))
-		blackPieces.append(Piece(type: PieceType.Bishop ,imageName: "b bishop.png", location: 5))
-		blackPieces.append(Piece(type: PieceType.Knight ,imageName: "b knight.png", location: 6))
-		blackPieces.append(Piece(type: PieceType.Rook ,imageName: "b rook.png", location: 7))
+		blackPieces.append(Piece(type: PieceType.Rook, team: Team.Black, imageName: "b rook.png", location: 0))
+		blackPieces.append(Piece(type: PieceType.Knight, team: Team.Black, imageName: "b knight.png", location: 1))
+		blackPieces.append(Piece(type: PieceType.Bishop, team: Team.Black, imageName: "b bishop.png", location: 2))
+		blackPieces.append(Piece(type: PieceType.Queen, team: Team.Black, imageName: "b queen.png", location: 3))
+		blackPieces.append(Piece(type: PieceType.King, team: Team.Black, imageName: "b king.png", location: 4))
+		blackPieces.append(Piece(type: PieceType.Bishop, team: Team.Black, imageName: "b bishop.png", location: 5))
+		blackPieces.append(Piece(type: PieceType.Knight, team: Team.Black, imageName: "b knight.png", location: 6))
+		blackPieces.append(Piece(type: PieceType.Rook, team: Team.Black, imageName: "b rook.png", location: 7))
 		
 		for i in 8...15 {
-			blackPieces.append(Piece(type: PieceType.Pawn, imageName: "b pawn.png", location: i))
+			blackPieces.append(Piece(type: PieceType.Pawn, team: Team.Black, imageName: "b pawn.png", location: i))
 		}
 		
 		
 		// White pieces
 		for i in 48...55 {
-			whitePieces.append(Piece(type: PieceType.Pawn, imageName: "w pawn.png", location: i))
+			whitePieces.append(Piece(type: PieceType.Pawn, team: Team.White, imageName: "w pawn.png", location: i))
 		}
 		
-		whitePieces.append(Piece(type: PieceType.Rook ,imageName: ("w rook" + ".png"), location: 56))
-		whitePieces.append(Piece(type: PieceType.Knight ,imageName: ("w knight" + ".png"), location: 57))
-		whitePieces.append(Piece(type: PieceType.Bishop ,imageName: ("w bishop" + ".png"), location: 58))
-		whitePieces.append(Piece(type: PieceType.Queen ,imageName: ("w queen" + ".png"), location: 59))
-		whitePieces.append(Piece(type: PieceType.King ,imageName: ("w king" + ".png"), location: 60))
-		whitePieces.append(Piece(type: PieceType.Bishop ,imageName: ("w bishop" + ".png"), location: 61))
-		whitePieces.append(Piece(type: PieceType.Knight ,imageName: ("w knight" + ".png"), location: 62))
-		whitePieces.append(Piece(type: PieceType.Rook ,imageName: ("w rook" + ".png"), location: 63))
+		whitePieces.append(Piece(type: PieceType.Rook, team: Team.White, imageName: "w rook" + ".png", location: 56))
+		whitePieces.append(Piece(type: PieceType.Knight, team: Team.White, imageName: "w knight" + ".png", location: 57))
+		whitePieces.append(Piece(type: PieceType.Bishop, team: Team.White, imageName: "w bishop" + ".png", location: 58))
+		whitePieces.append(Piece(type: PieceType.Queen, team: Team.White, imageName: "w queen" + ".png", location: 59))
+		whitePieces.append(Piece(type: PieceType.King, team: Team.White, imageName: "w king" + ".png", location: 60))
+		whitePieces.append(Piece(type: PieceType.Bishop, team: Team.White, imageName: "w bishop" + ".png", location: 61))
+		whitePieces.append(Piece(type: PieceType.Knight, team: Team.White, imageName: "w knight" + ".png", location: 62))
+		whitePieces.append(Piece(type: PieceType.Rook, team: Team.White, imageName: "w rook" + ".png", location: 63))
 	}
 	
 	
