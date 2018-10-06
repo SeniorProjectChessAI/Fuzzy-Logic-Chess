@@ -127,7 +127,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		if(!tileIsSelected && tile.hasPiece()) {
 			legalMoves = tile.piece?.getLegalMoves() ?? []
 			previouslySelectedTileTeam = tile.piece?.team
-			showLegalMoves()
+			legalMoves = showLegalMoves();
 			
 			previouslySelectedTileColor = tile.backgroundColor
 			tile.backgroundColor = UIColor.cyan
@@ -138,7 +138,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 			
 			let previousTile = board.cellForItem(at: IndexPath(row: previouslySelectedTileIndex!, section: 0)) as! Tile
 			
-			if(previousTile.piece?.getLegalMoves().contains(indexPath.row) ?? false) {
+			if(legalMoves.contains(indexPath.row) ?? false) {
 				// set previously selected piece to newly selected tile
 				tile.setPiece(piece: previousTile.piece)
 				previousTile.piece?.setHasMoved();
@@ -162,20 +162,32 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	}
 	
 	
-	func showLegalMoves() {
+	func showLegalMoves() -> [Int] {
 			for i in legalMoves {
 				let availableTile = board.cellForItem(at: IndexPath(row: i, section: 0)) as! Tile
 				
 				if(availableTile.hasPiece()) {
 					if(availableTile.piece?.team != previouslySelectedTileTeam) {
 						availableTile.showLegalMoveView(show: true)
+					} else {
+//						print("cell  \(i)  contains a teammate of class \(String(describing: availableTile.piece?.type))"  )
+//						print("this cell's team is of class \(String(describing: previouslySelectedTileTeam))"  )
+						let removeInt: Int  = (legalMoves.firstIndex(of: i)!);
+//
+//
+						//print(removeInt)
+						print("\(legalMoves[removeInt]) removed")
+						legalMoves.remove(at: removeInt)
+						print(legalMoves);
+
+						
 					}
 				}
 				else {
 					availableTile.showLegalMoveView(show: true)
 				}
 			}
-		
+		return legalMoves;
 	}
 	
 	

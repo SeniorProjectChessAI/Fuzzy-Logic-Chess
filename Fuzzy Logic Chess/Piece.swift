@@ -25,7 +25,6 @@ class Piece {
 	func changeLocation(location: Int) {
 		self.location = location
 		
-		// TODO: if PAWN, firstMove = false
 	}
 	
 	// returns list of legal moves
