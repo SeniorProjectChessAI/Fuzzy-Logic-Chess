@@ -141,7 +141,8 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 			if(previousTile.piece?.getLegalMoves().contains(indexPath.row) ?? false) {
 				// set previously selected piece to newly selected tile
 				tile.setPiece(piece: previousTile.piece)
-				
+				previousTile.piece?.setHasMoved();
+
 				// remove previously selected tile's image and restore original tile color
 				previousTile.removePiece()
 				previousTile.backgroundColor = previouslySelectedTileColor
@@ -154,6 +155,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 				previouslySelectedTileTeam = nil
 				legalMoves.removeAll()
 				
+
 				print("piece moved to tile \(indexPath.row) ")
 			}
 		}

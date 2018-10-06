@@ -36,13 +36,13 @@ class Board : UICollectionView {
 		blackPieces.append(Piece(type: PieceType.Rook, team: Team.Black, imageName: "b rook.png", location: 7))
 		
 		for i in 8...15 {
-			blackPieces.append(Piece(type: PieceType.Pawn, team: Team.Black, imageName: "b pawn.png", location: i))
+			blackPieces.append(Pawn(type: PieceType.Pawn, team: Team.Black, imageName: "b pawn.png", location: i))
 		}
 		
 		
 		// White pieces
 		for i in 48...55 {
-			whitePieces.append(Piece(type: PieceType.Pawn, team: Team.White, imageName: "w pawn.png", location: i))
+			whitePieces.append(Pawn(type: PieceType.Pawn, team: Team.White, imageName: "w pawn.png", location: i))
 		}
 		
 		whitePieces.append(Piece(type: PieceType.Rook, team: Team.White, imageName: "w rook" + ".png", location: 56))
