@@ -15,19 +15,17 @@ class Pawn: Piece {
 		
 	}
 	override
-	func getLegalMoves() -> [Int] {
+	func getLegalMoves(board:Board) -> [Int] {
 		var legalMoves = [Int]();
-		legalMoves = super.getLegalMoves();		//gets default moves from superclass
-
+		legalMoves = super.getLegalMoves(board: board);		//gets default moves from superclass
+		let moveVal = (self.team == Team.Black) ? 16 : -16
+		print(moveVal)
+		let pieceFound = board.getPieceAtLocation(location: location + (moveVal/2));
 		
 		// PAWN only - first move
-		if(!hasMoved) {
-			if(self.team == Team.Black) {
-				legalMoves.append(location + 16)
-			}
-			else {
-				legalMoves.append(location - 16)
-			}
+		if(!hasMoved && (pieceFound == nil)) {
+				legalMoves.append(location + moveVal)
+
 		}
 		for i in legalMoves {
 			print("legal move: \(i)")

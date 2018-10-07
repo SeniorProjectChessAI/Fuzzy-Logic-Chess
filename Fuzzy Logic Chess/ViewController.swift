@@ -125,7 +125,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		let tile = board.cellForItem(at: indexPath) as! Tile
 		
 		if(!tileIsSelected && tile.hasPiece()) {
-			legalMoves = tile.piece?.getLegalMoves() ?? []
+			legalMoves = tile.piece?.getLegalMoves(board:board) ?? []
 			previouslySelectedTileTeam = tile.piece?.team
 			legalMoves = showLegalMoves();
 			
@@ -170,15 +170,12 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 					if(availableTile.piece?.team != previouslySelectedTileTeam) {
 						availableTile.showLegalMoveView(show: true)
 					} else {
-//						print("cell  \(i)  contains a teammate of class \(String(describing: availableTile.piece?.type))"  )
-//						print("this cell's team is of class \(String(describing: previouslySelectedTileTeam))"  )
 						let removeInt: Int  = (legalMoves.firstIndex(of: i)!);
-//
-//
+
 						//print(removeInt)
-						print("\(legalMoves[removeInt]) removed")
+						//print("\(legalMoves[removeInt]) removed")
 						legalMoves.remove(at: removeInt)
-						print(legalMoves);
+						//print(legalMoves);
 
 						
 					}
