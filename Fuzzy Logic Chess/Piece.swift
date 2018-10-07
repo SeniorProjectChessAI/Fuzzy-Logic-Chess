@@ -74,90 +74,90 @@ class Piece {
 		// ALL THE WAY TO THE END OF THE BOARD...
 		if(self.type == PieceType.Queen) {
 			
-			var currentTile = location
-		
-			// Horizontal moves - until edge of board
-			// LEFT SIDE
-			if(location % 8 != 0) {
-				repeat {
-					currentTile -= 1
-					legalMoves.append(currentTile)
-				} while(currentTile % 8 != 0)
-			
-				currentTile = location	//reset
-			}
-		
-			// RIGHT SIDE
-			if(location % 8 != 7) {
-				repeat {
-					currentTile += 1
-					legalMoves.append(currentTile)
-				} while(currentTile % 8 != 7)
-			
-				currentTile = location //reset
-			}
-			
-			// VERTICAL moves - until edge of board
-			// TOP
-			if(location >= 8) {
-				repeat {
-					currentTile -= 8
-					legalMoves.append(currentTile)
-				} while (currentTile >= 8)
-			
-				currentTile = location	//reset
-			}
-			
-			// BOTTOM
-			if(location <= 55) {
-				repeat {
-					currentTile += 8
-					legalMoves.append(currentTile)
-				} while(currentTile <= 55)
-				
-				currentTile = location	//reset
-			}
-			
-			// DIAGONAL moves - until edge of board
-			// TOP-LEFT
-			if(location >= 8 && location % 8 != 0) {
-				repeat {
-					currentTile -= 9
-					legalMoves.append(currentTile)
-				} while (currentTile >= 8 && currentTile % 8 != 0)
-				
-				currentTile = location	//reset
-			}
-			
-			// TOP-RIGHT
-			if(location >= 8 && location % 8 != 7) {
-				repeat {
-					currentTile -= 7
-					legalMoves.append(currentTile)
-				} while (currentTile >= 8 && currentTile % 8 != 7)
-				
-				currentTile = location	//reset
-			}
-			
-			// BOTTOM-LEFT
-			if(location <= 55 && location % 8 != 0) {
-				repeat {
-					currentTile += 7
-					legalMoves.append(currentTile)
-				} while (currentTile <= 55 && currentTile % 8 != 0)
-				
-				currentTile = location	//reset
-			}
-			
-			// BOTTOM-RIGHT
-			if(location <= 55 && location % 8 != 7) {
-				repeat {
-					currentTile += 9
-					legalMoves.append(currentTile)
-				} while (currentTile <= 55 && currentTile % 8 != 7)
-				
-				currentTile = location	//reset
-			}
+//			var currentTile = location
+//		
+//			// Horizontal moves - until edge of board
+//			// LEFT SIDE
+//			if(location % 8 != 0) {
+//				repeat {
+//					currentTile -= 1
+//					legalMoves.append(currentTile)
+//				} while(currentTile % 8 != 0)
+//			
+//				currentTile = location	//reset
+//			}
+//		
+//			// RIGHT SIDE
+//			if(location % 8 != 7) {
+//				repeat {
+//					currentTile += 1
+//					legalMoves.append(currentTile)
+//				} while(currentTile % 8 != 7)
+//			
+//				currentTile = location //reset
+//			}
+//			
+//			// VERTICAL moves - until edge of board
+//			// TOP
+//			if(location >= 8) {
+//				repeat {
+//					currentTile -= 8
+//					legalMoves.append(currentTile)
+//				} while (currentTile >= 8)
+//			
+//				currentTile = location	//reset
+//			}
+//			
+//			// BOTTOM
+//			if(location <= 55) {
+//				repeat {
+//					currentTile += 8
+//					legalMoves.append(currentTile)
+//				} while(currentTile <= 55)
+//				
+//				currentTile = location	//reset
+//			}
+//			
+//			// DIAGONAL moves - until edge of board
+//			// TOP-LEFT
+//			if(location >= 8 && location % 8 != 0) {
+//				repeat {
+//					currentTile -= 9
+//					legalMoves.append(currentTile)
+//				} while (currentTile >= 8 && currentTile % 8 != 0)
+//				
+//				currentTile = location	//reset
+//			}
+//			
+//			// TOP-RIGHT
+//			if(location >= 8 && location % 8 != 7) {
+//				repeat {
+//					currentTile -= 7
+//					legalMoves.append(currentTile)
+//				} while (currentTile >= 8 && currentTile % 8 != 7)
+//				
+//				currentTile = location	//reset
+//			}
+//			
+//			// BOTTOM-LEFT
+//			if(location <= 55 && location % 8 != 0) {
+//				repeat {
+//					currentTile += 7
+//					legalMoves.append(currentTile)
+//				} while (currentTile <= 55 && currentTile % 8 != 0)
+//				
+//				currentTile = location	//reset
+//			}
+//			
+//			// BOTTOM-RIGHT
+//			if(location <= 55 && location % 8 != 7) {
+//				repeat {
+//					currentTile += 9
+//					legalMoves.append(currentTile)
+//				} while (currentTile <= 55 && currentTile % 8 != 7)
+//				
+//				currentTile = location	//reset
+//			}
 			
 		}
 		
