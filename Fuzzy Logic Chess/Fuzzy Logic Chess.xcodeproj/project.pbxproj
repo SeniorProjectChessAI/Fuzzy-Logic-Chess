@@ -1,0 +1,392 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2D03F2D32159E6BF002053D7 /* Start.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D03F2D22159E6BF002053D7 /* Start.storyboard */; };
+		2D6A7863215A88C400471AA5 /* capture table.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D6A7862215A88C400471AA5 /* capture table.png */; };
+		2DD7BD90215A03EA00B565C3 /* StartController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD7BD8F215A03EA00B565C3 /* StartController.swift */; };
+		79A9C1F12155D46700E58991 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A9C1F02155D46700E58991 /* MenuViewController.swift */; };
+		79A9C1F32155D49C00E58991 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A9C1F22155D49C00E58991 /* MenuTableViewCell.swift */; };
+		C0DF7E8A21571385003711A6 /* Die.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DF7E8921571385003711A6 /* Die.swift */; };
+		EE745491216AA1A400B6DDE7 /* Noble.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE745490216AA1A400B6DDE7 /* Noble.swift */; };
+		EEB563A4216916080041429F /* Pawn.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB563A3216916080041429F /* Pawn.swift */; };
+		F44B5479213C122E0030B370 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44B5478213C122E0030B370 /* Tile.swift */; };
+		F47E8CD9215440980089B93F /* Piece.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47E8CD8215440980089B93F /* Piece.swift */; };
+		F47E8CDB215440C10089B93F /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47E8CDA215440C10089B93F /* Board.swift */; };
+		F4E18B36213AD26E0009763F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E18B35213AD26E0009763F /* AppDelegate.swift */; };
+		F4E18B38213AD26E0009763F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E18B37213AD26E0009763F /* ViewController.swift */; };
+		F4E18B3B213AD26E0009763F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4E18B39213AD26E0009763F /* Main.storyboard */; };
+		F4E18B3D213AD2700009763F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4E18B3C213AD2700009763F /* Assets.xcassets */; };
+		F4E18B40213AD2700009763F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4E18B3E213AD2700009763F /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2D03F2D22159E6BF002053D7 /* Start.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Start.storyboard; sourceTree = "<group>"; };
+		2D6A7862215A88C400471AA5 /* capture table.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "capture table.png"; sourceTree = "<group>"; };
+		2DD7BD8F215A03EA00B565C3 /* StartController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartController.swift; sourceTree = "<group>"; };
+		79A9C1F02155D46700E58991 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		79A9C1F22155D49C00E58991 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
+		C0DF7E8921571385003711A6 /* Die.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Die.swift; sourceTree = "<group>"; };
+		EE745490216AA1A400B6DDE7 /* Noble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Noble.swift; sourceTree = "<group>"; };
+		EEB563A3216916080041429F /* Pawn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pawn.swift; sourceTree = "<group>"; };
+		F44B5478213C122E0030B370 /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
+		F47E8CD8215440980089B93F /* Piece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Piece.swift; sourceTree = "<group>"; };
+		F47E8CDA215440C10089B93F /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
+		F4E18B32213AD26E0009763F /* Fuzzy Logic Chess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fuzzy Logic Chess.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4E18B35213AD26E0009763F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F4E18B37213AD26E0009763F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F4E18B3A213AD26E0009763F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F4E18B3C213AD2700009763F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F4E18B3F213AD2700009763F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F4E18B41213AD2700009763F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F4E18B2F213AD26E0009763F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F4E18B29213AD26E0009763F = {
+			isa = PBXGroup;
+			children = (
+				F4E18B34213AD26E0009763F /* Fuzzy Logic Chess */,
+				F4E18B33213AD26E0009763F /* Products */,
+			);
+			sourceTree = "<group>";
+			usesTabs = 1;
+		};
+		F4E18B33213AD26E0009763F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F4E18B32213AD26E0009763F /* Fuzzy Logic Chess.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F4E18B34213AD26E0009763F /* Fuzzy Logic Chess */ = {
+			isa = PBXGroup;
+			children = (
+				F4E18B35213AD26E0009763F /* AppDelegate.swift */,
+				F4E18B37213AD26E0009763F /* ViewController.swift */,
+				F44B5478213C122E0030B370 /* Tile.swift */,
+				2D03F2D22159E6BF002053D7 /* Start.storyboard */,
+				F4E18B39213AD26E0009763F /* Main.storyboard */,
+				79A9C1F02155D46700E58991 /* MenuViewController.swift */,
+				2DD7BD8F215A03EA00B565C3 /* StartController.swift */,
+				79A9C1F22155D49C00E58991 /* MenuTableViewCell.swift */,
+				F4E18B3C213AD2700009763F /* Assets.xcassets */,
+				2D6A7862215A88C400471AA5 /* capture table.png */,
+				F4E18B3E213AD2700009763F /* LaunchScreen.storyboard */,
+				F4E18B41213AD2700009763F /* Info.plist */,
+				F47E8CD8215440980089B93F /* Piece.swift */,
+				EE745490216AA1A400B6DDE7 /* Noble.swift */,
+				EEB563A3216916080041429F /* Pawn.swift */,
+				F47E8CDA215440C10089B93F /* Board.swift */,
+				C0DF7E8921571385003711A6 /* Die.swift */,
+			);
+			path = "Fuzzy Logic Chess";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F4E18B31213AD26E0009763F /* Fuzzy Logic Chess */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F4E18B44213AD2700009763F /* Build configuration list for PBXNativeTarget "Fuzzy Logic Chess" */;
+			buildPhases = (
+				F4E18B2E213AD26E0009763F /* Sources */,
+				F4E18B2F213AD26E0009763F /* Frameworks */,
+				F4E18B30213AD26E0009763F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Fuzzy Logic Chess";
+			productName = "Fuzzy Logic Chess";
+			productReference = F4E18B32213AD26E0009763F /* Fuzzy Logic Chess.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F4E18B2A213AD26E0009763F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1000;
+				LastUpgradeCheck = 1000;
+				ORGANIZATIONNAME = "KSU CS Seniors Project 6A";
+				TargetAttributes = {
+					F4E18B31213AD26E0009763F = {
+						CreatedOnToolsVersion = 10.0;
+					};
+				};
+			};
+			buildConfigurationList = F4E18B2D213AD26E0009763F /* Build configuration list for PBXProject "Fuzzy Logic Chess" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F4E18B29213AD26E0009763F;
+			productRefGroup = F4E18B33213AD26E0009763F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F4E18B31213AD26E0009763F /* Fuzzy Logic Chess */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F4E18B30213AD26E0009763F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F4E18B40213AD2700009763F /* LaunchScreen.storyboard in Resources */,
+				2D03F2D32159E6BF002053D7 /* Start.storyboard in Resources */,
+				2D6A7863215A88C400471AA5 /* capture table.png in Resources */,
+				F4E18B3D213AD2700009763F /* Assets.xcassets in Resources */,
+				F4E18B3B213AD26E0009763F /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F4E18B2E213AD26E0009763F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F47E8CD9215440980089B93F /* Piece.swift in Sources */,
+				79A9C1F12155D46700E58991 /* MenuViewController.swift in Sources */,
+				2DD7BD90215A03EA00B565C3 /* StartController.swift in Sources */,
+				EEB563A4216916080041429F /* Pawn.swift in Sources */,
+				79A9C1F32155D49C00E58991 /* MenuTableViewCell.swift in Sources */,
+				F4E18B38213AD26E0009763F /* ViewController.swift in Sources */,
+				F47E8CDB215440C10089B93F /* Board.swift in Sources */,
+				F44B5479213C122E0030B370 /* Tile.swift in Sources */,
+				C0DF7E8A21571385003711A6 /* Die.swift in Sources */,
+				EE745491216AA1A400B6DDE7 /* Noble.swift in Sources */,
+				F4E18B36213AD26E0009763F /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		F4E18B39213AD26E0009763F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F4E18B3A213AD26E0009763F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F4E18B3E213AD2700009763F /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F4E18B3F213AD2700009763F /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F4E18B42213AD2700009763F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F4E18B43213AD2700009763F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F4E18B45213AD2700009763F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = "Fuzzy Logic Chess/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Project-6A.Fuzzy-Logic-Chess";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F4E18B46213AD2700009763F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = "Fuzzy Logic Chess/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Project-6A.Fuzzy-Logic-Chess";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F4E18B2D213AD26E0009763F /* Build configuration list for PBXProject "Fuzzy Logic Chess" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F4E18B42213AD2700009763F /* Debug */,
+				F4E18B43213AD2700009763F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F4E18B44213AD2700009763F /* Build configuration list for PBXNativeTarget "Fuzzy Logic Chess" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F4E18B45213AD2700009763F /* Debug */,
+				F4E18B46213AD2700009763F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F4E18B2A213AD26E0009763F /* Project object */;
+}
