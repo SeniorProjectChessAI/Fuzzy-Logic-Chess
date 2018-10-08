@@ -27,12 +27,12 @@ class Board : UICollectionView {
 		
 		// Black pieces
 		blackPieces.append(Noble(type: PieceType.Rook, team: Team.Black, imageName: "b rook.png", location: 0))
-		blackPieces.append(Piece(type: PieceType.Knight, team: Team.Black, imageName: "b knight.png", location: 1))
+		blackPieces.append(Knight(type: PieceType.Knight, team: Team.Black, imageName: "b knight.png", location: 1))
 		blackPieces.append(Noble(type: PieceType.Bishop, team: Team.Black, imageName: "b bishop.png", location: 2))
 		blackPieces.append(Noble(type: PieceType.Queen, team: Team.Black, imageName: "b queen.png", location: 3))
 		blackPieces.append(Piece(type: PieceType.King, team: Team.Black, imageName: "b king.png", location: 4))
 		blackPieces.append(Noble(type: PieceType.Bishop, team: Team.Black, imageName: "b bishop.png", location: 5))
-		blackPieces.append(Piece(type: PieceType.Knight, team: Team.Black, imageName: "b knight.png", location: 6))
+		blackPieces.append(Knight(type: PieceType.Knight, team: Team.Black, imageName: "b knight.png", location: 6))
 		blackPieces.append(Noble(type: PieceType.Rook, team: Team.Black, imageName: "b rook.png", location: 7))
 		
 		for i in 8...15 {
@@ -46,12 +46,12 @@ class Board : UICollectionView {
 		}
 		
 		whitePieces.append(Noble(type: PieceType.Rook, team: Team.White, imageName: "w rook" + ".png", location: 56))
-		whitePieces.append(Piece(type: PieceType.Knight, team: Team.White, imageName: "w knight" + ".png", location: 57))
+		whitePieces.append(Knight(type: PieceType.Knight, team: Team.White, imageName: "w knight" + ".png", location: 57))
 		whitePieces.append(Noble(type: PieceType.Bishop, team: Team.White, imageName: "w bishop" + ".png", location: 58))
 		whitePieces.append(Noble(type: PieceType.Queen, team: Team.White, imageName: "w queen" + ".png", location: 59))
 		whitePieces.append(Piece(type: PieceType.King, team: Team.White, imageName: "w king" + ".png", location: 60))
 		whitePieces.append(Noble(type: PieceType.Bishop, team: Team.White, imageName: "w bishop" + ".png", location: 61))
-		whitePieces.append(Piece(type: PieceType.Knight, team: Team.White, imageName: "w knight" + ".png", location: 62))
+		whitePieces.append(Knight(type: PieceType.Knight, team: Team.White, imageName: "w knight" + ".png", location: 62))
 		whitePieces.append(Noble(type: PieceType.Rook, team: Team.White, imageName: "w rook" + ".png", location: 63))
 	}
 	

@@ -124,7 +124,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		
 		let tile = board.cellForItem(at: indexPath) as! Tile
 		
-		if(!tileIsSelected && tile.hasPiece()) {
+		if(!tileIsSelected && tile.hasPiece()) {//clicked piece while no cells are highlighted
 			legalMoves = tile.piece?.getLegalMoves(board:board) ?? []
 			previouslySelectedTileTeam = tile.piece?.team
 			legalMoves = showLegalMoves();
@@ -134,10 +134,11 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 			tileIsSelected = true;
 			previouslySelectedTileIndex = indexPath.row
 		}
-		else if(tileIsSelected) {
+		else if(tileIsSelected) {//clicked a piece while some tile is selected
 			
 			let previousTile = board.cellForItem(at: IndexPath(row: previouslySelectedTileIndex!, section: 0)) as! Tile
-			
+			let tile = board.cellForItem(at: indexPath) as! Tile
+
 			if(legalMoves.contains(indexPath.row) ?? false) {
 				// set previously selected piece to newly selected tile
 				tile.setPiece(piece: previousTile.piece)
@@ -157,6 +158,27 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 				
 
 				print("piece moved to tile \(indexPath.row) ")
+			} else if (tile.piece?.team == previouslySelectedTileTeam){
+				print("Switch pieces to move")
+				// remove previously selected tile's image and restore original tile color
+				previousTile.backgroundColor = previouslySelectedTileColor
+				
+				// hide legalMoves indicators
+				hideLegalMoves()
+				
+				// reset variables
+				tileIsSelected = false
+				previouslySelectedTileTeam = nil
+				legalMoves.removeAll()
+				
+				legalMoves = tile.piece?.getLegalMoves(board:board) ?? []
+				previouslySelectedTileTeam = tile.piece?.team
+				legalMoves = showLegalMoves();
+				
+				previouslySelectedTileColor = tile.backgroundColor
+				tile.backgroundColor = UIColor.cyan
+				tileIsSelected = true;
+				previouslySelectedTileIndex = indexPath.row
 			}
 		}
 	}
