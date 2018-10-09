@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ugf-Ty-h8X">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ugf-Ty-h8X">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -189,11 +189,65 @@
                     </view>
                     <connections>
                         <outlet property="menu_tableView" destination="j2S-AY-NKm" id="jfX-kV-zs6"/>
+                        <segue destination="LQ6-VI-Der" kind="show" identifier="segue" id="FE5-7d-j7n"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KVj-HD-fUY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1861.5999999999999" y="130.78817733990149"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="r44-Kl-e3c">
+            <objects>
+                <viewController id="LQ6-VI-Der" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="DTa-v8-dfh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="s1v-Ad-4Ju">
+                                <rect key="frame" x="16" y="44" width="343" height="479"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <mutableString key="text">Fuzzy-Logic Chess©
+A Chess Variant Adding Ideas From WarGames
+How To Play
+CAPTURING PIECES Fuzzy-Logic Chess (F-L Chess) introduces uncertainty to the act of capturing a piece so that players must use reasoning with uncertainty (fuzzy logic: probability) in planning their strategies. The attacking player rolls a die to determine if a capture is successful. The die roll needed to capture a piece depends on the combination of the attacking piece and the defending piece, as shown in the Capture Table. 
+•	When an attack is successful, the attacking piece moves into the square of the captured piece. 
+•	When an attack is unsuccessful, the attacking piece remains in the square it attacked from. 
+•	All pieces may attempt to capture an opposing piece in any direction (left, right, up, down, diagonal). 
+•	Only the Knight may move after an attack. Only the Knight may attack twice. 
+MOVEMENT VARIATIONS F-L Chess adds and varies the standard chess moves: 
+•	in addition to their normal movement, all  pieces may also move to any unoccupied neighboring square in any direction (left, right, up, down, diagonal).  
+•	Pawns are never promoted after reaching the eighth rank (the opponent’s home row).  
+•	For its first move, a Pawn may move two  squares in a straight line.  
+•	The Bishop, Rook and Queen may each  move either diagonally or horizontally in a straight line, and may only move up to four squares (not eight).  
+•	No declaration of “check”  
+	TWO ACTIONS IN A TURN In F-L Chess, moving and capturing are separate actions, and players may take two actions in each turn. So in a single turn, a player may use two actions to:  
+•	Move two different pieces OR  
+•	Move the Bishop, Rook, or Queen twice, and they may change direction for the second move OR  
+•	Move the Knight twice, each action either using its normal chess movement pattern, OR by moving to an adjacent square OR  
+•	Move both the King and a Rook in a castle move OR  
+•	Move one piece and attack with one piece (can be the same or different pieces) OR  
+•	Make two attacks with any two pieces but move none.  
+	THE KNIGHT In F-L Chess, the Knight does not move on top of a piece to capture it as moving and capturing are separate actions. The Knight moves to an unoccupied square as normal, and then, in a second action may attack any adjacent opposing piece in any direction. Note that only the Knight is allowed to use two actions to make two attacks in the same turn when a  second action is available: A Knight may attack the same piece again (when the first attack fails) or may attack a different piece with the second attack. When a Knight makes a successful capture, it moves into the square of the captured piece, from which the Knight may now have different pieces to attack.
+	OPTIONAL FAST GAME The optional fast game allows players at most two minutes per turn. Players may time using any device of their choosing. If a player does not complete his/her turn within two minutes, any remaining actions are forfeit and the opposing player immediately begins his/her turn. In this way, a complete game of Fuzzy-Logic Chess may be played in an hour or less.  
+	
+	This work is protected by the Creative Commons copyright: Share — You are free to copy and redistribute the material in any medium or format. Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. NonCommercial — You may not use the material for commercial purposes. NoDerivatives — If you remix, transform, or build upon the material, you may not distribute the modified material.  </mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="capture table.png" translatesAutoresizingMaskIntoConstraints="NO" id="lWF-Qs-ZKs">
+                                <rect key="frame" x="0.0" y="554" width="375" height="224"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="H8Y-TW-aJu"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BSp-p1-Q4T" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2773.5999999999999" y="136.69950738916256"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="RLo-Ly-a5a">
@@ -215,7 +269,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="capture table.png" width="820" height="544"/>
         <image name="die0" width="2000" height="2000"/>
-        <image name="menu-icon" width="32.275863647460938" height="27.310344696044922"/>
+        <image name="menu-icon" width="39" height="33"/>
     </resources>
 </document>
