@@ -25,6 +25,9 @@ class Board : UICollectionView {
 	
 	func setup() {
 		
+		blackPieces.removeAll()
+		whitePieces.removeAll()
+		
 		// Black pieces
 		blackPieces.append(Noble(type: PieceType.Rook, team: Team.Black, imageName: "b rook.png", location: 0))
 		blackPieces.append(Knight(type: PieceType.Knight, team: Team.Black, imageName: "b knight.png", location: 1))
