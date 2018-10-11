@@ -26,6 +26,8 @@ class Tile: UICollectionViewCell {
 		// checks if piece is in tile and then attempts to set piece image
 		if(hasPiece()) {
 			foregroundImageView.image = UIImage(named: (self.piece?.imageName)!)	// should not abort
+		} else {
+			foregroundImageView.image = nil
 		}
 	}
 	
