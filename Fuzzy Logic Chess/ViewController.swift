@@ -44,22 +44,42 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		
 		menu_vc = self.storyboard?.instantiateViewController(withIdentifier: "MenuViewController") as? MenuViewController
 		
-		
 		// divides collectionView into 8 columns and sets spacing
 		let itemSize = (UIScreen.main.bounds.width - 10) / 8
-		
 		let layout = UICollectionViewFlowLayout()
 		layout.itemSize = CGSize(width: itemSize, height: itemSize)
-		
 		layout.minimumInteritemSpacing = 0
 		layout.minimumLineSpacing = 0
-		
 		board.collectionViewLayout = layout
 	
 		board.setup()
 		
+		startGame()
+		
 		rollDie() // Rolls die for presentation purposes..
     }
+	
+	// sets all game variables and starts the game
+	func startGame() {
+		
+	}
+	
+	func restartGame() {
+		resetBoard()
+		startGame()
+	}
+	
+	// Resets the board
+	func resetBoard() {
+		board.setup()
+		board.reloadData()
+	}
+	
+	// Displays end of game popup view
+	func endGame(winner: Team) {
+		//let winMessage = "\(winner.rawValue) Wins"
+		
+	}
 
     
     // Number of views in the collectionView
@@ -72,12 +92,9 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
         let tile = collectionView.dequeueReusableCell(withReuseIdentifier: "tile", for: indexPath) as! Tile
 		
 		tile.location = indexPath.row
-		tile.piece = board.getPieceAtLocation(location: indexPath.row)
 		tile.setPiece(piece: board.getPieceAtLocation(location: indexPath.row))
 		tile.setLegalMoveView()
 		setTileColorVariables(index: indexPath.row)
-		
-
 		
 		if indexPath.row % 2 == 0 {
 			tile.backgroundColor = evenColor
@@ -184,20 +201,6 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	}
 	
 	
-	// Resets the board
-	func resetBoard() {
-		board.setup()
-		
-		for index in 0...63 {
-			let tile = board.cellForItem(at: IndexPath(row: index, section: 0)) as! Tile
-			
-			tile.location = index
-			tile.piece = board.getPieceAtLocation(location: index)
-			tile.setPiece(piece: board.getPieceAtLocation(location: index))
-			tile.setLegalMoveView()
-			
-		}
-	}
 	
 	
 	func showLegalMoves() -> [Int] {
