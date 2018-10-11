@@ -37,7 +37,7 @@ class MenuTableViewCell: UITableViewCell {
 			case "Restart":
 				appDelegate.window?.rootViewController = vc
 			default:
-				print(selected_text)
+				print("\(selected_text ?? "Error finding selected_text")")
 			}
 		}
 
