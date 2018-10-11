@@ -28,8 +28,10 @@ class Noble: Piece {
 			for _ in 0...3 {
 				currentTile -= 1
 				legalMoves.append(currentTile)
-				let pieceFound = board.getPieceAtLocation(location: currentTile);
-				if(currentTile % 8 == 0 || (pieceFound != nil)){
+				let isPieceFound1 = board.getPieceAtLocation(location: currentTile); //piece in the current tile, possibly nil
+				let isPieceFound2 = board.getPieceAtLocation(location: currentTile-1); //piece in next tile to be checked, possibly nil
+
+				if(currentTile % 8 == 0 || (isPieceFound1 != nil) || (isPieceFound2 != nil)){
 					break;
 				}
 			}
