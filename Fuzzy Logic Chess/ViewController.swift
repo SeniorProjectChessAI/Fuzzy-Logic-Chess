@@ -139,7 +139,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 			let previousTile = board.cellForItem(at: IndexPath(row: previouslySelectedTileIndex!, section: 0)) as! Tile
 			let tile = board.cellForItem(at: indexPath) as! Tile
 
-			if(legalMoves.contains(indexPath.row) ?? false) {
+			if(legalMoves.contains(indexPath.row)) {
 				// set previously selected piece to newly selected tile
 				tile.setPiece(piece: previousTile.piece)
 				previousTile.piece?.setHasMoved();
@@ -180,6 +180,22 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 				tileIsSelected = true;
 				previouslySelectedTileIndex = indexPath.row
 			}
+		}
+	}
+	
+	
+	// Resets the board
+	func resetBoard() {
+		board.setup()
+		
+		for index in 0...63 {
+			let tile = board.cellForItem(at: IndexPath(row: index, section: 0)) as! Tile
+			
+			tile.location = index
+			tile.piece = board.getPieceAtLocation(location: index)
+			tile.setPiece(piece: board.getPieceAtLocation(location: index))
+			tile.setLegalMoveView()
+			
 		}
 	}
 	
