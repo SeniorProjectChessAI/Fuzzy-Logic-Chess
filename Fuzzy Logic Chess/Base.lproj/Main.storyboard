@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ugf-Ty-h8X">
-    <device id="retina5_9" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ugf-Ty-h8X">
+    <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -14,23 +14,23 @@
             <objects>
                 <viewController restorationIdentifier="ViewController" storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="Fuzzy_Logic_Chess" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Black: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kok-eJ-6BS">
-                                <rect key="frame" x="10" y="171.66666666666666" width="75" height="32"/>
+                                <rect key="frame" x="10" y="194" width="75" height="32"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="White: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7JL-ZT-wDq">
-                                <rect key="frame" x="10" y="608.66666666666663" width="79" height="32"/>
+                                <rect key="frame" x="10" y="670" width="79" height="32"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="KfE-VP-2bj" customClass="Board" customModule="Fuzzy_Logic_Chess" customModuleProvider="target">
-                                <rect key="frame" x="5" y="223.66666666666663" width="365" height="365"/>
+                                <rect key="frame" x="5" y="246" width="404" height="404"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="KfE-VP-2bj" secondAttribute="height" multiplier="1:1" id="kIF-kj-cS8"/>
@@ -98,7 +98,7 @@
                                 </connections>
                             </collectionView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="die0" translatesAutoresizingMaskIntoConstraints="NO" id="INU-VV-3t3" userLabel="die">
-                                <rect key="frame" x="254.66666666666666" y="98" width="115.33333333333334" height="115.66666666666669"/>
+                                <rect key="frame" x="271" y="98" width="138" height="138"/>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="750" constant="90" id="Cr9-PL-lEw"/>
                                     <constraint firstAttribute="width" secondItem="INU-VV-3t3" secondAttribute="height" multiplier="1:1" id="WWD-eW-eD9"/>
@@ -143,22 +143,22 @@
             <objects>
                 <viewController restorationIdentifier="MenuViewController" storyboardIdentifier="MenuViewController" id="uQo-R7-A8N" customClass="MenuViewController" customModule="Fuzzy_Logic_Chess" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gHI-Pd-nTO">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="j2S-AY-NKm">
-                                <rect key="frame" x="0.0" y="44" width="326" height="768"/>
+                                <rect key="frame" x="0.0" y="44" width="365" height="852"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="menu_cell" id="xcv-Mh-b0y" customClass="MenuTableViewCell" customModule="Fuzzy_Logic_Chess" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="326" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="365" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xcv-Mh-b0y" id="2h3-Nl-arQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="326" height="43.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="365" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p4m-HR-bvf">
-                                                    <rect key="frame" x="15" y="12" width="311" height="21"/>
+                                                    <rect key="frame" x="15" y="12" width="960" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -194,21 +194,67 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KVj-HD-fUY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1861.5999999999999" y="130.78817733990149"/>
+            <point key="canvasLocation" x="1921" y="137"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="ziE-09-K83">
+            <objects>
+                <viewController storyboardIdentifier="endGamePopup" id="Bsa-Se-IYB" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fgA-ok-XVw">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SiK-8B-AF1">
+                                <rect key="frame" x="57" y="285.5" width="300" height="325"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WXg-KL-rao">
+                                        <rect key="frame" x="62" y="25" width="176.5" height="29.5"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="Win Message">
+                                                <attributes>
+                                                    <font key="NSFont" size="24" name="Verdana-Bold"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.41645854920000003" green="1" blue="0.28119279689999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="WXg-KL-rao" firstAttribute="centerX" secondItem="SiK-8B-AF1" secondAttribute="centerX" id="CrY-Oi-Pkb"/>
+                                    <constraint firstItem="WXg-KL-rao" firstAttribute="top" secondItem="SiK-8B-AF1" secondAttribute="top" constant="25" id="M0u-Cf-xa7"/>
+                                    <constraint firstAttribute="height" priority="750" constant="325" id="VHi-8V-hE0"/>
+                                    <constraint firstAttribute="width" priority="750" constant="300" id="aMT-7q-yLD"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Jwc-Rk-jBQ" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="SiK-8B-AF1" secondAttribute="trailing" constant="30" id="6vr-Nh-fxA"/>
+                            <constraint firstItem="SiK-8B-AF1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Jwc-Rk-jBQ" secondAttribute="leading" constant="30" id="Fc3-Ie-WWb"/>
+                            <constraint firstItem="SiK-8B-AF1" firstAttribute="centerX" secondItem="fgA-ok-XVw" secondAttribute="centerX" id="XDj-C0-SRn"/>
+                            <constraint firstItem="SiK-8B-AF1" firstAttribute="centerY" secondItem="fgA-ok-XVw" secondAttribute="centerY" id="nJI-9Q-okp"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Jwc-Rk-jBQ"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TYY-8X-x7I" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1080.8" y="796.55172413793105"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="r44-Kl-e3c">
             <objects>
                 <viewController id="LQ6-VI-Der" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DTa-v8-dfh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="s1v-Ad-4Ju">
                                 <rect key="frame" x="16" y="44" width="343" height="479"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <mutableString key="text">Fuzzy-Logic Chess©
+                                <string key="text">Fuzzy-Logic Chess©
 A Chess Variant Adding Ideas From WarGames
 How To Play
 CAPTURING PIECES Fuzzy-Logic Chess (F-L Chess) introduces uncertainty to the act of capturing a piece so that players must use reasoning with uncertainty (fuzzy logic: probability) in planning their strategies. The attacking player rolls a die to determine if a capture is successful. The die roll needed to capture a piece depends on the combination of the attacking piece and the defending piece, as shown in the Capture Table. 
@@ -232,7 +278,7 @@ MOVEMENT VARIATIONS F-L Chess adds and varies the standard chess moves:
 	THE KNIGHT In F-L Chess, the Knight does not move on top of a piece to capture it as moving and capturing are separate actions. The Knight moves to an unoccupied square as normal, and then, in a second action may attack any adjacent opposing piece in any direction. Note that only the Knight is allowed to use two actions to make two attacks in the same turn when a  second action is available: A Knight may attack the same piece again (when the first attack fails) or may attack a different piece with the second attack. When a Knight makes a successful capture, it moves into the square of the captured piece, from which the Knight may now have different pieces to attack.
 	OPTIONAL FAST GAME The optional fast game allows players at most two minutes per turn. Players may time using any device of their choosing. If a player does not complete his/her turn within two minutes, any remaining actions are forfeit and the opposing player immediately begins his/her turn. In this way, a complete game of Fuzzy-Logic Chess may be played in an hour or less.  
 	
-	This work is protected by the Creative Commons copyright: Share — You are free to copy and redistribute the material in any medium or format. Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. NonCommercial — You may not use the material for commercial purposes. NoDerivatives — If you remix, transform, or build upon the material, you may not distribute the modified material.  </mutableString>
+	This work is protected by the Creative Commons copyright: Share — You are free to copy and redistribute the material in any medium or format. Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. NonCommercial — You may not use the material for commercial purposes. NoDerivatives — If you remix, transform, or build upon the material, you may not distribute the modified material.  </string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -255,7 +301,7 @@ MOVEMENT VARIATIONS F-L Chess adds and varies the standard chess moves:
                 <navigationController restorationIdentifier="NavigationController" storyboardIdentifier="NavigationController" automaticallyAdjustsScrollViewInsets="NO" id="ugf-Ty-h8X" customClass="NavigationController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mmU-Zj-xbf">
-                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -271,6 +317,6 @@ MOVEMENT VARIATIONS F-L Chess adds and varies the standard chess moves:
     <resources>
         <image name="capture table.png" width="820" height="544"/>
         <image name="die0" width="2000" height="2000"/>
-        <image name="menu-icon" width="39" height="33"/>
+        <image name="menu-icon" width="32.275863647460938" height="27.310344696044922"/>
     </resources>
 </document>
