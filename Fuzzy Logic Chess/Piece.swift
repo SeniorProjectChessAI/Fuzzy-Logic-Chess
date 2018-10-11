@@ -86,7 +86,7 @@ enum PieceType {
 	case Pawn
 }
 
-enum Team {
-	case Black
-	case White
+enum Team: String {
+	case Black = "Black"
+	case White = "White"
 }
