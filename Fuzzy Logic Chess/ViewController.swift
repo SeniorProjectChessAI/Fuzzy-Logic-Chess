@@ -36,8 +36,9 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	var previouslySelectedTileColor: UIColor?
 	var previouslySelectedTileIndex: Int?
 	var previouslySelectedTileTeam: Team?
+	var currentTeam: Team?
 	var legalMoves: [Int] = []
-	
+	var turnCounter = 0; //[0,1] -> first player's turns, [2,3] -> second player's turns
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,7 +62,6 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	
 	// sets all game variables and starts the game
 	func startGame() {
-		
 	}
 	
 	func restartGame() {
@@ -141,7 +141,14 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		
 		let tile = board.cellForItem(at: indexPath) as! Tile
 		
-		if(!tileIsSelected && tile.hasPiece()) {//clicked piece while no cells are highlighted
+		//decide which array is referenced based on turncounter
+		if (turnCounter <= 1) {
+			currentTeam = Team.White;
+		} else {
+			currentTeam = Team.Black;
+		}
+		
+		if(!tileIsSelected && tile.hasPiece() && (currentTeam == board.getPieceAtLocation(location: indexPath.row)?.team)) {//clicked piece while no cells are highlighted
 			legalMoves = tile.piece?.getLegalMoves(board:board) ?? []
 			previouslySelectedTileTeam = tile.piece?.team
 			legalMoves = showLegalMoves();
@@ -157,6 +164,13 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 			let tile = board.cellForItem(at: indexPath) as! Tile
 
 			if(legalMoves.contains(indexPath.row)) {
+				//piece moved legally
+				if (turnCounter == 3){
+					turnCounter = 0;
+				} else {
+					turnCounter += 1;
+				}
+				print(turnCounter);
 				// set previously selected piece to newly selected tile
 				tile.setPiece(piece: previousTile.piece)
 				previousTile.piece?.setHasMoved();

@@ -29,14 +29,13 @@ class Pawn: Piece {
 
 		}
 		for i in legalMoves {
-			print("legal move: \(i)")
+			//print("legal move: \(i)")
 		}
 		return legalMoves;
 	}
 	
 	override
 	func setHasMoved() {
-		print("Pawn Moved")
 		hasMoved = true;
 	}
 	

@@ -19,7 +19,6 @@ class Noble: Piece {
 		legalMoves = super.getLegalMoves(board:board);		//gets default moves from superclass
 
 		var currentTile = location
-		print("cell # \(currentTile) is:")
 		
 
 		// Horizontal moves - until edge of board
@@ -144,7 +143,7 @@ class Noble: Piece {
 
 
 		for i in legalMoves {
-			print("legal move: \(i)")
+			//print("legal move: \(i)")
 		}
 		return legalMoves;
 	}
