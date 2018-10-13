@@ -19,7 +19,6 @@ class Noble: Piece {
 		legalMoves = super.getLegalMoves(board:board);		//gets default moves from superclass
 
 		var currentTile = location
-		print("cell # \(currentTile) is:")
 		
 
 		// Horizontal moves - until edge of board
@@ -28,8 +27,10 @@ class Noble: Piece {
 			for _ in 0...3 {
 				currentTile -= 1
 				legalMoves.append(currentTile)
-				let pieceFound = board.getPieceAtLocation(location: currentTile);
-				if(currentTile % 8 == 0 || (pieceFound != nil)){
+				let nextCell = board.getPieceAtLocation(location: currentTile); //current tile, possibly nil
+				let cellAfterNext = board.getPieceAtLocation(location: currentTile - 1); //next next tile, possibly nil
+
+				if(currentTile % 8 == 0 || (nextCell != nil) || (cellAfterNext != nil)){
 					break;
 				}
 			}
@@ -41,8 +42,9 @@ class Noble: Piece {
 			for _ in 0...3 {
 				currentTile += 1
 				legalMoves.append(currentTile)
-				let pieceFound = board.getPieceAtLocation(location: currentTile);
-				if(currentTile % 8 == 7 || (pieceFound != nil)){
+				let nextCell = board.getPieceAtLocation(location: currentTile); //current tile, possibly nil
+				let cellAfterNext = board.getPieceAtLocation(location: currentTile + 1); //next next tile, possibly nil
+				if(currentTile % 8 == 7 || (nextCell != nil) || (cellAfterNext != nil)){
 					break;
 				}
 			}
@@ -54,8 +56,9 @@ class Noble: Piece {
 			for _ in 0...3 {
 				currentTile -= 8
 				legalMoves.append(currentTile)
-				let pieceFound = board.getPieceAtLocation(location: currentTile);
-				if(currentTile <= 8 || (pieceFound != nil)){
+				let nextCell = board.getPieceAtLocation(location: currentTile); //current tile, possibly nil
+				let cellAfterNext = board.getPieceAtLocation(location: currentTile - 8); //next next tile, possibly nil
+				if(currentTile <= 8 || (nextCell != nil) || (cellAfterNext != nil)){
 					break;
 				}
 			}
@@ -68,8 +71,9 @@ class Noble: Piece {
 			for _ in 0...3 {
 				currentTile += 8
 				legalMoves.append(currentTile)
-				let pieceFound = board.getPieceAtLocation(location: currentTile);
-				if(currentTile >= 55 || (pieceFound != nil)){
+				let nextCell = board.getPieceAtLocation(location: currentTile); //current tile, possibly nil
+				let cellAfterNext = board.getPieceAtLocation(location: currentTile + 8); //next next tile, possibly nil
+				if(currentTile >= 55 || (nextCell != nil) || (cellAfterNext != nil)){
 					break;
 				}
 			}
@@ -83,8 +87,9 @@ class Noble: Piece {
 			for _ in 0...3 {
 				currentTile -= 9
 				legalMoves.append(currentTile)
-				let pieceFound = board.getPieceAtLocation(location: currentTile);
-				if (currentTile <= 8 || currentTile % 8 == 0 || (pieceFound != nil)){
+				let nextCell = board.getPieceAtLocation(location: currentTile); //current tile, possibly nil
+				let cellAfterNext = board.getPieceAtLocation(location: currentTile - 9); //next next tile, possibly nil
+				if (currentTile <= 8 || currentTile % 8 == 0 || (nextCell != nil) || (cellAfterNext != nil)){
 					break;
 				}
 			}  
@@ -97,8 +102,9 @@ class Noble: Piece {
 			for _ in 0...3 {
 				currentTile -= 7
 				legalMoves.append(currentTile)
-				let pieceFound = board.getPieceAtLocation(location: currentTile);
-				if (currentTile <= 8 || currentTile % 8 == 7 || (pieceFound != nil)){
+				let nextCell = board.getPieceAtLocation(location: currentTile); //current tile, possibly nil
+				let cellAfterNext = board.getPieceAtLocation(location: currentTile - 7); //next next tile, possibly nil
+				if (currentTile <= 8 || currentTile % 8 == 7 || (nextCell != nil) || (cellAfterNext != nil)){
 					break;
 				}
 			}
@@ -111,8 +117,9 @@ class Noble: Piece {
 			for _ in 0...3 {
 				currentTile += 7
 				legalMoves.append(currentTile)
-				let pieceFound = board.getPieceAtLocation(location: currentTile);
-				if (currentTile >= 55 || currentTile % 8 == 0 || (pieceFound != nil)){
+				let nextCell = board.getPieceAtLocation(location: currentTile); //current tile, possibly nil
+				let cellAfterNext = board.getPieceAtLocation(location: currentTile + 7); //next next tile, possibly nil
+				if (currentTile >= 55 || currentTile % 8 == 0 || (nextCell != nil) || (cellAfterNext != nil)){
 					break;
 				}
 			}
@@ -124,8 +131,9 @@ class Noble: Piece {
 			for _ in 0...3 {
 				currentTile += 9
 				legalMoves.append(currentTile)
-				let pieceFound = board.getPieceAtLocation(location: currentTile);
-				if (currentTile >= 55 || currentTile % 8 == 7 || (pieceFound != nil)){
+				let nextCell = board.getPieceAtLocation(location: currentTile); //current tile, possibly nil
+				let cellAfterNext = board.getPieceAtLocation(location: currentTile + 9); //next next tile, possibly nil
+				if (currentTile >= 55 || currentTile % 8 == 7 || (nextCell != nil) || (cellAfterNext != nil)){
 					break;
 				}
 			}
@@ -135,7 +143,7 @@ class Noble: Piece {
 
 
 		for i in legalMoves {
-			print("legal move: \(i)")
+			//print("legal move: \(i)")
 		}
 		return legalMoves;
 	}
