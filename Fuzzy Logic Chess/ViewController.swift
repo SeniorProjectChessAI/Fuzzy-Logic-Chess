@@ -39,10 +39,13 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	var currentTeam: Team?
 	var legalMoves: [Int] = []
 	var turnCounter = 0; //[0,1] -> first player's turns, [2,3] -> second player's turns
+	var firstPieceMoved: Piece?
 	
     override func viewDidLoad() {
         super.viewDidLoad()
 		
+		NotificationCenter.default.addObserver(self, selector: #selector(onRecievePopupData(_:)), name: Notification.Name(rawValue: "startNewGame"), object: nil)
+
 		menu_vc = self.storyboard?.instantiateViewController(withIdentifier: "MenuViewController") as? MenuViewController
 		
 		// divides collectionView into 8 columns and sets spacing
@@ -77,8 +80,34 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	
 	// Displays end of game popup view
 	func endGame(winner: Team) {
-		//let winMessage = "\(winner.rawValue) Wins"
+		let winMessage = ["winMessage" : "\(winner.rawValue) Wins"]
 		
+		showPopup()
+		
+		// send winMessage to PopupViewController
+		NotificationCenter.default.post(name: Notification.Name(rawValue: "winMessage"), object: nil, userInfo: winMessage)
+	}
+	
+	func showPopup() {
+		let popupVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "endGamePopup") as! PopupViewController
+		
+		self.addChild(popupVC)
+		popupVC.view.frame = self.view.frame
+		self.view.addSubview(popupVC.view)
+		popupVC.didMove(toParent: self)
+	}
+	
+	@objc func onRecievePopupData(_ notification:Notification) {
+		
+		// handle difficulty change in popup
+		if let data = notification.userInfo as? [String:Int] {
+			for (_, difficulty) in data {
+				// SET GLOBAL DIFFICULTY LEVEL
+				print("Popup difficulty:  \(difficulty)")
+			}
+		}
+		
+		restartGame()
 	}
 
     
@@ -142,16 +171,18 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		let tile = board.cellForItem(at: indexPath) as! Tile
 		
 		//decide which array is referenced based on turncounter
-		if (turnCounter <= 1) {
+		if (turnCounter == 0 || turnCounter == 1) {
 			currentTeam = Team.White;
-		} else {
+		} else if (turnCounter == 2 || turnCounter == 3) {
 			currentTeam = Team.Black;
 		}
-		
-		if(!tileIsSelected && tile.hasPiece() && (currentTeam == board.getPieceAtLocation(location: indexPath.row)?.team)) {//clicked piece while no cells are highlighted
-			legalMoves = tile.piece?.getLegalMoves(board:board) ?? []
+		print(currentTeam)
+		print(board.getPieceAtLocation(location: indexPath.row)?.team)
+
+		if(!tileIsSelected && tile.hasPiece() && (currentTeam == tile.piece?.team)) {//clicked piece while no cells are highlighted
+			legalMoves = tile.piece?.getUnfilteredMoves(board:board) ?? []
 			previouslySelectedTileTeam = tile.piece?.team
-			legalMoves = showLegalMoves();
+			legalMoves = showLegalMoves(tile: tile);
 			
 			previouslySelectedTileColor = tile.backgroundColor
 			tile.backgroundColor = UIColor.cyan
@@ -165,15 +196,30 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 
 			if(legalMoves.contains(indexPath.row)) {
 				//piece moved legally
+				if (turnCounter == 0 || turnCounter == 2){
+					firstPieceMoved = previousTile.piece
+					if (tile.isEmpty()){
+						previousTile.piece?.firstMove = FirstAction.Moved
+						
+						
+					}else {
+						previousTile.piece?.firstMove = FirstAction.Attacked
+					}
+				} else if (turnCounter == 1 || turnCounter == 3){
+					previousTile.piece?.firstMove = FirstAction.None
+					firstPieceMoved?.firstMove = FirstAction.None
+				}
+				
 				if (turnCounter == 3){
 					turnCounter = 0;
 				} else {
 					turnCounter += 1;
 				}
-				print(turnCounter);
+				print(turnCounter)
+				
 				// set previously selected piece to newly selected tile
 				tile.setPiece(piece: previousTile.piece)
-				previousTile.piece?.setHasMoved();
+				previousTile.piece?.onMove();
 
 				// remove previously selected tile's image and restore original tile color
 				previousTile.removePiece()
@@ -202,14 +248,9 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 				previouslySelectedTileTeam = nil
 				legalMoves.removeAll()
 				
-				legalMoves = tile.piece?.getLegalMoves(board:board) ?? []
-				previouslySelectedTileTeam = tile.piece?.team
-				legalMoves = showLegalMoves();
+				legalMoves = tile.piece?.getUnfilteredMoves(board:board) ?? []
 				
-				previouslySelectedTileColor = tile.backgroundColor
-				tile.backgroundColor = UIColor.cyan
-				tileIsSelected = true;
-				previouslySelectedTileIndex = indexPath.row
+				
 			}
 		}
 	}
@@ -217,16 +258,19 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	
 	
 	
-	func showLegalMoves() -> [Int] {
+	func showLegalMoves(tile:Tile) -> [Int] {
+		//check to see 1) if either team's second turn 2) can move/attack
+		//if can move -> keep empty legal moves
+		//if can attack -> keep legal moves to opponent's piece
+		print("first move: \(tile.piece?.firstMove)")
 			for i in legalMoves {
 				let availableTile = board.cellForItem(at: IndexPath(row: i, section: 0)) as! Tile
-				
 				if(availableTile.hasPiece()) {
-					if(availableTile.piece?.team != previouslySelectedTileTeam) {
+					if(availableTile.piece?.team != previouslySelectedTileTeam && tile.piece?.firstMove != FirstAction.Attacked) {
+						//legal moves to opponents pieces
 						availableTile.showLegalMoveView(show: true)
 					} else {
 						let removeInt: Int  = (legalMoves.firstIndex(of: i)!);
-
 						//print(removeInt)
 						//print("\(legalMoves[removeInt]) removed")
 						legalMoves.remove(at: removeInt)
@@ -235,8 +279,15 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 						
 					}
 				}
-				else {
-					availableTile.showLegalMoveView(show: true)
+				if (availableTile.isEmpty()){
+					if (tile.piece?.firstMove != FirstAction.Moved){
+						availableTile.showLegalMoveView(show: true)
+					} else {
+						let removeInt: Int  = (legalMoves.firstIndex(of: i)!);
+						legalMoves.remove(at: removeInt)
+
+					}
+					//array of legal moves to empty squares
 				}
 			}
 		return legalMoves;
