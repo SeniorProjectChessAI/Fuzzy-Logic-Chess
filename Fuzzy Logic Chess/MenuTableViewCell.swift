@@ -10,7 +10,9 @@ import UIKit
 
 class MenuTableViewCell: UITableViewCell {
 
-	@IBOutlet weak var label_title: UILabel!
+	
+	@IBOutlet weak var lable_title: UILabel!
+	
 	override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -24,7 +26,7 @@ class MenuTableViewCell: UITableViewCell {
 		//let htpv = start_storyboard.instantiateViewController(withIdentifier: "HowToPlayView")
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
 		
-		let selected_text = self.label_title.text
+		let selected_text = self.lable_title.text
         // Configure the view for the selected state
 		if (selected){
 			switch selected_text {

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2KR-zP-u5c">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.23.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2KR-zP-u5c">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.16.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -32,7 +32,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" axis="vertical" distribution="equalCentering" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="bRx-lC-iV9">
-                                <rect key="frame" x="85" y="319" width="215" height="265"/>
+                                <rect key="frame" x="85" y="319" width="215" height="309"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cIM-bE-W2f">
                                         <rect key="frame" x="4" y="8" width="203" height="115"/>
@@ -49,7 +49,7 @@
                                         </connections>
                                     </button>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="N6F-Dn-J58">
-                                        <rect key="frame" x="4" y="124" width="203" height="18"/>
+                                        <rect key="frame" x="4" y="140.5" width="203" height="29"/>
                                         <segments>
                                             <segment title="Easy"/>
                                             <segment title="Medium"/>
@@ -57,7 +57,7 @@
                                         </segments>
                                     </segmentedControl>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hak-XQ-dm9">
-                                        <rect key="frame" x="4" y="142" width="203" height="115"/>
+                                        <rect key="frame" x="4" y="186" width="203" height="115"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Hak-XQ-dm9" secondAttribute="height" multiplier="203:48" id="cjb-Wy-yLF"/>
                                             <constraint firstAttribute="width" constant="203" id="uGK-i3-bB9"/>
@@ -67,7 +67,7 @@
                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <segue destination="Tww-w7-Qww" kind="push" id="iLH-N3-YLb"/>
+                                            <segue destination="AFp-db-OJj" kind="presentation" modalTransitionStyle="crossDissolve" id="WaJ-tu-LaZ"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -107,1440 +107,66 @@
             </objects>
             <point key="canvasLocation" x="1068" y="117.39130434782609"/>
         </scene>
-        <!--How To Play View-->
-        <scene sceneID="p1r-PB-kg5">
+        <!--View Controller-->
+        <scene sceneID="1wS-UG-luB">
             <objects>
-                <viewController restorationIdentifier="HowToPlayView" storyboardIdentifier="HowToPlayView" id="Tww-w7-Qww" customClass="HowToPlayView" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="xpy-cI-R3K">
+                <viewController id="AFp-db-OJj" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tPW-Q7-nmS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="718-qy-b7W">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gJx-lV-dK8">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
-                                        <subviews>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fjZ-Hn-fmA">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="403"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <attributedString key="attributedText">
-                                                    <fragment content="Fuzzy-Logic Chess">
-                                                        <attributes>
-                                                            <font key="NSFont" size="29" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" minimumLineHeight="33" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops/>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content="©">
-                                                        <attributes>
-                                                            <font key="NSFont" size="18.5" name="Helvetica"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" minimumLineHeight="33" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops/>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content" base64-UTF8="YES">
-Cg
-</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="18.5" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" minimumLineHeight="33" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops/>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content">A Chess Variant Adding Ideas From WarGames
-</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="11" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" tailIndent="468" minimumLineHeight="33" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops/>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content">How To Play
-</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="14" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" tailIndent="468" minimumLineHeight="33" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops/>
-                                                            </paragraphStyle>
-                                                            <integer key="NSUnderline" value="1"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content="CAPTURING PIECES ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="18.5" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" headIndent="18" tailIndent="468" minimumLineHeight="22" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops/>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content">Fuzzy-Logic Chess (F-L Chess) introduces uncertainty to the act of capturing a piece so that players must use reasoning with uncertainty (fuzzy logic: probability) in planning their strategies. The attacking player rolls a die to determine if a capture is successful. The die roll needed to capture a piece depends on the combination of the attacking piece and the defending piece, as shown in the Capture Table. </string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" headIndent="18" tailIndent="468" minimumLineHeight="22" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops/>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content" base64-UTF8="YES">
-Cg
-</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="12" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" headIndent="18" tailIndent="468" minimumLineHeight="22" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops/>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content">•	</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Symbol"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops/>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content="When an attack is successful, the attacking piece moves into the square of the captured piece.">
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops/>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content=" ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Helvetica"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops/>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content" base64-UTF8="YES">
-Cg
-</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops/>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content">•	</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Symbol"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops/>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content="When an attack is unsuccessful, the attacking piece remains in the square it attacked from.">
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops/>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content=" ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Helvetica"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops/>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content" base64-UTF8="YES">
-Cg
-</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops/>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content">•	</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Symbol"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops/>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content">All pieces may attempt to capture an opposing piece in any direction (left, right, up, down, diagonal). 
-</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops/>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content">•	</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Symbol"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops/>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content">Only the Knight may move after an attack. Only the Knight may attack twice. 
-</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops/>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content="MOVEMENT VARIATIONS ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="18.5" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" tailIndent="468" minimumLineHeight="22" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops/>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content="F-L Chess adds and varies the standard chess moves: ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" tailIndent="468" minimumLineHeight="22" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops/>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content" base64-UTF8="YES">
-Cg
-</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="12" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" tailIndent="468" minimumLineHeight="22" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops/>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content">•	</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Symbol"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content="in addition to their normal movement, all ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content=" ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="12" name="Helvetica"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content="pieces may also move to any unoccupied neighboring square in any direction (left, right, up, down, diagonal). ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content=" ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="12" name="Helvetica"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content" base64-UTF8="YES">
-Cg
-</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="12" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content">•	</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Symbol"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content="Pawns are never promoted after reaching the eighth rank (the opponent’s home row). ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content=" ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="12" name="Helvetica"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content" base64-UTF8="YES">
-Cg
-</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="12" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content">•	</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Symbol"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content="For its first move, a Pawn may move two ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content=" ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="12" name="Helvetica"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content="squares in a straight line. ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content=" ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="12" name="Helvetica"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content" base64-UTF8="YES">
-Cg
-</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="12" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content">•	</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Symbol"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content="The Bishop, Rook and Queen may each ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content=" ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="12" name="Helvetica"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content="move either diagonally or horizontally in a straight line, and may only move up to four squares (not eight). ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content=" ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="12" name="Helvetica"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content" base64-UTF8="YES">
-Cg
-</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="12" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content">•	</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Symbol"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content="No declaration of “check” ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content=" ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="12" name="Helvetica"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content" base64-UTF8="YES">
-Cg
-</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="12" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content" base64-UTF8="YES">
-CQ
-</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="12" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content="TWO ACTIONS IN A TURN ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="18.5" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content">In F-L Chess, moving and capturing are separate actions, and players may take two actions in each turn. So in a single turn, a player may use two actions to: </string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content=" ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="12" name="Helvetica"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content" base64-UTF8="YES">
-Cg
-</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="12" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content">•	</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Symbol"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content="Move two different pieces OR ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content=" ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="12" name="Helvetica-Bold"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content" base64-UTF8="YES">
-Cg
-</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="12" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content">•	</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Symbol"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content="Move the Bishop, Rook, or Queen twice, and they may change direction for the second move OR ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content=" ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="12" name="Helvetica-Bold"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content" base64-UTF8="YES">
-Cg
-</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="12" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content">•	</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Symbol"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content="Move the Knight twice, each action either using its normal chess movement pattern, OR by moving to an adjacent square OR ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content=" ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="12" name="Helvetica-Bold"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content" base64-UTF8="YES">
-Cg
-</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="12" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content">•	</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Symbol"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content="Move both the King and a Rook in a castle move OR ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content=" ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="12" name="Helvetica"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content" base64-UTF8="YES">
-Cg
-</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="12" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content">•	</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Symbol"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content="Move one piece and attack with one piece (can be the same or different pieces) OR ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content=" ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="12" name="Helvetica-Bold"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content" base64-UTF8="YES">
-Cg
-</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="12" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content">•	</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Symbol"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content="Make two attacks with any two pieces but move none. ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content=" ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="12" name="Helvetica"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content" base64-UTF8="YES">
-Cg
-</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="12" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" firstLineHeadIndent="18" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content" base64-UTF8="YES">
-CQ
-</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="12" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content="THE KNIGHT ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="18.5" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content">In F-L Chess, the Knight does not move on top of a piece to capture it as moving and capturing are separate actions. The Knight moves to an unoccupied square as normal, and then, in a second action may attack any adjacent opposing piece in any direction.</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content=" ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="14.5" name="Helvetica"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content="Note that ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="13" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content="only">
-                                                        <attributes>
-                                                            <font key="NSFont" size="13" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                            <integer key="NSUnderline" value="1"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content=" the Knight is allowed to use two actions to make two attacks in the same turn when a ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="13" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content=" ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="12" name="Helvetica"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content">second action is available: A Knight may attack the same piece again (when the first attack fails) or may attack a different piece with the second attack. When a Knight makes a successful capture, it moves into the square of the captured piece, from which the Knight may now have different pieces to attack.</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="13" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content" base64-UTF8="YES">
-Cgk
-</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="12" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content="OPTIONAL FAST GAME ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="18.5" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content">The optional fast game allows players at most two minutes per turn. Players may time using any device of their choosing. If a player does not complete his/her turn within two minutes, any remaining actions are forfeit and the opposing player immediately begins his/her turn. In this way, a complete game of Fuzzy-Logic Chess may be played in an hour or less. </string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="13" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content=" ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="12" name="Helvetica"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content" base64-UTF8="YES">
-CgkKCQ
-</string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="12" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content">This work is protected by the Creative Commons copyright: Share — You are free to copy and redistribute the material in any medium or format. Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. NonCommercial — You </string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="9" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content="may not">
-                                                        <attributes>
-                                                            <font key="NSFont" size="9" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                            <integer key="NSUnderline" value="1"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment>
-                                                        <string key="content"> use the material for commercial purposes. NoDerivatives — If you remix, transform, or build upon the material, you may not distribute the modified material. </string>
-                                                        <attributes>
-                                                            <font key="NSFont" size="9" name="Ayuthaya"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content=" ">
-                                                        <attributes>
-                                                            <font key="NSFont" size="9" name="Helvetica"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" headIndent="36" tailIndent="468" minimumLineHeight="15" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
-                                                                <tabStops>
-                                                                    <textTab alignment="left" location="11">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                    <textTab alignment="natural" location="36">
-                                                                        <options/>
-                                                                    </textTab>
-                                                                </tabStops>
-                                                            </paragraphStyle>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                            </textView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="capture table.png" translatesAutoresizingMaskIntoConstraints="NO" id="4op-xK-Smq">
-                                                <rect key="frame" x="0.0" y="403" width="375" height="200"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" secondItem="4op-xK-Smq" secondAttribute="height" multiplier="15:8" id="gKn-Uw-ADV"/>
-                                                </constraints>
-                                            </imageView>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="4op-xK-Smq" firstAttribute="trailing" secondItem="gJx-lV-dK8" secondAttribute="trailingMargin" constant="2" id="Phn-Mw-gmW"/>
-                                            <constraint firstItem="4op-xK-Smq" firstAttribute="leading" secondItem="gJx-lV-dK8" secondAttribute="leadingMargin" constant="2" id="eT3-h5-U3A"/>
-                                            <constraint firstItem="4op-xK-Smq" firstAttribute="bottom" secondItem="gJx-lV-dK8" secondAttribute="bottomMargin" id="v7r-5R-VB0"/>
-                                        </constraints>
-                                    </stackView>
-                                </subviews>
-                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="gJx-lV-dK8" firstAttribute="top" secondItem="718-qy-b7W" secondAttribute="top" id="A3v-Jt-sP6"/>
-                                    <constraint firstItem="gJx-lV-dK8" firstAttribute="centerY" secondItem="718-qy-b7W" secondAttribute="centerY" id="jrR-BA-1t0"/>
-                                    <constraint firstItem="gJx-lV-dK8" firstAttribute="leading" secondItem="718-qy-b7W" secondAttribute="leading" id="nbU-dQ-Jn4"/>
-                                    <constraint firstItem="gJx-lV-dK8" firstAttribute="centerX" secondItem="718-qy-b7W" secondAttribute="centerX" id="swb-F0-V7r"/>
-                                    <constraint firstAttribute="trailingMargin" secondItem="gJx-lV-dK8" secondAttribute="trailing" constant="20" id="yxi-iD-GwU"/>
-                                </constraints>
-                            </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KNG-rw-mMp">
+                                <rect key="frame" x="22" y="32" width="34" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="back"/>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r2" kind="presentation" modalTransitionStyle="crossDissolve" id="NYS-qs-ax6"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ixG-dA-9AU">
+                                <rect key="frame" x="16" y="62" width="352" height="445"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <mutableString key="text">Fuzzy-Logic Chess©
+A Chess Variant Adding Ideas From WarGames
+How To Play
+CAPTURING PIECES Fuzzy-Logic Chess (F-L Chess) introduces uncertainty to the act of capturing a piece so that players must use reasoning with uncertainty (fuzzy logic: probability) in planning their strategies. The attacking player rolls a die to determine if a capture is successful. The die roll needed to capture a piece depends on the combination of the attacking piece and the defending piece, as shown in the Capture Table. 
+•	When an attack is successful, the attacking piece moves into the square of the captured piece. 
+•	When an attack is unsuccessful, the attacking piece remains in the square it attacked from. 
+•	All pieces may attempt to capture an opposing piece in any direction (left, right, up, down, diagonal). 
+•	Only the Knight may move after an attack. Only the Knight may attack twice. 
+MOVEMENT VARIATIONS F-L Chess adds and varies the standard chess moves: 
+•	in addition to their normal movement, all  pieces may also move to any unoccupied neighboring square in any direction (left, right, up, down, diagonal).  
+•	Pawns are never promoted after reaching the eighth rank (the opponent’s home row).  
+•	For its first move, a Pawn may move two  squares in a straight line.  
+•	The Bishop, Rook and Queen may each  move either diagonally or horizontally in a straight line, and may only move up to four squares (not eight).  
+•	No declaration of “check”  
+	TWO ACTIONS IN A TURN In F-L Chess, moving and capturing are separate actions, and players may take two actions in each turn. So in a single turn, a player may use two actions to:  
+•	Move two different pieces OR  
+•	Move the Bishop, Rook, or Queen twice, and they may change direction for the second move OR  
+•	Move the Knight twice, each action either using its normal chess movement pattern, OR by moving to an adjacent square OR  
+•	Move both the King and a Rook in a castle move OR  
+•	Move one piece and attack with one piece (can be the same or different pieces) OR  
+•	Make two attacks with any two pieces but move none.  
+	THE KNIGHT In F-L Chess, the Knight does not move on top of a piece to capture it as moving and capturing are separate actions. The Knight moves to an unoccupied square as normal, and then, in a second action may attack any adjacent opposing piece in any direction. Note that only the Knight is allowed to use two actions to make two attacks in the same turn when a  second action is available: A Knight may attack the same piece again (when the first attack fails) or may attack a different piece with the second attack. When a Knight makes a successful capture, it moves into the square of the captured piece, from which the Knight may now have different pieces to attack.
+	OPTIONAL FAST GAME The optional fast game allows players at most two minutes per turn. Players may time using any device of their choosing. If a player does not complete his/her turn within two minutes, any remaining actions are forfeit and the opposing player immediately begins his/her turn. In this way, a complete game of Fuzzy-Logic Chess may be played in an hour or less.  
+	
+	This work is protected by the Creative Commons copyright: Share — You are free to copy and redistribute the material in any medium or format. Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. NonCommercial — You may not use the material for commercial purposes. NoDerivatives — If you remix, transform, or build upon the material, you may not distribute the modified material.  </mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="capture table" translatesAutoresizingMaskIntoConstraints="NO" id="gPH-MI-uZ0">
+                                <rect key="frame" x="16" y="515" width="359" height="275"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="718-qy-b7W" firstAttribute="bottom" secondItem="lNQ-iU-iOh" secondAttribute="bottom" id="Gov-t4-vnK"/>
-                            <constraint firstItem="718-qy-b7W" firstAttribute="trailing" secondItem="lNQ-iU-iOh" secondAttribute="trailing" id="R4m-dt-4ZW"/>
-                            <constraint firstItem="718-qy-b7W" firstAttribute="leading" secondItem="lNQ-iU-iOh" secondAttribute="leading" id="rN8-OH-MHY"/>
-                            <constraint firstItem="718-qy-b7W" firstAttribute="top" secondItem="xpy-cI-R3K" secondAttribute="top" constant="64" id="y53-cs-2I7"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="lNQ-iU-iOh"/>
+                        <viewLayoutGuide key="safeArea" id="spU-Wq-lSj"/>
                     </view>
-                    <navigationItem key="navigationItem" id="cPc-dN-Zjb"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JI7-kC-TUB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nqj-h0-8oe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1760.8" y="116.49175412293854"/>
+            <point key="canvasLocation" x="1855.2" y="110.19490254872565"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="BWv-Qg-hMl">
@@ -1562,6 +188,9 @@ CgkKCQ
         </scene>
     </scenes>
     <resources>
-        <image name="capture table.png" width="820" height="544"/>
+        <image name="capture table" width="820" height="544"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="NYS-qs-ax6"/>
+    </inferredMetricsTieBreakers>
 </document>
