@@ -42,6 +42,8 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
     override func viewDidLoad() {
         super.viewDidLoad()
 		
+		NotificationCenter.default.addObserver(self, selector: #selector(onRecievePopupData(_:)), name: Notification.Name(rawValue: "startNewGame"), object: nil)
+
 		menu_vc = self.storyboard?.instantiateViewController(withIdentifier: "MenuViewController") as? MenuViewController
 		
 		// divides collectionView into 8 columns and sets spacing
@@ -77,8 +79,34 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	
 	// Displays end of game popup view
 	func endGame(winner: Team) {
-		//let winMessage = "\(winner.rawValue) Wins"
+		let winMessage = ["winMessage" : "\(winner.rawValue) Wins"]
 		
+		showPopup()
+		
+		// send winMessage to PopupViewController
+		NotificationCenter.default.post(name: Notification.Name(rawValue: "winMessage"), object: nil, userInfo: winMessage)
+	}
+	
+	func showPopup() {
+		let popupVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "endGamePopup") as! PopupViewController
+		
+		self.addChild(popupVC)
+		popupVC.view.frame = self.view.frame
+		self.view.addSubview(popupVC.view)
+		popupVC.didMove(toParent: self)
+	}
+	
+	@objc func onRecievePopupData(_ notification:Notification) {
+		
+		// handle difficulty change in popup
+		if let data = notification.userInfo as? [String:Int] {
+			for (_, difficulty) in data {
+				// SET GLOBAL DIFFICULTY LEVEL
+				print("Popup difficulty:  \(difficulty)")
+			}
+		}
+		
+		restartGame()
 	}
 
     
