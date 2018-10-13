@@ -43,9 +43,17 @@ class Knight: Piece {
 
 		return unfilteredMoves;
 	}
-
+	
 	override
-	func onMove()  {
+	 func getCanAttack() -> Bool {
+		return true
+	}
+	override
+	func getCanMove() -> Bool {
+		if (firstMove != FirstAction.Moved){
+			return true
+		}
+		return false
 	}
 	
 	func opponentAtCell(index:Int,board:Board)-> Bool {//returns true if opponent piece in given square

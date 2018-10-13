@@ -90,7 +90,19 @@ class Piece {
 		//overrided by pawn class
 	}
 
-
+	func getCanMove() -> Bool {
+		if (firstMove != FirstAction.None){
+			return false
+		}
+		return true
+}
+	
+	func getCanAttack() -> Bool {
+		if (firstMove == FirstAction.Attacked){
+			return false
+		}
+		return true
+	}
 }
 enum PieceType {
 	case King

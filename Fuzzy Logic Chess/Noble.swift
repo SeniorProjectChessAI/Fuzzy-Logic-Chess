@@ -142,15 +142,13 @@ class Noble: Piece {
 		}
 
 
-		for i in unfilteredMoves {
-			//print("legal move: \(i)")
-		}
+
 		return unfilteredMoves;
 	}
+
 	
 	override
-	func onMove() {
+	func getCanMove() -> Bool {
+		return true
 	}
-	
-	
 }

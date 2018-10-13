@@ -266,7 +266,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 			for i in legalMoves {
 				let availableTile = board.cellForItem(at: IndexPath(row: i, section: 0)) as! Tile
 				if(availableTile.hasPiece()) {
-					if(availableTile.piece?.team != previouslySelectedTileTeam && tile.piece?.firstMove != FirstAction.Attacked) {
+					if(availableTile.piece?.team != previouslySelectedTileTeam && (tile.piece?.getCanAttack())!) {
 						//legal moves to opponents pieces
 						availableTile.showLegalMoveView(show: true)
 					} else {
@@ -280,7 +280,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 					}
 				}
 				if (availableTile.isEmpty()){
-					if (tile.piece?.firstMove != FirstAction.Moved){
+					if ((tile.piece?.getCanMove())!){
 						availableTile.showLegalMoveView(show: true)
 					} else {
 						let removeInt: Int  = (legalMoves.firstIndex(of: i)!);
