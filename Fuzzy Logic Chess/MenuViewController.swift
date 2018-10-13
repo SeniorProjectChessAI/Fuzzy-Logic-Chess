@@ -10,11 +10,12 @@ import UIKit
 
 class MenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
 
-	//This array of names will apear on the menu
+    @IBOutlet weak var menu_tableView: UITableView!
+    //This array of names will apear on the menu
 	let title_arr = ["Home","How to Play ","Change Difficulty","Restart"]
 	var myIndex = 0
 	
-    @IBOutlet weak var menu_tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,7 +33,7 @@ func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> 
 func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 	let cell = tableView.dequeueReusableCell(withIdentifier: "menu_cell") as!MenuTableViewCell
 	
-	cell.label_title.text = title_arr[indexPath.row]
+	cell.lable_title.text = title_arr[indexPath.row]
 	return cell
 }
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
