@@ -10,14 +10,14 @@ class Pawn: Piece {
 	var hasMoved: Bool = false;	// Pawn only!! -- can move 2 spots if first move..
 	
 	override
-	init(type: PieceType, team: Team, imageName: String, location: Int) {
-		super.init(type:type, team: team, imageName: imageName, location: location)
+	init(type: PieceType, team: Team, imageName: String, location: Int,firstAction:FirstAction) {
+		super.init(type:type, team: team, imageName: imageName, location: location, firstAction: FirstAction.None)
 		
 	}
 	override
-	func getLegalMoves(board:Board) -> [Int] {
-		var legalMoves = [Int]();
-		legalMoves = super.getLegalMoves(board: board);		//gets default moves from superclass
+	func getUnfilteredMoves(board:Board) -> [Int] {
+		var unfilteredMoves = [Int]();
+		unfilteredMoves = super.getUnfilteredMoves(board: board);		//gets default moves from superclass
 		let moveVal = (self.team == Team.Black) ? 16 : -16
 		print(moveVal)
 		let isPieceFoundRow1 = board.getPieceAtLocation(location: location + (moveVal/2)); //checks if piece found in the cell in front of pawn
@@ -25,17 +25,17 @@ class Pawn: Piece {
 
 		// PAWN only - first move
 		if(!hasMoved && (isPieceFoundRow1 == nil) && (isPieceFoundRow2 == nil)) {
-			legalMoves.append(location + moveVal)
+			unfilteredMoves.append(location + moveVal)
 
 		}
-		for i in legalMoves {
+		for i in unfilteredMoves {
 			//print("legal move: \(i)")
 		}
-		return legalMoves;
+		return unfilteredMoves;
 	}
 	
 	override
-	func setHasMoved() {
+	func onMove() {
 		hasMoved = true;
 	}
 	

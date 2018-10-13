@@ -12,13 +12,15 @@ class Piece {
 	var team: Team
 	var imageName: String
 	var location: Int
+	var firstMove: FirstAction
 
-	init(type: PieceType, team: Team, imageName: String, location: Int) {
+	init(type: PieceType, team: Team, imageName: String, location: Int, firstAction: FirstAction) {
 		self.type = type
 		self.team = team
 		self.imageName = imageName
 		self.location = location
-		
+		self.firstMove = firstAction
+
 	}
 	
 	// changes location of piece
@@ -28,39 +30,52 @@ class Piece {
 	}
 	
 	// returns list of legal moves
-	func getLegalMoves(board: Board) -> [Int] {
-		var legalMoves = [Int]()
+	func getUnfilteredMoves(board: Board) -> [Int] {
+		var unfilteredMoves = [Int]()
 		
 		// SURROUNDING THE PIECE...
 		// Top, Right, Bottom, Left, Diagonals
 		if(location >= 8) {		// TOP
-			legalMoves.append(location - 8)
+			unfilteredMoves.append(location - 8)
 			
 			if(location % 8 != 7) {	// TOP-RIGHT
-				legalMoves.append(location - 7)
+				unfilteredMoves.append(location - 7)
 			}
 		
 			if(location % 8 != 0) {	// TOP-LEFT
-				legalMoves.append(location - 9)
+				unfilteredMoves.append(location - 9)
 			}
 		}
 		if(location <= 55) {	// BOTTOM
-			legalMoves.append(location + 8)
+			unfilteredMoves.append(location + 8)
 			
 			if(location % 8 != 7) {	// BOTTOM-RIGHT
-				legalMoves.append(location + 9)
+				unfilteredMoves.append(location + 9)
 			}
 			
 			if(location % 8 != 0) {	// BOTTOM-LEFT
-				legalMoves.append(location + 7)
+				unfilteredMoves.append(location + 7)
 			}
 		}
 		if(location % 8 != 0) {	// LEFT
-			legalMoves.append(location - 1)
+			unfilteredMoves.append(location - 1)
 		}
 		if(location % 8 != 7) {	// RIGHT
-			legalMoves.append(location + 1)
+			unfilteredMoves.append(location + 1)
 		}
+		
+		//loop through legal moves
+		//build two arrays of indexes of cells that contain legal moves to cells with opponents pieces, and cells without
+		//if firstaction is none, do nothing
+		//pass in turncounter, if 1 or 3 and turncounter is attacked or moved, remove corresponding legal moves
+
+
+//			if (board.getPieceAtLocation(location: moveIndex)?.team != self.team){
+//			print("opponent piece in cell \(moveIndex)")
+//			} else {
+//				print("no opponent piece in cell \(moveIndex)")
+//
+//			}
 		
 		
 		// FOR REFERENCE...
@@ -69,14 +84,14 @@ class Piece {
 		
 
 		
-		return legalMoves
+		return unfilteredMoves
 	}
-	func setHasMoved() {//action after piece moved once
+	func onMove() {//action after piece moved once
 		//overrided by pawn class
 	}
+
+
 }
-
-
 enum PieceType {
 	case King
 	case Queen
@@ -90,3 +105,10 @@ enum Team: String {
 	case Black = "Black"
 	case White = "White"
 }
+
+enum FirstAction {
+	case Attacked
+	case Moved
+	case None
+}
+
