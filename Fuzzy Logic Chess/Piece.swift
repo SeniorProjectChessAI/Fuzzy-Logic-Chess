@@ -13,6 +13,9 @@ class Piece {
 	var imageName: String
 	var location: Int
 	var firstMove: FirstAction
+	var hasMoved: Bool = false;
+	var unfilteredMoves = [Int]()
+	
 
 	init(type: PieceType, team: Team, imageName: String, location: Int, firstAction: FirstAction) {
 		self.type = type
@@ -20,7 +23,6 @@ class Piece {
 		self.imageName = imageName
 		self.location = location
 		self.firstMove = firstAction
-
 	}
 	
 	// changes location of piece
@@ -31,7 +33,7 @@ class Piece {
 	
 	// returns list of legal moves
 	func getUnfilteredMoves(board: Board) -> [Int] {
-		var unfilteredMoves = [Int]()
+		unfilteredMoves = [Int]()
 		
 		// SURROUNDING THE PIECE...
 		// Top, Right, Bottom, Left, Diagonals
@@ -64,6 +66,10 @@ class Piece {
 			unfilteredMoves.append(location + 1)
 		}
 		
+		if (self.type == PieceType.King){
+			print("Checking for castle opportunity")
+			isCastleAvailable(board: board)
+		}
 		//loop through legal moves
 		//build two arrays of indexes of cells that contain legal moves to cells with opponents pieces, and cells without
 		//if firstaction is none, do nothing
@@ -87,7 +93,7 @@ class Piece {
 		return unfilteredMoves
 	}
 	func onMove() {//action after piece moved once
-		//overrided by pawn class
+		hasMoved = true;
 	}
 
 	func getCanMove() -> Bool {
@@ -103,7 +109,35 @@ class Piece {
 		}
 		return true
 	}
+	func isCastleAvailable(board:Board) -> Bool {
+		print("King has moved before: \(hasMoved)")
+		
+		var currentTile = location
+
+		if(location % 8 != 0) {
+			for _ in 0...3 {
+				currentTile -= 1
+				//unfilteredMoves.append(currentTile)
+				let nextCell = board.getPieceAtLocation(location: currentTile); //current tile, possibly nil
+				
+				if(nextCell?.type == PieceType.Rook && nextCell?.team == self.team){
+					print("Castling move available to the left")
+
+					//add castle legal move
+					break;
+				} else if (nextCell?.type != nil){
+					print("Piece in the way of castling")
+					break;
+				}
+			}
+			currentTile = location	//reset
+		}
+		return false
+	}
+
 }
+
+
 enum PieceType {
 	case King
 	case Queen

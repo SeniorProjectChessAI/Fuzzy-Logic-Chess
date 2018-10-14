@@ -7,7 +7,7 @@
 //
 
 class Pawn: Piece {
-	var hasMoved: Bool = false;	// Pawn only!! -- can move 2 spots if first move..
+	var pawnMoved: Bool = false;	// Pawn only!! -- can move 2 spots if first move..
 	
 	override
 	init(type: PieceType, team: Team, imageName: String, location: Int,firstAction:FirstAction) {
@@ -24,7 +24,7 @@ class Pawn: Piece {
 		let isPieceFoundRow2 = board.getPieceAtLocation(location: location + (moveVal)); //checks if piece found in the cell in front of pawn
 
 		// PAWN only - first move
-		if(!hasMoved && (isPieceFoundRow1 == nil) && (isPieceFoundRow2 == nil)) {
+		if(!pawnMoved && (isPieceFoundRow1 == nil) && (isPieceFoundRow2 == nil)) {
 			unfilteredMoves.append(location + moveVal)
 
 		}
@@ -36,7 +36,7 @@ class Pawn: Piece {
 	
 	override
 	func onMove() {
-		hasMoved = true;
+		pawnMoved = true;
 	}
 	
 
