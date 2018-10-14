@@ -176,8 +176,8 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		} else if (turnCounter == 2 || turnCounter == 3) {
 			currentTeam = Team.Black;
 		}
-		print(currentTeam)
-		print(board.getPieceAtLocation(location: indexPath.row)?.team)
+		print("controlling team is \(currentTeam)")
+		print("piece at \(board.getPieceAtLocation(location: indexPath.row)?.location) is \(board.getPieceAtLocation(location: indexPath.row)?.team)")
 
 		if(!tileIsSelected && tile.hasPiece() && (currentTeam == tile.piece?.team)) {//clicked piece while no cells are highlighted
 			legalMoves = tile.piece?.getUnfilteredMoves(board:board) ?? []
@@ -190,6 +190,12 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 			previouslySelectedTileIndex = indexPath.row
 		}
 		else if(tileIsSelected) {//clicked a piece while some tile is selected
+			print("tile has piece? \(tile.hasPiece())")
+			print("tile is empty? \(tile.isEmpty())")
+			print("tile pieces team: \(tile.piece?.team)")
+
+
+			
 			
 			let previousTile = board.cellForItem(at: IndexPath(row: previouslySelectedTileIndex!, section: 0)) as! Tile
 			let tile = board.cellForItem(at: indexPath) as! Tile
@@ -216,7 +222,9 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 					turnCounter += 1;
 				}
 				print(turnCounter)
-				
+				board.getPieceAtLocation(location: indexPath.row)?.location = 64
+				//all captured pieces move to '64th' tile since I can't figure out how to remove pieces from array in swift
+
 				// set previously selected piece to newly selected tile
 				tile.setPiece(piece: previousTile.piece)
 				previousTile.piece?.onMove();

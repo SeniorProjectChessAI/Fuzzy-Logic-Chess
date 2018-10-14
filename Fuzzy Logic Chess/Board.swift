@@ -64,17 +64,17 @@ class Board : UICollectionView {
 		
 		for piece in self.blackPieces {
 			if(location == piece.location) {
-				print("piece found")
+				//print("piece found")
 				return piece
 			}
 		}
 		for piece in self.whitePieces {
 			if(location == piece.location) {
-				print("piece found")
+				//print("piece found")
 				return piece
 			}
 		}
-		print("piece NOT found")
+		//print("piece NOT found")
 		return nil
 
 	}
