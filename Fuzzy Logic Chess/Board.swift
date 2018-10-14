@@ -47,7 +47,7 @@ class Board : UICollectionView {
 		for i in 48...55 {
 			whitePieces.append(Pawn(type: PieceType.Pawn, team: Team.White, imageName: "w pawn.png", location: i, firstAction: FirstAction.None))
 		}
-		
+
 		whitePieces.append(Noble(type: PieceType.Rook, team: Team.White, imageName: "w rook" + ".png", location: 56, firstAction: FirstAction.None))
 		whitePieces.append(Knight(type: PieceType.Knight, team: Team.White, imageName: "w knight" + ".png", location: 57, firstAction: FirstAction.None))
 		whitePieces.append(Noble(type: PieceType.Bishop, team: Team.White, imageName: "w bishop" + ".png", location: 58, firstAction: FirstAction.None))

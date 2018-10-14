@@ -15,9 +15,10 @@ class Piece {
 	var firstMove: FirstAction
 	var hasMoved: Bool = false;
 	var unfilteredMoves = [Int]()
-	var castleLegalMoveVal = -1
-	var rookCastlingLocation = -1
-
+	var legalCastlingMovesArray = [Int]()
+	var lRookCastlingLocation = -1
+	var rRookCastlingLocation = -1
+	var rookMoveAddVal = 0
 	init(type: PieceType, team: Team, imageName: String, location: Int, firstAction: FirstAction) {
 		self.type = type
 		self.team = team
@@ -111,7 +112,7 @@ class Piece {
 		}
 		return true
 	}
-	func isCastleAvailable(board:Board) -> Bool {
+	func isCastleAvailable(board:Board) {
 		print("King has moved before: \(hasMoved)")
 		
 		var currentTile = location
@@ -124,10 +125,33 @@ class Piece {
 				
 				if(nextCell?.type == PieceType.Rook && nextCell?.team == self.team && !(nextCell?.hasMoved)!){
 					print("Castling move available to the left")
-					unfilteredMoves.append(location-2)
-					castleLegalMoveVal = location - 2
-					rookCastlingLocation = currentTile
-					return true;
+					var lCastleLegalMoveVal = location - 2
+					unfilteredMoves.append(lCastleLegalMoveVal)
+					legalCastlingMovesArray.append(lCastleLegalMoveVal)
+					lRookCastlingLocation = currentTile //left rooks location
+					//add castle legal move
+					break;
+				} else if (nextCell?.type != nil){
+					print("Piece in the way of castling")
+					break;
+				}
+			}
+			currentTile = location	//reset
+		}
+		
+		if(location % 8 != 0) {
+			for _ in 0...3 {
+				currentTile += 1
+				//unfilteredMoves.append(currentTile)
+				let nextCell = board.getPieceAtLocation(location: currentTile); //current tile, possibly nil
+				
+				if(nextCell?.type == PieceType.Rook && nextCell?.team == self.team && !(nextCell?.hasMoved)!){
+					print("Castling move available to the right")
+					var rCastleLegalMoveVal = location + 2
+					unfilteredMoves.append(rCastleLegalMoveVal)
+					legalCastlingMovesArray.append(rCastleLegalMoveVal)
+					rRookCastlingLocation = currentTile
+					break;
 					//add castle legal move
 				} else if (nextCell?.type != nil){
 					print("Piece in the way of castling")
@@ -136,18 +160,20 @@ class Piece {
 			}
 			currentTile = location	//reset
 		}
-		return false
 	}
 	
-	func getCastleLegalMoveVal() -> Int {
-		return castleLegalMoveVal
-	}
 	
 	func resetCastleLegalMoveVal() {
-		castleLegalMoveVal = -1
+		legalCastlingMovesArray = [Int]()
+
 	}
-	func getCastlingRookLocation() -> Int{
-		return rookCastlingLocation
+	func getCastlingRookLocation(clickedIndex:Int) -> Int{
+		if (clickedIndex == 58 || clickedIndex == 2){
+			rookMoveAddVal = 1
+			return lRookCastlingLocation
+		}
+		rookMoveAddVal = -1
+		return rRookCastlingLocation
 	}
 }
 

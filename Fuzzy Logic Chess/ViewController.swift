@@ -176,8 +176,8 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		} else if (turnCounter == 2 || turnCounter == 3) {
 			currentTeam = Team.Black;
 		}
-		print("controlling team is \(currentTeam)")
-		print("piece at \(board.getPieceAtLocation(location: indexPath.row)?.location) is \(board.getPieceAtLocation(location: indexPath.row)?.team)")
+//		print("controlling team is \(currentTeam)")
+//		print("piece at \(board.getPieceAtLocation(location: indexPath.row)?.location) is \(board.getPieceAtLocation(location: indexPath.row)?.team)")
 
 		if(!tileIsSelected && tile.hasPiece() && (currentTeam == tile.piece?.team)) {//clicked piece while no cells are highlighted
 			legalMoves = tile.piece?.getUnfilteredMoves(board:board) ?? []
@@ -190,7 +190,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 			previouslySelectedTileIndex = indexPath.row
 		}
 		else if(tileIsSelected) {//clicked a piece while some tile is selected
-			
+			print("previous index: \(previouslySelectedTileIndex)")
 			let previousTile = board.cellForItem(at: IndexPath(row: previouslySelectedTileIndex!, section: 0)) as! Tile
 			let tile = board.cellForItem(at: indexPath) as! Tile
 
@@ -218,13 +218,15 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 				print(turnCounter)
 				
 				if (previousTile.piece?.type == PieceType.King){
-					if (tile.location == previousTile.piece?.getCastleLegalMoveVal()){
-						let rookFromPos = previousTile.piece?.getCastlingRookLocation()
-						let rookToPos = (previousTile.piece?.getCastleLegalMoveVal())! + 1
+					if ((previousTile.piece?.legalCastlingMovesArray.contains( tile.location))!){
+						let rookFromPos = previousTile.piece?.getCastlingRookLocation(clickedIndex: tile.location)
+						let rookToPos = tile.location + (previousTile.piece?.rookMoveAddVal)!
 						let castlingRook = board.getPieceAtLocation(location: rookFromPos!)
 						castlingRook?.location = rookToPos
-						
-						
+						let rookTileFrom = board.cellForItem(at: IndexPath(row: rookFromPos!, section: 0)) as! Tile
+						rookTileFrom.removePiece()
+						let rookTileTo = board.cellForItem(at: IndexPath(row: rookToPos, section: 0)) as! Tile
+						rookTileTo.setPiece(piece: castlingRook)
 					}
 				}
 				previousTile.piece?.resetCastleLegalMoveVal()
@@ -385,7 +387,4 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		last_rolled = d6.nextInt()
 		displayDie(num: last_rolled)
 	}
-	
-	
-
 }
