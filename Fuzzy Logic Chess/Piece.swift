@@ -15,7 +15,8 @@ class Piece {
 	var firstMove: FirstAction
 	var hasMoved: Bool = false;
 	var unfilteredMoves = [Int]()
-	
+	var castleLegalMoveVal = -1
+	var rookCastlingLocation = -1
 
 	init(type: PieceType, team: Team, imageName: String, location: Int, firstAction: FirstAction) {
 		self.type = type
@@ -23,6 +24,7 @@ class Piece {
 		self.imageName = imageName
 		self.location = location
 		self.firstMove = firstAction
+		
 	}
 	
 	// changes location of piece
@@ -120,11 +122,13 @@ class Piece {
 				//unfilteredMoves.append(currentTile)
 				let nextCell = board.getPieceAtLocation(location: currentTile); //current tile, possibly nil
 				
-				if(nextCell?.type == PieceType.Rook && nextCell?.team == self.team){
+				if(nextCell?.type == PieceType.Rook && nextCell?.team == self.team && !(nextCell?.hasMoved)!){
 					print("Castling move available to the left")
-
+					unfilteredMoves.append(location-2)
+					castleLegalMoveVal = location - 2
+					rookCastlingLocation = currentTile
+					return true;
 					//add castle legal move
-					break;
 				} else if (nextCell?.type != nil){
 					print("Piece in the way of castling")
 					break;
@@ -134,7 +138,17 @@ class Piece {
 		}
 		return false
 	}
-
+	
+	func getCastleLegalMoveVal() -> Int {
+		return castleLegalMoveVal
+	}
+	
+	func resetCastleLegalMoveVal() {
+		castleLegalMoveVal = -1
+	}
+	func getCastlingRookLocation() -> Int{
+		return rookCastlingLocation
+	}
 }
 
 

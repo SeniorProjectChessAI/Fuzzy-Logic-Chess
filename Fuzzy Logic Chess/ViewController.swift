@@ -190,12 +190,6 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 			previouslySelectedTileIndex = indexPath.row
 		}
 		else if(tileIsSelected) {//clicked a piece while some tile is selected
-			print("tile has piece? \(tile.hasPiece())")
-			print("tile is empty? \(tile.isEmpty())")
-			print("tile pieces team: \(tile.piece?.team)")
-
-
-			
 			
 			let previousTile = board.cellForItem(at: IndexPath(row: previouslySelectedTileIndex!, section: 0)) as! Tile
 			let tile = board.cellForItem(at: indexPath) as! Tile
@@ -222,6 +216,19 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 					turnCounter += 1;
 				}
 				print(turnCounter)
+				
+				if (previousTile.piece?.type == PieceType.King){
+					if (tile.location == previousTile.piece?.getCastleLegalMoveVal()){
+						let rookFromPos = previousTile.piece?.getCastlingRookLocation()
+						let rookToPos = (previousTile.piece?.getCastleLegalMoveVal())! + 1
+						let castlingRook = board.getPieceAtLocation(location: rookFromPos!)
+						castlingRook?.location = rookToPos
+						
+						
+					}
+				}
+				previousTile.piece?.resetCastleLegalMoveVal()
+				
 				board.getPieceAtLocation(location: indexPath.row)?.location = 64
 				//all captured pieces move to '64th' tile since I can't figure out how to remove pieces from array in swift
 
