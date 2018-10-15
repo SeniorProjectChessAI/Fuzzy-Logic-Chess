@@ -70,6 +70,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	func restartGame() {
 		resetBoard()
 		startGame()
+		turnCounter = 0
 	}
 	
 	// Resets the board
