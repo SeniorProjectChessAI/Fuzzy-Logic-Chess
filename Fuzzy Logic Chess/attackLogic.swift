@@ -10,6 +10,7 @@ import Foundation
 
 
 var attacker: PieceType!
+var attackerTeam: Team!
 var victim: PieceType!
 var victimTeam: Team!
 var attackSuccess: Bool!

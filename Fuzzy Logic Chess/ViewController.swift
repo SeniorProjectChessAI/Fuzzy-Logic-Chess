@@ -186,8 +186,10 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 			previouslySelectedTileTeam = tile.piece?.team
 			legalMoves = showLegalMoves(tile: tile);
 			attacker = tile.piece?.type
+			attackerTeam = tile.piece?.team
 			
-			print("attacker =  \(attacker)")
+			//print("attacker =  \(attacker)")
+			//print("attacker team = (\(attackerTeam)")
 			
 			previouslySelectedTileColor = tile.backgroundColor
 			tile.backgroundColor = UIColor.cyan
@@ -196,10 +198,12 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		}
 		else if(tileIsSelected) {//clicked a piece while some tile is selected
 			victim = board.getPieceAtLocation(location: indexPath.row)?.type
+			victimTeam = board.getPieceAtLocation(location: indexPath.row)?.team
 			
-			print("victim =  \(victim)")
-			
+			//print("victim =  \(victim)")
+			//print("victim team = \(victimTeam)")
 			print("previous index: \(previouslySelectedTileIndex)")
+			
 			let previousTile = board.cellForItem(at: IndexPath(row: previouslySelectedTileIndex!, section: 0)) as! Tile
 			let tile = board.cellForItem(at: indexPath) as! Tile
 
@@ -261,6 +265,10 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 						previousTile.backgroundColor = previouslySelectedTileColor
 						
 						print("Attack Successful! - piece moved to tile \(indexPath.row)")
+						
+						if (victim == PieceType.King) {
+							endGame(winner: attackerTeam)
+						}
 					}
 				}
 				else {
