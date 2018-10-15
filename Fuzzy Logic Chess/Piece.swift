@@ -100,7 +100,7 @@ class Piece {
 	}
 
 	func getCanMove() -> Bool {
-		if (firstMove != FirstAction.None){
+		if (firstMove == FirstAction.Moved){
 			return false
 		}
 		return true
