@@ -60,7 +60,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		
 		startGame()
 		
-		rollDie() // Rolls die for presentation purposes..
+		//rollDie() // Rolls die for presentation purposes..
     }
 	
 	// sets all game variables and starts the game
@@ -185,6 +185,9 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 			legalMoves = tile.piece?.getUnfilteredMoves(board:board) ?? []
 			previouslySelectedTileTeam = tile.piece?.team
 			legalMoves = showLegalMoves(tile: tile);
+			attacker = tile.piece?.type
+			
+			print("attacker =  \(attacker)")
 			
 			previouslySelectedTileColor = tile.backgroundColor
 			tile.backgroundColor = UIColor.cyan
@@ -192,6 +195,10 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 			previouslySelectedTileIndex = indexPath.row
 		}
 		else if(tileIsSelected) {//clicked a piece while some tile is selected
+			victim = board.getPieceAtLocation(location: indexPath.row)?.type
+			
+			print("victim =  \(victim)")
+			
 			print("previous index: \(previouslySelectedTileIndex)")
 			let previousTile = board.cellForItem(at: IndexPath(row: previouslySelectedTileIndex!, section: 0)) as! Tile
 			let tile = board.cellForItem(at: indexPath) as! Tile
@@ -217,7 +224,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 				} else {
 					turnCounter += 1;
 				}
-				print(turnCounter)
+				print("turn #\(turnCounter)")
 				
 				if (previousTile.piece?.type == PieceType.King){
 					if ((previousTile.piece?.legalCastlingMovesArray.contains( tile.location))!){
@@ -231,28 +238,61 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 						rookTileTo.setPiece(piece: castlingRook)
 					}
 				}
-				previousTile.piece?.resetCastleLegalMoveVal()
 				
-				board.getPieceAtLocation(location: indexPath.row)?.location = 64
-				//all captured pieces move to '64th' tile since I can't figure out how to remove pieces from array in swift
-
-				// set previously selected piece to newly selected tile
-				tile.setPiece(piece: previousTile.piece)
-				previousTile.piece?.onMove();
-
-				// remove previously selected tile's image and restore original tile color
-				previousTile.removePiece()
-				previousTile.backgroundColor = previouslySelectedTileColor
+				if (tile.hasPiece()) {
+					rollDie()
+					attack()
+					if attackResult() == false { // if attack is NOT successfull
+						previousTile.piece?.resetCastleLegalMoveVal()
+						
+						board.getPieceAtLocation(location: indexPath.row)?.location = 64
+						previousTile.backgroundColor = previouslySelectedTileColor
+						
+						print("Attack failed! Piece NOT moved")
+					}
+					else {
+						previousTile.piece?.resetCastleLegalMoveVal()
+						
+						board.getPieceAtLocation(location: indexPath.row)?.location = 64
+						//all captured pieces move to '64th' tile since I can't figure out how to remove pieces from array in swift
+						
+						// set previously selected piece to newly selected tile
+						tile.setPiece(piece: previousTile.piece)
+						previousTile.piece?.onMove();
+						
+						// remove previously selected tile's image and restore original tile color
+						previousTile.removePiece()
+						previousTile.backgroundColor = previouslySelectedTileColor
+						
+						print("Attack Successful")
+						
+					}
+				}
+				else {
+					previousTile.piece?.resetCastleLegalMoveVal()
+					
+					board.getPieceAtLocation(location: indexPath.row)?.location = 64
+					//all captured pieces move to '64th' tile since I can't figure out how to remove pieces from array in swift
+					
+					// set previously selected piece to newly selected tile
+					tile.setPiece(piece: previousTile.piece)
+					previousTile.piece?.onMove();
+					
+					// remove previously selected tile's image and restore original tile color
+					previousTile.removePiece()
+					previousTile.backgroundColor = previouslySelectedTileColor
+					
+				}
 				
 				// hide legalMoves indicators
 				hideLegalMoves()
 				
 				// reset variables
 				tileIsSelected = false
-				previouslySelectedTileTeam = nil
 				legalMoves.removeAll()
+				previouslySelectedTileTeam = nil
 				
-
+				
 				print("piece moved to tile \(indexPath.row) ")
 			} else if (tile.piece?.team == previouslySelectedTileTeam){
 				print("Switch pieces to move")
