@@ -224,7 +224,6 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 				} else {
 					turnCounter += 1;
 				}
-				print("turn #\(turnCounter)")
 				
 				if (previousTile.piece?.type == PieceType.King){
 					if ((previousTile.piece?.legalCastlingMovesArray.contains( tile.location))!){
@@ -243,14 +242,11 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 					rollDie()
 					attack()
 					if attackResult() == false { // if attack is NOT successfull
-						previousTile.piece?.resetCastleLegalMoveVal()
-						
-						board.getPieceAtLocation(location: indexPath.row)?.location = 64
 						previousTile.backgroundColor = previouslySelectedTileColor
 						
-						print("Attack failed! Piece NOT moved")
+						print("Attack Failed! - piece NOT moved")
 					}
-					else {
+					else { // if attack was successful
 						previousTile.piece?.resetCastleLegalMoveVal()
 						
 						board.getPieceAtLocation(location: indexPath.row)?.location = 64
@@ -264,8 +260,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 						previousTile.removePiece()
 						previousTile.backgroundColor = previouslySelectedTileColor
 						
-						print("Attack Successful")
-						
+						print("Attack Successful! - piece moved to tile \(indexPath.row)")
 					}
 				}
 				else {
@@ -282,7 +277,9 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 					previousTile.removePiece()
 					previousTile.backgroundColor = previouslySelectedTileColor
 					
+					print("piece moved to tile \(indexPath.row) ")
 				}
+				print("turn #\(turnCounter)")
 				
 				// hide legalMoves indicators
 				hideLegalMoves()
@@ -292,8 +289,6 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 				legalMoves.removeAll()
 				previouslySelectedTileTeam = nil
 				
-				
-				print("piece moved to tile \(indexPath.row) ")
 			} else if (tile.piece?.team == previouslySelectedTileTeam){
 				print("Switch pieces to move")
 				// remove previously selected tile's image and restore original tile color
@@ -308,14 +303,9 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 				legalMoves.removeAll()
 				
 				legalMoves = tile.piece?.getUnfilteredMoves(board:board) ?? []
-				
-				
 			}
 		}
 	}
-	
-	
-	
 	
 	func showLegalMoves(tile:Tile) -> [Int] {
 		//check to see 1) if either team's second turn 2) can move/attack
@@ -352,7 +342,6 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		return legalMoves;
 	}
 	
-	
 	func hideLegalMoves() {
 		for i in legalMoves {
 			let availableTile = board.cellForItem(at: IndexPath(row: i, section: 0)) as! Tile
@@ -362,7 +351,6 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		}
 	}
 
-	
 	//menu button
 	@IBAction func menu_action(_ sender: UIBarButtonItem) {
 		
