@@ -11,8 +11,8 @@ import Foundation
 
 var attacker: PieceType!
 var victim: PieceType!
+var victimTeam: Team!
 var attackSuccess: Bool!
-
 
 func attack() {
 	if (attacker == PieceType.Pawn) {
@@ -93,7 +93,13 @@ func attackResult() -> Bool {
 	return attackSuccess
 }
 
+func lastPieceTarget() -> PieceType {
+	return victim
+}
 
+func lastTeamTarget() -> Team {
+	return victimTeam
+}
 
 
 
