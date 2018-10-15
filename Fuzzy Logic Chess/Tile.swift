@@ -14,7 +14,7 @@ class Tile: UICollectionViewCell {
 	@IBOutlet weak var backgroundImageView: UIImageView!
 	@IBOutlet weak var foregroundImageView: UIImageView!
     @IBOutlet weak var legalMoveView: UIImageView!
-    
+	@IBOutlet weak var attackMoveView: UIImageView!
 	var location: Int = 0 //default location set to 0
 	var piece: Piece?
 	
@@ -49,11 +49,24 @@ class Tile: UICollectionViewCell {
 		showLegalMoveView(show: false)
 	}
 	
+	func setAttackView() {
+		self.attackMoveView.image = UIImage(named: "circleSelector65.png")
+		showAttackMoveView(show: false)
+	}
+	
 	func showLegalMoveView(show: Bool) {
 		if(show) {
 			legalMoveView.alpha = 1
 		} else {
 			legalMoveView.alpha = 0
+		}
+	}
+	
+	func showAttackMoveView(show: Bool) {
+		if(show) {
+			attackMoveView.alpha = 1
+		} else {
+			attackMoveView.alpha = 0
 		}
 	}
 	

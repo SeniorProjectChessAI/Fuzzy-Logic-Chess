@@ -123,6 +123,8 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		tile.location = indexPath.row
 		tile.setPiece(piece: board.getPieceAtLocation(location: indexPath.row))
 		tile.setLegalMoveView()
+		tile.setAttackView()
+
 		setTileColorVariables(index: indexPath.row)
 		
 		if indexPath.row % 2 == 0 {
@@ -285,7 +287,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 				if(availableTile.hasPiece()) {
 					if(availableTile.piece?.team != previouslySelectedTileTeam && (tile.piece?.getCanAttack())!) {
 						//legal moves to opponents pieces
-						availableTile.showLegalMoveView(show: true)
+						availableTile.showAttackMoveView(show: true)
 					} else {
 						let removeInt: Int  = (legalMoves.firstIndex(of: i)!);
 						//print(removeInt)
@@ -316,6 +318,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 			let availableTile = board.cellForItem(at: IndexPath(row: i, section: 0)) as! Tile
 			
 			availableTile.showLegalMoveView(show: false)
+			availableTile.showAttackMoveView(show: false)
 		}
 	}
 

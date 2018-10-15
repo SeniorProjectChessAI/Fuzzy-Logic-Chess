@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.23.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ugf-Ty-h8X">
-    <device id="retina6_1" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ugf-Ty-h8X">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.16.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -14,23 +14,23 @@
             <objects>
                 <viewController restorationIdentifier="ViewController" storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="Fuzzy_Logic_Chess" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Black: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kok-eJ-6BS">
-                                <rect key="frame" x="10" y="194" width="75" height="32"/>
+                                <rect key="frame" x="10" y="99" width="75" height="32"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="White: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7JL-ZT-wDq">
-                                <rect key="frame" x="10" y="670" width="79" height="32"/>
+                                <rect key="frame" x="10" y="536" width="79" height="32"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="KfE-VP-2bj" customClass="Board" customModule="Fuzzy_Logic_Chess" customModuleProvider="target">
-                                <rect key="frame" x="5" y="246" width="404" height="404"/>
+                                <rect key="frame" x="5" y="151" width="365" height="365"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="KfE-VP-2bj" secondAttribute="height" multiplier="1:1" id="kIF-kj-cS8"/>
@@ -58,10 +58,18 @@
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xz4-b2-Zq4">
                                                     <rect key="frame" x="15" y="15" width="20" height="20"/>
-                                                    <color key="tintColor" red="0.41645854918939695" green="1" blue="0.28119279693866317" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="tintColor" red="0.53291090165203048" green="0.98737150430679321" blue="0.39509280108504863" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" priority="750" constant="40" id="5QA-SX-shA"/>
                                                         <constraint firstAttribute="width" secondItem="xz4-b2-Zq4" secondAttribute="height" multiplier="1:1" id="WC2-nb-Jpn"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="myx-fy-ivP">
+                                                    <rect key="frame" x="15" y="35" width="0.0" height="0.0"/>
+                                                    <color key="tintColor" red="0.98737150429999998" green="0.0" blue="0.09169715547" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" priority="750" constant="40" id="hIM-ov-tS6"/>
+                                                        <constraint firstAttribute="width" secondItem="myx-fy-ivP" secondAttribute="height" multiplier="1:1" id="kLO-7O-lUk"/>
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
@@ -72,8 +80,10 @@
                                             <constraint firstItem="lt6-co-wF3" firstAttribute="top" secondItem="3Z2-54-rL9" secondAttribute="top" constant="5" id="4u0-6L-nQQ"/>
                                             <constraint firstAttribute="trailing" secondItem="wfZ-7t-ebc" secondAttribute="trailing" id="7FC-Le-dJn"/>
                                             <constraint firstAttribute="trailing" secondItem="lt6-co-wF3" secondAttribute="trailing" constant="5" id="959-Zg-36H"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="myx-fy-ivP" secondAttribute="bottom" constant="7" id="9ZH-0t-kNk"/>
                                             <constraint firstItem="xz4-b2-Zq4" firstAttribute="top" secondItem="3Z2-54-rL9" secondAttribute="top" constant="15" id="HZm-Tl-raV"/>
                                             <constraint firstItem="wfZ-7t-ebc" firstAttribute="leading" secondItem="3Z2-54-rL9" secondAttribute="leading" id="Pjo-Pl-1y3"/>
+                                            <constraint firstItem="myx-fy-ivP" firstAttribute="width" secondItem="myx-fy-ivP" secondAttribute="height" multiplier="1:1" id="X7c-un-tes"/>
                                             <constraint firstAttribute="bottom" secondItem="xz4-b2-Zq4" secondAttribute="bottom" constant="15" id="ckT-eC-6OV"/>
                                             <constraint firstItem="wfZ-7t-ebc" firstAttribute="leading" secondItem="3Z2-54-rL9" secondAttribute="leading" id="dvs-oF-QYE"/>
                                             <constraint firstAttribute="bottom" secondItem="wfZ-7t-ebc" secondAttribute="bottom" id="dww-W0-oln"/>
@@ -84,8 +94,12 @@
                                             <constraint firstItem="wfZ-7t-ebc" firstAttribute="top" secondItem="3Z2-54-rL9" secondAttribute="top" id="pJp-Hr-15L"/>
                                             <constraint firstAttribute="trailing" secondItem="wfZ-7t-ebc" secondAttribute="trailing" id="s1Z-1C-DiG"/>
                                             <constraint firstItem="lt6-co-wF3" firstAttribute="leading" secondItem="3Z2-54-rL9" secondAttribute="leading" constant="5" id="tPR-EY-sSy"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="myx-fy-ivP" secondAttribute="trailing" constant="7" id="taX-5h-vU5"/>
+                                            <constraint firstItem="myx-fy-ivP" firstAttribute="leading" secondItem="3Z2-54-rL9" secondAttribute="leadingMargin" constant="7" id="v7y-Xu-coL"/>
+                                            <constraint firstItem="myx-fy-ivP" firstAttribute="top" secondItem="3Z2-54-rL9" secondAttribute="topMargin" constant="7" id="wk5-zI-0yr"/>
                                         </constraints>
                                         <connections>
+                                            <outlet property="attackMoveView" destination="myx-fy-ivP" id="BlX-MM-uT6"/>
                                             <outlet property="backgroundImageView" destination="wfZ-7t-ebc" id="ztD-cm-Pe3"/>
                                             <outlet property="foregroundImageView" destination="lt6-co-wF3" id="75I-oG-OvA"/>
                                             <outlet property="legalMoveView" destination="xz4-b2-Zq4" id="pag-BB-6S8"/>
@@ -98,7 +112,7 @@
                                 </connections>
                             </collectionView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="die0" translatesAutoresizingMaskIntoConstraints="NO" id="INU-VV-3t3" userLabel="die">
-                                <rect key="frame" x="271" y="98" width="138" height="138"/>
+                                <rect key="frame" x="303" y="74" width="67" height="67"/>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="750" constant="90" id="Cr9-PL-lEw"/>
                                     <constraint firstAttribute="width" secondItem="INU-VV-3t3" secondAttribute="height" multiplier="1:1" id="WWD-eW-eD9"/>
@@ -136,29 +150,29 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1082.4000000000001" y="136.69950738916256"/>
+            <point key="canvasLocation" x="1082.4000000000001" y="136.28185907046478"/>
         </scene>
         <!--Menu View Controller-->
         <scene sceneID="jlY-1Q-lDU">
             <objects>
                 <viewController restorationIdentifier="MenuViewController" storyboardIdentifier="MenuViewController" id="uQo-R7-A8N" customClass="MenuViewController" customModule="Fuzzy_Logic_Chess" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gHI-Pd-nTO">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XZH-DP-3lS">
-                                <rect key="frame" x="0.0" y="44" width="359" height="852"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="menu_cell" id="EEq-gg-s9e" customClass="MenuTableViewCell" customModule="Fuzzy_Logic_Chess" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="359" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EEq-gg-s9e" id="We7-gK-lhB">
-                                            <rect key="frame" x="0.0" y="0.0" width="359" height="43.5"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EEq-gg-s9e" id="We7-gK-lhB">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vwZ-tV-4Nx">
-                                                    <rect key="frame" x="0.0" y="-21" width="347" height="85.5"/>
+                                                    <rect key="frame" x="0.0" y="35" width="347" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -207,11 +221,11 @@
             <objects>
                 <viewController storyboardIdentifier="endGamePopup" id="Bsa-Se-IYB" customClass="PopupViewController" customModule="Fuzzy_Logic_Chess" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fgA-ok-XVw">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SiK-8B-AF1">
-                                <rect key="frame" x="57" y="298" width="300" height="300"/>
+                                <rect key="frame" x="37.5" y="183.5" width="300" height="300"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WXg-KL-rao">
                                         <rect key="frame" x="36" y="25" width="228" height="38"/>
@@ -313,7 +327,7 @@
             <objects>
                 <viewController id="LQ6-VI-Der" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DTa-v8-dfh">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s1v-Ad-4Ju">
@@ -367,7 +381,7 @@ MOVEMENT VARIATIONS F-L Chess adds and varies the standard chess moves:
                 <navigationController restorationIdentifier="NavigationController" storyboardIdentifier="NavigationController" automaticallyAdjustsScrollViewInsets="NO" id="ugf-Ty-h8X" customClass="NavigationController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mmU-Zj-xbf">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
