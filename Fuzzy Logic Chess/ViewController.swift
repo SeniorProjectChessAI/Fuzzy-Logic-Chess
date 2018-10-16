@@ -70,7 +70,11 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	func restartGame() {
 		resetBoard()
 		startGame()
+		displayDie(num: 0)
 		turnCounter = 0
+		
+		print("---------NEW GAME---------\n")
+		print("Turn #\(turnCounter)")
 	}
 	
 	// Resets the board
@@ -405,6 +409,8 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	func displayDie(num: Int) {
 		
 		switch num {
+		case 0:
+			die_imageView.image = die_blank
 		case 1:
 			die_imageView.image = die_1
 		case 2:
