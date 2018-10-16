@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ugf-Ty-h8X">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ugf-Ty-h8X">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,12 +17,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Black: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kok-eJ-6BS">
-                                <rect key="frame" x="10" y="99" width="75" height="32"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="White: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7JL-ZT-wDq">
                                 <rect key="frame" x="10" y="536" width="79" height="32"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
@@ -126,9 +120,7 @@
                             <constraint firstItem="INU-VV-3t3" firstAttribute="bottom" secondItem="KfE-VP-2bj" secondAttribute="top" constant="-10" id="603-QS-oZI"/>
                             <constraint firstItem="KfE-VP-2bj" firstAttribute="top" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="5" id="GK2-cV-0rU"/>
                             <constraint firstItem="7JL-ZT-wDq" firstAttribute="top" secondItem="KfE-VP-2bj" secondAttribute="bottom" constant="20" id="OMi-ch-WBo"/>
-                            <constraint firstItem="KfE-VP-2bj" firstAttribute="top" secondItem="kok-eJ-6BS" secondAttribute="bottom" constant="20" id="WTW-CV-f2V"/>
                             <constraint firstItem="KfE-VP-2bj" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="YRd-BF-l76"/>
-                            <constraint firstItem="kok-eJ-6BS" firstAttribute="leading" secondItem="W8W-HI-8oh" secondAttribute="leading" constant="10" id="ZfS-jq-BcP"/>
                             <constraint firstItem="7JL-ZT-wDq" firstAttribute="leading" secondItem="W8W-HI-8oh" secondAttribute="leading" constant="10" id="gjA-d2-Fi7"/>
                             <constraint firstItem="W8W-HI-8oh" firstAttribute="trailing" secondItem="INU-VV-3t3" secondAttribute="trailing" constant="5" id="qLm-Sx-b22"/>
                             <constraint firstItem="KfE-VP-2bj" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="xmX-bu-VH1"/>
@@ -172,7 +164,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vwZ-tV-4Nx">
-                                                    <rect key="frame" x="0.0" y="35" width="347" height="20.5"/>
+                                                    <rect key="frame" x="0.0" y="35" width="308" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -397,6 +389,6 @@ MOVEMENT VARIATIONS F-L Chess adds and varies the standard chess moves:
     <resources>
         <image name="capture table.png" width="820" height="544"/>
         <image name="die0" width="2000" height="2000"/>
-        <image name="menu-icon" width="39" height="33"/>
+        <image name="menu-icon" width="32.275863647460938" height="27.310344696044922"/>
     </resources>
 </document>
