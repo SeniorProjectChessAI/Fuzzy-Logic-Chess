@@ -12,7 +12,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     @IBOutlet weak var menu_tableView: UITableView!
     //This array of names will apear on the menu
-	let title_arr = ["Home","How to Play ","Change Difficulty","Restart"]
+	let title_arr = ["   How to Play ","   New Game"]
 	var myIndex = 0
 	
     

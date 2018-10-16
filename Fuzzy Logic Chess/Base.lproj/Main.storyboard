@@ -172,7 +172,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vwZ-tV-4Nx">
-                                                    <rect key="frame" x="0.0" y="35" width="347" height="20.5"/>
+                                                    <rect key="frame" x="0.0" y="35" width="308" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -331,7 +331,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s1v-Ad-4Ju">
-                                <rect key="frame" x="16" y="87" width="343" height="459"/>
+                                <rect key="frame" x="16" y="87" width="343" height="420"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">Fuzzy-Logic Chess©
@@ -363,7 +363,7 @@ MOVEMENT VARIATIONS F-L Chess adds and varies the standard chess moves:
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="capture table.png" translatesAutoresizingMaskIntoConstraints="NO" id="lWF-Qs-ZKs">
-                                <rect key="frame" x="0.0" y="554" width="375" height="274"/>
+                                <rect key="frame" x="0.0" y="515" width="375" height="223"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -373,7 +373,7 @@ MOVEMENT VARIATIONS F-L Chess adds and varies the standard chess moves:
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BSp-p1-Q4T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2772.4637681159425" y="136.60714285714286"/>
+            <point key="canvasLocation" x="2772" y="136.28185907046478"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="RLo-Ly-a5a">
