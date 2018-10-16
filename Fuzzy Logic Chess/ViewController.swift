@@ -39,7 +39,10 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	var currentTeam: Team?
 	var legalMoves: [Int] = []
 	var turnCounter = 0; //[0,1] -> first player's turns, [2,3] -> second player's turns
+	var isDieRolling = false //for disabling cell selection while die rolling
 	var firstPieceMoved: Piece?
+	var dieTimer: Timer!
+	var dieCounter = 5 //how many times the die rolls
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -173,7 +176,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	
 	// Called when Tile is clicked
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		print("Tile clicked: \(indexPath.row)")
+		//print("Tile clicked: \(indexPath.row)")
 		
 		let tile = board.cellForItem(at: indexPath) as! Tile
 		
@@ -186,7 +189,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 //		print("controlling team is \(currentTeam)")
 //		print("piece at \(board.getPieceAtLocation(location: indexPath.row)?.location) is \(board.getPieceAtLocation(location: indexPath.row)?.team)")
 
-		if(!tileIsSelected && tile.hasPiece() && (currentTeam == tile.piece?.team)) {//clicked piece while no cells are highlighted
+		if(!tileIsSelected && tile.hasPiece() && (currentTeam == tile.piece?.team) && !isDieRolling) {//clicked piece while no cells are highlighted
 			legalMoves = tile.piece?.getUnfilteredMoves(board:board) ?? []
 			previouslySelectedTileTeam = tile.piece?.team
 			legalMoves = showLegalMoves(tile: tile);
@@ -201,13 +204,13 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 			tileIsSelected = true;
 			previouslySelectedTileIndex = indexPath.row
 		}
-		else if(tileIsSelected) {//clicked a piece while some tile is selected
+		else if(tileIsSelected && !isDieRolling) {//clicked a piece while some tile is selected
 			victim = board.getPieceAtLocation(location: indexPath.row)?.type
 			victimTeam = board.getPieceAtLocation(location: indexPath.row)?.team
 			
 			//print("victim =  \(victim)")
 			//print("victim team = \(victimTeam)")
-			print("previous index: \(previouslySelectedTileIndex)")
+			//print("previous index: \(previouslySelectedTileIndex)")
 			
 			let previousTile = board.cellForItem(at: IndexPath(row: previouslySelectedTileIndex!, section: 0)) as! Tile
 			let tile = board.cellForItem(at: indexPath) as! Tile
@@ -248,33 +251,14 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 				}
 				
 				if (tile.hasPiece()) {
-					rollDie()
-					attack()
-					if attackResult() == false { // if attack is NOT successfull
-						previousTile.backgroundColor = previouslySelectedTileColor
-						
-						print("Attack Failed! - piece NOT moved")
-					}
-					else { // if attack was successful
-						previousTile.piece?.resetCastleLegalMoveVal()
-						
-						board.getPieceAtLocation(location: indexPath.row)?.location = 64
-						//all captured pieces move to '64th' tile since I can't figure out how to remove pieces from array in swift
-						
-						// set previously selected piece to newly selected tile
-						tile.setPiece(piece: previousTile.piece)
-						previousTile.piece?.onMove();
-						
-						// remove previously selected tile's image and restore original tile color
-						previousTile.removePiece()
-						previousTile.backgroundColor = previouslySelectedTileColor
-						
-						print("Attack Successful! - piece moved to tile \(indexPath.row)")
-						
-						if (victim == PieceType.King) {
-							endGame(winner: attackerTeam)
-						}
-					}
+					isDieRolling = true
+					dieTimer = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(rollDie), userInfo: previousTile, repeats: true)
+
+					DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+						self.afterDieRoll(previousTile:previousTile,indexPath:indexPath,tile:tile)
+					})
+					
+
 				}
 				else {
 					previousTile.piece?.resetCastleLegalMoveVal()
@@ -324,7 +308,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		//check to see 1) if either team's second turn 2) can move/attack
 		//if can move -> keep empty legal moves
 		//if can attack -> keep legal moves to opponent's piece
-		print("first move: \(tile.piece?.firstMove)")
+		//print("first move: \(tile.piece?.firstMove)")
 			for i in legalMoves {
 				let availableTile = board.cellForItem(at: IndexPath(row: i, section: 0)) as! Tile
 				if(availableTile.hasPiece()) {
@@ -429,8 +413,45 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	}
 	
 	// rolls the 6 sided die
-	func rollDie(){
-		last_rolled = d6.nextInt()
-		displayDie(num: last_rolled)
+	@objc func rollDie(){
+		if (dieCounter >= 0){
+			dieCounter -= 1
+			last_rolled = d6.nextInt()
+			displayDie(num: last_rolled)
+		} else {
+			dieTimer.invalidate()
+			//afterDieRoll(previousTile: previousTile, indexPath: indexPath, tile: tile)
+			dieCounter = 5
+		}
+	}
+	
+	func afterDieRoll(previousTile:Tile,indexPath:IndexPath,tile:Tile){
+		isDieRolling = false;
+		attack()
+		if attackResult() == false { // if attack is NOT successfull
+			previousTile.backgroundColor = previouslySelectedTileColor
+			
+			print("Attack Failed! - piece NOT moved")
+		}
+		else { // if attack was successful
+			previousTile.piece?.resetCastleLegalMoveVal()
+			
+			board.getPieceAtLocation(location: indexPath.row)?.location = 64
+			//all captured pieces move to '64th' tile since I can't figure out how to remove pieces from array in swift
+			
+			// set previously selected piece to newly selected tile
+			tile.setPiece(piece: previousTile.piece)
+			previousTile.piece?.onMove();
+			
+			// remove previously selected tile's image and restore original tile color
+			previousTile.removePiece()
+			previousTile.backgroundColor = previouslySelectedTileColor
+			
+			print("Attack Successful! - piece moved to tile \(indexPath.row)")
+			
+			if (victim == PieceType.King) {
+				endGame(winner: attackerTeam)
+			}
+		}
 	}
 }
