@@ -191,6 +191,7 @@ MOVEMENT VARIATIONS F-L Chess adds and varies the standard chess moves:
         <image name="capture table" width="820" height="544"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="WaJ-tu-LaZ"/>
         <segue reference="NYS-qs-ax6"/>
     </inferredMetricsTieBreakers>
 </document>

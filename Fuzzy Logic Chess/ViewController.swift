@@ -39,7 +39,10 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	var currentTeam: Team?
 	var legalMoves: [Int] = []
 	var turnCounter = 0; //[0,1] -> first player's turns, [2,3] -> second player's turns
+	var isDieRolling = false //for disabling cell selection while die rolling
 	var firstPieceMoved: Piece?
+	var dieTimer: Timer!
+	var dieCounter = 5 //how many times the die rolls
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,6 +73,11 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	func restartGame() {
 		resetBoard()
 		startGame()
+		displayDie(num: 0)
+		turnCounter = 0
+		
+		print("---------NEW GAME---------\n")
+		print("Turn #\(turnCounter)")
 	}
 	
 	// Resets the board
@@ -168,7 +176,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	
 	// Called when Tile is clicked
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		print("Tile clicked: \(indexPath.row)")
+		//print("Tile clicked: \(indexPath.row)")
 		
 		let tile = board.cellForItem(at: indexPath) as! Tile
 		
@@ -181,25 +189,29 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 //		print("controlling team is \(currentTeam)")
 //		print("piece at \(board.getPieceAtLocation(location: indexPath.row)?.location) is \(board.getPieceAtLocation(location: indexPath.row)?.team)")
 
-		if(!tileIsSelected && tile.hasPiece() && (currentTeam == tile.piece?.team)) {//clicked piece while no cells are highlighted
+		if(!tileIsSelected && tile.hasPiece() && (currentTeam == tile.piece?.team) && !isDieRolling) {//clicked piece while no cells are highlighted
 			legalMoves = tile.piece?.getUnfilteredMoves(board:board) ?? []
 			previouslySelectedTileTeam = tile.piece?.team
 			legalMoves = showLegalMoves(tile: tile);
 			attacker = tile.piece?.type
+			attackerTeam = tile.piece?.team
 			
-			print("attacker =  \(attacker)")
+			//print("attacker =  \(attacker)")
+			//print("attacker team = (\(attackerTeam)")
 			
 			previouslySelectedTileColor = tile.backgroundColor
 			tile.backgroundColor = UIColor.cyan
 			tileIsSelected = true;
 			previouslySelectedTileIndex = indexPath.row
 		}
-		else if(tileIsSelected) {//clicked a piece while some tile is selected
+		else if(tileIsSelected && !isDieRolling) {//clicked a piece while some tile is selected
 			victim = board.getPieceAtLocation(location: indexPath.row)?.type
+			victimTeam = board.getPieceAtLocation(location: indexPath.row)?.team
 			
-			print("victim =  \(victim)")
+			//print("victim =  \(victim)")
+			//print("victim team = \(victimTeam)")
+			//print("previous index: \(previouslySelectedTileIndex)")
 			
-			print("previous index: \(previouslySelectedTileIndex)")
 			let previousTile = board.cellForItem(at: IndexPath(row: previouslySelectedTileIndex!, section: 0)) as! Tile
 			let tile = board.cellForItem(at: indexPath) as! Tile
 
@@ -224,7 +236,6 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 				} else {
 					turnCounter += 1;
 				}
-				print("turn #\(turnCounter)")
 				
 				if (previousTile.piece?.type == PieceType.King){
 					if ((previousTile.piece?.legalCastlingMovesArray.contains( tile.location))!){
@@ -240,33 +251,14 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 				}
 				
 				if (tile.hasPiece()) {
-					rollDie()
-					attack()
-					if attackResult() == false { // if attack is NOT successfull
-						previousTile.piece?.resetCastleLegalMoveVal()
-						
-						board.getPieceAtLocation(location: indexPath.row)?.location = 64
-						previousTile.backgroundColor = previouslySelectedTileColor
-						
-						print("Attack failed! Piece NOT moved")
-					}
-					else {
-						previousTile.piece?.resetCastleLegalMoveVal()
-						
-						board.getPieceAtLocation(location: indexPath.row)?.location = 64
-						//all captured pieces move to '64th' tile since I can't figure out how to remove pieces from array in swift
-						
-						// set previously selected piece to newly selected tile
-						tile.setPiece(piece: previousTile.piece)
-						previousTile.piece?.onMove();
-						
-						// remove previously selected tile's image and restore original tile color
-						previousTile.removePiece()
-						previousTile.backgroundColor = previouslySelectedTileColor
-						
-						print("Attack Successful")
-						
-					}
+					isDieRolling = true
+					dieTimer = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(rollDie), userInfo: previousTile, repeats: true)
+
+					DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
+						self.afterDieRoll(previousTile:previousTile,indexPath:indexPath,tile:tile)
+					})
+					
+
 				}
 				else {
 					previousTile.piece?.resetCastleLegalMoveVal()
@@ -282,7 +274,9 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 					previousTile.removePiece()
 					previousTile.backgroundColor = previouslySelectedTileColor
 					
+					print("piece moved to tile \(indexPath.row) ")
 				}
+				print("turn #\(turnCounter)")
 				
 				// hide legalMoves indicators
 				hideLegalMoves()
@@ -292,8 +286,6 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 				legalMoves.removeAll()
 				previouslySelectedTileTeam = nil
 				
-				
-				print("piece moved to tile \(indexPath.row) ")
 			} else if (tile.piece?.team == previouslySelectedTileTeam){
 				print("Switch pieces to move")
 				// remove previously selected tile's image and restore original tile color
@@ -308,20 +300,15 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 				legalMoves.removeAll()
 				
 				legalMoves = tile.piece?.getUnfilteredMoves(board:board) ?? []
-				
-				
 			}
 		}
 	}
-	
-	
-	
 	
 	func showLegalMoves(tile:Tile) -> [Int] {
 		//check to see 1) if either team's second turn 2) can move/attack
 		//if can move -> keep empty legal moves
 		//if can attack -> keep legal moves to opponent's piece
-		print("first move: \(tile.piece?.firstMove)")
+		//print("first move: \(tile.piece?.firstMove)")
 			for i in legalMoves {
 				let availableTile = board.cellForItem(at: IndexPath(row: i, section: 0)) as! Tile
 				if(availableTile.hasPiece()) {
@@ -352,7 +339,6 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		return legalMoves;
 	}
 	
-	
 	func hideLegalMoves() {
 		for i in legalMoves {
 			let availableTile = board.cellForItem(at: IndexPath(row: i, section: 0)) as! Tile
@@ -362,7 +348,6 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		}
 	}
 
-	
 	//menu button
 	@IBAction func menu_action(_ sender: UIBarButtonItem) {
 		
@@ -408,6 +393,8 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	func displayDie(num: Int) {
 		
 		switch num {
+		case 0:
+			die_imageView.image = nil
 		case 1:
 			die_imageView.image = die_1
 		case 2:
@@ -426,8 +413,46 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	}
 	
 	// rolls the 6 sided die
-	func rollDie(){
-		last_rolled = d6.nextInt()
-		displayDie(num: last_rolled)
+	@objc func rollDie(){
+		if (dieCounter >= 0){
+			dieCounter -= 1
+			last_rolled = d6.nextInt()
+			displayDie(num: last_rolled)
+		} else {
+			dieTimer.invalidate()
+			//afterDieRoll(previousTile: previousTile, indexPath: indexPath, tile: tile)
+			dieCounter = 5
+		}
+	}
+	
+	func afterDieRoll(previousTile:Tile,indexPath:IndexPath,tile:Tile){
+		isDieRolling = false;
+		displayDie(num: 0)
+		attack()
+		if attackResult() == false { // if attack is NOT successfull
+			previousTile.backgroundColor = previouslySelectedTileColor
+			
+			print("Attack Failed! - piece NOT moved")
+		}
+		else { // if attack was successful
+			previousTile.piece?.resetCastleLegalMoveVal()
+			
+			board.getPieceAtLocation(location: indexPath.row)?.location = 64
+			//all captured pieces move to '64th' tile since I can't figure out how to remove pieces from array in swift
+			
+			// set previously selected piece to newly selected tile
+			tile.setPiece(piece: previousTile.piece)
+			previousTile.piece?.onMove();
+			
+			// remove previously selected tile's image and restore original tile color
+			previousTile.removePiece()
+			previousTile.backgroundColor = previouslySelectedTileColor
+			
+			print("Attack Successful! - piece moved to tile \(indexPath.row)")
+			
+			if (victim == PieceType.King) {
+				endGame(winner: attackerTeam)
+			}
+		}
 	}
 }
