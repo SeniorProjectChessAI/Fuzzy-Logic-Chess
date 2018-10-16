@@ -254,7 +254,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 					isDieRolling = true
 					dieTimer = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(rollDie), userInfo: previousTile, repeats: true)
 
-					DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+					DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
 						self.afterDieRoll(previousTile:previousTile,indexPath:indexPath,tile:tile)
 					})
 					
@@ -394,7 +394,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		
 		switch num {
 		case 0:
-			die_imageView.image = die_blank
+			die_imageView.image = nil
 		case 1:
 			die_imageView.image = die_1
 		case 2:
@@ -427,6 +427,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	
 	func afterDieRoll(previousTile:Tile,indexPath:IndexPath,tile:Tile){
 		isDieRolling = false;
+		displayDie(num: 0)
 		attack()
 		if attackResult() == false { // if attack is NOT successfull
 			previousTile.backgroundColor = previouslySelectedTileColor
