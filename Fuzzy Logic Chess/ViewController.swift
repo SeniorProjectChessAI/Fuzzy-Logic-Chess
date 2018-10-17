@@ -43,7 +43,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	var firstPieceMoved: Piece?
 	var dieTimer: Timer!
 	var dieCounter = 5 //how many times the die rolls
-	
+	var castlingTileIndices: [Int] = [2,6,58,62]
     override func viewDidLoad() {
         super.viewDidLoad()
 		
@@ -131,8 +131,6 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		tile.location = indexPath.row
 		tile.setPiece(piece: board.getPieceAtLocation(location: indexPath.row))
 		tile.setLegalMoveView()
-		tile.setAttackView()
-
 		setTileColorVariables(index: indexPath.row)
 		
 		if indexPath.row % 2 == 0 {
@@ -314,7 +312,12 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 				if(availableTile.hasPiece()) {
 					if(availableTile.piece?.team != previouslySelectedTileTeam && (tile.piece?.getCanAttack())!) {
 						//legal moves to opponents pieces
-						availableTile.showAttackMoveView(show: true)
+						availableTile.legalMoveView.tintColor = UIColor.red
+						availableTile.showLegalMoveView(show: true)
+						availableTile.MinRollLabel.alpha = 1
+						var lowestRollNeeded = tile.piece?.getMinRollNeeded(pieceToAttack: (availableTile.piece?.type)!)
+						availableTile.setMinRollLabel(minRoll: lowestRollNeeded!)
+
 					} else {
 						let removeInt: Int  = (legalMoves.firstIndex(of: i)!);
 						//print(removeInt)
@@ -326,12 +329,16 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 					}
 				}
 				if (availableTile.isEmpty()){
-					if ((tile.piece?.getCanMove())!){
+					if (tile.piece?.type == PieceType.King && castlingTileIndices.contains(i) && (tile.piece?.getCanMove())! && (tile.piece?.isCastleAvailable(board: board))!){
+						availableTile.legalMoveView.tintColor = UIColor.blue
+						availableTile.showLegalMoveView(show: true)
+
+					} else if ((tile.piece?.getCanMove())!){
+						availableTile.legalMoveView.tintColor = UIColor.green
 						availableTile.showLegalMoveView(show: true)
 					} else {
 						let removeInt: Int  = (legalMoves.firstIndex(of: i)!);
 						legalMoves.remove(at: removeInt)
-
 					}
 					//array of legal moves to empty squares
 				}
@@ -342,9 +349,9 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	func hideLegalMoves() {
 		for i in legalMoves {
 			let availableTile = board.cellForItem(at: IndexPath(row: i, section: 0)) as! Tile
-			
+			availableTile.MinRollLabel.alpha = 0
+
 			availableTile.showLegalMoveView(show: false)
-			availableTile.showAttackMoveView(show: false)
 		}
 	}
 

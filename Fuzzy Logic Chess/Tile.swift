@@ -14,7 +14,7 @@ class Tile: UICollectionViewCell {
 	@IBOutlet weak var backgroundImageView: UIImageView!
 	@IBOutlet weak var foregroundImageView: UIImageView!
     @IBOutlet weak var legalMoveView: UIImageView!
-	@IBOutlet weak var attackMoveView: UIImageView!
+	@IBOutlet weak var MinRollLabel: UILabel!
 	var location: Int = 0 //default location set to 0
 	var piece: Piece?
 	
@@ -48,11 +48,7 @@ class Tile: UICollectionViewCell {
 		self.legalMoveView.image = UIImage(named: "circleSelector65.png")
 		showLegalMoveView(show: false)
 	}
-	
-	func setAttackView() {
-		self.attackMoveView.image = UIImage(named: "circleSelector65.png")
-		showAttackMoveView(show: false)
-	}
+
 	
 	func showLegalMoveView(show: Bool) {
 		if(show) {
@@ -62,14 +58,9 @@ class Tile: UICollectionViewCell {
 		}
 	}
 	
-	func showAttackMoveView(show: Bool) {
-		if(show) {
-			attackMoveView.alpha = 1
-		} else {
-			attackMoveView.alpha = 0
-		}
+	func setMinRollLabel(minRoll:Int) {
+		self.MinRollLabel.text = String(minRoll)
 	}
-	
 	
 	func isEmpty() -> Bool {
 		if (foregroundImageView.image == nil) {

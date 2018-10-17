@@ -151,4 +151,30 @@ class Noble: Piece {
 	func getCanMove() -> Bool {
 		return true
 	}
+	
+	override
+	func getMinRollNeeded(pieceToAttack:PieceType)-> Int {
+		if (self.type == PieceType.Queen){
+			if (pieceToAttack == PieceType.King || pieceToAttack == PieceType.Queen){
+				return 4
+			} else if (pieceToAttack == PieceType.Bishop || pieceToAttack == PieceType.Rook){
+				return 3
+			} else if (pieceToAttack == PieceType.Knight){
+				return 2
+			} else {
+				return 1
+			}
+		} else {//if attack piece is rook or bishop
+			if (pieceToAttack == PieceType.King || pieceToAttack == PieceType.Queen){
+				return 5
+			} else if (pieceToAttack == PieceType.Bishop || pieceToAttack == PieceType.Rook){
+				return 4
+			} else if (pieceToAttack == PieceType.Knight){
+				return 3
+			} else {
+				return 2
+			}
+		}
+
+	}
 }

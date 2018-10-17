@@ -39,5 +39,15 @@ class Pawn: Piece {
 		pawnMoved = true;
 	}
 	
-
+	override
+	func getMinRollNeeded(pieceToAttack:PieceType)-> Int {
+		if (pieceToAttack != PieceType.Knight && pieceToAttack != PieceType.Pawn){
+			return 6
+		} else if (pieceToAttack == PieceType.Knight){
+			return 3
+		} else {
+			return 4
+		}
+	}
+	
 }

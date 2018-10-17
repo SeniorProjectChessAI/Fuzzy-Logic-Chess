@@ -60,4 +60,17 @@ class Knight: Piece {
 		};
 		return false;
 	}
+	
+	override
+	func getMinRollNeeded(pieceToAttack:PieceType)-> Int {
+		if (pieceToAttack == PieceType.King || pieceToAttack == PieceType.Queen){
+			return 6
+		} else if (pieceToAttack == PieceType.Bishop || pieceToAttack == PieceType.Rook){
+			return 5
+		} else if (pieceToAttack == PieceType.Knight){
+			return 4
+		} else {
+			return 3
+		}
+	}
 }
