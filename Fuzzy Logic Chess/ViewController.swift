@@ -9,23 +9,21 @@
 import UIKit
 
 class ViewController: UIViewController , UICollectionViewDataSource, UICollectionViewDelegate {
-	//show the menu 
+	//show the menu
+
 	
-	
-    
-    
+	@IBOutlet weak var blackGraveyard: Graveyard!
+	@IBOutlet weak var whiteGraveyard: Graveyard!
     @IBOutlet weak var board: Board!
     @IBOutlet weak var die_imageView: UIImageView!
 	
-	//var board: Board!
-	
+	// board variables
 	let light = UIColor.init(displayP3Red: 142.0/255.0, green: 109.0/255.0, blue: 67/255.0, alpha: 1.0)
 	let dark = UIColor.init(displayP3Red: 54.0/255.0, green: 38.0/255.0, blue: 19.0/255.0, alpha: 1.0)
 	var evenColor = UIColor.init()
 	var oddColor = UIColor.init()
 	var evenCode = "" // used for custom tile images
 	var oddCode = "" // used for custom tile images
-	
 	var staggerOn = true
 	var staggerOff = false;
 	
@@ -43,6 +41,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	var firstPieceMoved: Piece?
 	var dieTimer: Timer!
 	var dieCounter = 5 //how many times the die rolls
+	var gyCellWidth : CGFloat!
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,13 +50,23 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 
 		menu_vc = self.storyboard?.instantiateViewController(withIdentifier: "MenuViewController") as? MenuViewController
 		
-		// divides collectionView into 8 columns and sets spacing
+		// divides board collectionView into 8 columns and sets spacing
 		let itemSize = (UIScreen.main.bounds.width - 10) / 8
 		let layout = UICollectionViewFlowLayout()
 		layout.itemSize = CGSize(width: itemSize, height: itemSize)
 		layout.minimumInteritemSpacing = 0
 		layout.minimumLineSpacing = 0
 		board.collectionViewLayout = layout
+		
+		// sets graveyard collectionView cell sizes according to screen size
+		let itemSize2 = (UIScreen.main.bounds.width - 10) / 12
+		gyCellWidth = itemSize2
+		let layout2 = UICollectionViewFlowLayout()
+		layout2.itemSize = CGSize(width: itemSize2, height: itemSize2)
+		layout2.minimumInteritemSpacing = 0
+		layout2.minimumLineSpacing = 0
+		whiteGraveyard.collectionViewLayout = layout2
+		blackGraveyard.collectionViewLayout = layout2
 	
 		board.setup()
 		
@@ -84,6 +93,10 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	func resetBoard() {
 		board.setup()
 		board.reloadData()
+		whiteGraveyard.resetGraveyard()
+		blackGraveyard.resetGraveyard()
+//		whiteGraveyard.reloadData()
+//		blackGraveyard.reloadData()
 	}
 	
 	// Displays end of game popup view
@@ -121,28 +134,47 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
     
     // Number of views in the collectionView
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+		
+		if(collectionView == whiteGraveyard || collectionView == blackGraveyard) {
+			return 21
+		}
 		return 64
 	}
 
     // Populate UICollectionView with Tile objects
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let tile = collectionView.dequeueReusableCell(withReuseIdentifier: "tile", for: indexPath) as! Tile
 		
-		tile.location = indexPath.row
-		tile.setPiece(piece: board.getPieceAtLocation(location: indexPath.row))
-		tile.setLegalMoveView()
-		tile.setAttackView()
+		// Populates the graveyard cells
+		if(collectionView == whiteGraveyard || collectionView == blackGraveyard) {
+			
+			let gyCell = collectionView.dequeueReusableCell(withReuseIdentifier: "GYCell", for: indexPath) as! GraveyardCell
+			
+			// makes graveyard cells overlap
+			let centerX = gyCellWidth / 2.0 + CGFloat(indexPath.item) * (gyCellWidth/2)
+			let centerY = gyCellWidth / 2.0
+			gyCell.center = CGPoint(x: centerX, y: centerY)
 
-		setTileColorVariables(index: indexPath.row)
-		
-		if indexPath.row % 2 == 0 {
-			tile.backgroundColor = evenColor
-		} else {
-			tile.backgroundColor = oddColor
+			return gyCell
 		}
+		else {
+			
+        	let tile = collectionView.dequeueReusableCell(withReuseIdentifier: "tile", for: indexPath) as! Tile
 		
+			tile.location = indexPath.row
+			tile.setPiece(piece: board.getPieceAtLocation(location: indexPath.row))
+			tile.setLegalMoveView()
+			tile.setAttackView()
+
+			setTileColorVariables(index: indexPath.row)
 		
-		return tile
+			if indexPath.row % 2 == 0 {
+				tile.backgroundColor = evenColor
+			} else {
+				tile.backgroundColor = oddColor
+			}
+			
+			return tile
+		}
     }
 	
 	
@@ -417,6 +449,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		if (dieCounter >= 0){
 			dieCounter -= 1
 			last_rolled = d6.nextInt()
+			//last_rolled = 6 		// for testing purposes
 			displayDie(num: last_rolled)
 		} else {
 			dieTimer.invalidate()
@@ -440,6 +473,12 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 			board.getPieceAtLocation(location: indexPath.row)?.location = 64
 			//all captured pieces move to '64th' tile since I can't figure out how to remove pieces from array in swift
 			
+			
+			// send captured piece to graveyard
+			if(tile.hasPiece()) {
+				sendToGraveyard(piece: tile.piece!)
+			}
+			
 			// set previously selected piece to newly selected tile
 			tile.setPiece(piece: previousTile.piece)
 			previousTile.piece?.onMove();
@@ -453,6 +492,16 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 			if (victim == PieceType.King) {
 				endGame(winner: attackerTeam)
 			}
+		}
+	}
+	
+	// Send captured piece to correct graveyard
+	func sendToGraveyard(piece: Piece) {
+		switch(piece.team) {
+		case .Black:
+			whiteGraveyard.addPiece(piece: piece)
+		case .White:
+			blackGraveyard.addPiece(piece: piece)
 		}
 	}
 }
