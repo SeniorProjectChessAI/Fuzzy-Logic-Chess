@@ -17,7 +17,6 @@
 		EE745491216AA1A400B6DDE7 /* Noble.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE745490216AA1A400B6DDE7 /* Noble.swift */; };
 		EE745493216AD1F500B6DDE7 /* Knight.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE745492216AD1F500B6DDE7 /* Knight.swift */; };
 		EEB563A4216916080041429F /* Pawn.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB563A3216916080041429F /* Pawn.swift */; };
-		EEB5E3E62178022D004C2180 /* dice-solid.svg in Resources */ = {isa = PBXBuildFile; fileRef = EEB5E3E52178022D004C2180 /* dice-solid.svg */; };
 		F41DA05A21724567004B4F56 /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41DA05921724567004B4F56 /* PopupViewController.swift */; };
 		F44B5479213C122E0030B370 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44B5478213C122E0030B370 /* Tile.swift */; };
 		F47E8CD9215440980089B93F /* Piece.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47E8CD8215440980089B93F /* Piece.swift */; };
@@ -40,7 +39,6 @@
 		EE745490216AA1A400B6DDE7 /* Noble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Noble.swift; sourceTree = "<group>"; };
 		EE745492216AD1F500B6DDE7 /* Knight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Knight.swift; sourceTree = "<group>"; };
 		EEB563A3216916080041429F /* Pawn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pawn.swift; sourceTree = "<group>"; };
-		EEB5E3E52178022D004C2180 /* dice-solid.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "dice-solid.svg"; path = "../../../Downloads/dice-solid.svg"; sourceTree = "<group>"; };
 		F41DA05921724567004B4F56 /* PopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
 		F44B5478213C122E0030B370 /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		F47E8CD8215440980089B93F /* Piece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Piece.swift; sourceTree = "<group>"; };
@@ -94,7 +92,6 @@
 				79A9C1F02155D46700E58991 /* MenuViewController.swift */,
 				2DD7BD8F215A03EA00B565C3 /* StartController.swift */,
 				79A9C1F22155D49C00E58991 /* MenuTableViewCell.swift */,
-				EEB5E3E52178022D004C2180 /* dice-solid.svg */,
 				F4E18B3C213AD2700009763F /* Assets.xcassets */,
 				2D6A7862215A88C400471AA5 /* capture table.png */,
 				F4E18B3E213AD2700009763F /* LaunchScreen.storyboard */,
@@ -171,7 +168,6 @@
 				F4E18B40213AD2700009763F /* LaunchScreen.storyboard in Resources */,
 				2D03F2D32159E6BF002053D7 /* Start.storyboard in Resources */,
 				2D6A7863215A88C400471AA5 /* capture table.png in Resources */,
-				EEB5E3E62178022D004C2180 /* dice-solid.svg in Resources */,
 				F4E18B3D213AD2700009763F /* Assets.xcassets in Resources */,
 				F4E18B3B213AD26E0009763F /* Main.storyboard in Resources */,
 			);
