@@ -156,13 +156,11 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 			return gyCell
 		}
 		else {
-			
         	let tile = collectionView.dequeueReusableCell(withReuseIdentifier: "tile", for: indexPath) as! Tile
 		
 			tile.location = indexPath.row
 			tile.setPiece(piece: board.getPieceAtLocation(location: indexPath.row))
 			tile.setLegalMoveView()
-			tile.setAttackView()
 
 			setTileColorVariables(index: indexPath.row)
 		
