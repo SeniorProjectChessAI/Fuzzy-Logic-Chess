@@ -149,6 +149,9 @@ class Noble: Piece {
 	
 	override
 	func getCanMove() -> Bool {
+		if (firstMove == FirstAction.Attacked){
+			return false
+		}
 		return true
 	}
 	
