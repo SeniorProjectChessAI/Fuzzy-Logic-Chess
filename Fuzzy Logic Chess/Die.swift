@@ -11,7 +11,6 @@ import UIKit
 
 var last_rolled = -1	// holds the result of the last die roll
 
-let die_blank = #imageLiteral(resourceName: "die0")
 let die_1 = #imageLiteral(resourceName: "die1")
 let die_2 = #imageLiteral(resourceName: "die2")
 let die_3 = #imageLiteral(resourceName: "die3")

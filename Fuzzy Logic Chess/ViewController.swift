@@ -455,7 +455,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
         if (dieCounter >= 0){
             dieCounter -= 1
             last_rolled = d6.nextInt()
-            last_rolled = 6         // for testing purposes
+            //last_rolled = 6         // for testing purposes
             displayDie(num: last_rolled)
         } else {
             dieTimer.invalidate()
