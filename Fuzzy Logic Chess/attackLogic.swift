@@ -94,13 +94,6 @@ func attackResult() -> Bool {
 	return attackSuccess
 }
 
-func lastPieceTarget() -> PieceType {
-	return victim
-}
-
-func lastTeamTarget() -> Team {
-	return victimTeam
-}
 
 
 

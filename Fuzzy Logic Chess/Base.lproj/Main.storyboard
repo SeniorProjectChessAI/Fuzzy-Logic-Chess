@@ -52,26 +52,24 @@
                                                         <constraint firstAttribute="width" secondItem="xz4-b2-Zq4" secondAttribute="height" multiplier="1:1" id="WC2-nb-Jpn"/>
                                                     </constraints>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="myx-fy-ivP">
-                                                    <rect key="frame" x="15" y="35" width="0.0" height="0.0"/>
-                                                    <color key="tintColor" red="0.98737150429999998" green="0.0" blue="0.09169715547" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" priority="750" constant="40" id="hIM-ov-tS6"/>
-                                                        <constraint firstAttribute="width" secondItem="myx-fy-ivP" secondAttribute="height" multiplier="1:1" id="kLO-7O-lUk"/>
-                                                    </constraints>
-                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KDx-R0-4bS">
+                                                    <rect key="frame" x="25" y="25" width="0.0" height="0.0"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="wfZ-7t-ebc" secondAttribute="bottom" id="3yz-hb-SvU"/>
                                             <constraint firstItem="lt6-co-wF3" firstAttribute="top" secondItem="3Z2-54-rL9" secondAttribute="top" constant="5" id="4u0-6L-nQQ"/>
+                                            <constraint firstItem="KDx-R0-4bS" firstAttribute="centerX" secondItem="3Z2-54-rL9" secondAttribute="centerX" id="5vp-dm-626"/>
                                             <constraint firstAttribute="trailing" secondItem="wfZ-7t-ebc" secondAttribute="trailing" id="7FC-Le-dJn"/>
                                             <constraint firstAttribute="trailing" secondItem="lt6-co-wF3" secondAttribute="trailing" constant="5" id="959-Zg-36H"/>
-                                            <constraint firstAttribute="bottomMargin" secondItem="myx-fy-ivP" secondAttribute="bottom" constant="7" id="9ZH-0t-kNk"/>
+                                            <constraint firstItem="KDx-R0-4bS" firstAttribute="centerY" secondItem="3Z2-54-rL9" secondAttribute="centerY" id="ApR-i2-Aiz"/>
                                             <constraint firstItem="xz4-b2-Zq4" firstAttribute="top" secondItem="3Z2-54-rL9" secondAttribute="top" constant="15" id="HZm-Tl-raV"/>
                                             <constraint firstItem="wfZ-7t-ebc" firstAttribute="leading" secondItem="3Z2-54-rL9" secondAttribute="leading" id="Pjo-Pl-1y3"/>
-                                            <constraint firstItem="myx-fy-ivP" firstAttribute="width" secondItem="myx-fy-ivP" secondAttribute="height" multiplier="1:1" id="X7c-un-tes"/>
                                             <constraint firstAttribute="bottom" secondItem="xz4-b2-Zq4" secondAttribute="bottom" constant="15" id="ckT-eC-6OV"/>
                                             <constraint firstItem="wfZ-7t-ebc" firstAttribute="leading" secondItem="3Z2-54-rL9" secondAttribute="leading" id="dvs-oF-QYE"/>
                                             <constraint firstAttribute="bottom" secondItem="wfZ-7t-ebc" secondAttribute="bottom" id="dww-W0-oln"/>
@@ -82,12 +80,9 @@
                                             <constraint firstItem="wfZ-7t-ebc" firstAttribute="top" secondItem="3Z2-54-rL9" secondAttribute="top" id="pJp-Hr-15L"/>
                                             <constraint firstAttribute="trailing" secondItem="wfZ-7t-ebc" secondAttribute="trailing" id="s1Z-1C-DiG"/>
                                             <constraint firstItem="lt6-co-wF3" firstAttribute="leading" secondItem="3Z2-54-rL9" secondAttribute="leading" constant="5" id="tPR-EY-sSy"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="myx-fy-ivP" secondAttribute="trailing" constant="7" id="taX-5h-vU5"/>
-                                            <constraint firstItem="myx-fy-ivP" firstAttribute="leading" secondItem="3Z2-54-rL9" secondAttribute="leadingMargin" constant="7" id="v7y-Xu-coL"/>
-                                            <constraint firstItem="myx-fy-ivP" firstAttribute="top" secondItem="3Z2-54-rL9" secondAttribute="topMargin" constant="7" id="wk5-zI-0yr"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="attackMoveView" destination="myx-fy-ivP" id="BlX-MM-uT6"/>
+                                            <outlet property="MinRollLabel" destination="KDx-R0-4bS" id="ca1-MA-0ia"/>
                                             <outlet property="backgroundImageView" destination="wfZ-7t-ebc" id="ztD-cm-Pe3"/>
                                             <outlet property="foregroundImageView" destination="lt6-co-wF3" id="75I-oG-OvA"/>
                                             <outlet property="legalMoveView" destination="xz4-b2-Zq4" id="pag-BB-6S8"/>
@@ -412,30 +407,30 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">Fuzzy-Logic Chess©
-A Chess Variant Adding Ideas From WarGames
-How To Play
-CAPTURING PIECES Fuzzy-Logic Chess (F-L Chess) introduces uncertainty to the act of capturing a piece so that players must use reasoning with uncertainty (fuzzy logic: probability) in planning their strategies. The attacking player rolls a die to determine if a capture is successful. The die roll needed to capture a piece depends on the combination of the attacking piece and the defending piece, as shown in the Capture Table. 
-•	When an attack is successful, the attacking piece moves into the square of the captured piece. 
-•	When an attack is unsuccessful, the attacking piece remains in the square it attacked from. 
-•	All pieces may attempt to capture an opposing piece in any direction (left, right, up, down, diagonal). 
-•	Only the Knight may move after an attack. Only the Knight may attack twice. 
-MOVEMENT VARIATIONS F-L Chess adds and varies the standard chess moves: 
-•	in addition to their normal movement, all  pieces may also move to any unoccupied neighboring square in any direction (left, right, up, down, diagonal).  
-•	Pawns are never promoted after reaching the eighth rank (the opponent’s home row).  
-•	For its first move, a Pawn may move two  squares in a straight line.  
-•	The Bishop, Rook and Queen may each  move either diagonally or horizontally in a straight line, and may only move up to four squares (not eight).  
-•	No declaration of “check”  
-	TWO ACTIONS IN A TURN In F-L Chess, moving and capturing are separate actions, and players may take two actions in each turn. So in a single turn, a player may use two actions to:  
-•	Move two different pieces OR  
-•	Move the Bishop, Rook, or Queen twice, and they may change direction for the second move OR  
-•	Move the Knight twice, each action either using its normal chess movement pattern, OR by moving to an adjacent square OR  
-•	Move both the King and a Rook in a castle move OR  
-•	Move one piece and attack with one piece (can be the same or different pieces) OR  
-•	Make two attacks with any two pieces but move none.  
-	THE KNIGHT In F-L Chess, the Knight does not move on top of a piece to capture it as moving and capturing are separate actions. The Knight moves to an unoccupied square as normal, and then, in a second action may attack any adjacent opposing piece in any direction. Note that only the Knight is allowed to use two actions to make two attacks in the same turn when a  second action is available: A Knight may attack the same piece again (when the first attack fails) or may attack a different piece with the second attack. When a Knight makes a successful capture, it moves into the square of the captured piece, from which the Knight may now have different pieces to attack.
-	OPTIONAL FAST GAME The optional fast game allows players at most two minutes per turn. Players may time using any device of their choosing. If a player does not complete his/her turn within two minutes, any remaining actions are forfeit and the opposing player immediately begins his/her turn. In this way, a complete game of Fuzzy-Logic Chess may be played in an hour or less.  
-	
-	This work is protected by the Creative Commons copyright: Share — You are free to copy and redistribute the material in any medium or format. Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. NonCommercial — You may not use the material for commercial purposes. NoDerivatives — If you remix, transform, or build upon the material, you may not distribute the modified material.  </string>
+									A Chess Variant Adding Ideas From WarGames
+									How To Play
+									CAPTURING PIECES Fuzzy-Logic Chess (F-L Chess) introduces uncertainty to the act of capturing a piece so that players must use reasoning with uncertainty (fuzzy logic: probability) in planning their strategies. The attacking player rolls a die to determine if a capture is successful. The die roll needed to capture a piece depends on the combination of the attacking piece and the defending piece, as shown in the Capture Table.
+									•	When an attack is successful, the attacking piece moves into the square of the captured piece. 
+									•	When an attack is unsuccessful, the attacking piece remains in the square it attacked from. 
+									•	All pieces may attempt to capture an opposing piece in any direction (left, right, up, down, diagonal).
+									•	Only the Knight may move after an attack. Only the Knight may attack twice.
+									MOVEMENT VARIATIONS F-L Chess adds and varies the standard chess moves:
+									•	in addition to their normal movement, all  pieces may also move to any unoccupied neighboring square in any direction (left, right, up, down, diagonal).  
+									•	Pawns are never promoted after reaching the eighth rank (the opponent’s home row).  
+									•	For its first move, a Pawn may move two  squares in a straight line.  
+									•	The Bishop, Rook and Queen may each  move either diagonally or horizontally in a straight line, and may only move up to four squares (not eight).  
+									•	No declaration of “check”  
+									TWO ACTIONS IN A TURN In F-L Chess, moving and capturing are separate actions, and players may take two actions in each turn. So in a single turn, a player may use two actions to:  
+									•	Move two different pieces OR  
+									•	Move the Bishop, Rook, or Queen twice, and they may change direction for the second move OR  
+									•	Move the Knight twice, each action either using its normal chess movement pattern, OR by moving to an adjacent square OR  
+									•	Move both the King and a Rook in a castle move OR  
+									•	Move one piece and attack with one piece (can be the same or different pieces) OR  
+									•	Make two attacks with any two pieces but move none.  
+									THE KNIGHT In F-L Chess, the Knight does not move on top of a piece to capture it as moving and capturing are separate actions. The Knight moves to an unoccupied square as normal, and then, in a second action may attack any adjacent opposing piece in any direction. Note that only the Knight is allowed to use two actions to make two attacks in the same turn when a  second action is available: A Knight may attack the same piece again (when the first attack fails) or may attack a different piece with the second attack. When a Knight makes a successful capture, it moves into the square of the captured piece, from which the Knight may now have different pieces to attack.
+									OPTIONAL FAST GAME The optional fast game allows players at most two minutes per turn. Players may time using any device of their choosing. If a player does not complete his/her turn within two minutes, any remaining actions are forfeit and the opposing player immediately begins his/her turn. In this way, a complete game of Fuzzy-Logic Chess may be played in an hour or less.  
+									
+									This work is protected by the Creative Commons copyright: Share — You are free to copy and redistribute the material in any medium or format. Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. NonCommercial — You may not use the material for commercial purposes. NoDerivatives — If you remix, transform, or build upon the material, you may not distribute the modified material.  </string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -469,6 +464,65 @@ MOVEMENT VARIATIONS F-L Chess adds and varies the standard chess moves:
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uPv-rw-7y6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="140" y="136.69950738916256"/>
+        </scene>
+        <!--Popup View Controller-->
+        <scene sceneID="UMe-lK-4f6">
+            <objects>
+                <viewController storyboardIdentifier="capturePopUp" id="vmg-rT-ccq" customClass="PopupViewController" customModule="Fuzzy_Logic_Chess" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bZE-l6-v5n">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9fv-cc-Dxp">
+                                <rect key="frame" x="37.5" y="183.5" width="300" height="300"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Miy-zG-Dnn">
+                                        <rect key="frame" x="270" y="0.0" width="30" height="30"/>
+                                        <state key="normal" title="X">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="closePopup:" destination="vmg-rT-ccq" eventType="touchUpInside" id="fgB-YP-9F7"/>
+                                        </connections>
+                                    </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="capture table.png" translatesAutoresizingMaskIntoConstraints="NO" id="naC-0N-BQn">
+                                        <rect key="frame" x="8" y="52" width="284" height="240"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="naC-0N-BQn" secondAttribute="height" multiplier="284:265" id="90M-fa-QwN"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.92306913859999995" green="0.92306913859999995" blue="0.92306913859999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Miy-zG-Dnn" firstAttribute="top" secondItem="9fv-cc-Dxp" secondAttribute="top" id="1eV-DH-RO0"/>
+                                    <constraint firstItem="naC-0N-BQn" firstAttribute="centerY" secondItem="9fv-cc-Dxp" secondAttribute="centerY" id="9pa-hn-S7Z"/>
+                                    <constraint firstAttribute="height" constant="300" id="DwL-sa-Bxg"/>
+                                    <constraint firstItem="naC-0N-BQn" firstAttribute="leading" secondItem="9fv-cc-Dxp" secondAttribute="leading" constant="8" id="IFj-XG-7uY"/>
+                                    <constraint firstAttribute="trailing" secondItem="Miy-zG-Dnn" secondAttribute="trailing" id="LaZ-y1-QgC"/>
+                                    <constraint firstAttribute="width" priority="750" constant="300" id="N7A-pT-wf6"/>
+                                    <constraint firstAttribute="bottom" secondItem="naC-0N-BQn" secondAttribute="bottom" constant="8" id="Qrn-py-Gn8"/>
+                                    <constraint firstItem="naC-0N-BQn" firstAttribute="top" secondItem="9fv-cc-Dxp" secondAttribute="top" constant="27" id="Qs9-jt-i32"/>
+                                    <constraint firstAttribute="trailing" secondItem="naC-0N-BQn" secondAttribute="trailing" constant="8" id="aqt-uU-F1M"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="SIE-Z3-OfO" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9fv-cc-Dxp" secondAttribute="trailing" constant="30" id="0Fb-Xr-TCg"/>
+                            <constraint firstItem="9fv-cc-Dxp" firstAttribute="centerX" secondItem="bZE-l6-v5n" secondAttribute="centerX" id="Flx-Gh-VRa"/>
+                            <constraint firstItem="9fv-cc-Dxp" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="SIE-Z3-OfO" secondAttribute="leading" constant="30" id="GzG-2u-hvt"/>
+                            <constraint firstItem="9fv-cc-Dxp" firstAttribute="centerY" secondItem="bZE-l6-v5n" secondAttribute="centerY" id="Jv4-o0-u0T"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="SIE-Z3-OfO"/>
+                    </view>
+                    <connections>
+                        <outlet property="popupView" destination="9fv-cc-Dxp" id="pIf-27-V2q"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5HW-OK-kSh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1080.8" y="796.55172413793105"/>
         </scene>
     </scenes>
     <resources>
