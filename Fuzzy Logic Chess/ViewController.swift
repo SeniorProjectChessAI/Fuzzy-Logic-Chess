@@ -62,8 +62,6 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		board.setup()
 		
 		startGame()
-		
-		//rollDie() // Rolls die for presentation purposes..
     }
 	
 	// sets all game variables and starts the game
