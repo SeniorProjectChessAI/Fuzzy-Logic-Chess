@@ -43,6 +43,10 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
     var dieCounter = 5 //how many times the die rolls
 	var castlingTileIndices: [Int] = [2,6,58,62]
 	var gyCellWidth : CGFloat!
+	var blackPiecesRemoved = 0
+	var whitePiecesRemoved = 0
+	var kingNeighborsCheck: [Int] = [-9,-8,-7,-1,1,7,8,9]
+
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -232,6 +236,15 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
             tile.backgroundColor = UIColor.cyan
             tileIsSelected = true;
             previouslySelectedTileIndex = indexPath.row
+			
+			if (tile.piece?.type == PieceType.King){
+				var piecesRemoved = tile.piece?.team == Team.Black ? blackPiecesRemoved : whitePiecesRemoved
+				if (legalMoves.isEmpty && tile.piece?.firstMove == FirstAction.Moved && piecesRemoved >= 15){
+					turnCounter += 1
+					tile.piece?.firstMove = FirstAction.None
+
+				}
+			}
         }
         else if(tileIsSelected && !isDieRolling) {//clicked a piece while some tile is selected
             victim = board.getPieceAtLocation(location: indexPath.row)?.type
@@ -260,13 +273,41 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
                     firstPieceMoved?.firstMove = FirstAction.None
                 }
                 
-                if (turnCounter == 3){
+                if (turnCounter >= 3){
                     turnCounter = 0;
                 } else {
                     turnCounter += 1;
                 }
-                
+				
+				
+
                 if (previousTile.piece?.type == PieceType.King){
+					var piecesRemoved = previousTile.piece?.team == Team.Black ? blackPiecesRemoved : whitePiecesRemoved
+					if (previousTile.piece?.firstMove != FirstAction.None && piecesRemoved >= 15){
+						if (turnCounter == 1 || turnCounter == 3){
+							let kingsLocation = previousTile.piece?.location
+							let turnCounterTemp = turnCounter
+							for i in kingNeighborsCheck {
+								if (board.getPieceAtLocation(location: kingsLocation! + i) != nil){
+									turnCounter = turnCounterTemp
+									print("neighboring piece found")
+									break
+								} else {
+									print("no neighboring piece found, skipping skipping second turn")
+									previousTile.piece?.firstMove = FirstAction.None
+									if (turnCounterTemp >= 3){
+										turnCounter = 0;
+									} else {
+										turnCounter = turnCounterTemp + 1;
+									}
+								}
+								
+							}
+
+						}
+						
+						
+					}
                     if ((previousTile.piece?.legalCastlingMovesArray.contains( tile.location))!){
                         let rookFromPos = previousTile.piece?.getCastlingRookLocation(clickedIndex: tile.location)
                         let rookToPos = tile.location + (previousTile.piece?.rookMoveAddVal)!
@@ -278,7 +319,8 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
                         rookTileTo.setPiece(piece: castlingRook)
                     }
                 }
-                
+				print("# of pieces removed for this team: \(blackPiecesRemoved)")
+
                 if (tile.hasPiece()) {
                     isDieRolling = true
                     dieTimer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(rollDie), userInfo: previousTile, repeats: true)
@@ -302,6 +344,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
                     // remove previously selected tile's image and restore original tile color
                     previousTile.removePiece()
                     previousTile.backgroundColor = previouslySelectedTileColor
+
                     
                     print("piece moved to tile \(indexPath.row) ")
                 }
@@ -455,7 +498,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
         if (dieCounter >= 0){
             dieCounter -= 1
             last_rolled = d6.nextInt()
-            last_rolled = 6         // for testing purposes
+            //last_rolled = 6         // for testing purposes
             displayDie(num: last_rolled)
         } else {
             dieTimer.invalidate()
@@ -494,7 +537,12 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
             previousTile.backgroundColor = previouslySelectedTileColor
             
             print("Attack Successful! - piece moved to tile \(indexPath.row)")
-            
+			if (victimTeam == Team.Black){
+				blackPiecesRemoved += 1
+			} else if (victimTeam == Team.White) {
+				whitePiecesRemoved += 1
+			}
+			
             if (victim == PieceType.King) {
                 endGame(winner: attackerTeam)
             }
