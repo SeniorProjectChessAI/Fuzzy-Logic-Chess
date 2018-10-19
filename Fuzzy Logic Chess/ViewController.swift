@@ -94,8 +94,8 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
         board.reloadData()
 		whiteGraveyard.resetGraveyard()
 		blackGraveyard.resetGraveyard()
-//		whiteGraveyard.reloadData()
-//		blackGraveyard.reloadData()
+		//whiteGraveyard.reloadData()
+		//blackGraveyard.reloadData()
     }
     
     // Displays end of game popup view
@@ -281,9 +281,9 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
                 
                 if (tile.hasPiece()) {
                     isDieRolling = true
-                    dieTimer = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(rollDie), userInfo: previousTile, repeats: true)
+                    dieTimer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(rollDie), userInfo: previousTile, repeats: true)
 
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
                         self.afterDieRoll(previousTile:previousTile,indexPath:indexPath,tile:tile)
                     })
                     
@@ -346,7 +346,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
                         availableTile.legalMoveView.tintColor = UIColor.red
                         availableTile.showLegalMoveView(show: true)
                         availableTile.MinRollLabel.alpha = 1
-                        var lowestRollNeeded = tile.piece?.getMinRollNeeded(pieceToAttack: (availableTile.piece?.type)!)
+						let lowestRollNeeded = tile.piece?.getMinRollNeeded(pieceToAttack: (availableTile.piece?.type)!)
                         availableTile.setMinRollLabel(minRoll: lowestRollNeeded!)
 
                     } else {
