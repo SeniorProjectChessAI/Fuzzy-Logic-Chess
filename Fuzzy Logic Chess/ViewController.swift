@@ -45,8 +45,6 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	var gyCellWidth : CGFloat!
 	var blackPiecesRemoved = 0
 	var whitePiecesRemoved = 0
-	var kingNeighborsCheck: [Int] = [-9,-8,-7,-1,1,7,8,9]
-
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -304,35 +302,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 					turnCounter += 1;
 				}
 				
-				
-				
 				if (previousTile.piece?.type == PieceType.King){
-					let piecesRemoved = previousTile.piece?.team == Team.Black ? blackPiecesRemoved : whitePiecesRemoved
-					if (previousTile.piece?.firstMove != FirstAction.None && piecesRemoved >= 15){
-						if (turnCounter == 1 || turnCounter == 3){
-							let kingsLocation = previousTile.piece?.location
-							let turnCounterTemp = turnCounter
-							for i in kingNeighborsCheck {
-								if (board.getPieceAtLocation(location: kingsLocation! + i) != nil){
-									turnCounter = turnCounterTemp
-									print("neighboring piece found")
-									break
-								} else {
-									print("no neighboring piece found, skipping skipping second turn")
-									previousTile.piece?.firstMove = FirstAction.None
-									if (turnCounterTemp >= 3){
-										turnCounter = 0;
-									} else {
-										turnCounter = turnCounterTemp + 1;
-									}
-								}
-								
-							}
-							
-						}
-						
-						
-					}
 					if ((previousTile.piece?.legalCastlingMovesArray.contains( tile.location))!){
 						let rookFromPos = previousTile.piece?.getCastlingRookLocation(clickedIndex: tile.location)
 						let rookToPos = tile.location + (previousTile.piece?.rookMoveAddVal)!
@@ -344,8 +314,6 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 						rookTileTo.setPiece(piece: castlingRook)
 					}
 				}
-				print("# of pieces removed for this team: \(blackPiecesRemoved)")
-				
 				if (tile.hasPiece()) {
 					isDieRolling = true
 					dieTimer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(rollDie), userInfo: previousTile, repeats: true)
@@ -397,6 +365,66 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 				legalMoves.removeAll()
 				
 				legalMoves = tile.piece?.getUnfilteredMoves(board:board) ?? []
+			}
+			print(tile.piece)
+			print(previousTile.piece)
+			var lastPiece: Piece?
+			if (previousTile.isEmpty()){
+				lastPiece = tile.piece
+			} else {
+				lastPiece = previousTile.piece
+			}
+			var piecesRemoved = lastPiece!.team == Team.Black ? blackPiecesRemoved : whitePiecesRemoved
+			
+			if (piecesRemoved >= 15){
+				if (lastPiece!.type == PieceType.King){
+					if (turnCounter == 1 || turnCounter == 3){
+						if (lastPiece?.firstMove == FirstAction.Attacked)
+						{
+							if (turnCounter >= 3){
+								turnCounter = 0;
+							} else {
+								turnCounter += 1;
+							}
+							lastPiece?.firstMove = FirstAction.None
+						}
+						else if (lastPiece?.type == PieceType.King){
+							print(lastPiece?.firstMove)
+							print("made it here")
+							
+							if (lastPiece?.firstMove != FirstAction.None && piecesRemoved >= 15){
+								
+								if (turnCounter == 1 || turnCounter == 3){
+									if (lastPiece?.firstMove == FirstAction.Moved){
+										let kingLegalMoves = lastPiece?.getUnfilteredMoves(board: board)
+										var kingCanAttack = false
+										for i in kingLegalMoves! {
+											if (board.getPieceAtLocation(location: i) != nil){
+												kingCanAttack = true
+												break;
+											}
+											kingCanAttack = false
+										}
+										
+										if (kingCanAttack){
+										} else {
+											if (turnCounter >= 3){
+												turnCounter = 0;
+											} else {
+												turnCounter += 1;
+											}
+											lastPiece?.firstMove = FirstAction.None
+										}
+									}
+								}
+							}
+							
+						}
+						
+						
+					}
+					
+				}
 			}
 		}
 		
@@ -529,7 +557,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
         if (dieCounter >= 0){
             dieCounter -= 1
             last_rolled = d6.nextInt()
-            //last_rolled = 6         // for testing purposes
+            last_rolled = 6         // for testing purposes
             displayDie(num: last_rolled)
         } else {
             dieTimer.invalidate()
