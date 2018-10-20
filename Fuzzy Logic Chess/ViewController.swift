@@ -16,6 +16,8 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
     @IBOutlet weak var whiteGraveyard: Graveyard!
     @IBOutlet weak var board: Board!
     @IBOutlet weak var die_imageView: UIImageView!
+    @IBOutlet weak var blackTeamLabel: UILabel!
+    @IBOutlet weak var whiteTeamLabel: UILabel!
     
     // board variables
     let light = UIColor.init(displayP3Red: 142.0/255.0, green: 109.0/255.0, blue: 67/255.0, alpha: 1.0)
@@ -80,6 +82,8 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
     func startGame() {
 		displayDie(num: 0)
 		turnCounter = 0
+		blackTeamLabel.text = "Black Team (temp)"
+		whiteTeamLabel.text = "White Team (temp)"
     }
     
     func restartGame() {
