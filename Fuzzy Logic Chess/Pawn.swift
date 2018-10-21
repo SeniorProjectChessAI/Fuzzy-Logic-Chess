@@ -44,7 +44,7 @@ class Pawn: Piece {
 		if (pieceToAttack != PieceType.Knight && pieceToAttack != PieceType.Pawn){
 			return 6
 		} else if (pieceToAttack == PieceType.Knight){
-			return 3
+			return 5
 		} else {
 			return 4
 		}
