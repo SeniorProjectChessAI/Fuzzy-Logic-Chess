@@ -28,7 +28,6 @@ class Piece {
 		self.imageName = imageName
 		self.location = location
 		self.firstMove = firstAction
-		
 	}
 	
 	// changes location of piece

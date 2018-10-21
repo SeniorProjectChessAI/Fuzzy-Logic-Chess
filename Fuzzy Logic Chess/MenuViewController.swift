@@ -45,6 +45,7 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
 	}
 	func changeView(){
 		let storyboard = UIStoryboard(name: "Start", bundle: nil)
+		//let nc = storyboard.instantiateViewController(withIdentifier: "fff")
 		let vc = storyboard.instantiateViewController(withIdentifier: "StartController")
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
 		appDelegate.window?.rootViewController = vc
