@@ -217,20 +217,37 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 //			// AI turn gets called at the end of playersTrun() function
 //		}
 		
-		playersTurn(indexPath: indexPath)
-		
+		if (turnCounter == 0 || turnCounter == 1) {
+			playersTurn(indexPath: indexPath)
+		} else if (turnCounter == 2) {
+			AITurn()
+			turnCounter += 1
+		} else if (turnCounter >= 3){
+			AITurn()
+			turnCounter = 0
+		}
 		
 	}
 	
 	// Plays turns for the AI
 	func AITurn() {
+		let weakSpots = getKingsWeakSpots(board: board)
+		print("kings weak spots array :  \(weakSpots)")
+		let cellsInDanger = getCellsInDanger(board: board, vulnerableSquares: weakSpots)
+
+		print("cells in danger: \(cellsInDanger)")
 		
-		
-		// Call AITurn() again for the AI's second turn
-		if(turnCounter == 4) {
-			AITurn()
+		if (cellsInDanger != []){
+			//find AI piece that can move to that location
+			let helpPieces = getHelpPieces(board: board, cellsInDanger: cellsInDanger)
+			print("pieces that can help are \(helpPieces)")
+			let previousTile = board.cellForItem(at: IndexPath(row: (helpPieces.first?.location)!, section: 0)) as! Tile
+			previousTile.removePiece()
+			let tileInDanger = board.cellForItem(at: IndexPath(row: cellsInDanger.first!, section: 0)) as! Tile
+			tileInDanger.setPiece(piece: helpPieces.first)
 		}
-	}
+		}
+
 	
 	
 	func playersTurn(indexPath: IndexPath) {
