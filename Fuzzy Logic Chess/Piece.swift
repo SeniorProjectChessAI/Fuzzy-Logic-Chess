@@ -19,21 +19,22 @@ class Piece {
 	var lRookCastlingLocation = -1
 	var rRookCastlingLocation = -1
 	var rookMoveAddVal = 0
+	var pieceValue: Int
 
 	
 
-	init(type: PieceType, team: Team, imageName: String, location: Int, firstAction: FirstAction) {
+	init(type: PieceType, team: Team, imageName: String, location: Int, firstAction: FirstAction, pieceValue: Int) {
 		self.type = type
 		self.team = team
 		self.imageName = imageName
 		self.location = location
 		self.firstMove = firstAction
+		self.pieceValue = pieceValue
 	}
 	
 	// changes location of piece
 	func changeLocation(location: Int) {
 		self.location = location
-		
 	}
 	
 	// returns list of legal moves

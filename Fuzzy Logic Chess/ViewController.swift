@@ -46,6 +46,9 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	var blackPiecesRemoved = 0
 	var whitePiecesRemoved = 0
 	
+	// for randomMove()
+	var isRandom:Bool = true
+	
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -248,9 +251,25 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 			let tileInDanger = board.cellForItem(at: IndexPath(row: cellsInDanger.first!, section: 0)) as! Tile
 			tileInDanger.setPiece(piece: helpPieces.first)
 		}
-		}
+	}
 
-	
+	// returns all the legal moves the AI can make
+	func getLegalMovesAI(board:Board, team:Team)
+	{
+		var legalMovesList = [Int]()
+		let bp = board.blackPieces
+		for n in bp
+		{
+			let piece = board.cellForItem(at: IndexPath(row: n.location, section: 0)) as! Tile
+			let moves = showLegalMoves(tile: piece)
+			for m in moves
+			{
+				legalMovesList.append(m)
+			}
+		}
+		print(legalMovesList.randomElement())
+	}
+
 	
 	func playersTurn(indexPath: IndexPath) {
 		let tile = board.cellForItem(at: indexPath) as! Tile
