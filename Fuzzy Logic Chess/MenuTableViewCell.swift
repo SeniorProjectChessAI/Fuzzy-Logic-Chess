@@ -23,6 +23,8 @@ class MenuTableViewCell: UITableViewCell {
 		
 		let start_storyboard = UIStoryboard(name: "Start", bundle: nil)
 		let vc = start_storyboard.instantiateViewController(withIdentifier: "StartController")
+		let nc = start_storyboard.instantiateViewController(withIdentifier: "NavigationController")
+
 		//let htpv = start_storyboard.instantiateViewController(withIdentifier: "HowToPlayView")
 		let appDelegate = UIApplication.shared.delegate as! AppDelegate
 		
@@ -37,7 +39,7 @@ class MenuTableViewCell: UITableViewCell {
 			//case "Change Difficulty":
 				//appDelegate.window?.rootViewController = vc
 			case "   New Game":
-				appDelegate.window?.rootViewController = vc
+				appDelegate.window?.rootViewController = nc
 			default:
 				print("\(selected_text ?? "Error finding selected_text")")
 			}
