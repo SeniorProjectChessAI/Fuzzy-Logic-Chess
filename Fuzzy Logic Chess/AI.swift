@@ -55,10 +55,10 @@ func getHelpPieces(board:Board,cellsInDanger:[Int])->[Piece]{
 	for b in board.blackPieces {
 		for um in b.getUnfilteredMoves(board: board){
 			if (b.type != PieceType.King && cellsInDanger.contains(um) && cellsInDanger.firstIndex(of: um) == 0){
-				if (AIKing.getUnfilteredMoves(board: board).contains(b.location)){//make sure piece isn't already guarding the King
+				if (!AIKing.getUnfilteredMoves(board: board).contains(b.location)){//make sure piece isn't already guarding the King
+					helpPieces.append(b)
+					break
 				}
-				helpPieces.append(b)
-				break
 			}
 		}
 	}
