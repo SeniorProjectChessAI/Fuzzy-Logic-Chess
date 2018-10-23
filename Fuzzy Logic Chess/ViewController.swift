@@ -231,9 +231,11 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	
 	// Plays turns for the AI
 	func AITurn() {
-		let weakSpots = getKingsWeakSpots(board: board)
+		getAllLegalMoves(board: board, thisTeam: Team.Black)//prints current legal moves of each of blacks pieces
+		
+		let weakSpots = getKingsWeakSpots(board: board)//returns empty cells neighboring the King
 		print("kings weak spots array :  \(weakSpots)")
-		let cellsInDanger = getCellsInDanger(board: board, vulnerableSquares: weakSpots)
+		let cellsInDanger = getCellsInDanger(board: board, vulnerableSquares: weakSpots)//vulnerable sqares around king a white piece has a legal move to next turn
 
 		print("cells in danger: \(cellsInDanger)")
 		

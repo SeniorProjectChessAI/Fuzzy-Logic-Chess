@@ -19,7 +19,6 @@ class Pawn: Piece {
 		var unfilteredMoves = [Int]();
 		unfilteredMoves = super.getUnfilteredMoves(board: board);		//gets default moves from superclass
 		let moveVal = (self.team == Team.Black) ? 16 : -16
-		print(moveVal)
 		let isPieceFoundRow1 = board.getPieceAtLocation(location: location + (moveVal/2)); //checks if piece found in the cell in front of pawn
 		let isPieceFoundRow2 = board.getPieceAtLocation(location: location + (moveVal)); //checks if piece found in the cell in front of pawn
 
