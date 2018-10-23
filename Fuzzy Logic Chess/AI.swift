@@ -5,7 +5,6 @@
 //  Created by Brian Iruka on 10/22/18.
 //  Copyright © 2018 KSU CS Seniors Project 6A. All rights reserved.
 //
-import Foundation
 
  var AIKing: Piece!
 
@@ -32,9 +31,7 @@ import Foundation
 
 
 
-	//get the neighboring cells of (king/queen) an opponent can move to before an attack (vulnerable cells_
-
-//returns an array of cells an opponent's piece can potentially move to on their next turn
+//returns an array of cells (near AI king) an opponent's piece can potentially move to on their next turn
 func getCellsInDanger(board:Board, vulnerableSquares:[Int]) -> [Int]{
 	var cellsInDanger = [Int]()
 	for w in board.whitePieces{
@@ -63,4 +60,23 @@ func getHelpPieces(board:Board,cellsInDanger:[Int])->[Piece]{
 		}
 	}
 	return helpPieces
+}
+
+func getAllLegalMoves(board:Board,thisTeam:Team){
+	//loops through each piece for a specified team and returns its legal moves array
+	var teamsPieces = (thisTeam == Team.Black) ? board.blackPieces : board.whitePieces
+	
+	for p in teamsPieces {
+		var legalMovesForPiece = [Int]()
+		for um in p.getUnfilteredMoves(board: board){
+			if (p.getCanMove() && board.getPieceAtLocation(location:um) == nil){
+					legalMovesForPiece.append(um)
+				}
+			else if (p.getCanAttack() && board.getPieceAtLocation(location:um) != nil && board.getPieceAtLocation(location:um)?.team != thisTeam){
+				legalMovesForPiece.append(um)
+			}
+		}
+		print("legal moves for \(p.type) at index \(p.location) are \(legalMovesForPiece)")
+	}
+	
 }
