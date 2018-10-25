@@ -45,7 +45,8 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	var gyCellWidth : CGFloat!
 	var blackPiecesRemoved = 0
 	var whitePiecesRemoved = 0
-	
+	var AIPreviousAttackTileColor: UIColor?
+	var AIPreviousVictimTileColor: UIColor?
 	// for randomMove()
 	var isRandom:Bool = true
 	
@@ -266,9 +267,20 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 			let fromPos = bestMove.oldPos
 			let toPos = bestMove.newPos
 			let fromTile = board.cellForItem(at: IndexPath(row: fromPos, section: 0)) as! Tile
+			let toTile = board.cellForItem(at: IndexPath(row: toPos, section: 0)) as! Tile
+
 
 			if (bestMove.attackedPiece != nil){//if best move is an attack
 				bestMove.pieceToMove.firstMove = FirstAction.Attacked
+				AIPreviousAttackTileColor = fromTile.backgroundColor
+				AIPreviousVictimTileColor = toTile.backgroundColor
+				fromTile.backgroundColor = UIColor.yellow
+				toTile.backgroundColor = UIColor.magenta
+				toTile.legalMoveView.tintColor = UIColor.black
+				toTile.showLegalMoveView(show: true)
+				toTile.MinRollLabel.alpha = 1
+				let lowestRollNeeded = fromTile.piece?.getMinRollNeeded(pieceToAttack: (toTile.piece?.type)!)
+				toTile.setMinRollLabel(minRoll: lowestRollNeeded!)
 				isDieRolling = true
 				dieTimer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(rollDie), userInfo: fromTile, repeats: true)
 				
@@ -663,6 +675,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
         isDieRolling = false;
         displayDie(num: 0)
         attack()
+		
         if attackResult() == false { // if attack is NOT successfull
             previousTile.backgroundColor = previouslySelectedTileColor
             
@@ -715,6 +728,12 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		isDieRolling = false;
 		displayDie(num: 0)
 		attack()
+		let fromTile = board.cellForItem(at: IndexPath(row: fromPos, section: 0)) as! Tile
+		let toTile = board.cellForItem(at: IndexPath(row: toPos, section: 0)) as! Tile
+		fromTile.backgroundColor = AIPreviousAttackTileColor
+		toTile.backgroundColor = AIPreviousVictimTileColor
+		toTile.MinRollLabel.alpha = 0
+		toTile.showLegalMoveView(show: false)
 		if attackResult() == false { // if attack is NOT successfull
 			print("Attack Failed! - piece NOT moved")
 		}
