@@ -234,22 +234,48 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	
 	// Plays turns for the AI
 	func AITurn() {
-		getAllLegalMoves(board: board, thisTeam: Team.Black)//prints current legal moves of each of blacks pieces
+		//getAllLegalMoves(board: board, thisTeam: Team.Black)//prints current legal moves of each of blacks pieces
+		var legalMovesArray = getBestLegalMoves(board: board, thisTeam: Team.Black, turnCounter:turnCounter)
 		
-		let weakSpots = getKingsWeakSpots(board: board)//returns empty cells neighboring the King
+		var bestMove: AIMove = legalMovesArray.first!
+		for lm in legalMovesArray{
+			print("Move \(lm.pieceToMove.type) at \(lm.oldPos) to \(lm.newPos). Attack available? \(lm.isAttackMove) Move Benefit? \(lm.moveBenefit)")
+			if (lm.moveBenefit > bestMove.moveBenefit){
+				bestMove = lm
+			}
+		}
+		
+		let weakSpots = getKingsVulnerableCells(board: board)//returns empty cells neighboring the King
 		print("kings weak spots array :  \(weakSpots)")
 		let cellsInDanger = getCellsInDanger(board: board, vulnerableSquares: weakSpots)//vulnerable sqares around king a white piece has a legal move to next turn
 
 		print("cells in danger: \(cellsInDanger)")
-		
-		if (cellsInDanger != []){
+		let helperPieces: [Piece] = getHelperPieces(board: board, cellsInDanger: cellsInDanger)
+		print("pieces that can help are \(helperPieces)")
+		if (cellsInDanger.count > 0  && helperPieces.count > 0){
 			//find AI piece that can move to that location
-			let helpPieces = getHelpPieces(board: board, cellsInDanger: cellsInDanger)
-			print("pieces that can help are \(helpPieces)")
-			let previousTile = board.cellForItem(at: IndexPath(row: (helpPieces.first?.location)!, section: 0)) as! Tile
+			let previousTile = board.cellForItem(at: IndexPath(row: (helperPieces.first?.location)!, section: 0)) as! Tile
 			previousTile.removePiece()
 			let tileInDanger = board.cellForItem(at: IndexPath(row: cellsInDanger.first!, section: 0)) as! Tile
-			tileInDanger.setPiece(piece: helpPieces.first)
+			tileInDanger.setPiece(piece: helperPieces.first)
+		} else {//if King not in harms way
+			let fromPos = bestMove.oldPos
+			let toPos = bestMove.newPos
+			board.getPieceAtLocation(location: toPos)?.location = 64
+			var pieceCount = 0
+			for wp in board.whitePieces{
+				if (wp.location == 64){
+					board.whitePieces.remove(at: pieceCount)
+					break
+				}
+				pieceCount += 1
+			}
+			let moveFromTile = board.cellForItem(at: IndexPath(row: fromPos, section: 0)) as! Tile
+			moveFromTile.removePiece()
+			let moveToTile = board.cellForItem(at: IndexPath(row: toPos, section: 0)) as! Tile
+			moveToTile.setPiece(piece: bestMove.pieceToMove)
+			
+
 		}
 	}
 
@@ -366,6 +392,15 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 					previousTile.piece?.resetCastleLegalMoveVal()
 					
 					board.getPieceAtLocation(location: indexPath.row)?.location = 64
+					var pieceCount = 0
+					for bp in board.blackPieces{
+						if (bp.location == 64){
+							print("removedPiece: \(bp.type) at \(bp.location)")
+							board.blackPieces.remove(at: pieceCount)
+							break
+						}
+						pieceCount += 1
+					}
 					//all captured pieces move to '64th' tile since I can't figure out how to remove pieces from array in swift
 					
 					// set previously selected piece to newly selected tile
@@ -617,6 +652,15 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
             previousTile.piece?.resetCastleLegalMoveVal()
             
             board.getPieceAtLocation(location: indexPath.row)?.location = 64
+			var pieceCount = 0
+			for bp in board.blackPieces{
+				if (bp.location == 64){
+					print("removedPiece: \(bp.type) at \(bp.location)")
+					board.blackPieces.remove(at: pieceCount)
+					break
+				}
+				pieceCount += 1
+			}
             //all captured pieces move to '64th' tile since I can't figure out how to remove pieces from array in swift
             
             
