@@ -8,6 +8,9 @@
 
 import UIKit
 
+// GLOBAL difficulty variable
+var DIFFICULTY = 0
+
 class StartController: UIViewController {
 
     override func viewDidLoad() {
@@ -16,5 +19,9 @@ class StartController: UIViewController {
     }
 
 
+	
+	@IBAction func difficultyChanged(_ sender: UISegmentedControl) {
+		DIFFICULTY = sender.selectedSegmentIndex
+	}
 }
 
