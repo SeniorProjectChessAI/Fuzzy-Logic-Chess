@@ -223,6 +223,9 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		if (turnCounter == 0 || turnCounter == 1) {
 			playersTurn(indexPath: indexPath)
 		} else if (turnCounter == 2) {
+			for bp in board.blackPieces{
+				bp.firstMove = FirstAction.None //resets what AI piece did for first move
+			}
 			AITurn()
 			turnCounter += 1
 		} else if (turnCounter >= 3){
@@ -243,6 +246,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 			if (lm.moveBenefit > bestMove.moveBenefit){
 				bestMove = lm
 			}
+			
 		}
 		
 		let weakSpots = getKingsVulnerableCells(board: board)//returns empty cells neighboring the King
@@ -253,28 +257,44 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		let helperPieces: [Piece] = getHelperPieces(board: board, cellsInDanger: cellsInDanger)
 		print("pieces that can help are \(helperPieces)")
 		if (cellsInDanger.count > 0  && helperPieces.count > 0){
-			//find AI piece that can move to that location
 			let previousTile = board.cellForItem(at: IndexPath(row: (helperPieces.first?.location)!, section: 0)) as! Tile
+			//find AI piece that can move to that location
 			previousTile.removePiece()
 			let tileInDanger = board.cellForItem(at: IndexPath(row: cellsInDanger.first!, section: 0)) as! Tile
 			tileInDanger.setPiece(piece: helperPieces.first)
 		} else {//if King not in harms way
 			let fromPos = bestMove.oldPos
 			let toPos = bestMove.newPos
-			board.getPieceAtLocation(location: toPos)?.location = 64
-			var pieceCount = 0
-			for wp in board.whitePieces{
-				if (wp.location == 64){
-					board.whitePieces.remove(at: pieceCount)
-					break
+			let fromTile = board.cellForItem(at: IndexPath(row: fromPos, section: 0)) as! Tile
+
+			if (bestMove.attackedPiece != nil){//if best move is an attack
+				bestMove.pieceToMove.firstMove = FirstAction.Attacked
+				isDieRolling = true
+				dieTimer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(rollDie), userInfo: fromTile, repeats: true)
+				
+				attacker = bestMove.pieceToMove.type
+				attackerTeam = bestMove.pieceToMove.team
+				victim = bestMove.attackedPiece!.type
+				victimTeam = bestMove.attackedPiece!.team
+				DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+					self.afterDieRollAI(fromPos:fromPos,toPos:toPos,bestMove:bestMove)
+				})
+			} else{
+				bestMove.pieceToMove.firstMove = FirstAction.Moved
+				board.getPieceAtLocation(location: toPos)?.location = 64
+				var pieceCount = 0
+				for wp in board.whitePieces{
+					if (wp.location == 64){
+						board.whitePieces.remove(at: pieceCount)
+						break
+					}
+					pieceCount += 1
 				}
-				pieceCount += 1
+				let moveFromTile = board.cellForItem(at: IndexPath(row: fromPos, section: 0)) as! Tile
+				moveFromTile.removePiece()
+				let moveToTile = board.cellForItem(at: IndexPath(row: toPos, section: 0)) as! Tile
+				moveToTile.setPiece(piece: bestMove.pieceToMove)
 			}
-			let moveFromTile = board.cellForItem(at: IndexPath(row: fromPos, section: 0)) as! Tile
-			moveFromTile.removePiece()
-			let moveToTile = board.cellForItem(at: IndexPath(row: toPos, section: 0)) as! Tile
-			moveToTile.setPiece(piece: bestMove.pieceToMove)
-			
 
 		}
 	}
@@ -630,7 +650,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
         if (dieCounter >= 0){
             dieCounter -= 1
             last_rolled = d6.nextInt()
-            last_rolled = 6         // for testing purposes
+            //last_rolled = 6         // for testing purposes
             displayDie(num: last_rolled)
         } else {
             dieTimer.invalidate()
@@ -689,7 +709,34 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
             }
         }
     }
-    
+	
+	
+	func afterDieRollAI(fromPos:Int,toPos:Int,bestMove:AIMove){
+		isDieRolling = false;
+		displayDie(num: 0)
+		attack()
+		if attackResult() == false { // if attack is NOT successfull
+			print("Attack Failed! - piece NOT moved")
+		}
+		else {
+			sendToGraveyard(piece: board.getPieceAtLocation(location: toPos)!)
+			board.getPieceAtLocation(location: toPos)?.location = 64
+			var pieceCount = 0
+			for wp in board.whitePieces{
+				if (wp.location == 64){
+					board.whitePieces.remove(at: pieceCount)
+					break
+				}
+				pieceCount += 1
+			}
+			let moveFromTile = board.cellForItem(at: IndexPath(row: fromPos, section: 0)) as! Tile
+			moveFromTile.removePiece()
+			let moveToTile = board.cellForItem(at: IndexPath(row: toPos, section: 0)) as! Tile
+			moveToTile.setPiece(piece: bestMove.pieceToMove)
+			
+
+		}
+	}
     // Send captured piece to correct graveyard
     func sendToGraveyard(piece: Piece) {
         switch(piece.team) {

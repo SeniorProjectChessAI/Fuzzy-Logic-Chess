@@ -91,7 +91,7 @@ func getBestLegalMoves(board:Board,thisTeam:Team,turnCounter:Int)->[AIMove]{
 			var attkPiece: Piece
 			var attackProb: Double // the chance this piece will capture another
 			var defendProb: Double = 0.0 //the chance another piece will capture this piece
-			var denominator: Double = 6.0
+			let denominator: Double = 6.0
 			var mBenefit: Double = 0.0 //total benefit of moving piece to a certain index
 			if (p.getCanMove() && board.getPieceAtLocation(location:um) == nil){
 					var neighboringPiecesArray = [Piece]()
@@ -103,12 +103,12 @@ func getBestLegalMoves(board:Board,thisTeam:Team,turnCounter:Int)->[AIMove]{
 					}
 					var maxMBenefit: Double = 0.0
 					for np in neighboringPiecesArray{//calculates the greatest move benefit of all the pieces neighboring legal move
-						attackProb = Double(7 - p.getMinRollNeeded(pieceToAttack: np.type))/6.0
+						attackProb = Double(7 - p.getMinRollNeeded(pieceToAttack: np.type))/denominator
 						let currentMaxBenefit = Double(np.pieceValue) * attackProb
 
 						if (currentMaxBenefit > maxMBenefit){
 							maxMBenefit = currentMaxBenefit
-							defendProb = Double(7 - np.getMinRollNeeded(pieceToAttack: p.type))/6.0
+							defendProb = Double(7 - np.getMinRollNeeded(pieceToAttack: p.type))/denominator
 							
 						}
 					}
@@ -124,7 +124,7 @@ func getBestLegalMoves(board:Board,thisTeam:Team,turnCounter:Int)->[AIMove]{
 			}
 			else if (p.getCanAttack() && board.getPieceAtLocation(location:um) != nil && board.getPieceAtLocation(location:um)?.team != thisTeam){//if AI has attacking move available
 				attkPiece = board.getPieceAtLocation(location: um)!
-				attackProb = Double(7 - p.getMinRollNeeded(pieceToAttack: attkPiece.type))/6.0
+				attackProb = Double(7 - p.getMinRollNeeded(pieceToAttack: attkPiece.type))/denominator
 				mBenefit = Double(attkPiece.pieceValue) * attackProb
 
 				availableMoves.append(AIMove(pieceToMove: p, attackedPiece: attkPiece, oldPos: p.location, newPos: um, isAttackMove: true,moveBenefit:mBenefit))
