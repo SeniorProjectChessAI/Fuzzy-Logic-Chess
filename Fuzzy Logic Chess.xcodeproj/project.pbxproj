@@ -23,6 +23,7 @@
 		F44B5479213C122E0030B370 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44B5478213C122E0030B370 /* Tile.swift */; };
 		F47E8CD9215440980089B93F /* Piece.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47E8CD8215440980089B93F /* Piece.swift */; };
 		F47E8CDB215440C10089B93F /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47E8CDA215440C10089B93F /* Board.swift */; };
+		F4B25EEB21822F510061C87A /* CustomNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B25EEA21822F510061C87A /* CustomNavController.swift */; };
 		F4E18B36213AD26E0009763F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E18B35213AD26E0009763F /* AppDelegate.swift */; };
 		F4E18B38213AD26E0009763F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E18B37213AD26E0009763F /* ViewController.swift */; };
 		F4E18B3B213AD26E0009763F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4E18B39213AD26E0009763F /* Main.storyboard */; };
@@ -47,6 +48,7 @@
 		F44B5478213C122E0030B370 /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		F47E8CD8215440980089B93F /* Piece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Piece.swift; sourceTree = "<group>"; };
 		F47E8CDA215440C10089B93F /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
+		F4B25EEA21822F510061C87A /* CustomNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavController.swift; sourceTree = "<group>"; };
 		F4E18B32213AD26E0009763F /* Fuzzy Logic Chess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fuzzy Logic Chess.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4E18B35213AD26E0009763F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4E18B37213AD26E0009763F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				F4E18B3C213AD2700009763F /* Assets.xcassets */,
 				2D6A7862215A88C400471AA5 /* capture table.png */,
 				F4E18B41213AD2700009763F /* Info.plist */,
+				F4B25EEA21822F510061C87A /* CustomNavController.swift */,
 			);
 			path = "Fuzzy Logic Chess";
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 				F44B5479213C122E0030B370 /* Tile.swift in Sources */,
 				C0DF7E8A21571385003711A6 /* Die.swift in Sources */,
 				EE745491216AA1A400B6DDE7 /* Noble.swift in Sources */,
+				F4B25EEB21822F510061C87A /* CustomNavController.swift in Sources */,
 				EE467CBE217E7731007E27AB /* AI.swift in Sources */,
 				F4E18B36213AD26E0009763F /* AppDelegate.swift in Sources */,
 				F41DA05A21724567004B4F56 /* PopupViewController.swift in Sources */,
