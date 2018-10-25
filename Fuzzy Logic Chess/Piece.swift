@@ -19,21 +19,22 @@ class Piece {
 	var lRookCastlingLocation = -1
 	var rRookCastlingLocation = -1
 	var rookMoveAddVal = 0
+	var pieceValue: Int
 
 	
 
-	init(type: PieceType, team: Team, imageName: String, location: Int, firstAction: FirstAction) {
+	init(type: PieceType, team: Team, imageName: String, location: Int, firstAction: FirstAction, pieceValue: Int) {
 		self.type = type
 		self.team = team
 		self.imageName = imageName
 		self.location = location
 		self.firstMove = firstAction
+		self.pieceValue = pieceValue
 	}
 	
 	// changes location of piece
 	func changeLocation(location: Int) {
 		self.location = location
-		
 	}
 	
 	// returns list of legal moves
@@ -72,7 +73,7 @@ class Piece {
 		}
 		
 		if (self.type == PieceType.King){
-			print("Checking for castle opportunity")
+			//print("Checking for castle opportunity")
 			isCastleAvailable(board: board)
 		}
 		//loop through legal moves
@@ -115,7 +116,7 @@ class Piece {
 		return true
 	}
 	func isCastleAvailable(board:Board) -> Bool {
-		print("King has moved before: \(hasMoved)")
+		//print("King has moved before: \(hasMoved)")
 		
 		var currentTile = location
 		var kingCanCastleLeft = false
@@ -127,7 +128,7 @@ class Piece {
 				let nextCell = board.getPieceAtLocation(location: currentTile); //current tile, possibly nil
 				
 				if(nextCell?.type == PieceType.Rook && nextCell?.team == self.team && !(nextCell?.hasMoved)! && !hasMoved){
-					print("Castling move available to the left")
+					//print("Castling move available to the left")
 					var lCastleLegalMoveVal = location - 2
 					unfilteredMoves.append(lCastleLegalMoveVal)
 					legalCastlingMovesArray.append(lCastleLegalMoveVal)
@@ -136,7 +137,7 @@ class Piece {
 					kingCanCastleLeft = true
 					break;
 				} else if (nextCell?.type != nil){
-					print("Piece in the way of castling")
+					//print("Piece in the way of castling")
 					kingCanCastleLeft = false
 					break;
 				}
@@ -151,7 +152,7 @@ class Piece {
 				let nextCell = board.getPieceAtLocation(location: currentTile); //current tile, possibly nil
 				
 				if(nextCell?.type == PieceType.Rook && nextCell?.team == self.team && !(nextCell?.hasMoved)! && !hasMoved){
-					print("Castling move available to the right")
+					//print("Castling move available to the right")
 					var rCastleLegalMoveVal = location + 2
 					unfilteredMoves.append(rCastleLegalMoveVal)
 					legalCastlingMovesArray.append(rCastleLegalMoveVal)
@@ -160,7 +161,7 @@ class Piece {
 					break;
 					//add castle legal move
 				} else if (nextCell?.type != nil){
-					print("Piece in the way of castling")
+					//print("Piece in the way of castling")
 					kingCanCastleRight = false
 					break;
 				}

@@ -47,6 +47,10 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	var gyCellWidth : CGFloat!
 	var blackPiecesRemoved = 0
 	var whitePiecesRemoved = 0
+	var AIPreviousAttackTileColor: UIColor?
+	var AIPreviousVictimTileColor: UIColor?
+	// for randomMove()
+	var isRandom:Bool = true
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -247,6 +251,9 @@ func restartGame() {
 		if (turnCounter == 0 || turnCounter == 1) {
 			playersTurn(indexPath: indexPath)
 		} else if (turnCounter == 2) {
+			for bp in board.blackPieces{
+				bp.firstMove = FirstAction.None //resets what AI piece did for first move
+			}
 			AITurn()
 			turnCounter += 1
 		} else if (turnCounter >= 3){
@@ -258,26 +265,96 @@ func restartGame() {
 	
 	// Plays turns for the AI
 	func AITurn() {
-		getAllLegalMoves(board: board, thisTeam: Team.Black)//prints current legal moves of each of blacks pieces
+		//getAllLegalMoves(board: board, thisTeam: Team.Black)//prints current legal moves of each of blacks pieces
+		var legalMovesArray = getBestLegalMoves(board: board, thisTeam: Team.Black, turnCounter:turnCounter)
 		
-		let weakSpots = getKingsWeakSpots(board: board)//returns empty cells neighboring the King
+		var bestMove: AIMove = legalMovesArray.first!
+		for lm in legalMovesArray{
+			print("Move \(lm.pieceToMove.type) at \(lm.oldPos) to \(lm.newPos). Attack available? \(lm.isAttackMove) Move Benefit? \(lm.moveBenefit)")
+			if (lm.moveBenefit > bestMove.moveBenefit){
+				bestMove = lm
+			}
+			
+		}
+		
+		let weakSpots = getKingsVulnerableCells(board: board)//returns empty cells neighboring the King
 		print("kings weak spots array :  \(weakSpots)")
 		let cellsInDanger = getCellsInDanger(board: board, vulnerableSquares: weakSpots)//vulnerable sqares around king a white piece has a legal move to next turn
 
 		print("cells in danger: \(cellsInDanger)")
-		
-		if (cellsInDanger != []){
+		let helperPieces: [Piece] = getHelperPieces(board: board, cellsInDanger: cellsInDanger)
+		print("pieces that can help are \(helperPieces)")
+		if (cellsInDanger.count > 0  && helperPieces.count > 0){
+			let previousTile = board.cellForItem(at: IndexPath(row: (helperPieces.first?.location)!, section: 0)) as! Tile
 			//find AI piece that can move to that location
-			let helpPieces = getHelpPieces(board: board, cellsInDanger: cellsInDanger)
-			print("pieces that can help are \(helpPieces)")
-			let previousTile = board.cellForItem(at: IndexPath(row: (helpPieces.first?.location)!, section: 0)) as! Tile
 			previousTile.removePiece()
 			let tileInDanger = board.cellForItem(at: IndexPath(row: cellsInDanger.first!, section: 0)) as! Tile
-			tileInDanger.setPiece(piece: helpPieces.first)
-		}
-		}
+			tileInDanger.setPiece(piece: helperPieces.first)
+		} else {//if King not in harms way
+			let fromPos = bestMove.oldPos
+			let toPos = bestMove.newPos
+			let fromTile = board.cellForItem(at: IndexPath(row: fromPos, section: 0)) as! Tile
+			let toTile = board.cellForItem(at: IndexPath(row: toPos, section: 0)) as! Tile
 
-	
+
+			if (bestMove.attackedPiece != nil){//if best move is an attack
+				bestMove.pieceToMove.firstMove = FirstAction.Attacked
+				AIPreviousAttackTileColor = fromTile.backgroundColor
+				AIPreviousVictimTileColor = toTile.backgroundColor
+				fromTile.backgroundColor = UIColor.yellow
+				toTile.backgroundColor = UIColor.magenta
+				toTile.legalMoveView.tintColor = UIColor.black
+				toTile.showLegalMoveView(show: true)
+				toTile.MinRollLabel.alpha = 1
+				let lowestRollNeeded = fromTile.piece?.getMinRollNeeded(pieceToAttack: (toTile.piece?.type)!)
+				toTile.setMinRollLabel(minRoll: lowestRollNeeded!)
+				isDieRolling = true
+				dieTimer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(rollDie), userInfo: fromTile, repeats: true)
+				
+				attacker = bestMove.pieceToMove.type
+				attackerTeam = bestMove.pieceToMove.team
+				victim = bestMove.attackedPiece!.type
+				victimTeam = bestMove.attackedPiece!.team
+				DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+					self.afterDieRollAI(fromPos:fromPos,toPos:toPos,bestMove:bestMove)
+				})
+			} else{
+				bestMove.pieceToMove.firstMove = FirstAction.Moved
+				board.getPieceAtLocation(location: toPos)?.location = 64
+				var pieceCount = 0
+				for wp in board.whitePieces{
+					if (wp.location == 64){
+						board.whitePieces.remove(at: pieceCount)
+						break
+					}
+					pieceCount += 1
+				}
+				let moveFromTile = board.cellForItem(at: IndexPath(row: fromPos, section: 0)) as! Tile
+				moveFromTile.removePiece()
+				let moveToTile = board.cellForItem(at: IndexPath(row: toPos, section: 0)) as! Tile
+				moveToTile.setPiece(piece: bestMove.pieceToMove)
+			}
+
+		}
+	}
+
+	// returns all the legal moves the AI can make
+	func getLegalMovesAI(board:Board, team:Team)
+	{
+		var legalMovesList = [Int]()
+		let bp = board.blackPieces
+		for n in bp
+		{
+			let piece = board.cellForItem(at: IndexPath(row: n.location, section: 0)) as! Tile
+			let moves = showLegalMoves(tile: piece)
+			for m in moves
+			{
+				legalMovesList.append(m)
+			}
+		}
+		print(legalMovesList.randomElement())
+	}
+
 	
 	func playersTurn(indexPath: IndexPath) {
 		let tile = board.cellForItem(at: indexPath) as! Tile
@@ -374,6 +451,15 @@ func restartGame() {
 					previousTile.piece?.resetCastleLegalMoveVal()
 					
 					board.getPieceAtLocation(location: indexPath.row)?.location = 64
+					var pieceCount = 0
+					for bp in board.blackPieces{
+						if (bp.location == 64){
+							print("removedPiece: \(bp.type) at \(bp.location)")
+							board.blackPieces.remove(at: pieceCount)
+							break
+						}
+						pieceCount += 1
+					}
 					//all captured pieces move to '64th' tile since I can't figure out how to remove pieces from array in swift
 					
 					// set previously selected piece to newly selected tile
@@ -603,7 +689,7 @@ func restartGame() {
         if (dieCounter >= 0){
             dieCounter -= 1
             last_rolled = d6.nextInt()
-            last_rolled = 6         // for testing purposes
+            //last_rolled = 6         // for testing purposes
             displayDie(num: last_rolled)
         } else {
             dieTimer.invalidate()
@@ -616,6 +702,7 @@ func restartGame() {
         isDieRolling = false;
         displayDie(num: 0)
         attack()
+		
         if attackResult() == false { // if attack is NOT successfull
             previousTile.backgroundColor = previouslySelectedTileColor
             
@@ -625,6 +712,15 @@ func restartGame() {
             previousTile.piece?.resetCastleLegalMoveVal()
             
             board.getPieceAtLocation(location: indexPath.row)?.location = 64
+			var pieceCount = 0
+			for bp in board.blackPieces{
+				if (bp.location == 64){
+					print("removedPiece: \(bp.type) at \(bp.location)")
+					board.blackPieces.remove(at: pieceCount)
+					break
+				}
+				pieceCount += 1
+			}
             //all captured pieces move to '64th' tile since I can't figure out how to remove pieces from array in swift
             
             
@@ -653,7 +749,40 @@ func restartGame() {
             }
         }
     }
-    
+	
+	
+	func afterDieRollAI(fromPos:Int,toPos:Int,bestMove:AIMove){
+		isDieRolling = false;
+		displayDie(num: 0)
+		attack()
+		let fromTile = board.cellForItem(at: IndexPath(row: fromPos, section: 0)) as! Tile
+		let toTile = board.cellForItem(at: IndexPath(row: toPos, section: 0)) as! Tile
+		fromTile.backgroundColor = AIPreviousAttackTileColor
+		toTile.backgroundColor = AIPreviousVictimTileColor
+		toTile.MinRollLabel.alpha = 0
+		toTile.showLegalMoveView(show: false)
+		if attackResult() == false { // if attack is NOT successfull
+			print("Attack Failed! - piece NOT moved")
+		}
+		else {
+			sendToGraveyard(piece: board.getPieceAtLocation(location: toPos)!)
+			board.getPieceAtLocation(location: toPos)?.location = 64
+			var pieceCount = 0
+			for wp in board.whitePieces{
+				if (wp.location == 64){
+					board.whitePieces.remove(at: pieceCount)
+					break
+				}
+				pieceCount += 1
+			}
+			let moveFromTile = board.cellForItem(at: IndexPath(row: fromPos, section: 0)) as! Tile
+			moveFromTile.removePiece()
+			let moveToTile = board.cellForItem(at: IndexPath(row: toPos, section: 0)) as! Tile
+			moveToTile.setPiece(piece: bestMove.pieceToMove)
+			
+
+		}
+	}
     // Send captured piece to correct graveyard
     func sendToGraveyard(piece: Piece) {
         switch(piece.team) {

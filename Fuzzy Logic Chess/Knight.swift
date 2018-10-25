@@ -8,8 +8,8 @@
 
 class Knight: Piece {
 	override
-	init(type: PieceType, team: Team, imageName: String, location: Int, firstAction: FirstAction) {
-		super.init(type:type, team: team, imageName: imageName, location: location, firstAction: FirstAction.None)
+	init(type: PieceType, team: Team, imageName: String, location: Int, firstAction: FirstAction, pieceValue: Int) {
+		super.init(type:type, team: team, imageName: imageName, location: location, firstAction: FirstAction.None, pieceValue: pieceValue)
 		
 	}
 	override

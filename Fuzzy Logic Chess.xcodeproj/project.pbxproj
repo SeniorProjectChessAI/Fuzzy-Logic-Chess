@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2D03F2D32159E6BF002053D7 /* Start.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D03F2D22159E6BF002053D7 /* Start.storyboard */; };
 		2D6A7863215A88C400471AA5 /* capture table.png in Resources */ = {isa = PBXBuildFile; fileRef = 2D6A7862215A88C400471AA5 /* capture table.png */; };
+		2D8F0C3421800609009BDE0B /* AIMove.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8F0C3321800609009BDE0B /* AIMove.swift */; };
 		2DD7BD90215A03EA00B565C3 /* StartController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD7BD8F215A03EA00B565C3 /* StartController.swift */; };
 		79A9C1F12155D46700E58991 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A9C1F02155D46700E58991 /* MenuViewController.swift */; };
 		79A9C1F32155D49C00E58991 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A9C1F22155D49C00E58991 /* MenuTableViewCell.swift */; };
@@ -34,6 +35,7 @@
 /* Begin PBXFileReference section */
 		2D03F2D22159E6BF002053D7 /* Start.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Start.storyboard; sourceTree = "<group>"; };
 		2D6A7862215A88C400471AA5 /* capture table.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "capture table.png"; sourceTree = "<group>"; };
+		2D8F0C3321800609009BDE0B /* AIMove.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIMove.swift; sourceTree = "<group>"; };
 		2DD7BD8F215A03EA00B565C3 /* StartController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartController.swift; sourceTree = "<group>"; };
 		79A9C1F02155D46700E58991 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		79A9C1F22155D49C00E58991 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 				C034A76C21743DCA00631D6A /* attackLogic.swift */,
 				F40D582F2176561500E999FD /* Graveyard.swift */,
 				EE467CBD217E7731007E27AB /* AI.swift */,
+				2D8F0C3321800609009BDE0B /* AIMove.swift */,
 			);
 			name = Game;
 			sourceTree = "<group>";
@@ -219,6 +222,7 @@
 				2DD7BD90215A03EA00B565C3 /* StartController.swift in Sources */,
 				EEB563A4216916080041429F /* Pawn.swift in Sources */,
 				EE745493216AD1F500B6DDE7 /* Knight.swift in Sources */,
+				2D8F0C3421800609009BDE0B /* AIMove.swift in Sources */,
 				79A9C1F32155D49C00E58991 /* MenuTableViewCell.swift in Sources */,
 				F4E18B38213AD26E0009763F /* ViewController.swift in Sources */,
 				F47E8CDB215440C10089B93F /* Board.swift in Sources */,
