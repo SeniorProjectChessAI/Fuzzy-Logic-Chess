@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController , UICollectionViewDataSource, UICollectionViewDelegate {
     //show the menu
 
-    
+	@IBOutlet weak var mainBackgroundImage: UIImageView!
     @IBOutlet weak var blackGraveyard: Graveyard!
     @IBOutlet weak var whiteGraveyard: Graveyard!
     @IBOutlet weak var board: Board!
@@ -75,18 +75,19 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
     
         board.setup()
         
-        startGame()
+		startGame()
     }
     
     // sets all game variables and starts the game
-    func startGame() {
+	func startGame() {
 		displayDie(num: 0)
 		turnCounter = 0
 		blackTeamLabel.text = "Black Team (temp)"
 		whiteTeamLabel.text = "White Team (temp)"
+		setDifficultyColors()
     }
     
-    func restartGame() {
+func restartGame() {
         resetBoard()
         startGame()
         
@@ -128,13 +129,35 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
         // handle difficulty change in popup
         if let data = notification.userInfo as? [String:Int] {
             for (_, difficulty) in data {
-                // SET GLOBAL DIFFICULTY LEVEL
+                DIFFICULTY = difficulty
                 print("Popup difficulty:  \(difficulty)")
             }
         }
         
         restartGame()
     }
+	
+	
+	func setDifficultyColors() {
+		switch(DIFFICULTY) {
+		case 0: mainBackgroundImage.image = UIImage(named: "green.png")
+			let sendData = [0 : 0]
+			NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuMessage"), object: nil, userInfo: sendData)
+			NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuTableMessage"), object: nil, userInfo: sendData)
+		case 1: mainBackgroundImage.image = UIImage(named: "blue.png")
+			let sendData = [0 : 1]
+			NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuMessage"), object: nil, userInfo: sendData)
+			NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuTableMessage"), object: nil, userInfo: sendData)
+		case 2: mainBackgroundImage.image = UIImage(named: "red.png")
+			let sendData = [0 : 2]
+			NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuMessage"), object: nil, userInfo: sendData)
+			NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuTableMessage"), object: nil, userInfo: sendData)
+		default:mainBackgroundImage.image = UIImage(named: "green.png")
+			let sendData = [0 : 0]
+			NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuMessage"), object: nil, userInfo: sendData)
+			NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuTableMessage"), object: nil, userInfo: sendData)
+		}
+	}
 
     
     // Number of views in the collectionView
@@ -397,7 +420,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 			} else {
 				lastPiece = previousTile.piece
 			}
-			var piecesRemoved = lastPiece!.team == Team.Black ? blackPiecesRemoved : whitePiecesRemoved
+			let piecesRemoved = lastPiece!.team == Team.Black ? blackPiecesRemoved : whitePiecesRemoved
 			
 			if (piecesRemoved >= 15){
 				if (lastPiece!.type == PieceType.King){
@@ -530,7 +553,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
             
             UIView.animate(withDuration: 0.3) { ()->Void in
                 
-                self.menu_vc.view.frame = CGRect(x: 0, y: 60, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
+				self.menu_vc.view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.height)
                 self.menu_vc.view.backgroundColor = UIColor.black.withAlphaComponent(0.6)
                 self.addChild(self.menu_vc)
                 self.view.addSubview(self.menu_vc.view)
@@ -545,7 +568,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
             
             
             UIView.animate(withDuration: 0.3, animations: {()->Void in
-                self.menu_vc.view.frame = CGRect(x: -UIScreen.main.bounds.size.width, y: 60, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)        }) { (finished) in
+                self.menu_vc.view.frame = CGRect(x: -UIScreen.main.bounds.size.width, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.height)        }) { (finished) in
                     self.menu_vc.view.removeFromSuperview()        }
             
             AppDelegate.menu_bool = true
