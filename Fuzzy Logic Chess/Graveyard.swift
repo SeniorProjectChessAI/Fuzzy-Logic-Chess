@@ -54,13 +54,15 @@ class Graveyard : UICollectionView {
 	
 		for i in 0...20 { //21 cells total (16 + 5 spaces...)
 			let cell = self.cellForItem(at: IndexPath(row: i, section: 0)) as! GraveyardCell
+			
+			print("Cell at \(i) has Piece: \(cell.hasPiece()) with Type: \(cell.piece?.type ?? type)")
 		
 			if(!cell.hasPiece()) {
 				if(i == 0) {
 					return index
 				}
 		
-				if(tempIndex == (i - 1)) { // if current cell is the second empty cell in a row
+				if(i != 1 && tempIndex == (i - 1)) { // if current cell is the second empty cell in a row
 					index = i
 					return index
 				}
