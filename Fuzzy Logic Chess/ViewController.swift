@@ -144,19 +144,19 @@ func restartGame() {
 	
 	func setDifficultyColors() {
 		switch(DIFFICULTY) {
-		case 0: mainBackgroundImage.image = UIImage(named: "green.png")
+		case 0: mainBackgroundImage.image = UIImage(named: "green.jpg")
 			let sendData = [0 : 0]
 			NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuMessage"), object: nil, userInfo: sendData)
 			NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuTableMessage"), object: nil, userInfo: sendData)
-		case 1: mainBackgroundImage.image = UIImage(named: "blue.png")
+		case 1: mainBackgroundImage.image = UIImage(named: "blue.jpg")
 			let sendData = [0 : 1]
 			NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuMessage"), object: nil, userInfo: sendData)
 			NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuTableMessage"), object: nil, userInfo: sendData)
-		case 2: mainBackgroundImage.image = UIImage(named: "red.png")
+		case 2: mainBackgroundImage.image = UIImage(named: "red.jpg")
 			let sendData = [0 : 2]
 			NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuMessage"), object: nil, userInfo: sendData)
 			NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuTableMessage"), object: nil, userInfo: sendData)
-		default:mainBackgroundImage.image = UIImage(named: "green.png")
+		default:mainBackgroundImage.image = UIImage(named: "green.jpg")
 			let sendData = [0 : 0]
 			NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuMessage"), object: nil, userInfo: sendData)
 			NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuTableMessage"), object: nil, userInfo: sendData)
