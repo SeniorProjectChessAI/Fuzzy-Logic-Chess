@@ -248,17 +248,15 @@ func restartGame() {
 //			// AI turn gets called at the end of playersTrun() function
 //		}
 		
-		if (turnCounter == 0 || turnCounter == 1) {
+		if (turnCounter == 0) {
 			playersTurn(indexPath: indexPath)
-		} else if (turnCounter == 2) {
+		} else if (turnCounter == 1) {
+			playersTurn(indexPath: indexPath)
+
 			for bp in board.blackPieces{
 				bp.firstMove = FirstAction.None //resets what AI piece did for first move
 			}
-			AITurn()
-			turnCounter += 1
-		} else if (turnCounter >= 3){
-			AITurn()
-			turnCounter = 0
+
 		}
 		
 	}
@@ -290,6 +288,16 @@ func restartGame() {
 			previousTile.removePiece()
 			let tileInDanger = board.cellForItem(at: IndexPath(row: cellsInDanger.first!, section: 0)) as! Tile
 			tileInDanger.setPiece(piece: helperPieces.first)
+			
+			if (turnCounter == 2){//if finished ai's first turn, increase turncounter, do 2nd turn
+				DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
+					self.turnCounter += 1
+					self.AITurn()
+				})
+				
+			} else if (turnCounter == 3){//if second turn, reset turncounter
+				turnCounter = 0
+			}
 		} else {//if King not in harms way
 			let fromPos = bestMove.oldPos
 			let toPos = bestMove.newPos
@@ -315,7 +323,7 @@ func restartGame() {
 				attackerTeam = bestMove.pieceToMove.team
 				victim = bestMove.attackedPiece!.type
 				victimTeam = bestMove.attackedPiece!.team
-				DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+				DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
 					self.afterDieRollAI(fromPos:fromPos,toPos:toPos,bestMove:bestMove)
 				})
 			} else{
@@ -333,6 +341,17 @@ func restartGame() {
 				moveFromTile.removePiece()
 				let moveToTile = board.cellForItem(at: IndexPath(row: toPos, section: 0)) as! Tile
 				moveToTile.setPiece(piece: bestMove.pieceToMove)
+				if (turnCounter == 2){//if finished ai's first turn, increase turncounter, do 2nd turn
+					DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
+						self.turnCounter += 1
+						self.AITurn()
+					})
+					
+				} else if (turnCounter == 3){//if second turn, reset turncounter
+					turnCounter = 0
+				}
+				print("turncounter after move is \(turnCounter)")
+				
 			}
 
 		}
@@ -445,6 +464,8 @@ func restartGame() {
 						self.afterDieRoll(previousTile:previousTile,indexPath:indexPath,tile:tile)
 					})
 					
+
+					
 					
 				}
 				else {
@@ -472,7 +493,14 @@ func restartGame() {
 					
 					
 					print("piece moved to tile \(indexPath.row) ")
+					if (turnCounter == 2){
+						DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
+							self.AITurn()
+						})
+					}
 				}
+
+
 				print("turn #\(turnCounter)")
 				
 				// hide legalMoves indicators
@@ -748,8 +776,12 @@ func restartGame() {
                 endGame(winner: attackerTeam)
             }
         }
-    }
-	
+		if (turnCounter == 2){
+			DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
+				self.AITurn()
+			})
+		}
+	}
 	
 	func afterDieRollAI(fromPos:Int,toPos:Int,bestMove:AIMove){
 		isDieRolling = false;
@@ -766,6 +798,9 @@ func restartGame() {
 		}
 		else {
 			sendToGraveyard(piece: board.getPieceAtLocation(location: toPos)!)
+			if (victim == PieceType.King) {
+				endGame(winner: Team.Black)
+			}
 			board.getPieceAtLocation(location: toPos)?.location = 64
 			var pieceCount = 0
 			for wp in board.whitePieces{
@@ -782,6 +817,15 @@ func restartGame() {
 			
 
 		}
+		if (turnCounter == 2){
+			DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
+				self.turnCounter += 1
+				self.AITurn()
+			})
+		} else if (turnCounter >= 3){
+			turnCounter = 0
+		}
+		print("turncounter after die roll is \(turnCounter)")
 	}
     // Send captured piece to correct graveyard
     func sendToGraveyard(piece: Piece) {
