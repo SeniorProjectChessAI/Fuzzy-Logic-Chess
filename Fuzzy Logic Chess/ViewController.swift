@@ -9,43 +9,50 @@
 import UIKit
 
 class ViewController: UIViewController , UICollectionViewDataSource, UICollectionViewDelegate {
-    //show the menu
-
+	//show the menu
+	
 	@IBOutlet weak var mainBackgroundImage: UIImageView!
-    @IBOutlet weak var blackGraveyard: Graveyard!
-    @IBOutlet weak var whiteGraveyard: Graveyard!
-    @IBOutlet weak var board: Board!
-    @IBOutlet weak var die_imageView: UIImageView!
+	@IBOutlet weak var blackGraveyard: Graveyard!
+	@IBOutlet weak var whiteGraveyard: Graveyard!
+	@IBOutlet weak var board: Board!
+	@IBOutlet weak var die_imageView: UIImageView!
 	@IBOutlet weak var aiWaitingSymbol: UIActivityIndicatorView!
 	@IBOutlet weak var aiWaitingText: UITextField!
 	@IBOutlet weak var aiStackView: UIStackView!
-    @IBOutlet weak var blackTeamLabel: UILabel!
-    @IBOutlet weak var whiteTeamLabel: UILabel!
-    
-    // board variables
-    let light = UIColor.init(displayP3Red: 142.0/255.0, green: 109.0/255.0, blue: 67/255.0, alpha: 1.0)
-    let dark = UIColor.init(displayP3Red: 54.0/255.0, green: 38.0/255.0, blue: 19.0/255.0, alpha: 1.0)
-    var evenColor = UIColor.init()
-    var oddColor = UIColor.init()
-    var evenCode = "" // used for custom tile images
-    var oddCode = "" // used for custom tile images
-    var staggerOn = true
-    var staggerOff = false;
-    
-    var menu_vc : MenuViewController!
-    
-    // variables for selected/clicked cells
-    var tileIsSelected: Bool = false
-    var previouslySelectedTileColor: UIColor?
-    var previouslySelectedTileIndex: Int?
-    var previouslySelectedTileTeam: Team?
-    var currentTeam: Team?
-    var legalMoves: [Int] = []
-    var turnCounter = 0; //[0,1] -> first player's turns, [2,3] -> second player's turns
-    var isDieRolling = false //for disabling cell selection while die rolling
-    var firstPieceMoved: Piece?
-    var dieTimer: Timer!
-    var dieCounter = 5 //how many times the die rolls
+	@IBOutlet weak var blackTeamLabel: UILabel!
+	@IBOutlet weak var whiteTeamLabel: UILabel!
+	@IBOutlet weak var currentTeamLabel: UILabel!
+	@IBOutlet weak var turnBallWhite1: UIImageView!
+	@IBOutlet weak var turnBallWhite2: UIImageView!
+	@IBOutlet weak var turnBallBlack1: UIImageView!
+	@IBOutlet weak var turnBallBlack2: UIImageView!
+	
+	// board variables
+	let light = UIColor.init(displayP3Red: 142.0/255.0, green: 109.0/255.0, blue: 67/255.0, alpha: 1.0)
+	let dark = UIColor.init(displayP3Red: 54.0/255.0, green: 38.0/255.0, blue: 19.0/255.0, alpha: 1.0)
+	let whitePieceColor = UIColor.init(displayP3Red: 186.0/255.0, green: 166.0/255.0, blue: 136.0/255.0, alpha: 1.0)
+	let darkPieceColor = UIColor.init(displayP3Red: 54.0/255.0, green: 38.0/255.0, blue: 19.0/255.0, alpha: 1.0)
+	var evenColor = UIColor.init()
+	var oddColor = UIColor.init()
+	var evenCode = "" // used for custom tile images
+	var oddCode = "" // used for custom tile images
+	var staggerOn = true
+	var staggerOff = false;
+	
+	var menu_vc : MenuViewController!
+	
+	// variables for selected/clicked cells
+	var tileIsSelected: Bool = false
+	var previouslySelectedTileColor: UIColor?
+	var previouslySelectedTileIndex: Int?
+	var previouslySelectedTileTeam: Team?
+	var currentTeam: Team?
+	var legalMoves: [Int] = []
+	var turnCounter = 0; //[0,1] -> first player's turns, [2,3] -> second player's turns
+	var isDieRolling = false //for disabling cell selection while die rolling
+	var firstPieceMoved: Piece?
+	var dieTimer: Timer!
+	var dieCounter = 5 //how many times the die rolls
 	var castlingTileIndices: [Int] = [2,6,58,62]
 	var gyCellWidth : CGFloat!
 	var blackPiecesRemoved = 0
@@ -55,37 +62,37 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	// for randomMove()
 	var isRandom:Bool = true
 	
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(onRecievePopupData(_:)), name: Notification.Name(rawValue: "startNewGame"), object: nil)
-
-        menu_vc = self.storyboard?.instantiateViewController(withIdentifier: "MenuViewController") as? MenuViewController
-        
-        // divides board collectionView into 8 columns and sets spacing
-        let itemSize = (UIScreen.main.bounds.width - 10) / 8
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: itemSize, height: itemSize)
-        layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 0
-        board.collectionViewLayout = layout
-        
-        // sets graveyard collectionView cell sizes according to screen size
-        let itemSize2 = (UIScreen.main.bounds.width - 10) / 12
-        gyCellWidth = itemSize2
-        let layout2 = UICollectionViewFlowLayout()
-        layout2.itemSize = CGSize(width: itemSize2, height: itemSize2)
-        layout2.minimumInteritemSpacing = 0
-        layout2.minimumLineSpacing = 0
-        whiteGraveyard.collectionViewLayout = layout2
-        blackGraveyard.collectionViewLayout = layout2
-    
-        board.setup()
-        
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		
+		NotificationCenter.default.addObserver(self, selector: #selector(onRecievePopupData(_:)), name: Notification.Name(rawValue: "startNewGame"), object: nil)
+		
+		menu_vc = self.storyboard?.instantiateViewController(withIdentifier: "MenuViewController") as? MenuViewController
+		
+		// divides board collectionView into 8 columns and sets spacing
+		let itemSize = (UIScreen.main.bounds.width - 10) / 8
+		let layout = UICollectionViewFlowLayout()
+		layout.itemSize = CGSize(width: itemSize, height: itemSize)
+		layout.minimumInteritemSpacing = 0
+		layout.minimumLineSpacing = 0
+		board.collectionViewLayout = layout
+		
+		// sets graveyard collectionView cell sizes according to screen size
+		let itemSize2 = (UIScreen.main.bounds.width - 10) / 12
+		gyCellWidth = itemSize2
+		let layout2 = UICollectionViewFlowLayout()
+		layout2.itemSize = CGSize(width: itemSize2, height: itemSize2)
+		layout2.minimumInteritemSpacing = 0
+		layout2.minimumLineSpacing = 0
+		whiteGraveyard.collectionViewLayout = layout2
+		blackGraveyard.collectionViewLayout = layout2
+		
+		board.setup()
+		
 		startGame()
-    }
-    
-    // sets all game variables and starts the game
+	}
+	
+	// sets all game variables and starts the game
 	func startGame() {
 		displayDie(num: 0)
 		turnCounter = 0
@@ -107,69 +114,78 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		}
 		
 		setGameColors()
-    }
-    
-func restartGame() {
-        resetBoard()
-        startGame()
-        
-        print("---------NEW GAME---------\n")
-        print("Turn #\(turnCounter)")
-    }
-    
-    // Resets the board
-    func resetBoard() {
-        board.setup()
-        board.reloadData()
+		
+		updateTurnDisplay()
+	}
+	
+	func restartGame() {
+		resetBoard()
+		startGame()
+		
+		print("---------NEW GAME---------\n")
+		print("Turn #\(turnCounter)")
+	}
+	
+	// Resets the board
+	func resetBoard() {
+		board.setup()
+		board.reloadData()
 		whiteGraveyard.resetGraveyard()
 		blackGraveyard.resetGraveyard()
 		//whiteGraveyard.reloadData()
 		//blackGraveyard.reloadData()
-    }
-    
-    // Displays end of game popup view
-    func endGame(winner: Team) {
-        let winMessage = ["winMessage" : "\(winner.rawValue) Wins"]
-        
-        showPopup()
-        
-        // send winMessage to PopupViewController
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "winMessage"), object: nil, userInfo: winMessage)
-    }
-    
-    func showPopup() {
-        let popupVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "endGamePopup") as! PopupViewController
-        
-        self.addChild(popupVC)
-        popupVC.view.frame = self.view.frame
-        self.view.addSubview(popupVC.view)
-        popupVC.didMove(toParent: self)
-    }
-    
-    @objc func onRecievePopupData(_ notification:Notification) {
-        restartGame()
-    }
+	}
 	
+	// Displays end of game popup view
+	func endGame(winner: Team) {
+		let winMessage = ["winMessage" : "\(winner.rawValue) Wins"]
+		
+		showPopup()
+		
+		// send winMessage to PopupViewController
+		NotificationCenter.default.post(name: Notification.Name(rawValue: "winMessage"), object: nil, userInfo: winMessage)
+	}
 	
+	func showPopup() {
+		let popupVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "endGamePopup") as! PopupViewController
+		
+		self.addChild(popupVC)
+		popupVC.view.frame = self.view.frame
+		self.view.addSubview(popupVC.view)
+		popupVC.didMove(toParent: self)
+	}
+	
+	@objc func onRecievePopupData(_ notification:Notification) {
+		
+		// handle difficulty change in popup
+		if let data = notification.userInfo as? [String:Int] {
+			for (_, difficulty) in data {
+				DIFFICULTY = difficulty
+				print("Popup difficulty:  \(difficulty)")
+			}
+		}
+		
+		restartGame()
+	}
 	func setGameColors() {
 		if(GAME_TYPE == 0) {
 			switch(DIFFICULTY) {
 			case 0: mainBackgroundImage.image = UIImage(named: "green.jpg")
-				let sendData = [0 : 0]
-				NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuMessage"), object: nil, userInfo: sendData)
-				NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuTableMessage"), object: nil, userInfo: sendData)
+			let sendData = [0 : 0]
+			NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuMessage"), object: nil, userInfo: sendData)
+			NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuTableMessage"), object: nil, userInfo: sendData)
 			case 1: mainBackgroundImage.image = UIImage(named: "blue.jpg")
-				let sendData = [0 : 1]
-				NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuMessage"), object: nil, userInfo: sendData)
-				NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuTableMessage"), object: nil, userInfo: sendData)
+			let sendData = [0 : 1]
+			NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuMessage"), object: nil, userInfo: sendData)
+			NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuTableMessage"), object: nil, userInfo: sendData)
 			case 2: mainBackgroundImage.image = UIImage(named: "red.jpg")
-				let sendData = [0 : 2]
-				NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuMessage"), object: nil, userInfo: sendData)
-				NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuTableMessage"), object: nil, userInfo: sendData)
+			let sendData = [0 : 2]
+			NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuMessage"), object: nil, userInfo: sendData)
+			NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuTableMessage"), object: nil, userInfo: sendData)
 			default:mainBackgroundImage.image = UIImage(named: "green.jpg")
-				let sendData = [0 : 0]
-				NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuMessage"), object: nil, userInfo: sendData)
-				NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuTableMessage"), object: nil, userInfo: sendData)
+			let sendData = [0 : 0]
+			NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuMessage"), object: nil, userInfo: sendData)
+			NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuTableMessage"), object: nil, userInfo: sendData)
 			}
 		} else {
 			mainBackgroundImage.image = UIImage(named: "purple.jpg")
@@ -178,19 +194,19 @@ func restartGame() {
 			NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuTableMessage"), object: nil, userInfo: sendData)
 		}
 	}
-
-    
-    // Number of views in the collectionView
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        if(collectionView == whiteGraveyard || collectionView == blackGraveyard) {
-            return 21
-        }
-        return 64
-    }
-
-    // Populate UICollectionView with Tile objects
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+	
+	
+	// Number of views in the collectionView
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+		
+		if(collectionView == whiteGraveyard || collectionView == blackGraveyard) {
+			return 21
+		}
+		return 64
+	}
+	
+	// Populate UICollectionView with Tile objects
+	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		
 		// Populates the graveyard cells
 		if(collectionView == whiteGraveyard || collectionView == blackGraveyard) {
@@ -201,18 +217,18 @@ func restartGame() {
 			let centerX = gyCellWidth / 2.0 + CGFloat(indexPath.item) * (gyCellWidth/2)
 			let centerY = gyCellWidth / 2.0
 			gyCell.center = CGPoint(x: centerX, y: centerY)
-
+			
 			return gyCell
 		}
 		else {
-        	let tile = collectionView.dequeueReusableCell(withReuseIdentifier: "tile", for: indexPath) as! Tile
-		
+			let tile = collectionView.dequeueReusableCell(withReuseIdentifier: "tile", for: indexPath) as! Tile
+			
 			tile.location = indexPath.row
 			tile.setPiece(piece: board.getPieceAtLocation(location: indexPath.row))
 			tile.setLegalMoveView()
-
+			
 			setTileColorVariables(index: indexPath.row)
-		
+			
 			if indexPath.row % 2 == 0 {
 				tile.backgroundColor = evenColor
 			} else {
@@ -221,35 +237,35 @@ func restartGame() {
 			
 			return tile
 		}
-    }
-    
-    
-    // Sets tile color variables according to Tile index
-    func setTileColorVariables(index: Int) {
-        
-        // checks if start of new row and turns on staggered colors
-        if(index % 8 == 0) {
-            if(staggerOn) {
-                staggerOn = false
-                staggerOff = true
-                
-                evenColor = dark
-                oddColor = light
-                
-                //evenCode = "d" // used for custom tile images
-                //oddCode = "l" // used for custom tile images
-            } else {
-                staggerOn = true
-                staggerOff = false
-                
-                evenColor = light
-                oddColor = dark
-                
-                //evenCode = "l" // used for custom tile images
-                //oddCode = "d" // used for custom tile images
-            }
-        }
-    }
+	}
+	
+	
+	// Sets tile color variables according to Tile index
+	func setTileColorVariables(index: Int) {
+		
+		// checks if start of new row and turns on staggered colors
+		if(index % 8 == 0) {
+			if(staggerOn) {
+				staggerOn = false
+				staggerOff = true
+				
+				evenColor = dark
+				oddColor = light
+				
+				//evenCode = "d" // used for custom tile images
+				//oddCode = "l" // used for custom tile images
+			} else {
+				staggerOn = true
+				staggerOff = false
+				
+				evenColor = light
+				oddColor = dark
+				
+				//evenCode = "l" // used for custom tile images
+				//oddCode = "d" // used for custom tile images
+			}
+		}
+	}
 	
 	
 	// Called when Tile is clicked
@@ -257,12 +273,12 @@ func restartGame() {
 		//print("Tile clicked: \(indexPath.row)")
 		
 		// checks if current turn is the players turn (at time of cell click...)
-//		if (turnCounter == 0 || turnCounter == 1) {
-//			currentTeam = Team.White;
-//
-//			playersTurn(indexPath: indexPath)
-//			// AI turn gets called at the end of playersTrun() function
-//		}
+		//        if (turnCounter == 0 || turnCounter == 1) {
+		//            currentTeam = Team.White;
+		//
+		//            playersTurn(indexPath: indexPath)
+		//            // AI turn gets called at the end of playersTrun() function
+		//        }
 		
 		if(GAME_TYPE == 0) { // AI game
 			if (turnCounter == 0) {
@@ -287,18 +303,18 @@ func restartGame() {
 		//getAllLegalMoves(board: board, thisTeam: Team.Black)//prints current legal moves of each of blacks pieces
 		let legalMovesArray = getBestLegalMoves(board: board, thisTeam: Team.Black, turnCounter:turnCounter)
 		
-		let chosenMove: AIMove = getMoveByDifficulty(movesArray: legalMovesArray, difficulty: "easy")
+		let chosenMove: AIMove = getMoveByDifficulty(movesArray: legalMovesArray, difficulty: "hard")
 		
 		let weakSpots = getKingsVulnerableCells(board: board)//returns empty cells neighboring the King
 		print("kings weak spots array :  \(weakSpots)")
 		let cellsInDanger = getCellsInDanger(board: board, vulnerableSquares: weakSpots)//vulnerable sqares around king a white piece has a legal move to next turn
-
+		
 		print("cells in danger: \(cellsInDanger)")
 		let helperPieces: [Piece] = getHelperPieces(board: board, cellsInDanger: cellsInDanger)
 		print("pieces that can help are \(helperPieces)")
 		
 		if (cellsInDanger.count > 0  && helperPieces.count > 0){
-
+			
 			let previousTile = board.cellForItem(at: IndexPath(row: (helperPieces.first?.location)!, section: 0)) as! Tile
 			//find AI piece that can move to that location
 			previousTile.removePiece()
@@ -308,6 +324,9 @@ func restartGame() {
 			if (turnCounter == 2){//if finished ai's first turn, increase turncounter, do 2nd turn
 				aiWaitingSymbol.alpha = 1
 				aiWaitingText.alpha = 1
+				turnCounter += 1
+				updateTurnDisplay()
+				turnCounter -= 1
 				DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
 					self.turnCounter += 1
 					self.AITurn()
@@ -315,14 +334,15 @@ func restartGame() {
 				
 			} else if (turnCounter == 3){//if second turn, reset turncounter
 				turnCounter = 0
+				updateTurnDisplay()
 			}
 		} else {//if King not in harms way
 			let fromPos = chosenMove.oldPos
 			let toPos = chosenMove.newPos
 			let fromTile = board.cellForItem(at: IndexPath(row: fromPos, section: 0)) as! Tile
 			let toTile = board.cellForItem(at: IndexPath(row: toPos, section: 0)) as! Tile
-
-
+			
+			
 			if (chosenMove.attackedPiece != nil){//if best move is an attack
 				chosenMove.pieceToMove.firstMove = FirstAction.Attacked
 				AIPreviousAttackTileColor = fromTile.backgroundColor
@@ -362,6 +382,9 @@ func restartGame() {
 				if (turnCounter == 2){//if finished ai's first turn, increase turncounter, do 2nd turn
 					aiWaitingSymbol.alpha = 1
 					aiWaitingText.alpha = 1
+					turnCounter += 1
+					updateTurnDisplay()
+					turnCounter -= 1
 					DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
 						self.turnCounter += 1
 						self.AITurn()
@@ -369,14 +392,15 @@ func restartGame() {
 					
 				} else if (turnCounter == 3){//if second turn, reset turncounter
 					turnCounter = 0
+					updateTurnDisplay()
 				}
 				print("turncounter after move is \(turnCounter)")
 				
 			}
-
+			
 		}
 	}
-
+	
 	// returns all the legal moves the AI can make
 	func getLegalMovesAI(board:Board, team:Team)
 	{
@@ -393,7 +417,7 @@ func restartGame() {
 		}
 		print(legalMovesList.randomElement())
 	}
-
+	
 	
 	func playersTurn(indexPath: IndexPath) {
 		let tile = board.cellForItem(at: indexPath) as! Tile
@@ -483,10 +507,6 @@ func restartGame() {
 					DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
 						self.afterDieRoll(previousTile:previousTile,indexPath:indexPath,tile:tile)
 					})
-					
-
-					
-					
 				}
 				else {
 					previousTile.piece?.resetCastleLegalMoveVal()
@@ -516,13 +536,17 @@ func restartGame() {
 					if (turnCounter == 2 && GAME_TYPE == 0){
 						aiWaitingSymbol.alpha = 1
 						aiWaitingText.alpha = 1
-						DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
+						updateTurnDisplay()
+						DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
 							self.AITurn()
 						})
+					} else {
+						updateTurnDisplay()
+						
 					}
 				}
-
-
+				
+				
 				print("turn #\(turnCounter)")
 				
 				// hide legalMoves indicators
@@ -571,8 +595,7 @@ func restartGame() {
 							lastPiece?.firstMove = FirstAction.None
 						}
 						else if (lastPiece?.type == PieceType.King){
-							print(lastPiece?.firstMove)
-							print("made it here")
+							
 							
 							if (lastPiece?.firstMove != FirstAction.None && piecesRemoved >= 15){
 								
@@ -603,7 +626,6 @@ func restartGame() {
 							
 						}
 						
-						
 					}
 					
 				}
@@ -611,157 +633,157 @@ func restartGame() {
 		}
 		
 		// Checks if the next turn is the start of the AI Turns
-//		if(turnCounter == 3) {
-//			AITurn()
-//		}
+		//        if(turnCounter == 3) {
+		//            AITurn()
+		//        }
 	}
 	
-    
-    func showLegalMoves(tile:Tile) -> [Int] {
-        //check to see 1) if either team's second turn 2) can move/attack
-        //if can move -> keep empty legal moves
-        //if can attack -> keep legal moves to opponent's piece
-        //print("first move: \(tile.piece?.firstMove)")
-            for i in legalMoves {
-                let availableTile = board.cellForItem(at: IndexPath(row: i, section: 0)) as! Tile
-                if(availableTile.hasPiece()) {
-                    if(availableTile.piece?.team != previouslySelectedTileTeam && (tile.piece?.getCanAttack())!) {
-                        //legal moves to opponents pieces
-                        availableTile.legalMoveView.tintColor = UIColor.red
-                        availableTile.showLegalMoveView(show: true)
-                        availableTile.MinRollLabel.alpha = 1
-						let lowestRollNeeded = tile.piece?.getMinRollNeeded(pieceToAttack: (availableTile.piece?.type)!)
-                        availableTile.setMinRollLabel(minRoll: lowestRollNeeded!)
-
-                    } else {
-                        let removeInt: Int  = (legalMoves.firstIndex(of: i)!);
-                        //print(removeInt)
-                        //print("\(legalMoves[removeInt]) removed")
-                        legalMoves.remove(at: removeInt)
-                        //print(legalMoves);
-
-                        
-                    }
-                }
-                if (availableTile.isEmpty()){
-                    if (tile.piece?.type == PieceType.King && castlingTileIndices.contains(i) && (tile.piece?.getCanMove())! && (tile.piece?.isCastleAvailable(board: board))!){
-                        availableTile.legalMoveView.tintColor = UIColor.blue
-                        availableTile.showLegalMoveView(show: true)
-
-                    } else if ((tile.piece?.getCanMove())!){
-                        availableTile.legalMoveView.tintColor = UIColor.green
-                        availableTile.showLegalMoveView(show: true)
-                    } else {
-                        let removeInt: Int  = (legalMoves.firstIndex(of: i)!);
-                        legalMoves.remove(at: removeInt)
-                    }
-                    //array of legal moves to empty squares
-                }
-            }
-        return legalMoves;
-    }
-    
-    func hideLegalMoves() {
-        for i in legalMoves {
-            let availableTile = board.cellForItem(at: IndexPath(row: i, section: 0)) as! Tile
-            availableTile.MinRollLabel.alpha = 0
-
-            availableTile.showLegalMoveView(show: false)
-        }
-    }
-
-    //menu button
-    @IBAction func menu_action(_ sender: UIBarButtonItem) {
-        
-        if AppDelegate.menu_bool {
-            //show the menu
-            show_menu()
-        }
-        else{
-            //close the menu
-            close_menu()
-            
-        }
-    }
-    
-    //function to show and open up the menu
-        func show_menu(){
-            
-            UIView.animate(withDuration: 0.3) { ()->Void in
-                
-				self.menu_vc.view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.height)
-                self.menu_vc.view.backgroundColor = UIColor.black.withAlphaComponent(0.6)
-                self.addChild(self.menu_vc)
-                self.view.addSubview(self.menu_vc.view)
-                AppDelegate.menu_bool = false
-            
-        }
-        
-    }
-    
-    //fucntion to close the menu
-        func close_menu(){
-            
-            
-            UIView.animate(withDuration: 0.3, animations: {()->Void in
-                self.menu_vc.view.frame = CGRect(x: -UIScreen.main.bounds.size.width, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.height)        }) { (finished) in
-                    self.menu_vc.view.removeFromSuperview()        }
-            
-            AppDelegate.menu_bool = true
-            
-        }
-    
-    // Called during die roll to display result
-    func displayDie(num: Int) {
-        
-        switch num {
-        case 0:
-            die_imageView.image = nil
-        case 1:
-            die_imageView.image = die_1
-        case 2:
-            die_imageView.image = die_2
-        case 3:
-            die_imageView.image = die_3
-        case 4:
-            die_imageView.image = die_4
-        case 5:
-            die_imageView.image = die_5
-        case 6:
-            die_imageView.image = die_6
-        default:
-            print("ERROR: Invalid die roll")
-        }
-    }
-    
-    // rolls the 6 sided die
-    @objc func rollDie(){
-        if (dieCounter >= 0){
-            dieCounter -= 1
-            last_rolled = d6.nextInt()
-            //last_rolled = 6         // for testing purposes
-            displayDie(num: last_rolled)
-        } else {
-            dieTimer.invalidate()
-            //afterDieRoll(previousTile: previousTile, indexPath: indexPath, tile: tile)
-            dieCounter = 5
-        }
-    }
-    
-    func afterDieRoll(previousTile:Tile,indexPath:IndexPath,tile:Tile){
-        isDieRolling = false;
-        displayDie(num: 0)
-        attack()
+	
+	func showLegalMoves(tile:Tile) -> [Int] {
+		//check to see 1) if either team's second turn 2) can move/attack
+		//if can move -> keep empty legal moves
+		//if can attack -> keep legal moves to opponent's piece
+		//print("first move: \(tile.piece?.firstMove)")
+		for i in legalMoves {
+			let availableTile = board.cellForItem(at: IndexPath(row: i, section: 0)) as! Tile
+			if(availableTile.hasPiece()) {
+				if(availableTile.piece?.team != previouslySelectedTileTeam && (tile.piece?.getCanAttack())!) {
+					//legal moves to opponents pieces
+					availableTile.legalMoveView.tintColor = UIColor.red
+					availableTile.showLegalMoveView(show: true)
+					availableTile.MinRollLabel.alpha = 1
+					let lowestRollNeeded = tile.piece?.getMinRollNeeded(pieceToAttack: (availableTile.piece?.type)!)
+					availableTile.setMinRollLabel(minRoll: lowestRollNeeded!)
+					
+				} else {
+					let removeInt: Int  = (legalMoves.firstIndex(of: i)!);
+					//print(removeInt)
+					//print("\(legalMoves[removeInt]) removed")
+					legalMoves.remove(at: removeInt)
+					//print(legalMoves);
+					
+					
+				}
+			}
+			if (availableTile.isEmpty()){
+				if (tile.piece?.type == PieceType.King && castlingTileIndices.contains(i) && (tile.piece?.getCanMove())! && (tile.piece?.isCastleAvailable(board: board))!){
+					availableTile.legalMoveView.tintColor = UIColor.blue
+					availableTile.showLegalMoveView(show: true)
+					
+				} else if ((tile.piece?.getCanMove())!){
+					availableTile.legalMoveView.tintColor = UIColor.green
+					availableTile.showLegalMoveView(show: true)
+				} else {
+					let removeInt: Int  = (legalMoves.firstIndex(of: i)!);
+					legalMoves.remove(at: removeInt)
+				}
+				//array of legal moves to empty squares
+			}
+		}
+		return legalMoves;
+	}
+	
+	func hideLegalMoves() {
+		for i in legalMoves {
+			let availableTile = board.cellForItem(at: IndexPath(row: i, section: 0)) as! Tile
+			availableTile.MinRollLabel.alpha = 0
+			
+			availableTile.showLegalMoveView(show: false)
+		}
+	}
+	
+	//menu button
+	@IBAction func menu_action(_ sender: UIBarButtonItem) {
 		
-        if attackResult() == false { // if attack is NOT successfull
-            previousTile.backgroundColor = previouslySelectedTileColor
-            
-            print("Attack Failed! - piece NOT moved")
-        }
-        else { // if attack was successful
-            previousTile.piece?.resetCastleLegalMoveVal()
-            
-            board.getPieceAtLocation(location: indexPath.row)?.location = 64
+		if AppDelegate.menu_bool {
+			//show the menu
+			show_menu()
+		}
+		else{
+			//close the menu
+			close_menu()
+			
+		}
+	}
+	
+	//function to show and open up the menu
+	func show_menu(){
+		
+		UIView.animate(withDuration: 0.3) { ()->Void in
+			
+			self.menu_vc.view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.height)
+			self.menu_vc.view.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+			self.addChild(self.menu_vc)
+			self.view.addSubview(self.menu_vc.view)
+			AppDelegate.menu_bool = false
+			
+		}
+		
+	}
+	
+	//fucntion to close the menu
+	func close_menu(){
+		
+		
+		UIView.animate(withDuration: 0.3, animations: {()->Void in
+			self.menu_vc.view.frame = CGRect(x: -UIScreen.main.bounds.size.width, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.height)        }) { (finished) in
+				self.menu_vc.view.removeFromSuperview()        }
+		
+		AppDelegate.menu_bool = true
+		
+	}
+	
+	// Called during die roll to display result
+	func displayDie(num: Int) {
+		
+		switch num {
+		case 0:
+			die_imageView.image = nil
+		case 1:
+			die_imageView.image = die_1
+		case 2:
+			die_imageView.image = die_2
+		case 3:
+			die_imageView.image = die_3
+		case 4:
+			die_imageView.image = die_4
+		case 5:
+			die_imageView.image = die_5
+		case 6:
+			die_imageView.image = die_6
+		default:
+			print("ERROR: Invalid die roll")
+		}
+	}
+	
+	// rolls the 6 sided die
+	@objc func rollDie(){
+		if (dieCounter >= 0){
+			dieCounter -= 1
+			last_rolled = d6.nextInt()
+			//last_rolled = 6         // for testing purposes
+			displayDie(num: last_rolled)
+		} else {
+			dieTimer.invalidate()
+			//afterDieRoll(previousTile: previousTile, indexPath: indexPath, tile: tile)
+			dieCounter = 5
+		}
+	}
+	
+	func afterDieRoll(previousTile:Tile,indexPath:IndexPath,tile:Tile){
+		isDieRolling = false;
+		displayDie(num: 0)
+		attack()
+		
+		if attackResult() == false { // if attack is NOT successfull
+			previousTile.backgroundColor = previouslySelectedTileColor
+			
+			print("Attack Failed! - piece NOT moved")
+		}
+		else { // if attack was successful
+			previousTile.piece?.resetCastleLegalMoveVal()
+			
+			board.getPieceAtLocation(location: indexPath.row)?.location = 64
 			var pieceCount = 0
 			for bp in board.blackPieces{
 				if (bp.location == 64){
@@ -771,39 +793,42 @@ func restartGame() {
 				}
 				pieceCount += 1
 			}
-            //all captured pieces move to '64th' tile since I can't figure out how to remove pieces from array in swift
-            
-            
-            // send captured piece to graveyard
-            if(tile.hasPiece()) {
-                sendToGraveyard(piece: tile.piece!)
-            }
-            
-            // set previously selected piece to newly selected tile
-            tile.setPiece(piece: previousTile.piece)
-            previousTile.piece?.onMove();
-            
-            // remove previously selected tile's image and restore original tile color
-            previousTile.removePiece()
-            previousTile.backgroundColor = previouslySelectedTileColor
-            
-            print("Attack Successful! - piece moved to tile \(indexPath.row)")
+			//all captured pieces move to '64th' tile since I can't figure out how to remove pieces from array in swift
+			
+			
+			// send captured piece to graveyard
+			if(tile.hasPiece()) {
+				sendToGraveyard(piece: tile.piece!)
+			}
+			
+			// set previously selected piece to newly selected tile
+			tile.setPiece(piece: previousTile.piece)
+			previousTile.piece?.onMove();
+			
+			// remove previously selected tile's image and restore original tile color
+			previousTile.removePiece()
+			previousTile.backgroundColor = previouslySelectedTileColor
+			
+			print("Attack Successful! - piece moved to tile \(indexPath.row)")
 			if (victimTeam == Team.Black){
 				blackPiecesRemoved += 1
 			} else if (victimTeam == Team.White) {
 				whitePiecesRemoved += 1
 			}
 			
-            if (victim == PieceType.King) {
-                endGame(winner: attackerTeam)
-            }
-        }
+			if (victim == PieceType.King) {
+				endGame(winner: attackerTeam)
+			}
+		}
 		if (turnCounter == 2 && GAME_TYPE == 0){
 			aiWaitingSymbol.alpha = 1
 			aiWaitingText.alpha = 1
+			updateTurnDisplay()
 			DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
 				self.AITurn()
 			})
+		} else if (GAME_TYPE == 1){
+			updateTurnDisplay()
 		}
 	}
 	
@@ -839,29 +864,69 @@ func restartGame() {
 			let moveToTile = board.cellForItem(at: IndexPath(row: toPos, section: 0)) as! Tile
 			moveToTile.setPiece(piece: chosenMove.pieceToMove)
 			
-
+			
 		}
-		if (turnCounter == 2){
+		if (turnCounter == 2 && GAME_TYPE == 0){
 			aiWaitingSymbol.alpha = 1
 			aiWaitingText.alpha = 1
+			turnCounter += 1
+			updateTurnDisplay()
+			turnCounter -= 1
 			DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
 				self.turnCounter += 1
 				self.AITurn()
 			})
 		} else if (turnCounter >= 3){
 			turnCounter = 0
+			updateTurnDisplay()
+			
 		}
 		print("turncounter after die roll is \(turnCounter)")
 	}
-    // Send captured piece to correct graveyard
-    func sendToGraveyard(piece: Piece) {
-        switch(piece.team) {
-        case .Black:
-            whiteGraveyard.addPiece(piece: piece)
-        case .White:
-            blackGraveyard.addPiece(piece: piece)
-        }
-    }
+	// Send captured piece to correct graveyard
+	func sendToGraveyard(piece: Piece) {
+		switch(piece.team) {
+		case .Black:
+			whiteGraveyard.addPiece(piece: piece)
+		case .White:
+			blackGraveyard.addPiece(piece: piece)
+		}
+	}
 	
+	func updateTurnDisplay(){
+		turnBallWhite1.tintColor = UIColor.gray
+		turnBallWhite1.alpha = 0.5
+		turnBallWhite2.tintColor = UIColor.gray
+		turnBallWhite2.alpha = 0.5
+		turnBallBlack1.tintColor = UIColor.gray
+		turnBallBlack1.alpha = 0.5
+		turnBallBlack2.tintColor = UIColor.gray
+		turnBallBlack2.alpha = 0.5
+		
+		switch(turnCounter) {
+		case 0:
+			currentTeamLabel.text = " WHITE "
+			turnBallWhite1.tintColor = whitePieceColor
+			turnBallWhite1.alpha = 1
+		case 1:
+			currentTeamLabel.text = " WHITE "
+			turnBallWhite2.tintColor = whitePieceColor
+			turnBallWhite2.alpha = 1
+		case 2:
+			currentTeamLabel.text = " BLACK "
+			
+			turnBallBlack1.tintColor = UIColor.black
+			turnBallBlack1.alpha = 1
+		case 3:
+			currentTeamLabel.text = " BLACK "
+			
+			turnBallBlack2.tintColor = UIColor.black
+			turnBallBlack2.alpha = 1
+		default:
+			currentTeamLabel.text = " WHITE "
+			turnBallWhite1.tintColor = whitePieceColor
+			turnBallWhite1.alpha = 1
+		}
+	}
 	
 }
