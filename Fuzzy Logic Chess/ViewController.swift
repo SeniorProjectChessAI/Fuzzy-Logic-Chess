@@ -89,24 +89,10 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	func startGame() {
 		displayDie(num: 0)
 		turnCounter = 0
+		blackTeamLabel.text = "Black Team (temp)"
+		whiteTeamLabel.text = "White Team (temp)"
+		setDifficultyColors()
 		
-		if(GAME_TYPE == 0) { // AI game
-			var difficulty = ""
-			
-			switch(DIFFICULTY) {
-			case 1: difficulty = "Medium"
-			case 2: difficulty = "Hard"
-			default: difficulty = "Easy"
-			}
-			
-			blackTeamLabel.text = "AI (\(difficulty))"
-			whiteTeamLabel.text = "Player"
-			
-		} else {
-			// Two Player Game
-		}
-		
-		setGameColors()
     }
     
 func restartGame() {
@@ -147,33 +133,35 @@ func restartGame() {
     }
     
     @objc func onRecievePopupData(_ notification:Notification) {
+        
+        // handle difficulty change in popup
+        if let data = notification.userInfo as? [String:Int] {
+            for (_, difficulty) in data {
+                DIFFICULTY = difficulty
+                print("Popup difficulty:  \(difficulty)")
+            }
+        }
+        
         restartGame()
     }
 	
 	
-	func setGameColors() {
-		if(GAME_TYPE == 0) {
-			switch(DIFFICULTY) {
-			case 0: mainBackgroundImage.image = UIImage(named: "green.jpg")
-				let sendData = [0 : 0]
-				NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuMessage"), object: nil, userInfo: sendData)
-				NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuTableMessage"), object: nil, userInfo: sendData)
-			case 1: mainBackgroundImage.image = UIImage(named: "blue.jpg")
-				let sendData = [0 : 1]
-				NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuMessage"), object: nil, userInfo: sendData)
-				NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuTableMessage"), object: nil, userInfo: sendData)
-			case 2: mainBackgroundImage.image = UIImage(named: "red.jpg")
-				let sendData = [0 : 2]
-				NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuMessage"), object: nil, userInfo: sendData)
-				NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuTableMessage"), object: nil, userInfo: sendData)
-			default:mainBackgroundImage.image = UIImage(named: "green.jpg")
-				let sendData = [0 : 0]
-				NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuMessage"), object: nil, userInfo: sendData)
-				NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuTableMessage"), object: nil, userInfo: sendData)
-			}
-		} else {
-			mainBackgroundImage.image = UIImage(named: "purple.jpg")
-			let sendData = [0 : 3]
+	func setDifficultyColors() {
+		switch(DIFFICULTY) {
+		case 0: mainBackgroundImage.image = UIImage(named: "green.jpg")
+			let sendData = [0 : 0]
+			NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuMessage"), object: nil, userInfo: sendData)
+			NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuTableMessage"), object: nil, userInfo: sendData)
+		case 1: mainBackgroundImage.image = UIImage(named: "blue.jpg")
+			let sendData = [0 : 1]
+			NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuMessage"), object: nil, userInfo: sendData)
+			NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuTableMessage"), object: nil, userInfo: sendData)
+		case 2: mainBackgroundImage.image = UIImage(named: "red.jpg")
+			let sendData = [0 : 2]
+			NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuMessage"), object: nil, userInfo: sendData)
+			NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuTableMessage"), object: nil, userInfo: sendData)
+		default:mainBackgroundImage.image = UIImage(named: "green.jpg")
+			let sendData = [0 : 0]
 			NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuMessage"), object: nil, userInfo: sendData)
 			NotificationCenter.default.post(name: Notification.Name(rawValue: "difficultyMenuTableMessage"), object: nil, userInfo: sendData)
 		}
@@ -264,22 +252,16 @@ func restartGame() {
 //			// AI turn gets called at the end of playersTrun() function
 //		}
 		
-		if(GAME_TYPE == 0) { // AI game
-			if (turnCounter == 0) {
-				playersTurn(indexPath: indexPath)
-			} else if (turnCounter == 1) {
-				playersTurn(indexPath: indexPath)
-				
-				for bp in board.blackPieces{
-					bp.firstMove = FirstAction.None //resets what AI piece did for first move
-				}
-				
-			}
-		} else { // Two Player game
+		if (turnCounter == 0) {
 			playersTurn(indexPath: indexPath)
+		} else if (turnCounter == 1) {
+			playersTurn(indexPath: indexPath)
+
+			for bp in board.blackPieces{
+				bp.firstMove = FirstAction.None //resets what AI piece did for first move
+			}
+
 		}
-		
-		
 		
 	}
 	
@@ -516,7 +498,7 @@ func restartGame() {
 					
 					
 					print("piece moved to tile \(indexPath.row) ")
-					if (turnCounter == 2 && GAME_TYPE == 0){
+					if (turnCounter == 2){
 						aiWaitingSymbol.alpha = 1
 						aiWaitingText.alpha = 1
 						DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
@@ -801,7 +783,7 @@ func restartGame() {
                 endGame(winner: attackerTeam)
             }
         }
-		if (turnCounter == 2 && GAME_TYPE == 0){
+		if (turnCounter == 2){
 			aiWaitingSymbol.alpha = 1
 			aiWaitingText.alpha = 1
 			DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {

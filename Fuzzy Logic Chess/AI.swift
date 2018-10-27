@@ -184,12 +184,40 @@ func getMoveByDifficulty(movesArray:[AIMove],difficulty:String)->AIMove{
 	switch difficulty {
 		case "easy"://picks random element from moves array
 			//should be reconfigured so that it only picks a random element with a move benefit > 0
-		chosenAIMove = movesArray.randomElement()!
+			var movesArray2 = [AIMove]();
+			for m in movesArray{
+				if m.moveBenefit >= 0{
+					movesArray2.append(m)
+				}
+			}
+		chosenAIMove = movesArray2.randomElement()!
 		print("easy mode")
-	case "medium"://idea: create a new array that holds the middle 1/3 moves sorted by move benefit
+		
+		
+		case "medium"://idea: create a new array that holds the middle 1/3 moves sorted by move benefit
 		//for example if moves array has 3 elements m1 with move benefit 1, m2 with 2, and m3 with 3, the new array would only hold m2
 		//hint on how to implement: your new array's size would be 1/3 of old array,
 		//once you have the new array, simply call array.randomelement()
+			
+			var movesArray2 = [AIMove]();
+			var sum:Double = 0
+			var mean:Double = 0
+			
+			for m in movesArray{
+				if m.moveBenefit > 0{
+					sum = sum + m.moveBenefit
+				}
+			}
+			mean = sum/Double(movesArray2.capacity)
+			mean = mean + mean/2
+			
+			for m in movesArray{
+				if m.moveBenefit >= mean{
+					movesArray2.append(m)
+				}
+			}
+			
+		chosenAIMove = movesArray2.randomElement()!
 		print("medium mode")
 		case "hard":
 			for m in movesArray{//finds and returns the aimove with the greatest movebenefit
