@@ -39,7 +39,6 @@ class StartController: UIViewController {
 		
 		(difficultySegmentControl.subviews[2] as UIView).tintColor = red
 		
-        // Do any additional setup after loading the view, typically from a nib.
 		DIFFICULTY = 0
     }
 
