@@ -269,16 +269,9 @@ func restartGame() {
 		aiWaitingSymbol.alpha = 0
 		aiWaitingText.alpha = 0
 		//getAllLegalMoves(board: board, thisTeam: Team.Black)//prints current legal moves of each of blacks pieces
-		var legalMovesArray = getBestLegalMoves(board: board, thisTeam: Team.Black, turnCounter:turnCounter)
+		let legalMovesArray = getBestLegalMoves(board: board, thisTeam: Team.Black, turnCounter:turnCounter)
 		
-		var bestMove: AIMove = legalMovesArray.first!
-		for lm in legalMovesArray{
-			print("Move \(lm.pieceToMove.type) at \(lm.oldPos) to \(lm.newPos). Attack available? \(lm.isAttackMove) Move Benefit? \(lm.moveBenefit)")
-			if (lm.moveBenefit > bestMove.moveBenefit){
-				bestMove = lm
-			}
-			
-		}
+		let chosenMove: AIMove = getMoveByDifficulty(movesArray: legalMovesArray, difficulty: "easy")
 		
 		let weakSpots = getKingsVulnerableCells(board: board)//returns empty cells neighboring the King
 		print("kings weak spots array :  \(weakSpots)")
@@ -308,14 +301,14 @@ func restartGame() {
 				turnCounter = 0
 			}
 		} else {//if King not in harms way
-			let fromPos = bestMove.oldPos
-			let toPos = bestMove.newPos
+			let fromPos = chosenMove.oldPos
+			let toPos = chosenMove.newPos
 			let fromTile = board.cellForItem(at: IndexPath(row: fromPos, section: 0)) as! Tile
 			let toTile = board.cellForItem(at: IndexPath(row: toPos, section: 0)) as! Tile
 
 
-			if (bestMove.attackedPiece != nil){//if best move is an attack
-				bestMove.pieceToMove.firstMove = FirstAction.Attacked
+			if (chosenMove.attackedPiece != nil){//if best move is an attack
+				chosenMove.pieceToMove.firstMove = FirstAction.Attacked
 				AIPreviousAttackTileColor = fromTile.backgroundColor
 				AIPreviousVictimTileColor = toTile.backgroundColor
 				fromTile.backgroundColor = UIColor.yellow
@@ -328,15 +321,15 @@ func restartGame() {
 				isDieRolling = true
 				dieTimer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(rollDie), userInfo: fromTile, repeats: true)
 				
-				attacker = bestMove.pieceToMove.type
-				attackerTeam = bestMove.pieceToMove.team
-				victim = bestMove.attackedPiece!.type
-				victimTeam = bestMove.attackedPiece!.team
+				attacker = chosenMove.pieceToMove.type
+				attackerTeam = chosenMove.pieceToMove.team
+				victim = chosenMove.attackedPiece!.type
+				victimTeam = chosenMove.attackedPiece!.team
 				DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
-					self.afterDieRollAI(fromPos:fromPos,toPos:toPos,bestMove:bestMove)
+					self.afterDieRollAI(fromPos:fromPos,toPos:toPos,chosenMove:chosenMove)
 				})
 			} else{
-				bestMove.pieceToMove.firstMove = FirstAction.Moved
+				chosenMove.pieceToMove.firstMove = FirstAction.Moved
 				board.getPieceAtLocation(location: toPos)?.location = 64
 				var pieceCount = 0
 				for wp in board.whitePieces{
@@ -349,7 +342,7 @@ func restartGame() {
 				let moveFromTile = board.cellForItem(at: IndexPath(row: fromPos, section: 0)) as! Tile
 				moveFromTile.removePiece()
 				let moveToTile = board.cellForItem(at: IndexPath(row: toPos, section: 0)) as! Tile
-				moveToTile.setPiece(piece: bestMove.pieceToMove)
+				moveToTile.setPiece(piece: chosenMove.pieceToMove)
 				if (turnCounter == 2){//if finished ai's first turn, increase turncounter, do 2nd turn
 					aiWaitingSymbol.alpha = 1
 					aiWaitingText.alpha = 1
@@ -798,7 +791,7 @@ func restartGame() {
 		}
 	}
 	
-	func afterDieRollAI(fromPos:Int,toPos:Int,bestMove:AIMove){
+	func afterDieRollAI(fromPos:Int,toPos:Int,chosenMove:AIMove){
 		isDieRolling = false;
 		displayDie(num: 0)
 		attack()
@@ -828,7 +821,7 @@ func restartGame() {
 			let moveFromTile = board.cellForItem(at: IndexPath(row: fromPos, section: 0)) as! Tile
 			moveFromTile.removePiece()
 			let moveToTile = board.cellForItem(at: IndexPath(row: toPos, section: 0)) as! Tile
-			moveToTile.setPiece(piece: bestMove.pieceToMove)
+			moveToTile.setPiece(piece: chosenMove.pieceToMove)
 			
 
 		}
