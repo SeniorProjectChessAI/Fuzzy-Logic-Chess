@@ -31,11 +31,6 @@ class PopupViewController: UIViewController {
     }
 	
 	
-    @IBAction func closePopup(_ sender: Any) {
-        self.view.removeFromSuperview()
-    }
-	
-	
 	// On newGame button press: send difficulty level to ViewController
     @IBAction func newGame(_ sender: Any) {
 		
