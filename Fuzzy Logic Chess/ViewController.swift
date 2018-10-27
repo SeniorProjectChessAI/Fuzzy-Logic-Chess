@@ -16,6 +16,9 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
     @IBOutlet weak var whiteGraveyard: Graveyard!
     @IBOutlet weak var board: Board!
     @IBOutlet weak var die_imageView: UIImageView!
+	@IBOutlet weak var aiWaitingSymbol: UIActivityIndicatorView!
+	@IBOutlet weak var aiWaitingText: UITextField!
+	@IBOutlet weak var aiStackView: UIStackView!
     @IBOutlet weak var blackTeamLabel: UILabel!
     @IBOutlet weak var whiteTeamLabel: UILabel!
     
@@ -263,6 +266,8 @@ func restartGame() {
 	
 	// Plays turns for the AI
 	func AITurn() {
+		aiWaitingSymbol.alpha = 0
+		aiWaitingText.alpha = 0
 		//getAllLegalMoves(board: board, thisTeam: Team.Black)//prints current legal moves of each of blacks pieces
 		var legalMovesArray = getBestLegalMoves(board: board, thisTeam: Team.Black, turnCounter:turnCounter)
 		
@@ -282,7 +287,9 @@ func restartGame() {
 		print("cells in danger: \(cellsInDanger)")
 		let helperPieces: [Piece] = getHelperPieces(board: board, cellsInDanger: cellsInDanger)
 		print("pieces that can help are \(helperPieces)")
+		
 		if (cellsInDanger.count > 0  && helperPieces.count > 0){
+
 			let previousTile = board.cellForItem(at: IndexPath(row: (helperPieces.first?.location)!, section: 0)) as! Tile
 			//find AI piece that can move to that location
 			previousTile.removePiece()
@@ -290,6 +297,8 @@ func restartGame() {
 			tileInDanger.setPiece(piece: helperPieces.first)
 			
 			if (turnCounter == 2){//if finished ai's first turn, increase turncounter, do 2nd turn
+				aiWaitingSymbol.alpha = 1
+				aiWaitingText.alpha = 1
 				DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
 					self.turnCounter += 1
 					self.AITurn()
@@ -342,6 +351,8 @@ func restartGame() {
 				let moveToTile = board.cellForItem(at: IndexPath(row: toPos, section: 0)) as! Tile
 				moveToTile.setPiece(piece: bestMove.pieceToMove)
 				if (turnCounter == 2){//if finished ai's first turn, increase turncounter, do 2nd turn
+					aiWaitingSymbol.alpha = 1
+					aiWaitingText.alpha = 1
 					DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
 						self.turnCounter += 1
 						self.AITurn()
@@ -494,6 +505,8 @@ func restartGame() {
 					
 					print("piece moved to tile \(indexPath.row) ")
 					if (turnCounter == 2){
+						aiWaitingSymbol.alpha = 1
+						aiWaitingText.alpha = 1
 						DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
 							self.AITurn()
 						})
@@ -777,6 +790,8 @@ func restartGame() {
             }
         }
 		if (turnCounter == 2){
+			aiWaitingSymbol.alpha = 1
+			aiWaitingText.alpha = 1
 			DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
 				self.AITurn()
 			})
@@ -818,6 +833,8 @@ func restartGame() {
 
 		}
 		if (turnCounter == 2){
+			aiWaitingSymbol.alpha = 1
+			aiWaitingText.alpha = 1
 			DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
 				self.turnCounter += 1
 				self.AITurn()
@@ -836,4 +853,6 @@ func restartGame() {
             blackGraveyard.addPiece(piece: piece)
         }
     }
+	
+	
 }

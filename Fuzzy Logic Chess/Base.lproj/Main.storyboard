@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ugf-Ty-h8X">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ugf-Ty-h8X">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -106,7 +106,7 @@
                                         </connections>
                                     </collectionView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="tEu-k8-x4q" userLabel="White Team Label">
-                                        <rect key="frame" x="10" y="547.66666666666663" width="72.333333333333329" height="24"/>
+                                        <rect key="frame" x="10" y="547.66666666666663" width="72.333333333333329" height="23.333333333333371"/>
                                         <attributedString key="attributedText">
                                             <fragment content="Player 1">
                                                 <attributes>
@@ -118,8 +118,33 @@
                                         </attributedString>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <stackView autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fhd-Wn-fp2">
+                                        <rect key="frame" x="98" y="162" width="179" height="27"/>
+                                        <subviews>
+                                            <activityIndicatorView opaque="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="GHM-rD-BIz">
+                                                <rect key="frame" x="0.0" y="0.0" width="20" height="27"/>
+                                                <color key="backgroundColor" white="0.35343424480000002" alpha="0.85859910100000003" colorSpace="calibratedWhite"/>
+                                                <rect key="contentStretch" x="1" y="1" width="1" height="1"/>
+                                            </activityIndicatorView>
+                                            <textField opaque="NO" alpha="0.0" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="AI Thinking..." textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YdH-z8-Jju">
+                                                <rect key="frame" x="20" y="0.0" width="159" height="27"/>
+                                                <color key="backgroundColor" white="0.35343424480000002" alpha="0.85859910100000003" colorSpace="calibratedWhite"/>
+                                                <accessibility key="accessibilityConfiguration">
+                                                    <accessibilityTraits key="traits" notEnabled="YES"/>
+                                                </accessibility>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" name="AppleColorEmoji" family="Apple Color Emoji" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="YdH-z8-Jju" firstAttribute="leading" secondItem="GHM-rD-BIz" secondAttribute="trailing" constant="10" id="f2c-2z-X4N"/>
+                                        </constraints>
+                                    </stackView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="WIu-am-4Fh" customClass="Graveyard" customModule="Fuzzy_Logic_Chess" customModuleProvider="target">
-                                        <rect key="frame" x="15" y="576.66666666666663" width="340" height="35"/>
+                                        <rect key="frame" x="15" y="576" width="340" height="35"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="RJO-09-cK2"/>
@@ -232,6 +257,7 @@
                                     <constraint firstItem="KfE-VP-2bj" firstAttribute="centerX" secondItem="6f2-qV-40T" secondAttribute="centerX" id="08v-pH-QOO"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="kJf-JD-iQN" secondAttribute="trailing" constant="20" id="3sv-6f-Hb5"/>
                                     <constraint firstItem="tEu-k8-x4q" firstAttribute="leading" secondItem="6f2-qV-40T" secondAttribute="leading" constant="10" id="4i9-zJ-aF3"/>
+                                    <constraint firstItem="Fhd-Wn-fp2" firstAttribute="centerY" secondItem="6f2-qV-40T" secondAttribute="centerY" id="6fg-1d-AVB"/>
                                     <constraint firstItem="kJf-JD-iQN" firstAttribute="leading" secondItem="6f2-qV-40T" secondAttribute="leading" constant="10" id="7se-8a-oLJ"/>
                                     <constraint firstItem="6GZ-aC-i80" firstAttribute="leading" secondItem="6f2-qV-40T" secondAttribute="leading" constant="15" id="JHW-f7-vMQ"/>
                                     <constraint firstAttribute="trailing" secondItem="WIu-am-4Fh" secondAttribute="trailing" constant="20" id="Mn0-RD-FlI"/>
@@ -241,6 +267,7 @@
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tEu-k8-x4q" secondAttribute="trailing" constant="20" id="biI-dI-Rsy"/>
                                     <constraint firstAttribute="trailing" secondItem="6GZ-aC-i80" secondAttribute="trailing" constant="20" id="gSD-Bf-a8h"/>
                                     <constraint firstItem="INU-VV-3t3" firstAttribute="centerY" secondItem="6f2-qV-40T" secondAttribute="centerY" id="hwy-j0-Akf"/>
+                                    <constraint firstItem="Fhd-Wn-fp2" firstAttribute="centerX" secondItem="6f2-qV-40T" secondAttribute="centerX" id="hy7-pB-Ob8"/>
                                     <constraint firstItem="tEu-k8-x4q" firstAttribute="top" secondItem="KfE-VP-2bj" secondAttribute="bottom" constant="20" id="ic6-Qw-Cku"/>
                                     <constraint firstItem="KfE-VP-2bj" firstAttribute="top" secondItem="6GZ-aC-i80" secondAttribute="bottom" constant="20" id="l8v-FY-31D"/>
                                     <constraint firstItem="INU-VV-3t3" firstAttribute="centerX" secondItem="6f2-qV-40T" secondAttribute="centerX" id="mmO-9o-Mns"/>
@@ -273,6 +300,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="aiStackView" destination="Fhd-Wn-fp2" id="dQq-Pl-bab"/>
+                        <outlet property="aiWaitingSymbol" destination="GHM-rD-BIz" id="2l6-mR-JZe"/>
+                        <outlet property="aiWaitingText" destination="YdH-z8-Jju" id="EiE-L3-dwq"/>
                         <outlet property="blackGraveyard" destination="6GZ-aC-i80" id="IF4-cf-TLh"/>
                         <outlet property="blackTeamLabel" destination="kJf-JD-iQN" id="yKr-yQ-LkD"/>
                         <outlet property="board" destination="KfE-VP-2bj" id="4zg-Ma-din"/>
@@ -284,7 +314,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1082.4000000000001" y="136.28185907046478"/>
+            <point key="canvasLocation" x="1082.4000000000001" y="135.96059113300493"/>
         </scene>
         <!--Menu View Controller-->
         <scene sceneID="jlY-1Q-lDU">
@@ -1132,6 +1162,6 @@ Cg
     </scenes>
     <resources>
         <image name="capture table.png" width="820" height="544"/>
-        <image name="menu-icon" width="11.520000457763672" height="14.399999618530273"/>
+        <image name="menu-icon" width="48" height="60"/>
     </resources>
 </document>
