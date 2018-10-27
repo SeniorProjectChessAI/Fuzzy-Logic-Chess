@@ -92,6 +92,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		blackTeamLabel.text = "Black Team (temp)"
 		whiteTeamLabel.text = "White Team (temp)"
 		setDifficultyColors()
+		
     }
     
 func restartGame() {

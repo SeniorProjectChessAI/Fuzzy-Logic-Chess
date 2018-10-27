@@ -16,6 +16,7 @@ class StartController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+		DIFFICULTY = 0
     }
 
 
@@ -23,5 +24,7 @@ class StartController: UIViewController {
 	@IBAction func difficultyChanged(_ sender: UISegmentedControl) {
 		DIFFICULTY = sender.selectedSegmentIndex
 	}
+	
+	
 }
 
