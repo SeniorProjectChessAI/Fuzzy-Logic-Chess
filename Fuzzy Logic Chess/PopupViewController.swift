@@ -37,7 +37,6 @@ class PopupViewController: UIViewController {
 		let sendData = ["difficulty" : difficultyControl.selectedSegmentIndex]
 		
 		NotificationCenter.default.post(name: Notification.Name(rawValue: "startNewGame"), object: nil, userInfo: sendData)
-		
 		self.view.removeFromSuperview()
     }
 	

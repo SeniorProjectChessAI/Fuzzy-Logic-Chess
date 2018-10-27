@@ -14,17 +14,17 @@ var GAME_TYPE = 0 // GLOBAL game type variable (0 - AI, 1 - two Player)
 
 
 class StartController: UIViewController {
-	
-	@IBOutlet weak var playAIButton: UIButton!
-	@IBOutlet weak var playFriendButton: UIButton!
-	@IBOutlet weak var howToPlayButton: UIButton!
-	@IBOutlet weak var difficultySegmentControl: UISegmentedControl!
-	
-	
-	// Colors
-	let green = UIColor.init(displayP3Red: 50.0/255.0, green: 88.0/255.0, blue: 46.0/255.0, alpha: 1.0)
-	let blue = UIColor.init(displayP3Red: 23.0/255.0, green: 42.0/255.0, blue: 83.0/255.0, alpha: 1.0)
-	let red = UIColor.init(displayP3Red: 83.0/255.0, green: 39.0/255.0, blue: 42.0/255.0, alpha: 1.0)
+    
+    @IBOutlet weak var playAIButton: UIButton!
+    @IBOutlet weak var playFriendButton: UIButton!
+    @IBOutlet weak var howToPlayButton: UIButton!
+    @IBOutlet weak var difficultySegmentControl: UISegmentedControl!
+    
+    
+    // Colors
+    let green = UIColor.init(displayP3Red: 50.0/255.0, green: 88.0/255.0, blue: 46.0/255.0, alpha: 1.0)
+    let blue = UIColor.init(displayP3Red: 23.0/255.0, green: 42.0/255.0, blue: 83.0/255.0, alpha: 1.0)
+    let red = UIColor.init(displayP3Red: 83.0/255.0, green: 39.0/255.0, blue: 42.0/255.0, alpha: 1.0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,14 +39,16 @@ class StartController: UIViewController {
 		
 		(difficultySegmentControl.subviews[2] as UIView).tintColor = red
 		
+        // Do any additional setup after loading the view, typically from a nib.
+		DIFFICULTY = 0
     }
 
 	
 	
 	
-	
-	@IBAction func difficultyChanged(_ sender: UISegmentedControl) {
-		DIFFICULTY = sender.selectedSegmentIndex
+    
+    @IBAction func difficultyChanged(_ sender: UISegmentedControl) {
+        DIFFICULTY = sender.selectedSegmentIndex
 		
 		switch(DIFFICULTY) {
 		case 0: playAIButton.backgroundColor = green
@@ -67,6 +69,6 @@ class StartController: UIViewController {
 		GAME_TYPE = 1
 		print("Game Type: MULTI \(GAME_TYPE)")
 	}
-	
+    
 }
 
