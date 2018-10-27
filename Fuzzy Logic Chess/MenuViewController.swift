@@ -31,25 +31,28 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
 	}
 	
 	func setColors() {
-		switch(DIFFICULTY) {
-		case 0: setEasyColor()
-		case 1: setMediumColor()
-		case 2: setHardColor()
-		default: setEasyColor()
+		if(GAME_TYPE == 0) {
+			switch(DIFFICULTY) {
+			case 0: setEasyColor()
+			case 1: setMediumColor()
+			case 2: setHardColor()
+			default: setEasyColor()
+			}
+		} else {
+			setTwoPlayersColor()
 		}
 	}
 	
 	
 	// Used when difficulty changed after viewDidLoad() function
 	@objc func onRecieveDifficulty(_ notification:Notification) {
-		print("RECEIVED TABLE DIFFICULTY")
-		
 		if let data = notification.userInfo as? [Int:Int] {
 			for (_, difficulty) in data {
 				switch(difficulty) {
 				case 0: setEasyColor()
 				case 1: setMediumColor()
 				case 2: setHardColor()
+				case 3: setTwoPlayersColor() // for two player mode
 				default: setEasyColor()
 				}
 			}
@@ -71,7 +74,11 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
 		menu_tableView.backgroundColor = red
 	}
 	
-    
+	func setTwoPlayersColor() {
+		let purple = UIColor.init(displayP3Red: 61.0/255.0, green: 38.0/255.0, blue: 64.0/255.0, alpha: 1.0)
+		menu_tableView.backgroundColor = purple
+	}
+	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return title_arr.count
 	}

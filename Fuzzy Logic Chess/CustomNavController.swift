@@ -20,15 +20,13 @@ class CustomNavController: UINavigationController {
     }
 	
 	@objc func onRecieveDifficulty(_ notification:Notification) {
-		
-		print("RECEIVED DIFFICULTY")
-		
 		if let data = notification.userInfo as? [Int:Int] {
 			for (_, difficulty) in data {
 				switch(difficulty) {
 				case 0: setEasyColor()
 				case 1: setMediumColor()
 				case 2: setHardColor()
+				case 3: setTwoPlayersColor()
 				default: setEasyColor()
 				}
 			}
@@ -48,5 +46,10 @@ class CustomNavController: UINavigationController {
 	func setHardColor() {
 		let red = UIColor.init(displayP3Red: 83.0/255.0, green: 39.0/255.0, blue: 42.0/255.0, alpha: 1.0)
 		self.navigationBar.barTintColor = red
+	}
+	
+	func setTwoPlayersColor() {
+		let purple = UIColor.init(displayP3Red: 61.0/255.0, green: 38.0/255.0, blue: 64.0/255.0, alpha: 1.0)
+		self.navigationBar.barTintColor = purple
 	}
 }
