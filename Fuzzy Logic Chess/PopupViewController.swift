@@ -11,10 +11,15 @@ import UIKit
 class PopupViewController: UIViewController {
 
     @IBOutlet weak var popupView: UIView!
-    @IBOutlet weak var newGameButton: UIButton!
-    @IBOutlet weak var winMessage: UILabel!
+	@IBOutlet weak var playAIButton: UIButton!
+	@IBOutlet weak var winMessage: UILabel!
 	@IBOutlet weak var difficultyControl: UISegmentedControl!
-    
+	@IBOutlet weak var playFriendButton: UIButton!
+	
+	// Colors
+	let green = UIColor.init(displayP3Red: 50.0/255.0, green: 88.0/255.0, blue: 46.0/255.0, alpha: 1.0)
+	let blue = UIColor.init(displayP3Red: 23.0/255.0, green: 42.0/255.0, blue: 83.0/255.0, alpha: 1.0)
+	let red = UIColor.init(displayP3Red: 83.0/255.0, green: 39.0/255.0, blue: 42.0/255.0, alpha: 1.0)
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,21 +30,58 @@ class PopupViewController: UIViewController {
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         
         popupView.layer.cornerRadius = 10
-        newGameButton.layer.cornerRadius = 5
-
-        // Do any additional setup after loading the view.
+        playAIButton.layer.cornerRadius = 5
+		playFriendButton.layer.cornerRadius = 5
+		
+		(difficultyControl.subviews[0] as UIView).tintColor = green
+		(difficultyControl.subviews[1] as UIView).tintColor = blue
+		(difficultyControl.subviews[2] as UIView).tintColor = red
+		
+		print ("game type \(GAME_TYPE)")
+		
+		if(GAME_TYPE == 0) {
+			if let attributedTitle = playAIButton.attributedTitle(for: .normal) {
+				let mutableAttributedTitle = NSMutableAttributedString(attributedString: attributedTitle)
+				mutableAttributedTitle.replaceCharacters(in: NSMakeRange(0, mutableAttributedTitle.length), with: "Rematch")
+				playAIButton.setAttributedTitle(mutableAttributedTitle, for: .normal)
+			}
+		} else {
+			if let attributedTitle = playFriendButton.attributedTitle(for: .normal) {
+				let mutableAttributedTitle = NSMutableAttributedString(attributedString: attributedTitle)
+				mutableAttributedTitle.replaceCharacters(in: NSMakeRange(0, mutableAttributedTitle.length), with: "Rematch")
+				playFriendButton.setAttributedTitle(mutableAttributedTitle, for: .normal)
+			}
+		}
     }
 	
 	
 	// On newGame button press: send difficulty level to ViewController
-    @IBAction func newGame(_ sender: Any) {
+	@IBAction func playAIButtonPress(_ sender: UIButton) {
+		GAME_TYPE = 0
+		DIFFICULTY = difficultyControl.selectedSegmentIndex
 		
-		let sendData = ["difficulty" : difficultyControl.selectedSegmentIndex]
-		
-		NotificationCenter.default.post(name: Notification.Name(rawValue: "startNewGame"), object: nil, userInfo: sendData)
+		NotificationCenter.default.post(name: Notification.Name(rawValue: "startNewGame"), object: nil, userInfo: [0:0])
 		self.view.removeFromSuperview()
-    }
+	}
 	
+	
+	// set GAME_TYPE to 1 and send startNewGame notification
+	@IBAction func playFriendButtonPress(_ sender: UIButton) {
+		GAME_TYPE = 1
+		
+		NotificationCenter.default.post(name: Notification.Name(rawValue: "startNewGame"), object: nil, userInfo: [0:0])
+		self.view.removeFromSuperview()
+	}
+	
+	
+	@IBAction func difficultyChanged(_ sender: UISegmentedControl) {
+		switch(sender.selectedSegmentIndex) {
+		case 0: playAIButton.backgroundColor = green
+		case 1: playAIButton.backgroundColor = blue
+		case 2: playAIButton.backgroundColor = red
+		default: playAIButton.backgroundColor = green
+		}
+	}
 	
 	// sets winMessage label text on notification
 	@objc func onRecieveWinMessage(_ notification:Notification) {
