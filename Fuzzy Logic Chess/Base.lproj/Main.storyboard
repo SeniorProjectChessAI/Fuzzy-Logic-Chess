@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ugf-Ty-h8X">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ugf-Ty-h8X">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -437,25 +437,14 @@
                                             <action selector="newGame:" destination="Bsa-Se-IYB" eventType="touchUpInside" id="60p-NC-OBh"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DPK-M9-okp">
-                                        <rect key="frame" x="270" y="0.0" width="30" height="30"/>
-                                        <state key="normal" title="X">
-                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="closePopup:" destination="Bsa-Se-IYB" eventType="touchUpInside" id="c64-CZ-e9Z"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.92306913860103623" green="0.92306913860103623" blue="0.92306913860103623" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="DPK-M9-okp" firstAttribute="top" secondItem="SiK-8B-AF1" secondAttribute="top" id="1tz-R3-UkR"/>
                                     <constraint firstAttribute="bottom" secondItem="MXW-ca-Zta" secondAttribute="bottom" constant="30" id="5j3-Xq-EpG"/>
                                     <constraint firstItem="MXW-ca-Zta" firstAttribute="centerX" secondItem="SiK-8B-AF1" secondAttribute="centerX" id="Brl-Wi-7rh"/>
                                     <constraint firstItem="WXg-KL-rao" firstAttribute="centerX" secondItem="SiK-8B-AF1" secondAttribute="centerX" id="CrY-Oi-Pkb"/>
                                     <constraint firstItem="NpB-UZ-s98" firstAttribute="top" secondItem="1tl-GV-XJ3" secondAttribute="bottom" constant="10" id="Cu5-WU-wa9"/>
-                                    <constraint firstAttribute="trailing" secondItem="DPK-M9-okp" secondAttribute="trailing" id="KAl-qM-t4F"/>
                                     <constraint firstItem="1tl-GV-XJ3" firstAttribute="centerX" secondItem="SiK-8B-AF1" secondAttribute="centerX" id="Lo6-OV-cE1"/>
                                     <constraint firstItem="WXg-KL-rao" firstAttribute="top" secondItem="SiK-8B-AF1" secondAttribute="top" constant="25" id="M0u-Cf-xa7"/>
                                     <constraint firstAttribute="height" constant="300" id="VHi-8V-hE0"/>
@@ -1162,6 +1151,6 @@ Cg
     </scenes>
     <resources>
         <image name="capture table.png" width="820" height="544"/>
-        <image name="menu-icon" width="48" height="60"/>
+        <image name="menu-icon" width="11.520000457763672" height="14.399999618530273"/>
     </resources>
 </document>
