@@ -116,7 +116,7 @@
                                                             <rect key="frame" x="15" y="15" width="20" height="20"/>
                                                             <color key="tintColor" red="0.53291090165203048" green="0.98737150430679321" blue="0.39509280108504863" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" priority="750" constant="40" id="5QA-SX-shA"/>
+                                                                <constraint firstAttribute="height" priority="750" constant="30" id="5QA-SX-shA"/>
                                                                 <constraint firstAttribute="width" secondItem="xz4-b2-Zq4" secondAttribute="height" multiplier="1:1" id="WC2-nb-Jpn"/>
                                                             </constraints>
                                                         </imageView>
@@ -136,18 +136,17 @@
                                                     <constraint firstAttribute="trailing" secondItem="wfZ-7t-ebc" secondAttribute="trailing" id="7FC-Le-dJn"/>
                                                     <constraint firstAttribute="trailing" secondItem="lt6-co-wF3" secondAttribute="trailing" constant="5" id="959-Zg-36H"/>
                                                     <constraint firstItem="KDx-R0-4bS" firstAttribute="centerY" secondItem="3Z2-54-rL9" secondAttribute="centerY" id="ApR-i2-Aiz"/>
-                                                    <constraint firstItem="xz4-b2-Zq4" firstAttribute="top" secondItem="3Z2-54-rL9" secondAttribute="top" constant="15" id="HZm-Tl-raV"/>
+                                                    <constraint firstItem="xz4-b2-Zq4" firstAttribute="centerY" secondItem="3Z2-54-rL9" secondAttribute="centerY" id="MCE-Z5-6au"/>
                                                     <constraint firstItem="wfZ-7t-ebc" firstAttribute="leading" secondItem="3Z2-54-rL9" secondAttribute="leading" id="Pjo-Pl-1y3"/>
-                                                    <constraint firstAttribute="bottom" secondItem="xz4-b2-Zq4" secondAttribute="bottom" constant="15" id="ckT-eC-6OV"/>
                                                     <constraint firstItem="wfZ-7t-ebc" firstAttribute="leading" secondItem="3Z2-54-rL9" secondAttribute="leading" id="dvs-oF-QYE"/>
                                                     <constraint firstAttribute="bottom" secondItem="wfZ-7t-ebc" secondAttribute="bottom" id="dww-W0-oln"/>
-                                                    <constraint firstAttribute="trailing" secondItem="xz4-b2-Zq4" secondAttribute="trailing" constant="15" id="ijY-YI-MuC"/>
-                                                    <constraint firstItem="xz4-b2-Zq4" firstAttribute="leading" secondItem="3Z2-54-rL9" secondAttribute="leading" constant="15" id="nTk-u1-HkI"/>
+                                                    <constraint firstItem="xz4-b2-Zq4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="3Z2-54-rL9" secondAttribute="leading" constant="15" id="nTk-u1-HkI"/>
                                                     <constraint firstAttribute="bottom" secondItem="lt6-co-wF3" secondAttribute="bottom" constant="5" id="nkV-ws-TfM"/>
                                                     <constraint firstItem="wfZ-7t-ebc" firstAttribute="top" secondItem="3Z2-54-rL9" secondAttribute="top" id="oTG-gU-5dO"/>
                                                     <constraint firstItem="wfZ-7t-ebc" firstAttribute="top" secondItem="3Z2-54-rL9" secondAttribute="top" id="pJp-Hr-15L"/>
                                                     <constraint firstAttribute="trailing" secondItem="wfZ-7t-ebc" secondAttribute="trailing" id="s1Z-1C-DiG"/>
                                                     <constraint firstItem="lt6-co-wF3" firstAttribute="leading" secondItem="3Z2-54-rL9" secondAttribute="leading" constant="5" id="tPR-EY-sSy"/>
+                                                    <constraint firstItem="xz4-b2-Zq4" firstAttribute="centerX" secondItem="3Z2-54-rL9" secondAttribute="centerX" id="yzu-bw-8eO"/>
                                                 </constraints>
                                                 <connections>
                                                     <outlet property="MinRollLabel" destination="KDx-R0-4bS" id="ca1-MA-0ia"/>
