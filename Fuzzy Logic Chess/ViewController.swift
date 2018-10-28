@@ -78,7 +78,12 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		view.addGestureRecognizer(slideDown)
 		
 		// divides board collectionView into 8 columns and sets spacing
-		let itemSize = (UIScreen.main.bounds.width - 10) / 8
+		var screenWidth = UIScreen.main.bounds.width
+		if(screenWidth >= 710) {
+			print("SCREEN WIDTH: \(screenWidth)")
+			screenWidth = 710
+		}
+		let itemSize = (screenWidth - 10) / 8
 		let layout = UICollectionViewFlowLayout()
 		layout.itemSize = CGSize(width: itemSize, height: itemSize)
 		layout.minimumInteritemSpacing = 0
@@ -86,7 +91,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		board.collectionViewLayout = layout
 		
 		// sets graveyard collectionView cell sizes according to screen size
-		let itemSize2 = (UIScreen.main.bounds.width - 10) / 12
+		let itemSize2 = (screenWidth - 10) / 12
 		gyCellWidth = itemSize2
 		let layout2 = UICollectionViewFlowLayout()
 		layout2.itemSize = CGSize(width: itemSize2, height: itemSize2)
