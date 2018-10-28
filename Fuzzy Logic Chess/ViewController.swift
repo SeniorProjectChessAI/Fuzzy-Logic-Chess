@@ -355,9 +355,9 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 			let toPos = chosenMove.newPos
 			let fromTile = board.cellForItem(at: IndexPath(row: fromPos, section: 0)) as! Tile
 			let toTile = board.cellForItem(at: IndexPath(row: toPos, section: 0)) as! Tile
+			let dieRollNotNeeded: Bool = chosenMove.attackedPiece?.type == PieceType.Pawn && (fromTile.piece!.type == PieceType.King || fromTile.piece!.type == PieceType.Queen)
 			
-			
-			if (chosenMove.attackedPiece != nil){//if best move is an attack
+			if (chosenMove.attackedPiece != nil && !dieRollNotNeeded){//if best move is an attack
 				chosenMove.pieceToMove.firstMove = FirstAction.Attacked
 				AIPreviousAttackTileColor = fromTile.backgroundColor
 				AIPreviousVictimTileColor = toTile.backgroundColor
@@ -368,16 +368,18 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 				toTile.MinRollLabel.alpha = 1
 				let lowestRollNeeded = fromTile.piece?.getMinRollNeeded(pieceToAttack: (toTile.piece?.type)!)
 				toTile.setMinRollLabel(minRoll: lowestRollNeeded!)
-				isDieRolling = true
-				dieTimer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(rollDie), userInfo: fromTile, repeats: true)
-				
-				attacker = chosenMove.pieceToMove.type
-				attackerTeam = chosenMove.pieceToMove.team
-				victim = chosenMove.attackedPiece!.type
-				victimTeam = chosenMove.attackedPiece!.team
-				DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
-					self.afterDieRollAI(fromPos:fromPos,toPos:toPos,chosenMove:chosenMove)
-				})
+
+					isDieRolling = true
+					dieTimer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(rollDie), userInfo: fromTile, repeats: true)
+					
+					attacker = chosenMove.pieceToMove.type
+					attackerTeam = chosenMove.pieceToMove.team
+					victim = chosenMove.attackedPiece!.type
+					victimTeam = chosenMove.attackedPiece!.team
+					DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
+						self.afterDieRollAI(fromPos:fromPos,toPos:toPos,chosenMove:chosenMove)
+					})
+
 			} else{
 				chosenMove.pieceToMove.firstMove = FirstAction.Moved
 				board.getPieceAtLocation(location: toPos)?.location = 64
@@ -413,23 +415,6 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 			}
 			
 		}
-	}
-	
-	// returns all the legal moves the AI can make
-	func getLegalMovesAI(board:Board, team:Team)
-	{
-		var legalMovesList = [Int]()
-		let bp = board.blackPieces
-		for n in bp
-		{
-			let piece = board.cellForItem(at: IndexPath(row: n.location, section: 0)) as! Tile
-			let moves = showLegalMoves(tile: piece)
-			for m in moves
-			{
-				legalMovesList.append(m)
-			}
-		}
-		print(legalMovesList.randomElement())
 	}
 	
 	
@@ -514,7 +499,8 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 						rookTileTo.setPiece(piece: castlingRook)
 					}
 				}
-				if (tile.hasPiece()) {
+				let dieRollNotNeeded: Bool = victim == PieceType.Pawn && (attacker == PieceType.King || attacker == PieceType.Queen)
+				if (tile.hasPiece() && !dieRollNotNeeded) {
 					isDieRolling = true
 					dieTimer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(rollDie), userInfo: previousTile, repeats: true)
 					
