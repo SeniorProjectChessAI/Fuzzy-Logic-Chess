@@ -27,7 +27,42 @@
 		return emptySquaresNearKing
 	}
 
+//returns array of AI Moves containing opponents pieces that can reach AI King within their next two moves
+//only called when there are vulnerable cells near king
+func getKingThreats(board:Board){
+	var threatMoves: [AIMove] = []
+	for wp in board.whitePieces {
+		let oldPieceLocation = wp.location
+		let emptyKingSquares: [Int] = getKingsVulnerableCells(board: board)
+		for um in wp.getUnfilteredMoves(board: board){
+			if (board.getPieceAtLocation(location: um) == nil) {
+				if (emptyKingSquares.contains(um)){
+					print("King attack eminent")
+					let attackProb = Double(7 - wp.getMinRollNeeded(pieceToAttack: AIKing.type))/6
+					threatMoves.append(AIMove(pieceToMove: wp, attackedPiece: AIKing, oldPos: oldPieceLocation, newPos: um, isAttackMove: false, moveBenefit:attackProb))
+				}
+				wp.changeLocation(location: um)
+				for um2 in wp.getUnfilteredMoves(board: board){
+					if (board.getPieceAtLocation(location: um2) == nil) {
+					print("if \(wp.type) at \(oldPieceLocation) moved to \(um), a next possible move could be \(um2)")
+						if (emptyKingSquares.contains(um2)){
+							print("King attack eminent")
+							let attackProb = Double(7 - wp.getMinRollNeeded(pieceToAttack: AIKing.type))/6
+							threatMoves.append(AIMove(pieceToMove: wp, attackedPiece: AIKing, oldPos: oldPieceLocation, newPos: um2, isAttackMove: false, moveBenefit:attackProb))
+						}
+						
+					}
+				}
+			}
 
+		}
+		wp.changeLocation(location: oldPieceLocation)
+	}
+	for t in threatMoves {
+		print("cell \(t.newPos) next to king is in danger from \(t.pieceToMove.type) at cell \(t.oldPos)")
+		print("can move next to king within the next two moves")
+	}
+}
 
 //returns an array of cells (near AI king) an opponent's piece can potentially move to on their next turn
 func getCellsInDanger(board:Board, vulnerableSquares:[Int]) -> [Int]{

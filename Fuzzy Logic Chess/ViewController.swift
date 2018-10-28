@@ -312,6 +312,9 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	
 	// Plays turns for the AI
 	func AITurn() {
+		if (getKingsVulnerableCells(board: board).count > 0){
+			getKingThreats(board: board)
+		}
 		aiWaitingSymbol.alpha = 0
 		aiWaitingText.alpha = 0
 		//getAllLegalMoves(board: board, thisTeam: Team.Black)//prints current legal moves of each of blacks pieces
