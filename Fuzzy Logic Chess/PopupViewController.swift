@@ -15,7 +15,7 @@ class PopupViewController: UIViewController {
     @IBOutlet weak var winMessage: UILabel!
 	@IBOutlet weak var difficultyControl: UISegmentedControl!
 	@IBOutlet weak var playFriendButton: UIButton!
-	
+
 	// Colors
 	let green = UIColor.init(displayP3Red: 50.0/255.0, green: 88.0/255.0, blue: 46.0/255.0, alpha: 1.0)
 	let blue = UIColor.init(displayP3Red: 23.0/255.0, green: 42.0/255.0, blue: 83.0/255.0, alpha: 1.0)

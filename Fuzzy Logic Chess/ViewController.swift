@@ -26,7 +26,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	@IBOutlet weak var turnBallWhite2: UIImageView!
 	@IBOutlet weak var turnBallBlack1: UIImageView!
 	@IBOutlet weak var turnBallBlack2: UIImageView!
-	
+
 	// board variables
 	let light = UIColor.init(displayP3Red: 142.0/255.0, green: 109.0/255.0, blue: 67/255.0, alpha: 1.0)
 	let dark = UIColor.init(displayP3Red: 54.0/255.0, green: 38.0/255.0, blue: 19.0/255.0, alpha: 1.0)
@@ -68,6 +68,14 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		NotificationCenter.default.addObserver(self, selector: #selector(onRecievePopupData(_:)), name: Notification.Name(rawValue: "startNewGame"), object: nil)
 		
 		menu_vc = self.storyboard?.instantiateViewController(withIdentifier: "MenuViewController") as? MenuViewController
+
+		let slideUp = UISwipeGestureRecognizer(target: self, action: #selector(showCT(gesture:)))
+		slideUp.direction = .up
+		view.addGestureRecognizer(slideUp)
+		
+		let slideDown = UISwipeGestureRecognizer(target: self, action: #selector(dismissCT(gesture:)))
+		slideDown.direction = .down
+		view.addGestureRecognizer(slideDown)
 		
 		// divides board collectionView into 8 columns and sets spacing
 		let itemSize = (UIScreen.main.bounds.width - 10) / 8
@@ -139,7 +147,6 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	// Displays end of game popup view
 	func endGame(winner: Team) {
 		let winMessage = ["winMessage" : "\(winner.rawValue) Wins"]
-		
 		showPopup()
 		
 		// send winMessage to PopupViewController
@@ -154,6 +161,8 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		self.view.addSubview(popupVC.view)
 		popupVC.didMove(toParent: self)
 	}
+	
+
 	
 	@objc func onRecievePopupData(_ notification:Notification) {
 		
@@ -928,5 +937,32 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 			turnBallWhite1.alpha = 1
 		}
 	}
+	func showCaptureTable() {
+	let captureVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "capturePopUp") as! CaptureViewController
 	
+	self.addChild(captureVC)
+	captureVC.view.frame = self.view.frame
+	self.view.addSubview(captureVC.view)
+	captureVC.didMove(toParent: self)
+	}
+	
+	
+	@objc func showCT(gesture: UISwipeGestureRecognizer) {
+		if (self.view.subviews.count == 2){
+			UIView.animate(withDuration: 0.4) {
+				self.showCaptureTable()
+			}
+		}
+	}
+	
+	@objc func dismissCT(gesture: UISwipeGestureRecognizer) {
+		print(self.view.subviews.count)
+		if (self.view.subviews.count == 3){
+			UIView.animate(withDuration: 0.4) {
+				self.view.subviews.last!.willMove(toWindow: nil)
+				self.view.subviews.last!.removeFromSuperview()
+			}
+		}
+
+	}
 }

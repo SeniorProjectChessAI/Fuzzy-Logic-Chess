@@ -125,6 +125,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="20" height="27"/>
                                                 <color key="backgroundColor" white="0.35343424480000002" alpha="0.85859910100000003" colorSpace="calibratedWhite"/>
                                                 <rect key="contentStretch" x="1" y="1" width="1" height="1"/>
+                                                <gestureRecognizers/>
                                             </activityIndicatorView>
                                             <textField opaque="NO" alpha="0.0" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="AI Thinking..." textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YdH-z8-Jju">
                                                 <rect key="frame" x="20" y="0.0" width="159" height="27"/>
@@ -132,7 +133,7 @@
                                                 <accessibility key="accessibilityConfiguration">
                                                     <accessibilityTraits key="traits" notEnabled="YES"/>
                                                 </accessibility>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="AppleColorEmoji" family="Apple Color Emoji" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -319,6 +320,7 @@
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="KfE-VP-2bj" firstAttribute="centerX" secondItem="6f2-qV-40T" secondAttribute="centerX" id="08v-pH-QOO"/>
                                     <constraint firstItem="lsx-j0-qCg" firstAttribute="centerX" secondItem="6f2-qV-40T" secondAttribute="centerX" id="1Oi-6y-EBj"/>
@@ -349,6 +351,7 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="Z3z-fc-n24" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="1Ky-er-6Ca"/>
                             <constraint firstItem="6f2-qV-40T" firstAttribute="top" secondItem="W8W-HI-8oh" secondAttribute="top" id="6WQ-JN-Deo"/>
@@ -1223,64 +1226,47 @@ Cg
             </objects>
             <point key="canvasLocation" x="140" y="136.69950738916256"/>
         </scene>
-        <!--Popup View Controller-->
+        <!--Capture View Controller-->
         <scene sceneID="UMe-lK-4f6">
             <objects>
-                <viewController storyboardIdentifier="capturePopUp" id="vmg-rT-ccq" customClass="PopupViewController" customModule="Fuzzy_Logic_Chess" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="capturePopUp" id="vmg-rT-ccq" customClass="CaptureViewController" customModule="Fuzzy_Logic_Chess" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bZE-l6-v5n">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9fv-cc-Dxp">
-                                <rect key="frame" x="37.5" y="183.5" width="300" height="300"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9fv-cc-Dxp">
+                                <rect key="frame" x="16" y="418" width="343" height="229"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Miy-zG-Dnn">
-                                        <rect key="frame" x="270" y="0.0" width="30" height="30"/>
-                                        <state key="normal" title="X">
-                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="closePopup:" destination="vmg-rT-ccq" eventType="touchUpInside" id="fgB-YP-9F7"/>
-                                        </connections>
-                                    </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="capture table.png" translatesAutoresizingMaskIntoConstraints="NO" id="naC-0N-BQn">
-                                        <rect key="frame" x="8" y="52" width="284" height="240"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="capture table.png" translatesAutoresizingMaskIntoConstraints="NO" id="naC-0N-BQn">
+                                        <rect key="frame" x="7" y="13" width="329" height="203"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="naC-0N-BQn" secondAttribute="height" multiplier="284:265" id="90M-fa-QwN"/>
+                                            <constraint firstAttribute="height" constant="203" id="bqT-cD-GTg"/>
+                                            <constraint firstAttribute="width" secondItem="naC-0N-BQn" secondAttribute="height" multiplier="47:29" id="nwH-T0-riN"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.92306913859999995" green="0.92306913859999995" blue="0.92306913859999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="Miy-zG-Dnn" firstAttribute="top" secondItem="9fv-cc-Dxp" secondAttribute="top" id="1eV-DH-RO0"/>
-                                    <constraint firstItem="naC-0N-BQn" firstAttribute="centerY" secondItem="9fv-cc-Dxp" secondAttribute="centerY" id="9pa-hn-S7Z"/>
-                                    <constraint firstAttribute="height" constant="300" id="DwL-sa-Bxg"/>
-                                    <constraint firstItem="naC-0N-BQn" firstAttribute="leading" secondItem="9fv-cc-Dxp" secondAttribute="leading" constant="8" id="IFj-XG-7uY"/>
-                                    <constraint firstAttribute="trailing" secondItem="Miy-zG-Dnn" secondAttribute="trailing" id="LaZ-y1-QgC"/>
-                                    <constraint firstAttribute="width" priority="750" constant="300" id="N7A-pT-wf6"/>
-                                    <constraint firstAttribute="bottom" secondItem="naC-0N-BQn" secondAttribute="bottom" constant="8" id="Qrn-py-Gn8"/>
-                                    <constraint firstItem="naC-0N-BQn" firstAttribute="top" secondItem="9fv-cc-Dxp" secondAttribute="top" constant="27" id="Qs9-jt-i32"/>
-                                    <constraint firstAttribute="trailing" secondItem="naC-0N-BQn" secondAttribute="trailing" constant="8" id="aqt-uU-F1M"/>
+                                    <constraint firstItem="naC-0N-BQn" firstAttribute="centerX" secondItem="9fv-cc-Dxp" secondAttribute="centerX" id="Rfg-JU-EPJ"/>
+                                    <constraint firstItem="naC-0N-BQn" firstAttribute="centerY" secondItem="9fv-cc-Dxp" secondAttribute="centerY" id="m8Q-Bg-p2E"/>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="SIE-Z3-OfO" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9fv-cc-Dxp" secondAttribute="trailing" constant="30" id="0Fb-Xr-TCg"/>
-                            <constraint firstItem="9fv-cc-Dxp" firstAttribute="centerX" secondItem="bZE-l6-v5n" secondAttribute="centerX" id="Flx-Gh-VRa"/>
-                            <constraint firstItem="9fv-cc-Dxp" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="SIE-Z3-OfO" secondAttribute="leading" constant="30" id="GzG-2u-hvt"/>
-                            <constraint firstItem="9fv-cc-Dxp" firstAttribute="centerY" secondItem="bZE-l6-v5n" secondAttribute="centerY" id="Jv4-o0-u0T"/>
+                            <constraint firstItem="9fv-cc-Dxp" firstAttribute="centerY" secondItem="bZE-l6-v5n" secondAttribute="centerY" id="T1i-Hk-uVZ"/>
+                            <constraint firstItem="9fv-cc-Dxp" firstAttribute="centerX" secondItem="bZE-l6-v5n" secondAttribute="centerX" id="r7y-04-Dmp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="SIE-Z3-OfO"/>
                     </view>
                     <connections>
-                        <outlet property="popupView" destination="9fv-cc-Dxp" id="pIf-27-V2q"/>
+                        <outlet property="captureView" destination="9fv-cc-Dxp" id="y7c-YS-5oI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5HW-OK-kSh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1080.8" y="796.55172413793105"/>
+            <point key="canvasLocation" x="1768.8" y="796.55172413793105"/>
         </scene>
     </scenes>
     <resources>
