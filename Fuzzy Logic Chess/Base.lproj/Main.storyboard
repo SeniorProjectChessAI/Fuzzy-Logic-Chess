@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ugf-Ty-h8X">
-    <device id="retina6_1" orientation="portrait">
+    <device id="ipad9_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -14,11 +14,11 @@
             <objects>
                 <viewController restorationIdentifier="ViewController" storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="Fuzzy_Logic_Chess" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Z3z-fc-n24">
-                                <rect key="frame" x="-251" y="-10" width="916" height="916"/>
+                                <rect key="frame" x="-138" y="-10" width="1044" height="1044"/>
                                 <color key="backgroundColor" red="0.41645854920000003" green="1" blue="0.28119279689999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" priority="750" constant="1500" id="1LP-8v-xfL"/>
@@ -26,10 +26,13 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6f2-qV-40T" userLabel="Game View">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="70" width="768" height="954"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="kJf-JD-iQN" userLabel="Black Team Label">
-                                        <rect key="frame" x="10" y="71.5" width="72.5" height="23.5"/>
+                                        <rect key="frame" x="39" y="58" width="72.5" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="Cf5-Tt-LIn"/>
+                                        </constraints>
                                         <attributedString key="attributedText">
                                             <fragment content="Player 2">
                                                 <attributes>
@@ -42,10 +45,12 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="6GZ-aC-i80" userLabel="Black Graveyard" customClass="Graveyard" customModule="Fuzzy_Logic_Chess" customModuleProvider="target">
-                                        <rect key="frame" x="15" y="100" width="379" height="80"/>
+                                        <rect key="frame" x="44" y="87" width="704" height="35"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" priority="500" constant="80" id="3nu-hi-imT"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="pxd-uM-3Xg"/>
                                         </constraints>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="i7H-Om-HnX">
                                             <size key="itemSize" width="30" height="30"/>
@@ -86,7 +91,7 @@
                                         </connections>
                                     </collectionView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="KfE-VP-2bj" customClass="Board" customModule="Fuzzy_Logic_Chess" customModuleProvider="target">
-                                        <rect key="frame" x="5" y="185" width="404" height="404"/>
+                                        <rect key="frame" x="34" y="127" width="700" height="700"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="KfE-VP-2bj" secondAttribute="height" multiplier="1:1" id="kIF-kj-cS8"/>
@@ -162,7 +167,10 @@
                                         </connections>
                                     </collectionView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="tEu-k8-x4q" userLabel="White Team Label">
-                                        <rect key="frame" x="10" y="594" width="72.5" height="23.5"/>
+                                        <rect key="frame" x="39" y="832" width="72.5" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="zE5-Oq-KlT"/>
+                                        </constraints>
                                         <attributedString key="attributedText">
                                             <fragment content="Player 1">
                                                 <attributes>
@@ -175,10 +183,11 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="WIu-am-4Fh" customClass="Graveyard" customModule="Fuzzy_Logic_Chess" customModuleProvider="target">
-                                        <rect key="frame" x="15" y="622.5" width="379" height="35"/>
+                                        <rect key="frame" x="44" y="861" width="704" height="35"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="35" id="RJO-09-cK2"/>
+                                            <constraint firstAttribute="height" priority="500" constant="80" id="RJO-09-cK2"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="SXe-Ci-Ype"/>
                                         </constraints>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="zY4-tD-jt5">
                                             <size key="itemSize" width="30" height="30"/>
@@ -218,17 +227,17 @@
                                             <outlet property="delegate" destination="BYZ-38-t0r" id="1EW-Z1-xue"/>
                                         </connections>
                                     </collectionView>
-                                    <stackView autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fhd-Wn-fp2">
-                                        <rect key="frame" x="117.5" y="289" width="179" height="27"/>
+                                    <stackView autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fhd-Wn-fp2">
+                                        <rect key="frame" x="294.5" y="459.5" width="179" height="35"/>
                                         <subviews>
-                                            <activityIndicatorView opaque="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="GHM-rD-BIz">
-                                                <rect key="frame" x="0.0" y="0.0" width="20" height="27"/>
+                                            <activityIndicatorView opaque="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="GHM-rD-BIz">
+                                                <rect key="frame" x="0.0" y="0.0" width="20" height="35"/>
                                                 <color key="backgroundColor" white="0.35343424480000002" alpha="0.85859910100000003" colorSpace="calibratedWhite"/>
                                                 <rect key="contentStretch" x="1" y="1" width="1" height="1"/>
                                                 <gestureRecognizers/>
                                             </activityIndicatorView>
-                                            <textField opaque="NO" alpha="0.0" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="AI Thinking..." textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YdH-z8-Jju">
-                                                <rect key="frame" x="20" y="0.0" width="159" height="27"/>
+                                            <textField opaque="NO" alpha="0.0" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="AI Thinking..." textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YdH-z8-Jju">
+                                                <rect key="frame" x="20" y="0.0" width="159" height="35"/>
                                                 <color key="backgroundColor" white="0.35343424480000002" alpha="0.85859910100000003" colorSpace="calibratedWhite"/>
                                                 <accessibility key="accessibilityConfiguration">
                                                     <accessibilityTraits key="traits" notEnabled="YES"/>
@@ -241,18 +250,18 @@
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="YdH-z8-Jju" firstAttribute="leading" secondItem="GHM-rD-BIz" secondAttribute="trailing" constant="10" id="f2c-2z-X4N"/>
+                                            <constraint firstAttribute="height" constant="35" id="4Qy-NC-zvk"/>
                                         </constraints>
                                     </stackView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="INU-VV-3t3" userLabel="die">
-                                        <rect key="frame" x="172" y="352" width="70" height="70"/>
+                                        <rect key="frame" x="349" y="442" width="70" height="70"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="70" id="Qkz-YX-WWr"/>
                                             <constraint firstAttribute="width" secondItem="INU-VV-3t3" secondAttribute="height" multiplier="1:1" id="SYw-wD-nch"/>
                                         </constraints>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lsx-j0-qCg">
-                                        <rect key="frame" x="120.5" y="741" width="173" height="25"/>
+                                        <rect key="frame" x="297.5" y="921" width="173" height="25"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circleSelector65" translatesAutoresizingMaskIntoConstraints="NO" id="R8M-x0-b1e">
                                                 <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
@@ -313,6 +322,7 @@
                                             <constraint firstItem="GXg-dc-dpG" firstAttribute="width" secondItem="GXg-dc-dpG" secondAttribute="height" multiplier="1:1" id="BDM-03-rtT"/>
                                             <constraint firstItem="490-qc-wi1" firstAttribute="width" secondItem="490-qc-wi1" secondAttribute="height" multiplier="1:1" id="BWF-rf-Hyw"/>
                                             <constraint firstItem="GXg-dc-dpG" firstAttribute="width" secondItem="GXg-dc-dpG" secondAttribute="height" multiplier="1:1" id="Nc0-Dk-sJF"/>
+                                            <constraint firstAttribute="height" priority="750" constant="40" id="gBr-uD-9Eh"/>
                                             <constraint firstItem="xXj-z7-iik" firstAttribute="width" secondItem="xXj-z7-iik" secondAttribute="height" multiplier="1:1" id="lsV-RG-RpK"/>
                                             <constraint firstItem="xXj-z7-iik" firstAttribute="width" secondItem="xXj-z7-iik" secondAttribute="height" multiplier="1:1" id="zj9-qm-D71"/>
                                         </constraints>
@@ -327,9 +337,10 @@
                                     <constraint firstItem="tEu-k8-x4q" firstAttribute="leading" secondItem="KfE-VP-2bj" secondAttribute="leading" constant="5" id="4i9-zJ-aF3"/>
                                     <constraint firstItem="Fhd-Wn-fp2" firstAttribute="centerY" secondItem="6f2-qV-40T" secondAttribute="centerY" id="6fg-1d-AVB"/>
                                     <constraint firstItem="kJf-JD-iQN" firstAttribute="leading" secondItem="KfE-VP-2bj" secondAttribute="leading" constant="5" id="7se-8a-oLJ"/>
-                                    <constraint firstItem="kJf-JD-iQN" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6f2-qV-40T" secondAttribute="top" constant="50" id="FXm-x3-Sj8"/>
+                                    <constraint firstItem="kJf-JD-iQN" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6f2-qV-40T" secondAttribute="top" priority="749" constant="100" id="FXm-x3-Sj8"/>
                                     <constraint firstAttribute="bottom" secondItem="lsx-j0-qCg" secondAttribute="bottom" constant="8" id="HGd-Id-Bv0"/>
                                     <constraint firstItem="6GZ-aC-i80" firstAttribute="leading" secondItem="KfE-VP-2bj" secondAttribute="leading" constant="10" id="JHW-f7-vMQ"/>
+                                    <constraint firstItem="lsx-j0-qCg" firstAttribute="top" relation="greaterThanOrEqual" secondItem="WIu-am-4Fh" secondAttribute="bottom" priority="751" constant="5" id="Lh9-EU-YKZ"/>
                                     <constraint firstAttribute="trailing" secondItem="WIu-am-4Fh" secondAttribute="trailing" constant="20" id="Mn0-RD-FlI"/>
                                     <constraint firstItem="WIu-am-4Fh" firstAttribute="leading" secondItem="KfE-VP-2bj" secondAttribute="leading" constant="10" id="Ovr-kN-uPQ"/>
                                     <constraint firstItem="KfE-VP-2bj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6f2-qV-40T" secondAttribute="leading" constant="5" id="aL2-tW-LqF"/>
@@ -341,7 +352,7 @@
                                     <constraint firstItem="lsx-j0-qCg" firstAttribute="centerX" secondItem="6f2-qV-40T" secondAttribute="centerX" id="k2j-gm-01r"/>
                                     <constraint firstItem="KfE-VP-2bj" firstAttribute="top" secondItem="6GZ-aC-i80" secondAttribute="bottom" constant="5" id="l8v-FY-31D"/>
                                     <constraint firstItem="INU-VV-3t3" firstAttribute="centerX" secondItem="6f2-qV-40T" secondAttribute="centerX" id="mmO-9o-Mns"/>
-                                    <constraint firstItem="lsx-j0-qCg" firstAttribute="top" relation="greaterThanOrEqual" secondItem="WIu-am-4Fh" secondAttribute="bottom" constant="2.5" id="pJP-vX-vkf"/>
+                                    <constraint firstItem="lsx-j0-qCg" firstAttribute="top" relation="greaterThanOrEqual" secondItem="WIu-am-4Fh" secondAttribute="bottom" priority="749" constant="60" id="pJP-vX-vkf"/>
                                     <constraint firstItem="WIu-am-4Fh" firstAttribute="top" secondItem="tEu-k8-x4q" secondAttribute="bottom" constant="5" id="q7D-YY-5Tc"/>
                                     <constraint firstItem="6GZ-aC-i80" firstAttribute="top" secondItem="kJf-JD-iQN" secondAttribute="bottom" constant="5" id="unZ-vc-ouy"/>
                                     <constraint firstItem="KfE-VP-2bj" firstAttribute="centerY" secondItem="6f2-qV-40T" secondAttribute="centerY" id="wwB-Na-Cws"/>
@@ -397,11 +408,11 @@
             <objects>
                 <viewController restorationIdentifier="MenuViewController" storyboardIdentifier="MenuViewController" id="uQo-R7-A8N" customClass="MenuViewController" customModule="Fuzzy_Logic_Chess" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gHI-Pd-nTO">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XZH-DP-3lS">
-                                <rect key="frame" x="0.0" y="44" width="200" height="852"/>
+                                <rect key="frame" x="0.0" y="20" width="200" height="1004"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="i8d-fV-ZS7"/>
@@ -460,11 +471,11 @@
             <objects>
                 <viewController storyboardIdentifier="endGamePopup" id="Bsa-Se-IYB" customClass="PopupViewController" customModule="Fuzzy_Logic_Chess" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fgA-ok-XVw">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SiK-8B-AF1">
-                                <rect key="frame" x="57" y="276" width="300" height="344"/>
+                                <rect key="frame" x="234" y="340" width="300" height="344"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WXg-KL-rao">
                                         <rect key="frame" x="36" y="25" width="228" height="38"/>
@@ -614,11 +625,11 @@
             <objects>
                 <viewController id="LQ6-VI-Der" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DTa-v8-dfh">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s1v-Ad-4Ju">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="645"/>
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="542"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <attributedString key="attributedText">
                                     <fragment>
@@ -654,8 +665,8 @@
                                         </attributes>
                                     </fragment>
                                     <fragment>
-                                        <string key="content"> Fuzzy-Logic Chess (F-L Chess) introduces uncertainty to the act of capturing a piece so that players must use reasoning with uncertainty (fuzzy logic: probability) in planning their strategies. The attacking player rolls a die to determine if a capture is successful. The die roll needed to capture a piece depends on the combination of the attacking piece and the defending piece, as shown in the Capture Table. 
-•When an attack is successful, the attacking piece moves into the square of the captured piece.</string>
+                                        <mutableString key="content"> Fuzzy-Logic Chess (F-L Chess) introduces uncertainty to the act of capturing a piece so that players must use reasoning with uncertainty (fuzzy logic: probability) in planning their strategies. The attacking player rolls a die to determine if a capture is successful. The die roll needed to capture a piece depends on the combination of the attacking piece and the defending piece, as shown in the Capture Table. 
+•When an attack is successful, the attacking piece moves into the square of the captured piece.</mutableString>
                                         <attributes>
                                             <font key="NSFont" size="14" name="ArialMT"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0"/>
@@ -1075,7 +1086,7 @@ Cg
                                         <string key="content">	This work is protected by the Creative Commons copyright: </string>
                                         <attributes>
                                             <font key="NSFont" size="11" name="Arial-ItalicMT"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
                                                 <tabStops/>
                                             </paragraphStyle>
                                         </attributes>
@@ -1083,7 +1094,7 @@ Cg
                                     <fragment content="Share">
                                         <attributes>
                                             <font key="NSFont" size="11" name="Arial-BoldItalicMT"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
                                                 <tabStops/>
                                             </paragraphStyle>
                                         </attributes>
@@ -1091,7 +1102,7 @@ Cg
                                     <fragment content=" — You are free to copy and redistribute the material in any medium or format. ">
                                         <attributes>
                                             <font key="NSFont" size="11" name="Arial-ItalicMT"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
                                                 <tabStops/>
                                             </paragraphStyle>
                                         </attributes>
@@ -1099,7 +1110,7 @@ Cg
                                     <fragment content="Attribution">
                                         <attributes>
                                             <font key="NSFont" size="11" name="Arial-BoldItalicMT"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
                                                 <tabStops/>
                                             </paragraphStyle>
                                         </attributes>
@@ -1108,7 +1119,7 @@ Cg
                                         <string key="content"> — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. </string>
                                         <attributes>
                                             <font key="NSFont" size="11" name="Arial-ItalicMT"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
                                                 <tabStops/>
                                             </paragraphStyle>
                                         </attributes>
@@ -1116,7 +1127,7 @@ Cg
                                     <fragment content="NonCommercial">
                                         <attributes>
                                             <font key="NSFont" size="11" name="Arial-BoldItalicMT"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
                                                 <tabStops/>
                                             </paragraphStyle>
                                         </attributes>
@@ -1124,7 +1135,7 @@ Cg
                                     <fragment content=" — You ">
                                         <attributes>
                                             <font key="NSFont" size="11" name="Arial-ItalicMT"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
                                                 <tabStops/>
                                             </paragraphStyle>
                                         </attributes>
@@ -1132,7 +1143,7 @@ Cg
                                     <fragment content="may not">
                                         <attributes>
                                             <font key="NSFont" size="11" name="Arial-ItalicMT"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
                                                 <tabStops/>
                                             </paragraphStyle>
                                             <integer key="NSUnderline" value="1"/>
@@ -1141,7 +1152,7 @@ Cg
                                     <fragment content=" use the material for commercial purposes. ">
                                         <attributes>
                                             <font key="NSFont" size="11" name="Arial-ItalicMT"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
                                                 <tabStops/>
                                             </paragraphStyle>
                                         </attributes>
@@ -1149,7 +1160,7 @@ Cg
                                     <fragment content="NoDerivatives">
                                         <attributes>
                                             <font key="NSFont" size="11" name="Arial-BoldItalicMT"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
                                                 <tabStops/>
                                             </paragraphStyle>
                                         </attributes>
@@ -1157,7 +1168,7 @@ Cg
                                     <fragment content=" — If you remix, transform, or build upon the material, you may not distribute the modified material. ">
                                         <attributes>
                                             <font key="NSFont" size="11" name="Arial-ItalicMT"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
                                                 <tabStops/>
                                             </paragraphStyle>
                                         </attributes>
@@ -1165,7 +1176,7 @@ Cg
                                     <fragment content=" ">
                                         <attributes>
                                             <font key="NSFont" size="11" name="Courier-Oblique"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
                                                 <tabStops/>
                                             </paragraphStyle>
                                         </attributes>
@@ -1176,7 +1187,7 @@ Cg
 </string>
                                         <attributes>
                                             <font key="NSFont" size="11" name="Helvetica-Oblique"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" tailIndent="468" defaultTabInterval="36" tighteningFactorForTruncation="0.0">
                                                 <tabStops/>
                                             </paragraphStyle>
                                         </attributes>
@@ -1185,17 +1196,19 @@ Cg
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="capture table.png" translatesAutoresizingMaskIntoConstraints="NO" id="lWF-Qs-ZKs">
-                                <rect key="frame" x="0.0" y="468" width="414" height="394"/>
+                                <rect key="frame" x="0.0" y="547" width="768" height="474"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="lWF-Qs-ZKs" secondAttribute="height" multiplier="47:29" id="31U-fu-eBF"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="lWF-Qs-ZKs" firstAttribute="leading" secondItem="s1v-Ad-4Ju" secondAttribute="leading" id="9AW-ui-HhG"/>
-                            <constraint firstItem="lWF-Qs-ZKs" firstAttribute="bottom" secondItem="H8Y-TW-aJu" secondAttribute="bottom" id="IJh-K4-K15"/>
-                            <constraint firstItem="H8Y-TW-aJu" firstAttribute="bottom" secondItem="s1v-Ad-4Ju" secondAttribute="bottom" constant="217" id="LUh-HT-UFj"/>
+                            <constraint firstItem="lWF-Qs-ZKs" firstAttribute="bottom" secondItem="H8Y-TW-aJu" secondAttribute="bottom" constant="-3" id="IJh-K4-K15"/>
+                            <constraint firstItem="lWF-Qs-ZKs" firstAttribute="top" secondItem="s1v-Ad-4Ju" secondAttribute="bottom" constant="5" id="LUh-HT-UFj"/>
                             <constraint firstItem="lWF-Qs-ZKs" firstAttribute="trailing" secondItem="s1v-Ad-4Ju" secondAttribute="trailing" id="M3k-mZ-ykG"/>
                             <constraint firstItem="s1v-Ad-4Ju" firstAttribute="top" secondItem="DTa-v8-dfh" secondAttribute="top" id="Ufv-2f-dQ4"/>
-                            <constraint firstItem="lWF-Qs-ZKs" firstAttribute="top" secondItem="H8Y-TW-aJu" secondAttribute="top" constant="424" id="gMm-7S-zfp"/>
                             <constraint firstItem="s1v-Ad-4Ju" firstAttribute="leading" secondItem="H8Y-TW-aJu" secondAttribute="leading" id="v55-Cc-3pw"/>
                             <constraint firstItem="s1v-Ad-4Ju" firstAttribute="trailing" secondItem="H8Y-TW-aJu" secondAttribute="trailing" id="vBw-Ec-arV"/>
                         </constraints>
@@ -1212,7 +1225,7 @@ Cg
                 <navigationController restorationIdentifier="NavigationController" storyboardIdentifier="CustomNavController" automaticallyAdjustsScrollViewInsets="NO" id="ugf-Ty-h8X" customClass="CustomNavController" customModule="Fuzzy_Logic_Chess" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mmU-Zj-xbf">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="768" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1229,23 +1242,24 @@ Cg
             <objects>
                 <viewController storyboardIdentifier="capturePopUp" id="vmg-rT-ccq" customClass="CaptureViewController" customModule="Fuzzy_Logic_Chess" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bZE-l6-v5n">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9fv-cc-Dxp">
-                                <rect key="frame" x="16" y="418" width="343" height="229"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9fv-cc-Dxp">
+                                <rect key="frame" x="10" y="362" width="748" height="300"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="capture table.png" translatesAutoresizingMaskIntoConstraints="NO" id="naC-0N-BQn">
-                                        <rect key="frame" x="7" y="13" width="329" height="203"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="capture table.png" translatesAutoresizingMaskIntoConstraints="NO" id="naC-0N-BQn">
+                                        <rect key="frame" x="209.5" y="48.5" width="329" height="203"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="203" id="bqT-cD-GTg"/>
                                             <constraint firstAttribute="width" secondItem="naC-0N-BQn" secondAttribute="height" multiplier="47:29" id="nwH-T0-riN"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.92306913859999995" green="0.92306913859999995" blue="0.92306913859999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="NF0-FI-PpA"/>
                                     <constraint firstItem="naC-0N-BQn" firstAttribute="centerX" secondItem="9fv-cc-Dxp" secondAttribute="centerX" id="Rfg-JU-EPJ"/>
                                     <constraint firstItem="naC-0N-BQn" firstAttribute="centerY" secondItem="9fv-cc-Dxp" secondAttribute="centerY" id="m8Q-Bg-p2E"/>
                                 </constraints>
@@ -1254,6 +1268,7 @@ Cg
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="9fv-cc-Dxp" firstAttribute="centerY" secondItem="bZE-l6-v5n" secondAttribute="centerY" id="T1i-Hk-uVZ"/>
+                            <constraint firstItem="9fv-cc-Dxp" firstAttribute="leading" secondItem="SIE-Z3-OfO" secondAttribute="leading" constant="10" id="gwj-b2-tsn"/>
                             <constraint firstItem="9fv-cc-Dxp" firstAttribute="centerX" secondItem="bZE-l6-v5n" secondAttribute="centerX" id="r7y-04-Dmp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="SIE-Z3-OfO"/>
