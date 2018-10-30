@@ -21,8 +21,6 @@ class Piece {
 	var rookMoveAddVal = 0
 	var pieceValue: Int
 
-	
-
 	init(type: PieceType, team: Team, imageName: String, location: Int, firstAction: FirstAction, pieceValue: Int) {
 		self.type = type
 		self.team = team
@@ -31,25 +29,20 @@ class Piece {
 		self.firstMove = firstAction
 		self.pieceValue = pieceValue
 	}
-	
 	// changes location of piece
 	func changeLocation(location: Int) {
 		self.location = location
 	}
-	
 	// returns list of legal moves
 	func getUnfilteredMoves(board: Board) -> [Int] {
 		unfilteredMoves = [Int]()
-		
 		// SURROUNDING THE PIECE...
 		// Top, Right, Bottom, Left, Diagonals
 		if(location >= 8) {		// TOP
 			unfilteredMoves.append(location - 8)
-			
 			if(location % 8 != 7) {	// TOP-RIGHT
 				unfilteredMoves.append(location - 7)
 			}
-		
 			if(location % 8 != 0) {	// TOP-LEFT
 				unfilteredMoves.append(location - 9)
 			}
@@ -60,7 +53,6 @@ class Piece {
 			if(location % 8 != 7) {	// BOTTOM-RIGHT
 				unfilteredMoves.append(location + 9)
 			}
-			
 			if(location % 8 != 0) {	// BOTTOM-LEFT
 				unfilteredMoves.append(location + 7)
 			}
@@ -71,7 +63,6 @@ class Piece {
 		if(location % 8 != 7) {	// RIGHT
 			unfilteredMoves.append(location + 1)
 		}
-		
 		if (self.type == PieceType.King){
 			//print("Checking for castle opportunity")
 			isCastleAvailable(board: board)
@@ -88,16 +79,46 @@ class Piece {
 //				print("no opponent piece in cell \(moveIndex)")
 //
 //			}
-		
-		
 		// FOR REFERENCE...
 		if(location % 8 == 0) {}	// left side of board
 		if(location % 8 == 7) {} // right side of board
-		
 
-		
 		return unfilteredMoves
 	}
+	
+	func getSurroundingCells(board: Board) -> [Int] {
+		var surroundingCells = [Int]()
+		// SURROUNDING THE PIECE...
+		// Top, Right, Bottom, Left, Diagonals
+		if(location >= 8) {		// TOP
+			surroundingCells.append(location - 8)
+			if(location % 8 != 7) {	// TOP-RIGHT
+				surroundingCells.append(location - 7)
+			}
+			if(location % 8 != 0) {	// TOP-LEFT
+				surroundingCells.append(location - 9)
+			}
+		}
+		if(location <= 55) {	// BOTTOM
+			surroundingCells.append(location + 8)
+			
+			if(location % 8 != 7) {	// BOTTOM-RIGHT
+				surroundingCells.append(location + 9)
+			}
+			if(location % 8 != 0) {	// BOTTOM-LEFT
+				surroundingCells.append(location + 7)
+			}
+		}
+		if(location % 8 != 0) {	// LEFT
+			surroundingCells.append(location - 1)
+		}
+		if(location % 8 != 7) {	// RIGHT
+			surroundingCells.append(location + 1)
+		}
+	
+		return surroundingCells
+	}
+	
 	func onMove() {//action after piece moved once
 		hasMoved = true;
 	}

@@ -312,9 +312,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	
 	// Plays turns for the AI
 	func AITurn() {
-		if (getKingsVulnerableCells(board: board).count > 0){
-			getKingThreats(board: board)
-		}
+
 		aiWaitingSymbol.alpha = 0
 		aiWaitingText.alpha = 0
 		//getAllLegalMoves(board: board, thisTeam: Team.Black)//prints current legal moves of each of blacks pieces
@@ -324,36 +322,110 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		
 		let weakSpots = getKingsVulnerableCells(board: board)//returns empty cells neighboring the King
 		print("kings weak spots array :  \(weakSpots)")
-		let cellsInDanger = getCellsInDanger(board: board, vulnerableSquares: weakSpots)//vulnerable sqares around king a white piece has a legal move to next turn
+//		let cellsInDanger = getCellsInDanger(board: board, vulnerableSquares: weakSpots)//vulnerable sqares around king a white piece has a legal move to next turn
+//
+//		print("cells in danger: \(cellsInDanger)")
+//		let helperPieces: [Piece] = getHelperPieces(board: board, cellsInDanger: cellsInDanger)
+//		print("pieces that can help are \(helperPieces)")
 		
-		print("cells in danger: \(cellsInDanger)")
-		let helperPieces: [Piece] = getHelperPieces(board: board, cellsInDanger: cellsInDanger)
-		print("pieces that can help are \(helperPieces)")
+//		if (cellsInDanger.count > 0  && helperPieces.count > 0){
+//
+//			let previousTile = board.cellForItem(at: IndexPath(row: (helperPieces.first?.location)!, section: 0)) as! Tile
+//			//find AI piece that can move to that location
+//			previousTile.removePiece()
+//			let tileInDanger = board.cellForItem(at: IndexPath(row: cellsInDanger.first!, section: 0)) as! Tile
+//			tileInDanger.setPiece(piece: helperPieces.first)
+//
+//			if (turnCounter == 2){//if finished ai's first turn, increase turncounter, do 2nd turn
+//				aiWaitingSymbol.alpha = 1
+//				aiWaitingText.alpha = 1
+//				turnCounter += 1
+//				updateTurnDisplay()
+//				turnCounter -= 1
+//				DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
+//					self.turnCounter += 1
+//					self.AITurn()
+//				})
+//
+//			} else if (turnCounter == 3){//if second turn, reset turncounter
+//				turnCounter = 0
+//				updateTurnDisplay()
+//			}
+//		}
 		
-		if (cellsInDanger.count > 0  && helperPieces.count > 0){
+		let kingCellsInDanger: [Int] = getKingCellsInDanger(board: board)
+		let movesToKing: [AIMove] = getKingThreats(board: board)
+		let retreatMove: AIMove? = kingRetreatMove(board: board)
+		if (kingCellsInDanger.count > 0 || movesToKing.count > 0){
+			var defendMove: AIMove!
+			if (retreatMove != nil){//move king backward if possible
+				defendMove = retreatMove
+			}
+			else if (kingCellsInDanger.count > 0){
+				defendMove = getKingRescueMove(board: board, cellsInDanger: kingCellsInDanger, turnCounter: turnCounter)
+			} else {
+				defendMove = defendKing(board: board, threatMoves: movesToKing, turnCounter: turnCounter)
+			}
+
+			let fromPos = defendMove.oldPos
+			let toPos = defendMove.newPos
+			let fromTile = board.cellForItem(at: IndexPath(row: fromPos, section: 0)) as! Tile
+			let toTile = board.cellForItem(at: IndexPath(row: toPos, section: 0)) as! Tile
+			let dieRollNotNeeded: Bool = defendMove.attackedPiece?.type == PieceType.Pawn && (fromTile.piece!.type == PieceType.King || fromTile.piece!.type == PieceType.Queen)
 			
-			let previousTile = board.cellForItem(at: IndexPath(row: (helperPieces.first?.location)!, section: 0)) as! Tile
-			//find AI piece that can move to that location
-			previousTile.removePiece()
-			let tileInDanger = board.cellForItem(at: IndexPath(row: cellsInDanger.first!, section: 0)) as! Tile
-			tileInDanger.setPiece(piece: helperPieces.first)
-			
-			if (turnCounter == 2){//if finished ai's first turn, increase turncounter, do 2nd turn
-				aiWaitingSymbol.alpha = 1
-				aiWaitingText.alpha = 1
-				turnCounter += 1
-				updateTurnDisplay()
-				turnCounter -= 1
+			if (defendMove.attackedPiece != nil && !dieRollNotNeeded){//if best move is an attack
+				defendMove.pieceToMove.firstMove = FirstAction.Attacked
+				AIPreviousAttackTileColor = fromTile.backgroundColor
+				AIPreviousVictimTileColor = toTile.backgroundColor
+				fromTile.backgroundColor = UIColor.yellow
+				toTile.backgroundColor = UIColor.magenta
+				toTile.legalMoveView.tintColor = UIColor.black
+				toTile.showLegalMoveView(show: true)
+				toTile.MinRollLabel.alpha = 1
+				let lowestRollNeeded = fromTile.piece?.getMinRollNeeded(pieceToAttack: (toTile.piece?.type)!)
+				toTile.setMinRollLabel(minRoll: lowestRollNeeded!)
+				
+				isDieRolling = true
+				dieTimer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(rollDie), userInfo: fromTile, repeats: true)
+				
+				attacker = defendMove.pieceToMove.type
+				attackerTeam = defendMove.pieceToMove.team
+				victim = defendMove.attackedPiece!.type
+				victimTeam = defendMove.attackedPiece!.team
 				DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
-					self.turnCounter += 1
-					self.AITurn()
+					self.afterDieRollAI(fromPos:fromPos,toPos:toPos,chosenMove:defendMove)
 				})
 				
-			} else if (turnCounter == 3){//if second turn, reset turncounter
-				turnCounter = 0
-				updateTurnDisplay()
+			} else{
+				defendMove.pieceToMove.firstMove = FirstAction.Moved
+				board.getPieceAtLocation(location: toPos)?.location = 64
+
+				let moveFromTile = board.cellForItem(at: IndexPath(row: fromPos, section: 0)) as! Tile
+				moveFromTile.removePiece()
+				let moveToTile = board.cellForItem(at: IndexPath(row: toPos, section: 0)) as! Tile
+				moveToTile.setPiece(piece: defendMove.pieceToMove)
+				if (turnCounter == 2){//if finished ai's first turn, increase turncounter, do 2nd turn
+					aiWaitingSymbol.alpha = 1
+					aiWaitingText.alpha = 1
+					turnCounter += 1
+					updateTurnDisplay()
+					turnCounter -= 1
+					DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
+						self.turnCounter += 1
+						self.AITurn()
+					})
+					
+				} else if (turnCounter == 3){//if second turn, reset turncounter
+					turnCounter = 0
+					updateTurnDisplay()
+				}
+				print("turncounter after move is \(turnCounter)")
+				
 			}
-		} else {//if King not in harms way
+			
+		}
+			
+		else {//if King not in harms way
 			let fromPos = chosenMove.oldPos
 			let toPos = chosenMove.newPos
 			let fromTile = board.cellForItem(at: IndexPath(row: fromPos, section: 0)) as! Tile
@@ -386,14 +458,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 			} else{
 				chosenMove.pieceToMove.firstMove = FirstAction.Moved
 				board.getPieceAtLocation(location: toPos)?.location = 64
-				var pieceCount = 0
-				for wp in board.whitePieces{
-					if (wp.location == 64){
-						board.whitePieces.remove(at: pieceCount)
-						break
-					}
-					pieceCount += 1
-				}
+
 				let moveFromTile = board.cellForItem(at: IndexPath(row: fromPos, section: 0)) as! Tile
 				moveFromTile.removePiece()
 				let moveToTile = board.cellForItem(at: IndexPath(row: toPos, section: 0)) as! Tile
