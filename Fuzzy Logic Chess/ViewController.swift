@@ -321,7 +321,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		let chosenMove: AIMove = getMoveByDifficulty(movesArray: legalMovesArray, difficulty: "hard")
 		
 		let weakSpots = getKingsVulnerableCells(board: board)//returns empty cells neighboring the King
-		print("kings weak spots array :  \(weakSpots)")
+		//print("kings weak spots array :  \(weakSpots)")
 //		let cellsInDanger = getCellsInDanger(board: board, vulnerableSquares: weakSpots)//vulnerable sqares around king a white piece has a legal move to next turn
 //
 //		print("cells in danger: \(cellsInDanger)")
@@ -396,8 +396,13 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 					self.afterDieRollAI(fromPos:fromPos,toPos:toPos,chosenMove:defendMove)
 				})
 				
-			} else{
-				defendMove.pieceToMove.firstMove = FirstAction.Moved
+			} else {
+				if (dieRollNotNeeded){
+					defendMove.pieceToMove.firstMove = FirstAction.Attacked
+					sendToGraveyard(piece:board.getPieceAtLocation(location: toPos)!)
+				} else {
+					defendMove.pieceToMove.firstMove = FirstAction.Moved
+				}
 				board.getPieceAtLocation(location: toPos)?.location = 64
 
 				let moveFromTile = board.cellForItem(at: IndexPath(row: fromPos, section: 0)) as! Tile
@@ -456,7 +461,12 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 					})
 
 			} else{
-				chosenMove.pieceToMove.firstMove = FirstAction.Moved
+				if (dieRollNotNeeded){
+					chosenMove.pieceToMove.firstMove = FirstAction.Attacked
+					sendToGraveyard(piece:board.getPieceAtLocation(location: toPos)!)
+				} else {
+					chosenMove.pieceToMove.firstMove = FirstAction.Moved
+				}
 				board.getPieceAtLocation(location: toPos)?.location = 64
 
 				let moveFromTile = board.cellForItem(at: IndexPath(row: fromPos, section: 0)) as! Tile
@@ -577,6 +587,9 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 					})
 				}
 				else {
+					if (dieRollNotNeeded){
+						sendToGraveyard(piece:tile.piece!)
+					}
 					previousTile.piece?.resetCastleLegalMoveVal()
 					
 					board.getPieceAtLocation(location: indexPath.row)?.location = 64
