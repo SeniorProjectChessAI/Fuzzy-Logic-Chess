@@ -17,7 +17,9 @@ class CustomNavController: UINavigationController {
 		NotificationCenter.default.addObserver(self, selector: #selector(onRecieveDifficulty(_:)), name: Notification.Name(rawValue: "difficultyMenuMessage"), object: nil)
 		
 		self.navigationBar.barStyle = UIBarStyle.black
-    }
+		let dark = UIColor.init(displayP3Red: 36.0/255.0, green: 36.0/255.0, blue: 36.0/255.0, alpha: 1.0)
+		self.navigationBar.barTintColor = dark
+	}
 	
 	@objc func onRecieveDifficulty(_ notification:Notification) {
 		if let data = notification.userInfo as? [Int:Int] {

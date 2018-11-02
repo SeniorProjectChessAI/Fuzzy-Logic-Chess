@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2KR-zP-u5c">
-    <device id="ipad12_9rounded" orientation="portrait">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -22,20 +22,21 @@
             <objects>
                 <viewController restorationIdentifier="StartController" storyboardIdentifier="StartController" id="BYZ-38-t0r2" customClass="StartController" customModule="Fuzzy_Logic_Chess" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC2">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Fuzzy Logic Chess" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QIw-PL-PqT">
-                                <rect key="frame" x="67" y="674" width="890" height="220"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="67" y="200" width="241" height="220"/>
+                                <color key="backgroundColor" red="0.14117647059999999" green="0.14117647059999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="750" constant="220" id="2pd-eD-kj9"/>
                                 </constraints>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="AppleColorEmoji" family="Apple Color Emoji" pointSize="50"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <stackView opaque="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" axis="vertical" distribution="equalCentering" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="bRx-lC-iV9">
-                                <rect key="frame" x="387" y="914" width="250" height="318"/>
+                                <rect key="frame" x="62.666666666666657" y="440" width="249.99999999999997" height="318"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yDy-gN-cqr" userLabel="AI View">
                                         <rect key="frame" x="4" y="8" width="238" height="120"/>
@@ -55,8 +56,8 @@
                                                 </connections>
                                             </segmentedControl>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cIM-bE-W2f">
-                                                <rect key="frame" x="36.5" y="70" width="165" height="40"/>
-                                                <color key="backgroundColor" red="0.19607843137254902" green="0.34509803921568627" blue="0.1803921568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                                <rect key="frame" x="36.333333333333329" y="70" width="165" height="40.333333333333343"/>
+                                                <color key="backgroundColor" red="0.29803921568627451" green="0.50196078431372548" blue="0.32549019607843138" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <inset key="contentEdgeInsets" minX="20" minY="5" maxX="20" maxY="5"/>
                                                 <state key="normal">
                                                     <attributedString key="attributedTitle">
@@ -97,8 +98,8 @@
                                         <rect key="frame" x="4" y="139" width="238" height="80"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Elw-G5-O77">
-                                                <rect key="frame" x="22.5" y="20" width="193" height="40"/>
-                                                <color key="backgroundColor" red="0.23921568627450979" green="0.14901960784313725" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <rect key="frame" x="22.333333333333329" y="20.000000000000004" width="193" height="40.333333333333343"/>
+                                                <color key="backgroundColor" red="0.35007336930534111" green="0.2171797221894001" blue="0.68813646085532298" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <inset key="contentEdgeInsets" minX="20" minY="5" maxX="20" maxY="5"/>
                                                 <state key="normal">
                                                     <attributedString key="attributedTitle">
@@ -135,7 +136,7 @@
                                         <rect key="frame" x="4" y="230" width="238" height="80"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hak-XQ-dm9">
-                                                <rect key="frame" x="29" y="20" width="180" height="40"/>
+                                                <rect key="frame" x="29" y="20.000000000000004" width="180" height="40.333333333333343"/>
                                                 <color key="backgroundColor" red="0.25093346025473739" green="0.43973083244967143" blue="0.57716701036907847" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <inset key="contentEdgeInsets" minX="20" minY="5" maxX="20" maxY="5"/>
                                                 <state key="normal">
@@ -173,7 +174,7 @@
                                 <edgeInsets key="layoutMargins" top="8" left="4" bottom="8" right="8"/>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                        <color key="backgroundColor" red="0.14117647058823529" green="0.14117647058823529" blue="0.14117647058823529" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="QIw-PL-PqT" firstAttribute="top" relation="greaterThanOrEqual" secondItem="x6f-QR-5Jc" secondAttribute="top" priority="751" constant="15" id="5k3-1a-0NC"/>
                             <constraint firstItem="QIw-PL-PqT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="x6f-QR-5Jc" secondAttribute="leading" constant="15" id="HPL-yE-ajf"/>
@@ -207,11 +208,11 @@
             <objects>
                 <viewController id="AFp-db-OJj" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tPW-Q7-nmS">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CJQ-rW-Lbi">
-                                <rect key="frame" x="242" y="79" width="540" height="934"/>
+                                <rect key="frame" x="5" y="93.000000000000028" width="365" height="459.66666666666674"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" priority="751" constant="540" id="9nF-XS-cNG"/>
@@ -781,7 +782,7 @@ Cg
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="capture table" translatesAutoresizingMaskIntoConstraints="NO" id="gPH-MI-uZ0">
-                                <rect key="frame" x="242" y="1018" width="540" height="333"/>
+                                <rect key="frame" x="5" y="557.66666666666663" width="365" height="225.33333333333337"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="gPH-MI-uZ0" secondAttribute="height" multiplier="47:29" id="PL5-Wz-GOb"/>
                                 </constraints>
@@ -804,13 +805,13 @@ Cg
             </objects>
             <point key="canvasLocation" x="1854.6875" y="109.5703125"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Custom Nav Controller-->
         <scene sceneID="BWv-Qg-hMl">
             <objects>
-                <navigationController restorationIdentifier="NavigationController" storyboardIdentifier="NavigationController" automaticallyAdjustsScrollViewInsets="NO" id="2KR-zP-u5c" customClass="NavigationController" sceneMemberID="viewController">
+                <navigationController restorationIdentifier="NavigationController" storyboardIdentifier="NavigationController" automaticallyAdjustsScrollViewInsets="NO" id="2KR-zP-u5c" customClass="CustomNavController" customModule="Fuzzy_Logic_Chess" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fVQ-8z-8T5">
-                        <rect key="frame" x="0.0" y="24" width="1024" height="50"/>
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
