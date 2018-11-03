@@ -21,10 +21,17 @@ class StartController: UIViewController {
 	@IBOutlet weak var difficultySegmentControl: UISegmentedControl!
 	
 	
-	// Colors
-	let green = UIColor.init(displayP3Red: 50.0/255.0, green: 88.0/255.0, blue: 46.0/255.0, alpha: 1.0)
-	let blue = UIColor.init(displayP3Red: 23.0/255.0, green: 42.0/255.0, blue: 83.0/255.0, alpha: 1.0)
-	let red = UIColor.init(displayP3Red: 83.0/255.0, green: 39.0/255.0, blue: 42.0/255.0, alpha: 1.0)
+	// OLD Colors
+//	let green = UIColor.init(displayP3Red: 50.0/255.0, green: 88.0/255.0, blue: 46.0/255.0, alpha: 1.0)
+//	let blue = UIColor.init(displayP3Red: 23.0/255.0, green: 42.0/255.0, blue: 83.0/255.0, alpha: 1.0)
+//	let red = UIColor.init(displayP3Red: 83.0/255.0, green: 39.0/255.0, blue: 42.0/255.0, alpha: 1.0)
+	
+	// NEW Colors
+	let green = UIColor.init(displayP3Red: 76.0/255.0, green: 128.0/255.0, blue: 90.0/255.0, alpha: 1.0)
+	let blue = UIColor.init(displayP3Red: 58.0/255.0, green: 121.0/255.0, blue: 177.0/255.0, alpha: 1.0)
+	let red = UIColor.init(displayP3Red: 172.0/255.0, green: 86.0/255.0, blue: 84.0/255.0, alpha: 1.0)
+	
+	
 	
     override func viewDidLoad() {
         super.viewDidLoad()
