@@ -19,8 +19,6 @@ class CaptureViewController: UIViewController {
 
 	// sets winMessage label text on notification
 
-		
 	}
-
 }
 

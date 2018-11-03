@@ -12,6 +12,8 @@ class Board : UICollectionView {
 	
 	var blackPieces = [Piece]()
 	var whitePieces = [Piece]()
+	var aiFirstWavePieces = [Piece]()
+
 	
 	override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
 		
@@ -27,6 +29,8 @@ class Board : UICollectionView {
 		
 		blackPieces.removeAll()
 		whitePieces.removeAll()
+		aiFirstWavePieces.removeAll()
+
 		
 		// Black pieces
 		blackPieces.append(Noble(type: PieceType.Rook, team: Team.Black, imageName: "b rook.png", location: 0, firstAction: FirstAction.None, pieceValue: -50))
@@ -41,6 +45,14 @@ class Board : UICollectionView {
 		for i in 8...15 {
 			blackPieces.append(Pawn(type: PieceType.Pawn, team: Team.Black, imageName: "b pawn.png", location: i, firstAction: FirstAction.None, pieceValue: -10))
 		}
+		
+		aiFirstWavePieces.append(getPieceAtLocation(location: 0)!)
+		aiFirstWavePieces.append(getPieceAtLocation(location: 2)!)
+		aiFirstWavePieces.append(getPieceAtLocation(location: 5)!)
+		aiFirstWavePieces.append(getPieceAtLocation(location: 7)!)
+		aiFirstWavePieces.append(getPieceAtLocation(location: 9)!)
+		aiFirstWavePieces.append(getPieceAtLocation(location: 14)!)
+
 		
 		
 		// White pieces
