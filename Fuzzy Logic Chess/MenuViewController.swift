@@ -19,7 +19,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-		
+		print("menu: view did load")
 		// Do any additional setup after loading the view.
 		menu_tableView.delegate = self
 		menu_tableView.dataSource = self
@@ -31,6 +31,8 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
 	}
 	
 	func setColors() {
+		print("menu: set colors")
+
 		if(GAME_TYPE == 0) {
 			switch(DIFFICULTY) {
 			case 0: setEasyColor()
@@ -46,6 +48,8 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
 	
 	// Used when difficulty changed after viewDidLoad() function
 	@objc func onRecieveDifficulty(_ notification:Notification) {
+		print("menu: recieved difficulty")
+
 		if let data = notification.userInfo as? [Int:Int] {
 			for (_, difficulty) in data {
 				switch(difficulty) {
@@ -94,6 +98,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
 	
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
 		myIndex = indexPath.row
 		
 		performSegue(withIdentifier: "segue", sender:indexPath.endIndex)
@@ -101,6 +106,8 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
 	
 	
 	func changeView(){
+		print("menu: change view")
+
 		let storyboard = UIStoryboard(name: "Start", bundle: nil)
 		//let nc = storyboard.instantiateViewController(withIdentifier: "fff")
 		let vc = storyboard.instantiateViewController(withIdentifier: "StartController")

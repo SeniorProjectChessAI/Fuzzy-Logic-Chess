@@ -5,6 +5,7 @@
 //  Created by Brian Iruka on 10/22/18.
 //  Copyright © 2018 KSU CS Seniors Project 6A. All rights reserved.
 //
+import GameplayKit
 
  var AIKing: Piece!//AIs king
 
@@ -371,15 +372,45 @@ func getBestLegalMoves(board:Board,thisTeam:Team,turnCounter:Int)->[AIMove]{
 							
 						}
 					}
-					if (turnCounter == 2 && neighboringPiecesArray != nil){
-						//I think AI should not consider the negative benefit of moving its piece on its first move, since it has another move to attack a piece
-						maxMBenefit = moveExposesKing ? maxMBenefit/2 : maxMBenefit
-						availableMoves.append(AIMove(pieceToMove: p, attackedPiece: nil, oldPos: p.location, newPos: um, isAttackMove: false, moveBenefit:maxMBenefit/2))
-					} else if (turnCounter == 3 && neighboringPiecesArray != nil){
-						//AI should consider its own pieces value and possibly move away if its in danger, since other player moves next
-						var maxMBenefit = maxMBenefit + Double(p.pieceValue) * defendProb
-						maxMBenefit = moveExposesKing ? maxMBenefit/2 : maxMBenefit
-						availableMoves.append(AIMove(pieceToMove: p, attackedPiece: nil, oldPos: p.location, newPos: um, isAttackMove: false, moveBenefit:maxMBenefit/2))
+					if (turnCounter == 2){
+						if (neighboringPiecesArray.count > 0){
+							//I think AI should not consider the negative benefit of moving its piece on its first move, since it has another move to attack a piece
+							maxMBenefit = moveExposesKing ? maxMBenefit/2 : maxMBenefit
+							availableMoves.append(AIMove(pieceToMove: p, attackedPiece: nil, oldPos: p.location, newPos: um, isAttackMove: false, moveBenefit:maxMBenefit/2))
+						} else {
+							for f in board.aiFirstWavePieces{
+								for lm in getLegalMovesForPiece(board: board, thisPiece: f){
+									let randomVal = Double(GKRandomDistribution.init(lowestValue: 0, highestValue: 10).nextInt())
+									let oldRow = f.location / 8
+									let newRow = lm / 8
+									//print("random ben: \(randomBenefit)")
+									if (newRow > oldRow){//don't add any moves that have piece moving backward
+										availableMoves.append(AIMove(pieceToMove: f, attackedPiece: nil, oldPos: f.location, newPos: lm, isAttackMove: false, moveBenefit:randomVal))
+									}
+								}
+							}
+						}
+
+					} else if (turnCounter == 3){
+						if (neighboringPiecesArray.count > 0){
+							//AI should consider its own pieces value and possibly move away if its in danger, since other player moves next
+							var maxMBenefit = maxMBenefit + Double(p.pieceValue) * defendProb
+							maxMBenefit = moveExposesKing ? maxMBenefit/2 : maxMBenefit
+							availableMoves.append(AIMove(pieceToMove: p, attackedPiece: nil, oldPos: p.location, newPos: um, isAttackMove: false, moveBenefit:maxMBenefit/2))
+						} else {
+							for f in board.aiFirstWavePieces{
+								for lm in getLegalMovesForPiece(board: board, thisPiece: f){
+									let randomVal = Double(GKRandomDistribution.init(lowestValue: 0, highestValue: 10).nextInt())
+									let oldRow = f.location / 8
+									let newRow = lm / 8
+									//print("random ben: \(randomBenefit)")
+									if (newRow > oldRow){//don't add any moves that have piece moving backward
+										availableMoves.append(AIMove(pieceToMove: f, attackedPiece: nil, oldPos: f.location, newPos: lm, isAttackMove: false, moveBenefit:randomVal))
+									}
+									
+								}
+							}
+						}
 					}
 
 			}
