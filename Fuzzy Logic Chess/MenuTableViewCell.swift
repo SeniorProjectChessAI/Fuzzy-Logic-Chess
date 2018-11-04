@@ -32,12 +32,6 @@ class MenuTableViewCell: UITableViewCell {
         // Configure the view for the selected state
 		if (selected){
 			switch selected_text {
-			//case "Home":
-				//appDelegate.window?.rootViewController = vc
-			//case "How to Play ":
-				//appDelegate.window?.rootViewController = htpv
-			//case "Change Difficulty":
-				//appDelegate.window?.rootViewController = vc
 			case "   New Game":
 				appDelegate.window?.rootViewController = nc
 			default:

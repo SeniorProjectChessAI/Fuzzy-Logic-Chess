@@ -68,7 +68,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		NotificationCenter.default.addObserver(self, selector: #selector(onRecievePopupData(_:)), name: Notification.Name(rawValue: "startNewGame"), object: nil)
 		
 		menu_vc = self.storyboard?.instantiateViewController(withIdentifier: "MenuViewController") as? MenuViewController
-
+		AppDelegate.menu_bool = true
 		let slideUp = UISwipeGestureRecognizer(target: self, action: #selector(showCT(gesture:)))
 		slideUp.direction = .up
 		view.addGestureRecognizer(slideUp)
@@ -129,6 +129,8 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		setGameColors()
 		
 		updateTurnDisplay()
+		//AppDelegate.menu_bool = true
+
 	}
 	
 	func restartGame() {
