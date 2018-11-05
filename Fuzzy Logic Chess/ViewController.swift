@@ -137,6 +137,9 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		 kingCellsInDanger = []
 		 movesToKing = []
 		 retreatMove = nil
+		currentTeam = Team.White
+		legalMoves = []
+		turnCounter = 0
 	}
 	
 	func restartGame() {
@@ -376,7 +379,6 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 					defendMove.pieceToMove.firstMove = FirstAction.Attacked
 					sendToGraveyard(piece:board.getPieceAtLocation(location: toPos)!)
 				} else {
-					print("zoinks")
 					defendMove.pieceToMove.firstMove = FirstAction.Moved
 				}
 				board.getPieceAtLocation(location: toPos)?.location = 64
@@ -408,15 +410,15 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 			
 		else {//if King not in harms way
 			let legalMovesArray = getBestLegalMoves(board: board, thisTeam: Team.Black, turnCounter:turnCounter)
-			let chosenMove: AIMove = getMoveByDifficulty(movesArray: legalMovesArray, difficulty: "hard")
+			let chosenMove: AIMove = getMoveByDifficulty(movesArray: legalMovesArray, difficulty: DIFFICULTY)
 			let weakSpots = getKingsVulnerableCells(board: board)//returns empty cells neighboring the King
-			print("chosen move: \(chosenMove.pieceToMove) at \(chosenMove.oldPos) \(chosenMove.isAttackMove ? "is attacking \(chosenMove.attackedPiece)":"--> \(chosenMove.newPos)")")
+//			print("chosen move: \(chosenMove.pieceToMove) at \(chosenMove.oldPos) \(chosenMove.isAttackMove ? "is attacking \(chosenMove.attackedPiece)":"--> \(chosenMove.newPos)")")
 			let fromPos = chosenMove.oldPos
 			let toPos = chosenMove.newPos
 			let fromTile = board.cellForItem(at: IndexPath(row: fromPos, section: 0)) as! Tile
 			let toTile = board.cellForItem(at: IndexPath(row: toPos, section: 0)) as! Tile
 			let dieRollNotNeeded: Bool = chosenMove.attackedPiece?.type == PieceType.Pawn && (fromTile.piece!.type == PieceType.King || fromTile.piece!.type == PieceType.Queen)
-			print("chosen move attacked piece: \(chosenMove.attackedPiece?.type). \(dieRollNotNeeded ? "dieRoll not needed":"die roll needed")")
+//			print("chosen move attacked piece: \(chosenMove.attackedPiece?.type). \(dieRollNotNeeded ? "dieRoll not needed":"die roll needed")")
 			if (chosenMove.isAttackMove && !dieRollNotNeeded){//if best move is an attack
 				chosenMove.pieceToMove.firstMove = FirstAction.Attacked
 				AIPreviousAttackTileColor = fromTile.backgroundColor

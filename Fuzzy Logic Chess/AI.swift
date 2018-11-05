@@ -512,11 +512,11 @@ func getTileIndexDistance(fromLocation:Int,toLocation:Int) -> Int {//accepts two
 }
 
 //return the appropriate move based on difficulty level
-func getMoveByDifficulty(movesArray:[AIMove],difficulty:String)->AIMove{
+func getMoveByDifficulty(movesArray:[AIMove],difficulty:Int)->AIMove{
 	var chosenAIMove:AIMove = movesArray.first!
 
 	switch difficulty {
-		case "easy"://picks random element from moves array
+		case 0://picks random element from moves array
 			//should be reconfigured so that it only picks a random element with a move benefit > 0
 			var movesArray2 = [AIMove]();
 			for m in movesArray{
@@ -528,7 +528,7 @@ func getMoveByDifficulty(movesArray:[AIMove],difficulty:String)->AIMove{
 		print("easy mode")
 		
 		
-		case "medium"://idea: create a new array that holds the middle 1/3 moves sorted by move benefit
+		case 1://idea: create a new array that holds the middle 1/3 moves sorted by move benefit
 		//for example if moves array has 3 elements m1 with move benefit 1, m2 with 2, and m3 with 3, the new array would only hold m2
 		//hint on how to implement: your new array's size would be 1/3 of old array,
 		//once you have the new array, simply call array.randomelement()
@@ -553,7 +553,7 @@ func getMoveByDifficulty(movesArray:[AIMove],difficulty:String)->AIMove{
 			
 		chosenAIMove = movesArray2.randomElement()!
 		print("medium mode")
-		case "hard":
+		case 2:
 			for m in movesArray{//finds and returns the aimove with the greatest movebenefit
 				if (m.moveBenefit > chosenAIMove.moveBenefit){
 					chosenAIMove = m
