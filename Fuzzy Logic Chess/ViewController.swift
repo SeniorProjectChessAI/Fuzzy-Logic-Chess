@@ -61,6 +61,9 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	var AIPreviousVictimTileColor: UIColor?
 	// for randomMove()
 	var isRandom:Bool = true
+	var kingCellsInDanger: [Int]?
+	var movesToKing: [AIMove] = []
+	var retreatMove: AIMove? = nil
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -130,7 +133,13 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		
 		updateTurnDisplay()
 		//AppDelegate.menu_bool = true
-
+		AIKing = nil
+		 kingCellsInDanger = []
+		 movesToKing = []
+		 retreatMove = nil
+		currentTeam = Team.White
+		legalMoves = []
+		turnCounter = 0
 	}
 	
 	func restartGame() {
@@ -317,56 +326,23 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 
 		aiWaitingSymbol.alpha = 0
 		aiWaitingText.alpha = 0
-		//getAllLegalMoves(board: board, thisTeam: Team.Black)//prints current legal moves of each of blacks pieces
-		let legalMovesArray = getBestLegalMoves(board: board, thisTeam: Team.Black, turnCounter:turnCounter)
-		
-		let chosenMove: AIMove = getMoveByDifficulty(movesArray: legalMovesArray, difficulty: "hard")
-		
-		let weakSpots = getKingsVulnerableCells(board: board)//returns empty cells neighboring the King
-		//print("kings weak spots array :  \(weakSpots)")
-//		let cellsInDanger = getCellsInDanger(board: board, vulnerableSquares: weakSpots)//vulnerable sqares around king a white piece has a legal move to next turn
-//
-//		print("cells in danger: \(cellsInDanger)")
-//		let helperPieces: [Piece] = getHelperPieces(board: board, cellsInDanger: cellsInDanger)
-//		print("pieces that can help are \(helperPieces)")
-		
-//		if (cellsInDanger.count > 0  && helperPieces.count > 0){
-//
-//			let previousTile = board.cellForItem(at: IndexPath(row: (helperPieces.first?.location)!, section: 0)) as! Tile
-//			//find AI piece that can move to that location
-//			previousTile.removePiece()
-//			let tileInDanger = board.cellForItem(at: IndexPath(row: cellsInDanger.first!, section: 0)) as! Tile
-//			tileInDanger.setPiece(piece: helperPieces.first)
-//
-//			if (turnCounter == 2){//if finished ai's first turn, increase turncounter, do 2nd turn
-//				aiWaitingSymbol.alpha = 1
-//				aiWaitingText.alpha = 1
-//				turnCounter += 1
-//				updateTurnDisplay()
-//				turnCounter -= 1
-//				DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
-//					self.turnCounter += 1
-//					self.AITurn()
-//				})
-//
-//			} else if (turnCounter == 3){//if second turn, reset turncounter
-//				turnCounter = 0
-//				updateTurnDisplay()
-//			}
-//		}
-		
-		let kingCellsInDanger: [Int] = getKingCellsInDanger(board: board)
-		let movesToKing: [AIMove] = getKingThreats(board: board)
-		let retreatMove: AIMove? = kingRetreatMove(board: board)
-		if (kingCellsInDanger.count > 0 || movesToKing.count > 0){
+		if (AIKing == nil){
+			getKingsVulnerableCells(board: board)
+		}
+		 kingCellsInDanger = getKingCellsInDanger(board: board)
+		 movesToKing = getKingThreats(board: board)
+		 retreatMove = kingRetreatMove(board: board)
+		if (kingCellsInDanger != nil || movesToKing.count > 0){
 			var defendMove: AIMove!
 			if (retreatMove != nil){//move king backward if possible
 				defendMove = retreatMove
 			}
-			else if (kingCellsInDanger.count > 0){
-				defendMove = getKingRescueMove(board: board, cellsInDanger: kingCellsInDanger, turnCounter: turnCounter)
+			else if (kingCellsInDanger != nil){
+				defendMove = getKingRescueMove(board: board, cellsInDanger: kingCellsInDanger!, turnCounter: turnCounter)
 			} else {
 				defendMove = defendKing(board: board, threatMoves: movesToKing, turnCounter: turnCounter)
+				defendMove = (defendMove == nil) ? getBestLegalMoves(board: board, thisTeam: Team.Black, turnCounter: turnCounter).first: defendMove
+				//if defendmove nil, return any move to avoid crash
 			}
 
 			let fromPos = defendMove.oldPos
@@ -375,7 +351,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 			let toTile = board.cellForItem(at: IndexPath(row: toPos, section: 0)) as! Tile
 			let dieRollNotNeeded: Bool = defendMove.attackedPiece?.type == PieceType.Pawn && (fromTile.piece!.type == PieceType.King || fromTile.piece!.type == PieceType.Queen)
 			
-			if (defendMove.attackedPiece != nil && !dieRollNotNeeded){//if best move is an attack
+			if (defendMove.isAttackMove && !dieRollNotNeeded){//if best move is an attack
 				defendMove.pieceToMove.firstMove = FirstAction.Attacked
 				AIPreviousAttackTileColor = fromTile.backgroundColor
 				AIPreviousVictimTileColor = toTile.backgroundColor
@@ -433,13 +409,17 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		}
 			
 		else {//if King not in harms way
+			let legalMovesArray = getBestLegalMoves(board: board, thisTeam: Team.Black, turnCounter:turnCounter)
+			let chosenMove: AIMove = getMoveByDifficulty(movesArray: legalMovesArray, difficulty: DIFFICULTY)
+			let weakSpots = getKingsVulnerableCells(board: board)//returns empty cells neighboring the King
+//			print("chosen move: \(chosenMove.pieceToMove) at \(chosenMove.oldPos) \(chosenMove.isAttackMove ? "is attacking \(chosenMove.attackedPiece)":"--> \(chosenMove.newPos)")")
 			let fromPos = chosenMove.oldPos
 			let toPos = chosenMove.newPos
 			let fromTile = board.cellForItem(at: IndexPath(row: fromPos, section: 0)) as! Tile
 			let toTile = board.cellForItem(at: IndexPath(row: toPos, section: 0)) as! Tile
 			let dieRollNotNeeded: Bool = chosenMove.attackedPiece?.type == PieceType.Pawn && (fromTile.piece!.type == PieceType.King || fromTile.piece!.type == PieceType.Queen)
-			
-			if (chosenMove.attackedPiece != nil && !dieRollNotNeeded){//if best move is an attack
+//			print("chosen move attacked piece: \(chosenMove.attackedPiece?.type). \(dieRollNotNeeded ? "dieRoll not needed":"die roll needed")")
+			if (chosenMove.isAttackMove && !dieRollNotNeeded){//if best move is an attack
 				chosenMove.pieceToMove.firstMove = FirstAction.Attacked
 				AIPreviousAttackTileColor = fromTile.backgroundColor
 				AIPreviousVictimTileColor = toTile.backgroundColor
