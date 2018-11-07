@@ -224,7 +224,7 @@ func cellsCanAttackAIKing(board:Board) -> [Int]?{
 }
 //empty cells near king
 
-func getKingRescueMove(board:Board,cellsInDanger:[Int], turnCounter: Int)->AIMove{
+func getKingRescueMove(board:Board,cellsInDanger:[Int], turnCounter: Int)->AIMove?{
 	//if there are any pieces ready to attack King, find the best use of AIs two turns
 	//if first turn, decide if better to attack twice with two pieces (if possible) or move a more powerful piece then attack
 	//if second turn, attack with most powerful piece regardless
@@ -266,7 +266,7 @@ func getKingRescueMove(board:Board,cellsInDanger:[Int], turnCounter: Int)->AIMov
 				}
 			}
 		}
-
+	if (rescueMoves != nil){
 		var bestAttk: AIMove = rescueMoves.first!
 		var bestAttkVal: Double = 0.0
 		var nextBestAttkVal: Double = 0.0
@@ -292,10 +292,12 @@ func getKingRescueMove(board:Board,cellsInDanger:[Int], turnCounter: Int)->AIMov
 			} else {
 				return bestAttk
 			}
-
+			
 		}
-	
-	return rescueMoves.first!
+		
+		return rescueMoves.first!
+	}
+		return nil
 }
 
 
