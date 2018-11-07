@@ -42,6 +42,9 @@ class PopupViewController: UIViewController {
 		(difficultyControl.subviews[1] as UIView).tintColor = blue
 		(difficultyControl.subviews[2] as UIView).tintColor = red
 		
+		difficultyControl.selectedSegmentIndex = DIFFICULTY
+		setPlayAIButtonColors(difficulty: DIFFICULTY)
+		
 		print ("game type \(GAME_TYPE)")
 		
 		if(GAME_TYPE == 0) {
@@ -80,12 +83,7 @@ class PopupViewController: UIViewController {
 	
 	
 	@IBAction func difficultyChanged(_ sender: UISegmentedControl) {
-		switch(sender.selectedSegmentIndex) {
-		case 0: playAIButton.backgroundColor = green
-		case 1: playAIButton.backgroundColor = blue
-		case 2: playAIButton.backgroundColor = red
-		default: playAIButton.backgroundColor = green
-		}
+		setPlayAIButtonColors(difficulty: sender.selectedSegmentIndex)
 	}
 	
 	// sets winMessage label text on notification
@@ -95,6 +93,15 @@ class PopupViewController: UIViewController {
 			for (_, message) in data {
 				winMessage.text = message
 			}
+		}
+	}
+	
+	func setPlayAIButtonColors(difficulty: Int) {
+		switch(difficulty) {
+		case 0: playAIButton.backgroundColor = green
+		case 1: playAIButton.backgroundColor = blue
+		case 2: playAIButton.backgroundColor = red
+		default: playAIButton.backgroundColor = green
 		}
 	}
 }
