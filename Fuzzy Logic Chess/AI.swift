@@ -527,31 +527,36 @@ func getMoveByDifficulty(movesArray:[AIMove],difficulty:Int)->AIMove{
 		chosenAIMove = movesArray2.randomElement()!
 		print("easy mode")
 		
-		
-		case 1://idea: create a new array that holds the middle 1/3 moves sorted by move benefit
-		//for example if moves array has 3 elements m1 with move benefit 1, m2 with 2, and m3 with 3, the new array would only hold m2
-		//hint on how to implement: your new array's size would be 1/3 of old array,
-		//once you have the new array, simply call array.randomelement()
+		case 1:
+			// sort movesArray by moveBenefit ASC order
+			let sortedMoves = movesArray.sorted(by: {$0.moveBenefit < $1.moveBenefit})
+			var minIndex = 0;
+			var maxIndex = sortedMoves.count - 1
 			
-			var movesArray2 = [AIMove]();
-			var sum:Double = 0
-			var mean:Double = 0
-			
-			for m in movesArray{
-				if m.moveBenefit > 0{
-					sum = sum + m.moveBenefit
+			// find the minimum Index (first moveBenefit > 0)
+			var count = 0
+			for i in sortedMoves {
+				if(i.moveBenefit > 0) {
+					minIndex = count
+					break
 				}
+				count += 1
 			}
-			mean = sum/Double(movesArray2.capacity)
-			mean = mean + mean/2
+
+			if(sortedMoves.count >= 3) {
+				// set minIndex and maxIndex to the middle 1/3 set of the array
+				let subsetLength = ((sortedMoves.count - minIndex) / 3)
+				minIndex = minIndex + subsetLength
+				maxIndex = (sortedMoves.count - 1) - subsetLength
 			
-			for m in movesArray{
-				if m.moveBenefit >= mean{
-					movesArray2.append(m)
+				if(minIndex >= 0 && maxIndex < sortedMoves.count) {
+					let newMovesArray = sortedMoves[minIndex...maxIndex]
+					chosenAIMove = newMovesArray.randomElement()!
 				}
+			} else if (sortedMoves.count > 1) {
+				chosenAIMove = sortedMoves.randomElement()!
 			}
 			
-		chosenAIMove = movesArray2.randomElement()!
 		print("medium mode")
 		case 2:
 			for m in movesArray{//finds and returns the aimove with the greatest movebenefit
