@@ -68,27 +68,27 @@ class Board : UICollectionView {
 		whitePieces.append(Noble(type: PieceType.Bishop, team: Team.White, imageName: "w bishop" + ".png", location: 61, firstAction: FirstAction.None, pieceValue: 50))
 		whitePieces.append(Knight(type: PieceType.Knight, team: Team.White, imageName: "w knight" + ".png", location: 62, firstAction: FirstAction.None, pieceValue: 45))
 		whitePieces.append(Noble(type: PieceType.Rook, team: Team.White, imageName: "w rook" + ".png", location: 63, firstAction: FirstAction.None, pieceValue: 50))
+	
+
 	}
 	
-	
-	// Not ideal, but will return nil if no piece at given location is found
+	// will return nil if no piece at given location is found
 	func getPieceAtLocation(location: Int) -> Piece? {
 		
-		for piece in self.blackPieces {
-			if(location == piece.location) {
-				//print("piece found")
-				return piece
-			}
+		var gPiece:Piece?
+		gPiece = whitePieces.filter{ $0.location == location }.first
+		if (gPiece != nil){
+			return gPiece
 		}
-		for piece in self.whitePieces {
-			if(location == piece.location) {
-				//print("piece found")
-				return piece
-			}
+		gPiece = blackPieces.filter{ $0.location == location }.first
+		if (gPiece != nil){
+			return gPiece
 		}
-		//print("piece NOT found")
+
 		return nil
 
 	}
+	//sort array: whitePieces.sort(by: { $1.location < $0.location })
+
 	
 }

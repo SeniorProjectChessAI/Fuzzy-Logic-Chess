@@ -61,8 +61,8 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	var AIPreviousVictimTileColor: UIColor?
 	// for randomMove()
 	var isRandom:Bool = true
-	var kingCellsInDanger: [Int]?
-	var movesToKing: [AIMove] = []
+	var imminentKingAttacks: [Int]? = []
+	var kingThreats: [AIMove]? = []
 	var retreatMove: AIMove? = nil
 	
 	override func viewDidLoad() {
@@ -104,7 +104,6 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		blackGraveyard.collectionViewLayout = layout2
 		
 		board.setup()
-		
 		startGame()
 	}
 	
@@ -133,13 +132,14 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		
 		updateTurnDisplay()
 		//AppDelegate.menu_bool = true
-		AIKing = nil
-		 kingCellsInDanger = []
-		 movesToKing = []
+		 imminentKingAttacks = []
+		kingThreats = []
 		 retreatMove = nil
 		currentTeam = Team.White
 		legalMoves = []
 		turnCounter = 0
+		AIKing = board.getPieceAtLocation(location: 4)
+
 	}
 	
 	func restartGame() {
@@ -164,7 +164,6 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	func endGame(winner: Team) {
 		let winMessage = ["winMessage" : "\(winner.rawValue) Wins"]
 		showPopup()
-		
 		// send winMessage to PopupViewController
 		NotificationCenter.default.post(name: Notification.Name(rawValue: "winMessage"), object: nil, userInfo: winMessage)
 	}
@@ -326,156 +325,174 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 
 		aiWaitingSymbol.alpha = 0
 		aiWaitingText.alpha = 0
-		if (AIKing == nil){
-			getKingsVulnerableCells(board: board)
-		}
-		 kingCellsInDanger = getKingCellsInDanger(board: board)
-		 movesToKing = getKingThreats(board: board)
-		 retreatMove = kingRetreatMove(board: board)
-		if (kingCellsInDanger != nil || movesToKing.count > 0){
-			var defendMove: AIMove!
+
+		imminentKingAttacks = cellsCanAttackAIKing(board: board)
+		kingThreats = getKingThreats(board: board)
+
+		var defendMove: AIMove!
+		print("imminent king attacks: \(imminentKingAttacks != nil)")
+		print("king threats: \(kingThreats!.count)")
+
+		if(imminentKingAttacks != nil){
+			print("imminent attack")
+			defendMove = getKingRescueMove(board: board, cellsInDanger: imminentKingAttacks!, turnCounter: turnCounter)
+		} else if ((kingThreats?.count)! > 0){
+			print("king threat")
+			retreatMove = kingRetreatMove(board: board)
 			if (retreatMove != nil){//move king backward if possible
+				print("retreating from king threat")
+				
 				defendMove = retreatMove
-			}
-			else if (kingCellsInDanger != nil){
-				defendMove = getKingRescueMove(board: board, cellsInDanger: kingCellsInDanger!, turnCounter: turnCounter)
 			} else {
-				defendMove = defendKing(board: board, threatMoves: movesToKing, turnCounter: turnCounter)
+				print("defending king threat")
+
+				defendMove = defendKing(board: board, threatMoves: kingThreats!, turnCounter: turnCounter)
 				defendMove = (defendMove == nil) ? getBestLegalMoves(board: board, thisTeam: Team.Black, turnCounter: turnCounter).first: defendMove
 				//if defendmove nil, return any move to avoid crash
 			}
-
-			let fromPos = defendMove.oldPos
-			let toPos = defendMove.newPos
-			let fromTile = board.cellForItem(at: IndexPath(row: fromPos, section: 0)) as! Tile
-			let toTile = board.cellForItem(at: IndexPath(row: toPos, section: 0)) as! Tile
-			let dieRollNotNeeded: Bool = defendMove.attackedPiece?.type == PieceType.Pawn && (fromTile.piece!.type == PieceType.King || fromTile.piece!.type == PieceType.Queen)
+		} else {
+			print("making a regular move")
 			
-			if (defendMove.isAttackMove && !dieRollNotNeeded){//if best move is an attack
-				defendMove.pieceToMove.firstMove = FirstAction.Attacked
-				AIPreviousAttackTileColor = fromTile.backgroundColor
-				AIPreviousVictimTileColor = toTile.backgroundColor
-				fromTile.backgroundColor = UIColor.yellow
-				toTile.backgroundColor = UIColor.magenta
-				toTile.legalMoveView.tintColor = UIColor.black
-				toTile.showLegalMoveView(show: true)
-				toTile.MinRollLabel.alpha = 1
-				let lowestRollNeeded = fromTile.piece?.getMinRollNeeded(pieceToAttack: (toTile.piece?.type)!)
-				toTile.setMinRollLabel(minRoll: lowestRollNeeded!)
-				
-				isDieRolling = true
-				dieTimer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(rollDie), userInfo: fromTile, repeats: true)
-				
-				attacker = defendMove.pieceToMove.type
-				attackerTeam = defendMove.pieceToMove.team
-				victim = defendMove.attackedPiece!.type
-				victimTeam = defendMove.attackedPiece!.team
-				DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
-					self.afterDieRollAI(fromPos:fromPos,toPos:toPos,chosenMove:defendMove)
-				})
-				
-			} else {
-				if (dieRollNotNeeded){
-					defendMove.pieceToMove.firstMove = FirstAction.Attacked
-					sendToGraveyard(piece:board.getPieceAtLocation(location: toPos)!)
-				} else {
-					defendMove.pieceToMove.firstMove = FirstAction.Moved
-				}
-				board.getPieceAtLocation(location: toPos)?.location = 64
-
-				let moveFromTile = board.cellForItem(at: IndexPath(row: fromPos, section: 0)) as! Tile
-				moveFromTile.removePiece()
-				let moveToTile = board.cellForItem(at: IndexPath(row: toPos, section: 0)) as! Tile
-				moveToTile.setPiece(piece: defendMove.pieceToMove)
-				if (turnCounter == 2){//if finished ai's first turn, increase turncounter, do 2nd turn
-					aiWaitingSymbol.alpha = 1
-					aiWaitingText.alpha = 1
-					turnCounter += 1
-					updateTurnDisplay()
-					turnCounter -= 1
-					DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
-						self.turnCounter += 1
-						self.AITurn()
-					})
-					
-				} else if (turnCounter == 3){//if second turn, reset turncounter
-					turnCounter = 0
-					updateTurnDisplay()
-				}
-				print("turncounter after move is \(turnCounter)")
-				
+			var legalMovesArray = getBestLegalMoves(board: board, thisTeam: Team.Black, turnCounter:turnCounter)
+			legalMovesArray.sort(by: { $1.moveBenefit > $0.moveBenefit })
+			for l in legalMovesArray{
+				print("move: \(l.pieceToMove.type) at \(l.oldPos) to \(l.newPos) with benefit value \(l.moveBenefit)")
 			}
-			
+			defendMove = getMoveByDifficulty(movesArray: legalMovesArray, difficulty: DIFFICULTY)
+			print("chosen move: \(defendMove.pieceToMove.type) at \(defendMove.oldPos) to \(defendMove.newPos) with benefit value \(defendMove.moveBenefit). \(defendMove.isAttackMove ? "This is an attack move":"")")
 		}
-			
-		else {//if King not in harms way
-			let legalMovesArray = getBestLegalMoves(board: board, thisTeam: Team.Black, turnCounter:turnCounter)
-			let chosenMove: AIMove = getMoveByDifficulty(movesArray: legalMovesArray, difficulty: DIFFICULTY)
-			let weakSpots = getKingsVulnerableCells(board: board)//returns empty cells neighboring the King
-//			print("chosen move: \(chosenMove.pieceToMove) at \(chosenMove.oldPos) \(chosenMove.isAttackMove ? "is attacking \(chosenMove.attackedPiece)":"--> \(chosenMove.newPos)")")
-			let fromPos = chosenMove.oldPos
-			let toPos = chosenMove.newPos
-			let fromTile = board.cellForItem(at: IndexPath(row: fromPos, section: 0)) as! Tile
-			let toTile = board.cellForItem(at: IndexPath(row: toPos, section: 0)) as! Tile
-			let dieRollNotNeeded: Bool = chosenMove.attackedPiece?.type == PieceType.Pawn && (fromTile.piece!.type == PieceType.King || fromTile.piece!.type == PieceType.Queen)
-//			print("chosen move attacked piece: \(chosenMove.attackedPiece?.type). \(dieRollNotNeeded ? "dieRoll not needed":"die roll needed")")
-			if (chosenMove.isAttackMove && !dieRollNotNeeded){//if best move is an attack
-				chosenMove.pieceToMove.firstMove = FirstAction.Attacked
-				AIPreviousAttackTileColor = fromTile.backgroundColor
-				AIPreviousVictimTileColor = toTile.backgroundColor
-				fromTile.backgroundColor = UIColor.yellow
-				toTile.backgroundColor = UIColor.magenta
-				toTile.legalMoveView.tintColor = UIColor.black
-				toTile.showLegalMoveView(show: true)
-				toTile.MinRollLabel.alpha = 1
-				let lowestRollNeeded = fromTile.piece?.getMinRollNeeded(pieceToAttack: (toTile.piece?.type)!)
-				toTile.setMinRollLabel(minRoll: lowestRollNeeded!)
-
+				
+				let fromPos = defendMove.oldPos
+				let toPos = defendMove.newPos
+				let fromTile = board.cellForItem(at: IndexPath(row: fromPos, section: 0)) as! Tile
+				let toTile = board.cellForItem(at: IndexPath(row: toPos, section: 0)) as! Tile
+				let dieRollNotNeeded: Bool = defendMove.attackedPiece?.type == PieceType.Pawn && (fromTile.piece!.type == PieceType.King || fromTile.piece!.type == PieceType.Queen)
+				
+				if (defendMove.isAttackMove && !dieRollNotNeeded){//if best move is an attack
+					defendMove.pieceToMove.firstMove = FirstAction.Attacked
+					AIPreviousAttackTileColor = fromTile.backgroundColor
+					AIPreviousVictimTileColor = toTile.backgroundColor
+					fromTile.backgroundColor = UIColor.yellow
+					toTile.backgroundColor = UIColor.magenta
+					toTile.legalMoveView.tintColor = UIColor.black
+					toTile.showLegalMoveView(show: true)
+					toTile.MinRollLabel.alpha = 1
+					let lowestRollNeeded = fromTile.piece?.getMinRollNeeded(pieceToAttack: (toTile.piece?.type)!)
+					toTile.setMinRollLabel(minRoll: lowestRollNeeded!)
+					
 					isDieRolling = true
 					dieTimer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(rollDie), userInfo: fromTile, repeats: true)
 					
-					attacker = chosenMove.pieceToMove.type
-					attackerTeam = chosenMove.pieceToMove.team
-					victim = chosenMove.attackedPiece!.type
-					victimTeam = chosenMove.attackedPiece!.team
+					attacker = defendMove.pieceToMove.type
+					attackerTeam = defendMove.pieceToMove.team
+					victim = defendMove.attackedPiece!.type
+					victimTeam = defendMove.attackedPiece!.team
 					DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
-						self.afterDieRollAI(fromPos:fromPos,toPos:toPos,chosenMove:chosenMove)
-					})
-
-			} else{
-				if (dieRollNotNeeded){
-					chosenMove.pieceToMove.firstMove = FirstAction.Attacked
-					sendToGraveyard(piece:board.getPieceAtLocation(location: toPos)!)
-				} else {
-					chosenMove.pieceToMove.firstMove = FirstAction.Moved
-				}
-				board.getPieceAtLocation(location: toPos)?.location = 64
-
-				let moveFromTile = board.cellForItem(at: IndexPath(row: fromPos, section: 0)) as! Tile
-				moveFromTile.removePiece()
-				let moveToTile = board.cellForItem(at: IndexPath(row: toPos, section: 0)) as! Tile
-				moveToTile.setPiece(piece: chosenMove.pieceToMove)
-				if (turnCounter == 2){//if finished ai's first turn, increase turncounter, do 2nd turn
-					aiWaitingSymbol.alpha = 1
-					aiWaitingText.alpha = 1
-					turnCounter += 1
-					updateTurnDisplay()
-					turnCounter -= 1
-					DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
-						self.turnCounter += 1
-						self.AITurn()
+						self.afterDieRollAI(fromPos:fromPos,toPos:toPos,chosenMove:defendMove)
 					})
 					
-				} else if (turnCounter == 3){//if second turn, reset turncounter
-					turnCounter = 0
-					updateTurnDisplay()
+				} else {
+					if (dieRollNotNeeded){
+						defendMove.pieceToMove.firstMove = FirstAction.Attacked
+						sendToGraveyard(piece:board.getPieceAtLocation(location: toPos)!)
+					} else {
+						defendMove.pieceToMove.firstMove = FirstAction.Moved
+					}
+					board.getPieceAtLocation(location: toPos)?.location = 64
+					
+					let moveFromTile = board.cellForItem(at: IndexPath(row: fromPos, section: 0)) as! Tile
+					moveFromTile.removePiece()
+					let moveToTile = board.cellForItem(at: IndexPath(row: toPos, section: 0)) as! Tile
+					moveToTile.setPiece(piece: defendMove.pieceToMove)
+					if (turnCounter == 2){//if finished ai's first turn, increase turncounter, do 2nd turn
+						aiWaitingSymbol.alpha = 1
+						aiWaitingText.alpha = 1
+						turnCounter += 1
+						updateTurnDisplay()
+						turnCounter -= 1
+						DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
+							self.turnCounter += 1
+							self.AITurn()
+						})
+						
+					} else if (turnCounter == 3){//if second turn, reset turncounter
+						turnCounter = 0
+						updateTurnDisplay()
+					}
+					print("turncounter after move is \(turnCounter)")
+					
 				}
-				print("turncounter after move is \(turnCounter)")
-				
 			}
+	
+		
 			
-		}
-	}
+//		else {//if King not in harms way
+//			let legalMovesArray = getBestLegalMoves(board: board, thisTeam: Team.Black, turnCounter:turnCounter)
+//			let chosenMove: AIMove = getMoveByDifficulty(movesArray: legalMovesArray, difficulty: DIFFICULTY)
+////			print("chosen move: \(chosenMove.pieceToMove) at \(chosenMove.oldPos) \(chosenMove.isAttackMove ? "is attacking \(chosenMove.attackedPiece)":"--> \(chosenMove.newPos)")")
+//			let fromPos = chosenMove.oldPos
+//			let toPos = chosenMove.newPos
+//			let fromTile = board.cellForItem(at: IndexPath(row: fromPos, section: 0)) as! Tile
+//			let toTile = board.cellForItem(at: IndexPath(row: toPos, section: 0)) as! Tile
+//			let dieRollNotNeeded: Bool = chosenMove.attackedPiece?.type == PieceType.Pawn && (fromTile.piece!.type == PieceType.King || fromTile.piece!.type == PieceType.Queen)
+////			print("chosen move attacked piece: \(chosenMove.attackedPiece?.type). \(dieRollNotNeeded ? "dieRoll not needed":"die roll needed")")
+//			if (chosenMove.isAttackMove && !dieRollNotNeeded){//if best move is an attack
+//				chosenMove.pieceToMove.firstMove = FirstAction.Attacked
+//				AIPreviousAttackTileColor = fromTile.backgroundColor
+//				AIPreviousVictimTileColor = toTile.backgroundColor
+//				fromTile.backgroundColor = UIColor.yellow
+//				toTile.backgroundColor = UIColor.magenta
+//				toTile.legalMoveView.tintColor = UIColor.black
+//				toTile.showLegalMoveView(show: true)
+//				toTile.MinRollLabel.alpha = 1
+//				let lowestRollNeeded = fromTile.piece?.getMinRollNeeded(pieceToAttack: (toTile.piece?.type)!)
+//				toTile.setMinRollLabel(minRoll: lowestRollNeeded!)
+//
+//					isDieRolling = true
+//					dieTimer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(rollDie), userInfo: fromTile, repeats: true)
+//
+//					attacker = chosenMove.pieceToMove.type
+//					attackerTeam = chosenMove.pieceToMove.team
+//					victim = chosenMove.attackedPiece!.type
+//					victimTeam = chosenMove.attackedPiece!.team
+//					DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
+//						self.afterDieRollAI(fromPos:fromPos,toPos:toPos,chosenMove:chosenMove)
+//					})
+//
+//			} else{
+//				if (dieRollNotNeeded){
+//					chosenMove.pieceToMove.firstMove = FirstAction.Attacked
+//					sendToGraveyard(piece:board.getPieceAtLocation(location: toPos)!)
+//				} else {
+//					chosenMove.pieceToMove.firstMove = FirstAction.Moved
+//				}
+//				board.getPieceAtLocation(location: toPos)?.location = 64
+//
+//				let moveFromTile = board.cellForItem(at: IndexPath(row: fromPos, section: 0)) as! Tile
+//				moveFromTile.removePiece()
+//				let moveToTile = board.cellForItem(at: IndexPath(row: toPos, section: 0)) as! Tile
+//				moveToTile.setPiece(piece: chosenMove.pieceToMove)
+//				if (turnCounter == 2){//if finished ai's first turn, increase turncounter, do 2nd turn
+//					aiWaitingSymbol.alpha = 1
+//					aiWaitingText.alpha = 1
+//					turnCounter += 1
+//					updateTurnDisplay()
+//					turnCounter -= 1
+//					DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
+//						self.turnCounter += 1
+//						self.AITurn()
+//					})
+//
+//				} else if (turnCounter == 3){//if second turn, reset turncounter
+//					turnCounter = 0
+//					updateTurnDisplay()
+//				}
+//				print("turncounter after move is \(turnCounter)")
+//
+//			}
+//
+//		}
+	
 	
 	
 	func playersTurn(indexPath: IndexPath) {
@@ -578,7 +595,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 					var pieceCount = 0
 					for bp in board.blackPieces{
 						if (bp.location == 64){
-							print("removedPiece: \(bp.type) at \(bp.location)")
+							//print("removedPiece: \(bp.type) at \(bp.location)")
 							board.blackPieces.remove(at: pieceCount)
 							break
 						}
