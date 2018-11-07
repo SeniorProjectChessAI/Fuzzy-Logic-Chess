@@ -339,6 +339,8 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		if(imminentKingAttacks != nil){
 			//print("imminent attack")
 			chosenMove = getKingRescueMove(board: board, cellsInDanger: imminentKingAttacks!, turnCounter: turnCounter)
+
+
 		} else if ((kingThreats?.count)! > 0){
 			//print("king threat")
 			retreatMove = kingRetreatMove(board: board)
@@ -350,7 +352,8 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 				//print("defending king threat")
 
 				chosenMove = defendKing(board: board, threatMoves: kingThreats!, turnCounter: turnCounter)
-				chosenMove = (chosenMove == nil) ? getBestLegalMoves(board: board, thisTeam: Team.Black, turnCounter: turnCounter).first: chosenMove
+
+
 				//if defendmove nil, return any move to avoid crash
 			}
 		} else {
@@ -364,7 +367,8 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 			chosenMove = getMoveByDifficulty(movesArray: legalMovesArray, difficulty: DIFFICULTY)
 			//print("chosen move: \(defendMove.pieceToMove.type) at \(defendMove.oldPos) to \(defendMove.newPos) with benefit value \(defendMove.moveBenefit). \(defendMove.isAttackMove ? "This is an attack move":"")")
 		}
-				
+			chosenMove = (chosenMove == nil) ? getBestLegalMoves(board: board, thisTeam: Team.Black, turnCounter: turnCounter).first: chosenMove
+	
 				let fromPos = chosenMove.oldPos
 				let toPos = chosenMove.newPos
 				let fromTile = board.cellForItem(at: IndexPath(row: fromPos, section: 0)) as! Tile
@@ -775,14 +779,12 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 			dieCounter -= 1
 			last_rolled = d6.nextInt()
 			
-			/* for testing purposes
 			if (attackerTeam == Team.White) {
 			last_rolled = 6
 			}
 			else {
 			last_rolled = 1
 			}
-			*/
 			
 			displayDie(num: last_rolled)
 		} else {

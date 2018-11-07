@@ -235,7 +235,6 @@ func getKingRescueMove(board:Board,cellsInDanger:[Int], turnCounter: Int)->AIMov
 		}
 	}
 	var rescueMoves: [AIMove] = []
-	if (turnCounter == 2){
 		var surroundingCells = kingAttacker.getSurroundingCells(board: board)
 		var i: Int = 0
 		var j: Int = 0 //adjust index based on how many objects have been removed
@@ -249,7 +248,7 @@ func getKingRescueMove(board:Board,cellsInDanger:[Int], turnCounter: Int)->AIMov
 		}
 		for s in surroundingCells{
 			let heroPiece: Piece = board.getPieceAtLocation(location: s)!
-			if (heroPiece.team == Team.Black){//attack risk should really only be considered if a piece can attack you back
+			if (heroPiece.team == Team.Black && heroPiece.getCanAttack()){//attack risk should really only be considered if a piece can attack you back
 				let attackBenefit:Double = Double(kingAttacker.pieceValue) * Double(7 - heroPiece.getMinRollNeeded(pieceToAttack: kingAttacker.type))/6.0
 				let attackRisk:Double = Double(heroPiece.pieceValue) * Double(7 - kingAttacker.getMinRollNeeded(pieceToAttack: heroPiece.type))/6.0
 				//print("The benefit of moving \(heroPiece.type) at \(heroPiece.location) to \(attackBenefit - attackRisk)")
@@ -259,7 +258,7 @@ func getKingRescueMove(board:Board,cellsInDanger:[Int], turnCounter: Int)->AIMov
 		}
 		for b in board.blackPieces{//get AI pieces that can move then attack kingattacker
 			for lm in getLegalMovesForPiece(board: board, thisPiece: b){
-				if surroundingCells.contains(lm){
+				if kingAttacker.getSurroundingCells(board:board).contains(lm){
 					let attackBenefit:Double = Double(kingAttacker.pieceValue) * Double(7 - b.getMinRollNeeded(pieceToAttack: kingAttacker.type))/6.0
 					let attackRisk:Double = Double(b.pieceValue) * Double(7 - kingAttacker.getMinRollNeeded(pieceToAttack: b.type))/6.0
 					//print("The benefit of moving \(b.type) at \(b.location) to \(attackBenefit - attackRisk)")
@@ -295,38 +294,7 @@ func getKingRescueMove(board:Board,cellsInDanger:[Int], turnCounter: Int)->AIMov
 			}
 
 		}
-	} else if (turnCounter == 3){
-		var surroundingCells = kingAttacker.getSurroundingCells(board: board)
-		var i: Int = 0
-		var j: Int = 0 //adjust index based on how many objects have been removed
-		for s in surroundingCells{
-			if (board.getPieceAtLocation(location: s) == nil || board.getPieceAtLocation(location: s)?.team != Team.Black){
-				//only objects in array should be indexes of cells occupied by enemy (white) pieces
-				surroundingCells.remove(at: i-j)
-				j += 1
-			}
-			i += 1
-		}
-		for s in surroundingCells{
-			let heroPiece: Piece = board.getPieceAtLocation(location: s)!
-			if (heroPiece.team == Team.Black && heroPiece.getCanAttack()){//attack risk should really only be considered if a piece can attack you back
-				let attackBenefit:Double = Double(kingAttacker.pieceValue) * Double(7 - heroPiece.getMinRollNeeded(pieceToAttack: kingAttacker.type))/6.0
-				let attackRisk:Double = Double(heroPiece.pieceValue) * Double(7 - kingAttacker.getMinRollNeeded(pieceToAttack: heroPiece.type))/6.0
-				//print("The benefit of moving \(heroPiece.type) at \(heroPiece.location) to \(attackBenefit - attackRisk)")
-
-				rescueMoves.append(AIMove(pieceToMove: heroPiece, attackedPiece: kingAttacker, oldPos: s, newPos: kingAttacker.location, isAttackMove: true, moveBenefit: attackBenefit - attackRisk))
-			}
-		}
-		var bestAttk: AIMove?
-		var bestAttkVal: Double = 0.0
-		for r in rescueMoves{
-				if(r.moveBenefit > bestAttkVal){
-					bestAttkVal = r.moveBenefit
-					bestAttk = r
-			}
-		}
-		return bestAttk!
-	}
+	
 	return rescueMoves.first!
 }
 
