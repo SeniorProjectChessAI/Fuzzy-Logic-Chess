@@ -556,18 +556,18 @@ func getMoveByDifficulty(movesArray:[AIMove],difficulty:Int)->AIMove{
 				count += 1
 			}
 
-			if(sortedMoves.count >= 3) {
+			if(sortedMoves.count >= 5) {
 				// set minIndex and maxIndex to the middle 1/3 set of the array
-				let subsetLength = ((sortedMoves.count - minIndex) / 3)
-				minIndex = minIndex + subsetLength
-				maxIndex = (sortedMoves.count - 1) - subsetLength
+				let subsetLength = ((sortedMoves.count - minIndex) / 5)
+				minIndex = (sortedMoves.count - 1) - subsetLength //minIndex + subsetLength
+				maxIndex = (sortedMoves.count - 1) // - subsetLength ----->> nobody will attack king until end of game
 			
 				if(minIndex >= 0 && maxIndex < sortedMoves.count) {
 					let newMovesArray = sortedMoves[minIndex...maxIndex]
 					chosenAIMove = newMovesArray.randomElement()!
 				}
 			} else if (sortedMoves.count > 1) {
-				chosenAIMove = sortedMoves.randomElement()!
+				chosenAIMove = sortedMoves.last!
 			}
 			
 		print("medium mode")
