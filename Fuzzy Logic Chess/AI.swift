@@ -329,7 +329,7 @@ func getBestLegalMoves(board:Board,thisTeam:Team,turnCounter:Int)->[AIMove]{
 			var largestAttackBenefit: Double = 0.0
 			for s in (p.getSurroundingCells(board: board)){//finds largest benefit of attack moves around piece
 				let pieceAtCell: Piece? = board.getPieceAtLocation(location: s)
-				if (pieceAtCell != nil && pieceAtCell?.team != thisTeam){
+				if (pieceAtCell != nil && pieceAtCell?.team != thisTeam && pieceAtCell?.location != 64){
 
 					//print("piece can attack piece at \(s)")
 					let attackProb: Double = Double(7 - p.getMinRollNeeded(pieceToAttack: pieceAtCell!.type))/6.0
@@ -423,21 +423,24 @@ func getBestLegalMoves(board:Board,thisTeam:Team,turnCounter:Int)->[AIMove]{
 			}
 			if (largestMoveBenefit == 0){
 				for f in board.aiFirstWavePieces{
-					for lm in getLegalMovesForPiece(board: board, thisPiece: f){
-						if (board.getPieceAtLocation(location: lm) == nil){
-							let randomVal = Double(GKRandomDistribution.init(lowestValue: 0, highestValue: 10).nextInt())
-							let oldRow = f.location / 8
-							let newRow = lm / 8
-							//print("random ben: \(randomBenefit)")
-							if (newRow > oldRow){//don't add any moves that have piece moving backward
-								availableMoves.append(AIMove(pieceToMove: f, attackedPiece: nil, oldPos: f.location, newPos: lm, isAttackMove: false, moveBenefit:randomVal))
-
+					if ( f.location != 64){
+						for lm in getLegalMovesForPiece(board: board, thisPiece: f){
+							if (board.getPieceAtLocation(location: lm) == nil){
+								let randomVal = Double(GKRandomDistribution.init(lowestValue: 0, highestValue: 10).nextInt())
+								let oldRow = f.location / 8
+								let newRow = lm / 8
+								//print("random ben: \(randomBenefit)")
+								if (newRow > oldRow){//don't add any moves that have piece moving backward
+									availableMoves.append(AIMove(pieceToMove: f, attackedPiece: nil, oldPos: f.location, newPos: lm, isAttackMove: false, moveBenefit:randomVal))
+									
+								}
 							}
+							
 						}
-
 					}
+
 				}
-			} else if (largestMoveBenefit > 0) {
+			} else if (largestMoveBenefit > 0 && p.location != 64) {
 				availableMoves.append(AIMove(pieceToMove: p, attackedPiece: nil, oldPos: p.location, newPos: bestMove, isAttackMove: false,moveBenefit:largestMoveBenefit))
 			}
 		}
