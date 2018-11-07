@@ -70,8 +70,8 @@ func getKingThreats(board:Board)->[AIMove]{
 
 
 //when a piece is in striking distance but not directly next to AIKing
-func defendKing(board:Board, threatMoves:[AIMove],turnCounter:Int)->AIMove{
-	let start = NSDate()
+func defendKing(board:Board, threatMoves:[AIMove],turnCounter:Int)->AIMove?{
+	//let start = NSDate()
 	var defenseMove: AIMove?
 	var greatestThreatMove: AIMove = threatMoves.first!
 	for t in threatMoves{//finds and returns the aimove with the greatest movebenefit (in this case attack prob)
@@ -168,9 +168,7 @@ func defendKing(board:Board, threatMoves:[AIMove],turnCounter:Int)->AIMove{
 						bestMove = a
 					}
 				}
-
 			}
-	
 
 	if (turnCounter == 2){//find best move or attack based on benefit
 		defenseMove = (bestAttackBen + nextBestAttackBen > bestMoveBen) ? bestAttack : bestMove
@@ -181,18 +179,19 @@ func defendKing(board:Board, threatMoves:[AIMove],turnCounter:Int)->AIMove{
 			defenseMove = bestMove
 		}
 	} 	
-	if (defenseMove == nil){
-		
-	}
+
 	
 	//print("king in danger! suggested move: move\(defenseMove?.pieceToMove.type) at \(defenseMove?.oldPos) to \(defenseMove?.newPos). This move is an attack: \(defenseMove?.isAttackMove)")
 	
-	
-	let end = NSDate()
-	let _: Double = end.timeIntervalSince(start as Date) // <<<<< Difference in seconds (double)
+//
+//	let end = NSDate()
+//	let _: Double = end.timeIntervalSince(start as Date) // <<<<< Difference in seconds (double)
 	
 	//print("king defense took \(timeInterval) seconds")
-	return defenseMove!
+	if (defenseMove != nil){
+		return defenseMove
+	}
+	return nil
 }
 //**finds the greatest threat move based on the move that has the greatest benefit (could sort by largest and return first element)
 //sees if there's a single move that eliminates all threats to king, if not will find move with largest reduction
@@ -266,7 +265,7 @@ func getKingRescueMove(board:Board,cellsInDanger:[Int], turnCounter: Int)->AIMov
 				}
 			}
 		}
-	if (rescueMoves != nil){
+	if (rescueMoves.count > 0){
 		var bestAttk: AIMove = rescueMoves.first!
 		var bestAttkVal: Double = 0.0
 		var nextBestAttkVal: Double = 0.0

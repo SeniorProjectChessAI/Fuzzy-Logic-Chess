@@ -328,7 +328,11 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 
 		aiWaitingSymbol.alpha = 0
 		aiWaitingText.alpha = 0
-
+//		if indexPath.row % 2 == 0 {
+//			tile.backgroundColor = evenColor
+//		} else {
+//			tile.backgroundColor = oddColor
+//		}
 		imminentKingAttacks = cellsCanAttackAIKing(board: board)
 		kingThreats = getKingThreats(board: board)
 
@@ -411,6 +415,9 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 					moveFromTile.removePiece()
 					let moveToTile = board.cellForItem(at: IndexPath(row: toPos, section: 0)) as! Tile
 					moveToTile.setPiece(piece: chosenMove.pieceToMove)
+//					moveFromTile.backgroundColor = UIColor.init(displayP3Red: 0.0/255.0, green: 0.0/255.0, blue: 200.0/255.0, alpha: 0.5)
+//					moveToTile.backgroundColor = UIColor.init(displayP3Red: 200.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.5)
+
 					if (turnCounter == 2){//if finished ai's first turn, increase turncounter, do 2nd turn
 						aiWaitingSymbol.alpha = 1
 						aiWaitingText.alpha = 1
