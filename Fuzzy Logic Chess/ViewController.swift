@@ -902,6 +902,10 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		toTile.showLegalMoveView(show: false)
 		if attackResult() == false { // if attack is NOT successfull
 			print("Attack Failed! - piece NOT moved")
+			if (previousToTile != nil){
+				revertTileColor(tile: fromTile)
+				revertTileColor(tile: toTile)
+			}
 		}
 		else {
 			fromTile.backgroundColor = UIColor.init(displayP3Red: 112/255, green: 224/255, blue: 108/255, alpha: 1)
