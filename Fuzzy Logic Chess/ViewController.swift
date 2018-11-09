@@ -28,8 +28,8 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	@IBOutlet weak var turnBallBlack2: UIImageView!
 
 	// board variables
-	let light = UIColor.init(displayP3Red: 142.0/255.0, green: 109.0/255.0, blue: 67/255.0, alpha: 1.0)
-	let dark = UIColor.init(displayP3Red: 54.0/255.0, green: 38.0/255.0, blue: 19.0/255.0, alpha: 1.0)
+	var light = UIColor.init()
+	var dark = UIColor.init()
 	let whitePieceColor = UIColor.init(displayP3Red: 186.0/255.0, green: 166.0/255.0, blue: 136.0/255.0, alpha: 1.0)
 	let darkPieceColor = UIColor.init(displayP3Red: 54.0/255.0, green: 38.0/255.0, blue: 19.0/255.0, alpha: 1.0)
 	var evenColor = UIColor.init()
@@ -57,14 +57,15 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	var gyCellWidth : CGFloat!
 	var blackPiecesRemoved = 0
 	var whitePiecesRemoved = 0
-	var AIPreviousAttackTileColor: UIColor?
-	var AIPreviousVictimTileColor: UIColor?
+
 	// for randomMove()
 	var isRandom:Bool = true
 	var imminentKingAttacks: [Int]? = []
 	var kingThreats: [AIMove]? = []
 	var retreatMove: AIMove? = nil
-	
+	var previousFromTile: Tile?
+	var previousToTile: Tile?
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -117,8 +118,16 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 			
 			switch(DIFFICULTY) {
 			case 1: difficulty = "Medium"
+				 light = UIColor.init(displayP3Red: 234.0/255.0, green: 243.0/255.0, blue: 248.0/255.0, alpha: 1.0)
+				 dark = UIColor.init(displayP3Red: 116/255.0, green: 134/255.0, blue: 165/255.0, alpha: 1.0)
+
 			case 2: difficulty = "Hard"
+				light = UIColor.init(displayP3Red: 230/255.0, green: 223/255.0, blue: 226/255.0, alpha: 1.0)
+				dark = UIColor.init(displayP3Red: 132/255.0, green: 99/255.0, blue: 110/255.0, alpha: 1.0)
+
 			default: difficulty = "Easy"
+			light = UIColor.init(displayP3Red: 210.0/255.0, green: 215.0/255.0, blue: 208/255.0, alpha: 1.0)
+			dark = UIColor.init(displayP3Red: 114.0/255.0, green: 135.0/255.0, blue: 112.0/255.0, alpha: 1.0)
 			}
 			
 			blackTeamLabel.text = "AI (\(difficulty))"
@@ -126,6 +135,8 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 			
 		} else {
 			// Two Player Game
+			light = UIColor.init(displayP3Red: 234/255.0, green: 230/255.0, blue: 244/255.0, alpha: 1.0)
+			dark = UIColor.init(displayP3Red: 131/255.0, green: 111/255.0, blue: 134/255.0, alpha: 1.0)
 		}
 		
 		setGameColors()
@@ -328,11 +339,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 
 		aiWaitingSymbol.alpha = 0
 		aiWaitingText.alpha = 0
-//		if indexPath.row % 2 == 0 {
-//			tile.backgroundColor = evenColor
-//		} else {
-//			tile.backgroundColor = oddColor
-//		}
+
 		imminentKingAttacks = cellsCanAttackAIKing(board: board)
 		kingThreats = getKingThreats(board: board)
 
@@ -372,17 +379,27 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 			//print("chosen move: \(defendMove.pieceToMove.type) at \(defendMove.oldPos) to \(defendMove.newPos) with benefit value \(defendMove.moveBenefit). \(defendMove.isAttackMove ? "This is an attack move":"")")
 		}
 			chosenMove = (chosenMove == nil) ? getBestLegalMoves(board: board, thisTeam: Team.Black, turnCounter: turnCounter).first: chosenMove
-	
+
 				let fromPos = chosenMove.oldPos
 				let toPos = chosenMove.newPos
+		
+				if (previousToTile != nil){
+					revertTileColor(tile: previousFromTile!)
+					revertTileColor(tile: previousToTile!)
+				}
+
 				let fromTile = board.cellForItem(at: IndexPath(row: fromPos, section: 0)) as! Tile
 				let toTile = board.cellForItem(at: IndexPath(row: toPos, section: 0)) as! Tile
+				previousFromTile = fromTile
+				previousToTile = toTile
+				fromTile.backgroundColor = UIColor.init(displayP3Red: 112/255, green: 224/255, blue: 108/255, alpha: 1)
+				toTile.backgroundColor = UIColor.init(displayP3Red: 112/255, green: 224/255, blue: 108/255, alpha: 1)
+
 				let dieRollNotNeeded: Bool = chosenMove.attackedPiece?.type == PieceType.Pawn && (fromTile.piece!.type == PieceType.King || fromTile.piece!.type == PieceType.Queen)
 				
 				if (chosenMove.isAttackMove && !dieRollNotNeeded){//if best move is an attack
 					chosenMove.pieceToMove.firstMove = FirstAction.Attacked
-					AIPreviousAttackTileColor = fromTile.backgroundColor
-					AIPreviousVictimTileColor = toTile.backgroundColor
+
 					fromTile.backgroundColor = UIColor.yellow
 					toTile.backgroundColor = UIColor.magenta
 					toTile.legalMoveView.tintColor = UIColor.black
@@ -482,12 +499,21 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 			//print("victim =  \(victim)")
 			//print("victim team = \(victimTeam)")
 			//print("previous index: \(previouslySelectedTileIndex)")
-			
+
 			let previousTile = board.cellForItem(at: IndexPath(row: previouslySelectedTileIndex!, section: 0)) as! Tile
 			let tile = board.cellForItem(at: indexPath) as! Tile
 			
 			if(legalMoves.contains(indexPath.row)) {
 				//piece moved legally
+				
+				if (previousToTile != nil){
+					revertTileColor(tile: previousFromTile!)
+					revertTileColor(tile: previousToTile!)
+				}
+				
+				previousFromTile = previousTile
+				previousToTile = tile
+				
 				if (turnCounter == 0 || turnCounter == 2){
 					firstPieceMoved = previousTile.piece
 					if (tile.isEmpty()){
@@ -552,6 +578,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 					previousTile.piece?.onMove();
 					
 					// remove previously selected tile's image and restore original tile color
+
 					previousTile.removePiece()
 					previousTile.backgroundColor = previouslySelectedTileColor
 					
@@ -596,8 +623,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 				
 				legalMoves = tile.piece?.getUnfilteredMoves(board:board) ?? []
 			}
-			print(tile.piece)
-			print(previousTile.piece)
+
 			var lastPiece: Piece?
 			if (previousTile.isEmpty()){
 				lastPiece = tile.piece
@@ -807,8 +833,10 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		attack()
 		
 		if attackResult() == false { // if attack is NOT successfull
-			previousTile.backgroundColor = previouslySelectedTileColor
-			
+			if (previousToTile != nil){
+				revertTileColor(tile: previousFromTile!)
+				revertTileColor(tile: previousToTile!)
+			}
 			print("Attack Failed! - piece NOT moved")
 		}
 		else { // if attack was successful
@@ -869,14 +897,15 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		attack()
 		let fromTile = board.cellForItem(at: IndexPath(row: fromPos, section: 0)) as! Tile
 		let toTile = board.cellForItem(at: IndexPath(row: toPos, section: 0)) as! Tile
-		fromTile.backgroundColor = AIPreviousAttackTileColor
-		toTile.backgroundColor = AIPreviousVictimTileColor
+
 		toTile.MinRollLabel.alpha = 0
 		toTile.showLegalMoveView(show: false)
 		if attackResult() == false { // if attack is NOT successfull
 			print("Attack Failed! - piece NOT moved")
 		}
 		else {
+			fromTile.backgroundColor = UIColor.init(displayP3Red: 112/255, green: 224/255, blue: 108/255, alpha: 1)
+			toTile.backgroundColor = UIColor.init(displayP3Red: 112/255, green: 224/255, blue: 108/255, alpha: 1)
 			sendToGraveyard(piece: board.getPieceAtLocation(location: toPos)!)
 			if (victim == PieceType.King) {
 				endGame(winner: Team.Black)
@@ -966,6 +995,41 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	captureVC.view.frame = self.view.frame
 	self.view.addSubview(captureVC.view)
 	captureVC.didMove(toParent: self)
+	}
+	
+	func revertTileColor(tile:Tile){
+		let tileLocation:Int = (tile.location)
+		print("tile location: \(tileLocation)")
+		let isEvenRow:Bool = ((tileLocation / 8) % 2) == 0
+		let isEvenCol:Bool = ((tileLocation % 8) % 2) == 0
+		print("row count: \((tileLocation / 8) % 2)")
+		print("col count: \((tileLocation % 8) % 2)")
+		
+		if (isEvenRow){
+			if (isEvenCol){
+				tile.backgroundColor = dark
+				print("even row even column")
+
+			} else {
+				tile.backgroundColor = light
+				print("even row odd column")
+
+
+			}
+		} else if (!isEvenRow){
+			if (isEvenCol){
+				tile.backgroundColor = light
+				print("odd row even column")
+
+
+			} else {
+				tile.backgroundColor = dark
+				print("odd row odd column")
+
+
+			}
+		}
+
 	}
 	
 	

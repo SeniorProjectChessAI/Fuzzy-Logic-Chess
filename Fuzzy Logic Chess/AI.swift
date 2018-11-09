@@ -503,14 +503,18 @@ func getMoveByDifficulty(movesArray:[AIMove],difficulty:Int)->AIMove{
 	switch difficulty {
 		case 0://picks random element from moves array
 			//should be reconfigured so that it only picks a random element with a move benefit > 0
+			let sortedMoves = movesArray.sorted(by: {$0.moveBenefit < $1.moveBenefit})
+			var count = 0
+			let midwayVal: Double = Double(movesArray.count) / 1.1
 			var movesArray2 = [AIMove]();
-			for m in movesArray{
-				if m.moveBenefit >= 0{
-					movesArray2.append(m)
+			for s in sortedMoves{
+				if (Double(count) > midwayVal){
+					movesArray2.append(s)
 				}
+				count += 1
 			}
+			
 		chosenAIMove = movesArray2.randomElement()!
-		print("easy mode")
 		
 		case 1:
 			// sort movesArray by moveBenefit ASC order
@@ -542,14 +546,12 @@ func getMoveByDifficulty(movesArray:[AIMove],difficulty:Int)->AIMove{
 				chosenAIMove = sortedMoves.last!
 			}
 			
-		print("medium mode")
 		case 2:
 			for m in movesArray{//finds and returns the aimove with the greatest movebenefit
 				if (m.moveBenefit > chosenAIMove.moveBenefit){
 					chosenAIMove = m
 				}
 			}
-		print("hard mode")
 		default:
 		print("something went wrong")
 	}
