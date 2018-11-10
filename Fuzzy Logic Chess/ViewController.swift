@@ -19,6 +19,9 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	@IBOutlet weak var aiWaitingSymbol: UIActivityIndicatorView!
 	@IBOutlet weak var aiWaitingText: UITextField!
 	@IBOutlet weak var aiStackView: UIStackView!
+	@IBOutlet weak var swipeView: UIStackView!
+	@IBOutlet weak var swipeLabel: UILabel!
+	@IBOutlet weak var swipeImage: UIImageView!
 	@IBOutlet weak var blackTeamLabel: UILabel!
 	@IBOutlet weak var whiteTeamLabel: UILabel!
 	@IBOutlet weak var currentTeamLabel: UILabel!
@@ -150,6 +153,29 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		legalMoves = []
 		turnCounter = 0
 		AIKing = board.getPieceAtLocation(location: 4)
+
+
+	}
+	
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+			UIView.animate(withDuration: 1.5, animations: {
+				self.swipeImage.alpha = 1
+				self.swipeLabel.alpha = 1
+			})
+		
+//		let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
+//		if (launchedBefore)  {
+//			print("did load before")
+//
+//		} else {
+//			print("hasn't loaded before")
+//			UserDefaults.standard.set(true, forKey: "launchedBefore")
+//			UIView.animate(withDuration: 1.5, animations: {
+//				self.swipeImage.alpha = 1
+//				self.swipeLabel.alpha = 1
+//			})
+//		}
 
 	}
 	
@@ -457,6 +483,12 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 
 	
 	func playersTurn(indexPath: IndexPath) {
+		
+		UIView.animate(withDuration: 1.5, animations: {
+			self.swipeImage.alpha = 0
+			self.swipeLabel.alpha = 0
+		})
+		
 		let tile = board.cellForItem(at: indexPath) as! Tile
 		
 		//decide which array is referenced based on turncounter
