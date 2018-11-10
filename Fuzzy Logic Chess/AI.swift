@@ -531,6 +531,13 @@ func getMoveByDifficulty(movesArray:[AIMove],difficulty:Int)->AIMove{
 				}
 				count += 1
 			}
+			
+			// checks if the last move has a benefit of over 150 and returns it
+			if(sortedMoves.count > 0) {
+				if (sortedMoves.last!.moveBenefit >= 150.0) {
+					return sortedMoves.last!
+				}
+			}
 
 			if(sortedMoves.count >= 5) {
 				// set minIndex and maxIndex to the middle 1/3 set of the array
