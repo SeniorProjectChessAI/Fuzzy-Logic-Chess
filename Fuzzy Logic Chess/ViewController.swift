@@ -418,8 +418,16 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 				let toTile = board.cellForItem(at: IndexPath(row: toPos, section: 0)) as! Tile
 				previousFromTile = fromTile
 				previousToTile = toTile
+				let fromTileOriginalColor = fromTile.backgroundColor
+				let toTileOriginalColor = toTile.backgroundColor
+		
 				fromTile.backgroundColor = UIColor.init(displayP3Red: 112/255, green: 224/255, blue: 108/255, alpha: 1)
 				toTile.backgroundColor = UIColor.init(displayP3Red: 112/255, green: 224/255, blue: 108/255, alpha: 1)
+		
+				UIView.animate(withDuration: 2, animations: {
+					fromTile.backgroundColor = fromTileOriginalColor
+					toTile.backgroundColor = toTileOriginalColor
+				}, completion: nil)
 
 				let dieRollNotNeeded: Bool = chosenMove.attackedPiece?.type == PieceType.Pawn && (fromTile.piece!.type == PieceType.King || fromTile.piece!.type == PieceType.Queen)
 				
