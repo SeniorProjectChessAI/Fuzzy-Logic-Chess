@@ -45,7 +45,7 @@ class PopupViewController: UIViewController {
 		difficultyControl.selectedSegmentIndex = DIFFICULTY
 		setPlayAIButtonColors(difficulty: DIFFICULTY)
 		
-		print ("game type \(GAME_TYPE)")
+		//print ("game type \(GAME_TYPE)")
 		
 		if(GAME_TYPE == 0) {
 			if let attributedTitle = playAIButton.attributedTitle(for: .normal) {

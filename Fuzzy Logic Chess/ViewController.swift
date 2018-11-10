@@ -87,7 +87,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		// divides board collectionView into 8 columns and sets spacing
 		var screenWidth = UIScreen.main.bounds.width
 		if(screenWidth >= 710) {
-			print("SCREEN WIDTH: \(screenWidth)")
+			//print("SCREEN WIDTH: \(screenWidth)")
 			screenWidth = 710
 		}
 		let itemSize = (screenWidth - 10) / 8
@@ -183,8 +183,8 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		resetBoard()
 		startGame()
 		
-		print("---------NEW GAME---------\n")
-		print("Turn #\(turnCounter)")
+		//print("---------NEW GAME---------\n")
+		//print("Turn #\(turnCounter)")
 	}
 	
 	// Resets the board
@@ -225,7 +225,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		if let data = notification.userInfo as? [String:Int] {
 			for (_, difficulty) in data {
 				DIFFICULTY = difficulty
-				print("Popup difficulty:  \(difficulty)")
+				//print("Popup difficulty:  \(difficulty)")
 			}
 		}
 		
@@ -476,7 +476,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 						turnCounter = 0
 						updateTurnDisplay()
 					}
-					print("turncounter after move is \(turnCounter)")
+					//print("turncounter after move is \(turnCounter)")
 					
 				}
 			}
@@ -615,7 +615,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 					previousTile.backgroundColor = previouslySelectedTileColor
 					
 					
-					print("piece moved to tile \(indexPath.row) ")
+					//print("piece moved to tile \(indexPath.row) ")
 					if (turnCounter == 2 && GAME_TYPE == 0){
 						aiWaitingSymbol.alpha = 1
 						aiWaitingText.alpha = 1
@@ -630,7 +630,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 				}
 				
 				
-				print("turn #\(turnCounter)")
+				//print("turn #\(turnCounter)")
 				
 				// hide legalMoves indicators
 				hideLegalMoves()
@@ -641,7 +641,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 				previouslySelectedTileTeam = nil
 				
 			} else if (tile.piece?.team == previouslySelectedTileTeam){
-				print("Switch pieces to move")
+				//print("Switch pieces to move")
 				// remove previously selected tile's image and restore original tile color
 				previousTile.backgroundColor = previouslySelectedTileColor
 				
@@ -878,7 +878,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 			var pieceCount = 0
 			for bp in board.blackPieces{
 				if (bp.location == 64){
-					print("removedPiece: \(bp.type) at \(bp.location)")
+					//print("removedPiece: \(bp.type) at \(bp.location)")
 					board.blackPieces.remove(at: pieceCount)
 					break
 				}
@@ -900,7 +900,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 			previousTile.removePiece()
 			previousTile.backgroundColor = previouslySelectedTileColor
 			
-			print("Attack Successful! - piece moved to tile \(indexPath.row)")
+			//print("Attack Successful! - piece moved to tile \(indexPath.row)")
 			if (victimTeam == Team.Black){
 				blackPiecesRemoved += 1
 			} else if (victimTeam == Team.White) {
@@ -933,7 +933,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		toTile.MinRollLabel.alpha = 0
 		toTile.showLegalMoveView(show: false)
 		if attackResult() == false { // if attack is NOT successfull
-			print("Attack Failed! - piece NOT moved")
+			//print("Attack Failed! - piece NOT moved")
 			if (previousToTile != nil){
 				revertTileColor(tile: fromTile)
 				revertTileColor(tile: toTile)
@@ -977,7 +977,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 			updateTurnDisplay()
 			
 		}
-		print("turncounter after die roll is \(turnCounter)")
+		//print("turncounter after die roll is \(turnCounter)")
 	}
 	// Send captured piece to correct graveyard
 	func sendToGraveyard(piece: Piece) {
@@ -1035,34 +1035,23 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 	
 	func revertTileColor(tile:Tile){
 		let tileLocation:Int = (tile.location)
-		print("tile location: \(tileLocation)")
 		let isEvenRow:Bool = ((tileLocation / 8) % 2) == 0
 		let isEvenCol:Bool = ((tileLocation % 8) % 2) == 0
-		print("row count: \((tileLocation / 8) % 2)")
-		print("col count: \((tileLocation % 8) % 2)")
 		
 		if (isEvenRow){
 			if (isEvenCol){
 				tile.backgroundColor = dark
-				print("even row even column")
 
 			} else {
 				tile.backgroundColor = light
-				print("even row odd column")
-
-
 			}
 		} else if (!isEvenRow){
 			if (isEvenCol){
 				tile.backgroundColor = light
-				print("odd row even column")
 
 
 			} else {
 				tile.backgroundColor = dark
-				print("odd row odd column")
-
-
 			}
 		}
 

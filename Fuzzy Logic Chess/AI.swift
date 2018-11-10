@@ -8,6 +8,7 @@
 import GameplayKit
 
  var AIKing: Piece!//AIs king
+var bM:Int = 0 //best move
 	//get empty spots around King (can me modified for Queen as well)
 	func getKingsVulnerableCells(board:Board)->[Int]{
 		var emptySquaresNearKing = [Int]()
@@ -345,7 +346,7 @@ func getBestLegalMoves(board:Board,thisTeam:Team,turnCounter:Int)->[AIMove]{
 		}
 		//now have largest benefit of attacking without moving first
 		if (p.getCanMove()){
-			var bestMove: Int = p.location
+			let bestMove: Int = p.location
 			var largestMoveBenefit: Double = 0.0
 			for lm1 in getLegalMovesForPiece(board: board, thisPiece: p){//finds largest benefit of all legal moves
 				//check if making this move exposes king, decrease benefit of move
@@ -360,63 +361,74 @@ func getBestLegalMoves(board:Board,thisTeam:Team,turnCounter:Int)->[AIMove]{
 	
 				let firstLMPiece: Piece? = board.getPieceAtLocation(location: lm1)
 				if (firstLMPiece == nil && !moveExposesKing){
-					var attackProb: Double = 0.0 // the chance this piece will capture another
-					let denominator: Double = 6.0
-					let rowIncentive: Double = Double(lm1 / 8) / 100.0 //more benefit to spots further down board
-					var neighboringPiecesArray = [Piece]()
-					for otp in otherTeamsPieces {//builds array of other teams pieces neighboring legal move iteration
-						let dist = getTileIndexDistance(fromLocation: lm1, toLocation: otp.location)
-						if (dist == 1){
-							neighboringPiecesArray.append(otp)
-						}
+					
+				largestMoveBenefit = minMaxTraversal(lm1: lm1, otherTeamsPieces: otherTeamsPieces, p: p, turnCounter: turnCounter, largestMoveBenefit: largestMoveBenefit, bestMove: bestMove)
+					p.changeLocation(location: lm1)
+				for lm2 in getLegalMovesForPiece(board: board, thisPiece: p){//finds largest benefit of all legal moves
+					if (board.getPieceAtLocation(location: lm2) == nil){
+						largestMoveBenefit = minMaxTraversal(lm1: lm1, otherTeamsPieces: otherTeamsPieces, p: p, turnCounter: turnCounter, largestMoveBenefit: largestMoveBenefit, bestMove: -1)
 					}
-
-					for np in neighboringPiecesArray{//calculates the greatest move benefit of all the pieces neighboring legal move
-						attackProb = Double(7 - p.getMinRollNeeded(pieceToAttack: np.type))/denominator
-						var currentMaxBenefit = 0.0
-						if (turnCounter == 2){
-							currentMaxBenefit = (Double(np.pieceValue) * attackProb + rowIncentive)/2
-						} else {
-							currentMaxBenefit = ((Double(np.pieceValue) * attackProb)/2 + rowIncentive)/2
-						}
-						if (currentMaxBenefit >= largestMoveBenefit){
-							bestMove = lm1
-							largestMoveBenefit = currentMaxBenefit
-						}
-						
 					}
-					p.changeLocation(location: lm1)//temp set piece at location to consider whether king in more danger after move
+					p.location = oldPieceLocation
 
-					for lm2 in getLegalMovesForPiece(board: board, thisPiece: p){//finds largest benefit of all legal moves
-						if (board.getPieceAtLocation(location: lm2) == nil){
-							var attackProb: Double = 0.0 // the chance this piece will capture another
-							let denominator: Double = 6.0
-							let rowIncentive: Double = Double(lm1 / 8) / 100.0 //more benefit to spots further down board
-							var neighboringPiecesArray = [Piece]()
-							for otp in otherTeamsPieces {//builds array of other teams pieces neighboring legal move iteration
-								let dist = getTileIndexDistance(fromLocation: lm2, toLocation: otp.location)
-								if (dist == 1){
-									neighboringPiecesArray.append(otp)
-								}
-							}
-							for np in neighboringPiecesArray{//calculates the greatest move benefit of all the pieces neighboring legal move
-								attackProb = Double(7 - p.getMinRollNeeded(pieceToAttack: np.type))/denominator
-								var currentMaxBenefit = 0.0
-								if (turnCounter == 2){
-									currentMaxBenefit = (Double(np.pieceValue) * attackProb + rowIncentive)/2
-								} else {
-									currentMaxBenefit = ((Double(np.pieceValue) * attackProb)/2 + rowIncentive)/2
-								}
-								if (currentMaxBenefit > largestMoveBenefit){
-									bestMove = lm1
-									largestMoveBenefit = currentMaxBenefit
-								}
+					
+//					var attackProb: Double = 0.0 // the chance this piece will capture another
+//					let denominator: Double = 6.0
+//					let rowIncentive: Double = Double(lm1 / 8) / 100.0 //more benefit to spots further down board
+//					var neighboringPiecesArray = [Piece]()
+//					for otp in otherTeamsPieces {//builds array of other teams pieces neighboring legal move iteration
+//						let dist = getTileIndexDistance(fromLocation: lm1, toLocation: otp.location)
+//						if (dist == 1){
+//							neighboringPiecesArray.append(otp)
+//						}
+//					}
+//
+//					for np in neighboringPiecesArray{//calculates the greatest move benefit of all the pieces neighboring legal move
+//						attackProb = Double(7 - p.getMinRollNeeded(pieceToAttack: np.type))/denominator
+//						var currentMaxBenefit = 0.0
+//						if (turnCounter == 2){
+//							currentMaxBenefit = (Double(np.pieceValue) * attackProb + rowIncentive)/2
+//						} else {
+//							currentMaxBenefit = ((Double(np.pieceValue) * attackProb)/2 + rowIncentive)/2
+//						}
+//						if (currentMaxBenefit >= largestMoveBenefit){
+//							bestMove = lm1
+//							largestMoveBenefit = currentMaxBenefit
+//						}
+//
+//					}
+//					p.changeLocation(location: lm1)//temp set piece at location to consider whether king in more danger after move
 
-							}
-
-						}
-					}
-					p.changeLocation(location: oldPieceLocation )
+//					for lm2 in getLegalMovesForPiece(board: board, thisPiece: p){//finds largest benefit of all legal moves
+//						if (board.getPieceAtLocation(location: lm2) == nil){
+//							var attackProb: Double = 0.0 // the chance this piece will capture another
+//							let denominator: Double = 6.0
+//							let rowIncentive: Double = Double(lm1 / 8) / 100.0 //more benefit to spots further down board
+//							var neighboringPiecesArray = [Piece]()
+//							for otp in otherTeamsPieces {//builds array of other teams pieces neighboring legal move iteration
+//								let dist = getTileIndexDistance(fromLocation: lm2, toLocation: otp.location)
+//								if (dist == 1){
+//									neighboringPiecesArray.append(otp)
+//								}
+//							}
+//							for np in neighboringPiecesArray{//calculates the greatest move benefit of all the pieces neighboring legal move
+//								attackProb = Double(7 - p.getMinRollNeeded(pieceToAttack: np.type))/denominator
+//								var currentMaxBenefit = 0.0
+//								if (turnCounter == 2){
+//									currentMaxBenefit = (Double(np.pieceValue) * attackProb + rowIncentive)/2
+//								} else {
+//									currentMaxBenefit = ((Double(np.pieceValue) * attackProb)/2 + rowIncentive)/2
+//								}
+//								if (currentMaxBenefit > largestMoveBenefit){
+//									bestMove = lm1
+//									largestMoveBenefit = currentMaxBenefit
+//								}
+//
+//							}
+//
+//						}
+//					}
+//					p.changeLocation(location: oldPieceLocation )
 
 				}
 				
@@ -471,7 +483,7 @@ func getPiecesDistance(firstPiece:Piece,secondPiece:Piece) ->Int {//returns shor
 func getOppsNearKing(board:Board,king:Piece) ->[Piece] {//not currently used
 	//returns array of opponents pieces within a two cell radius
 	//can be added/tweaked for better King defense
-	var oppArray = king.team == Team.Black ? board.blackPieces : board.whitePieces
+	let oppArray = king.team == Team.Black ? board.blackPieces : board.whitePieces
 	var oppsNearKingArray = [Piece]();
 	for i in oppArray {
 		if (getPiecesDistance(firstPiece: king, secondPiece: i) == 3){
@@ -557,3 +569,38 @@ func getMoveByDifficulty(movesArray:[AIMove],difficulty:Int)->AIMove{
 	}
 	return chosenAIMove
 }
+
+func minMaxTraversal(lm1:Int,otherTeamsPieces:[Piece],p:Piece,turnCounter:Int,largestMoveBenefit:Double,bestMove:Int)->Double{
+	var attackProb: Double = 0.0 // the chance this piece will capture another
+	let denominator: Double = 6.0
+	let rowIncentive: Double = Double(lm1 / 8) / 100.0 //more benefit to spots further down board
+	var neighboringPiecesArray = [Piece]()
+	var lmb = largestMoveBenefit
+	var bm = bestMove
+	for otp in otherTeamsPieces {//builds array of other teams pieces neighboring legal move iteration
+		let dist = getTileIndexDistance(fromLocation: lm1, toLocation: otp.location)
+		if (dist == 1){
+			neighboringPiecesArray.append(otp)
+		}
+	}
+	
+	for np in neighboringPiecesArray{//calculates the greatest move benefit of all the pieces neighboring legal move
+		attackProb = Double(7 - p.getMinRollNeeded(pieceToAttack: np.type))/denominator
+		var currentMaxBenefit = 0.0
+		if (turnCounter == 2){
+			currentMaxBenefit = (Double(np.pieceValue) * attackProb + rowIncentive)/2
+		} else {
+			currentMaxBenefit = ((Double(np.pieceValue) * attackProb)/2 + rowIncentive)/2
+		}
+		if (currentMaxBenefit >= largestMoveBenefit){
+			if (bestMove != -1){
+				bm = lm1
+			}
+			lmb = currentMaxBenefit
+		}
+		
+	}
+	bM = bm
+	return lmb
+}
+
