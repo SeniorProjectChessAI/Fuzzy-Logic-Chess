@@ -13,7 +13,7 @@ Fuzzy Logic Chess is a variant of chess that has integrated various war game ide
 * For its first move, a Pawn may move two squares in a straight line.
 * The Bishop, Rook and Queen may each move either diagonally or horizontally in a straight line, and may only move up to four squares (not eight).
 * No declaration of “check”
-### Two actions in a turn
+### Two Actions in a Turn
 * Move two different pieces OR
 * Move the Bishop, Rook, or Queen twice, and they may change direction for the second move OR
 * Move the Knight twice, each action either using its normal chess movement pattern, OR by moving to an adjacent square OR
@@ -33,7 +33,7 @@ Fuzzy Logic Chess is a variant of chess that has integrated various war game ide
 * Multiple Difficulty Levels
 * Chess Graveyard
 
-## Built With
+## Built With...
 * XCode 10
 * Swift 3
 
