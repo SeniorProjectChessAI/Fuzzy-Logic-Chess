@@ -46,9 +46,9 @@ Fuzzy Logic Chess is a variant of chess that has integrated various war game ide
 ## Authors
 * Illya Blalakin(illyab2009): Lead Developer
 * Brian Iruka(brianiruka): Lead Developer
-* Reece Perry(reecespieces): Front-End Developer
+* Pouya R.(pranjba1): Front-End Developer
 * Nick Curtin(NickCurtin): Front-End Developer
-* Pouya R.(pranjba1): Back-End Developer
+* Reece Perry(reecespieces): Back-End Developer
 * Dozie Enworom(dozie07): Back-End Developer
 
 ## License
