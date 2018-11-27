@@ -39,9 +39,9 @@ Fuzzy Logic Chess is a variant of chess that has integrated various war game ide
 
 ## Compatible Devices
 * Apple Devices
-    * Iphones 
-    * Ipads
-* IOS Versions...
+    * iPhones 
+    * iPads
+* iOS Versions 12.0 and later
 
 ## Authors
 * Illya Blalakin(illyab2009): Lead Developer
