@@ -409,6 +409,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 				let fromPos = chosenMove.oldPos
 				let toPos = chosenMove.newPos
 		
+		
 				if (previousToTile != nil){
 					revertTileColor(tile: previousFromTile!)
 					revertTileColor(tile: previousToTile!)
@@ -469,23 +470,30 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 //					moveFromTile.backgroundColor = UIColor.init(displayP3Red: 0.0/255.0, green: 0.0/255.0, blue: 200.0/255.0, alpha: 0.5)
 //					moveToTile.backgroundColor = UIColor.init(displayP3Red: 200.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.5)
 
-					if (turnCounter == 2){//if finished ai's first turn, increase turncounter, do 2nd turn
+					if (turnCounter == 2){// if finished ai's first turn, increase turncounter, do 2nd turn
 						aiWaitingSymbol.alpha = 1
 						aiWaitingText.alpha = 1
 						turnCounter += 1
 						updateTurnDisplay()
 						turnCounter -= 1
+						if (blackPiecesRemoved < 15) {
 						DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
 							self.turnCounter += 1
 							self.AITurn()
 						})
+						}
+						else {
+							aiWaitingSymbol.alpha = 0
+							aiWaitingText.alpha = 0
+							turnCounter = 0
+							updateTurnDisplay()
+						}
 						
 					} else if (turnCounter == 3){//if second turn, reset turncounter
 						turnCounter = 0
 						updateTurnDisplay()
 					}
 					print("turncounter after move is \(turnCounter)")
-					
 				}
 			}
 
@@ -685,10 +693,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 							lastPiece?.firstMove = FirstAction.None
 						}
 						else if (lastPiece?.type == PieceType.King){
-							
-							
 							if (lastPiece?.firstMove != FirstAction.None && piecesRemoved >= 15){
-								
 								if (turnCounter == 1 || turnCounter == 3){
 									if (lastPiece?.firstMove == FirstAction.Moved){
 										let kingLegalMoves = lastPiece?.getUnfilteredMoves(board: board)
@@ -713,11 +718,8 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 									}
 								}
 							}
-							
 						}
-						
 					}
-					
 				}
 			}
 		}
@@ -851,13 +853,15 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		if (dieCounter >= 0){
 			dieCounter -= 1
 			last_rolled = d6.nextInt()
-			
-//			if (attackerTeam == Team.White) {
-//			last_rolled = 6
-//			}
-//			else {
-//			last_rolled = 1
-//			}
+
+		    // for testing purposes
+			if (attackerTeam == Team.White) {
+			last_rolled = 6
+			}
+			else {
+			last_rolled = 1
+			}
+		    //
 			
 			displayDie(num: last_rolled)
 		} else {
@@ -873,6 +877,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		attack()
 		
 		if attackResult() == false { // if attack is NOT successfull
+			updateTurnDisplay()
 			if (previousToTile != nil){
 				revertTileColor(tile: previousFromTile!)
 				revertTileColor(tile: previousToTile!)
@@ -880,6 +885,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 			print("Attack Failed! - piece NOT moved")
 		}
 		else { // if attack was successful
+			updateTurnDisplay()
 			previousTile.piece?.resetCastleLegalMoveVal()
 			
 			board.getPieceAtLocation(location: indexPath.row)?.location = 64
@@ -940,7 +946,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 
 		toTile.MinRollLabel.alpha = 0
 		toTile.showLegalMoveView(show: false)
-		if attackResult() == false { // if attack is NOT successfull
+		if attackResult() == false { // if attack is NOT successful
 			print("Attack Failed! - piece NOT moved")
 			if (previousToTile != nil){
 				revertTileColor(tile: fromTile)
@@ -968,7 +974,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 			let moveToTile = board.cellForItem(at: IndexPath(row: toPos, section: 0)) as! Tile
 			moveToTile.setPiece(piece: chosenMove.pieceToMove)
 			
-			
+			whitePiecesRemoved += 1
 		}
 		if (turnCounter == 2 && GAME_TYPE == 0){
 			aiWaitingSymbol.alpha = 1
@@ -976,10 +982,18 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 			turnCounter += 1
 			updateTurnDisplay()
 			turnCounter -= 1
-			DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
-				self.turnCounter += 1
-				self.AITurn()
-			})
+			if (blackPiecesRemoved < 15) {
+				DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
+					self.turnCounter += 1
+					self.AITurn()
+				})
+			}
+			else {
+				aiWaitingSymbol.alpha = 0
+				aiWaitingText.alpha = 0
+				turnCounter = 0
+				updateTurnDisplay()
+			}
 		} else if (turnCounter >= 3){
 			turnCounter = 0
 			updateTurnDisplay()
@@ -987,6 +1001,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
 		}
 		print("turncounter after die roll is \(turnCounter)")
 	}
+		
 	// Send captured piece to correct graveyard
 	func sendToGraveyard(piece: Piece) {
 		switch(piece.team) {
