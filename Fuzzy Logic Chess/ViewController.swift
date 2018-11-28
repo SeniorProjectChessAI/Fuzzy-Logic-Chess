@@ -856,12 +856,12 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
             last_rolled = d6.nextInt()
 
             // for testing purposes
-            if (attackerTeam == Team.White) {
-            last_rolled = 6
-            }
-            else {
-            last_rolled = 1
-            }
+//            if (attackerTeam == Team.White) {
+//            last_rolled = 6
+//            }
+//            else {
+//            last_rolled = 1
+//            }
             //
             
             displayDie(num: last_rolled)
