@@ -35,33 +35,33 @@ class Piece {
 	}
 	// returns list of legal moves
 	func getUnfilteredMoves(board: Board) -> [Int] {
-		unfilteredMoves = [Int]()
+		self.unfilteredMoves = [Int]()
 		// SURROUNDING THE PIECE...
 		// Top, Right, Bottom, Left, Diagonals
 		if(location >= 8) {		// TOP
-			unfilteredMoves.append(location - 8)
+			self.unfilteredMoves.append(location - 8)
 			if(location % 8 != 7) {	// TOP-RIGHT
-				unfilteredMoves.append(location - 7)
+				self.unfilteredMoves.append(location - 7)
 			}
 			if(location % 8 != 0) {	// TOP-LEFT
-				unfilteredMoves.append(location - 9)
+				self.unfilteredMoves.append(location - 9)
 			}
 		}
 		if(location <= 55) {	// BOTTOM
-			unfilteredMoves.append(location + 8)
+			self.unfilteredMoves.append(location + 8)
 			
 			if(location % 8 != 7) {	// BOTTOM-RIGHT
-				unfilteredMoves.append(location + 9)
+				self.unfilteredMoves.append(location + 9)
 			}
 			if(location % 8 != 0) {	// BOTTOM-LEFT
-				unfilteredMoves.append(location + 7)
+				self.unfilteredMoves.append(location + 7)
 			}
 		}
 		if(location % 8 != 0) {	// LEFT
-			unfilteredMoves.append(location - 1)
+			self.unfilteredMoves.append(location - 1)
 		}
 		if(location % 8 != 7) {	// RIGHT
-			unfilteredMoves.append(location + 1)
+			self.unfilteredMoves.append(location + 1)
 		}
 		if (self.type == PieceType.King){
 			//print("Checking for castle opportunity")
@@ -83,7 +83,7 @@ class Piece {
 		if(location % 8 == 0) {}	// left side of board
 		if(location % 8 == 7) {} // right side of board
 
-		return unfilteredMoves
+		return self.unfilteredMoves
 	}
 	
 	func getSurroundingCells(board: Board) -> [Int] {

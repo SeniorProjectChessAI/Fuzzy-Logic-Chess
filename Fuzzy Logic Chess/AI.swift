@@ -8,7 +8,6 @@
 import GameplayKit
 
  var AIKing: Piece!//AIs king
-var bM:Int = 0 //best move
 	//get empty spots around King (can me modified for Queen as well)
 	func getKingsVulnerableCells(board:Board)->[Int]{
 		var emptySquaresNearKing = [Int]()
@@ -303,17 +302,21 @@ func getKingRescueMove(board:Board,cellsInDanger:[Int], turnCounter: Int)->AIMov
 
 func getLegalMovesForPiece(board:Board,thisPiece:Piece)->[Int]{
 	
-		var legalMovesForPiece = [Int]()
-		for um in thisPiece.getUnfilteredMoves(board: board){
-			if (thisPiece.getCanMove() && board.getPieceAtLocation(location:um) == nil){
-					legalMovesForPiece.append(um)
-				}
-			if (thisPiece.getCanAttack() && board.getPieceAtLocation(location:um) != nil && board.getPieceAtLocation(location:um)?.team != thisPiece.team){
+	var legalMovesForPiece = [Int]()
+	for um in thisPiece.getUnfilteredMoves(board: board){
+		if (thisPiece.getCanMove() && board.getPieceAtLocation(location:um) == nil){
+			if (!legalMovesForPiece.contains(um)){
 				legalMovesForPiece.append(um)
 			}
 		}
-	return legalMovesForPiece
-}
+			if (thisPiece.getCanAttack() && board.getPieceAtLocation(location:um) != nil && board.getPieceAtLocation(location:um)?.team != thisPiece.team){
+				if (!legalMovesForPiece.contains(um)){
+					legalMovesForPiece.append(um)
+				}
+			}
+		}
+		return legalMovesForPiece
+	}
 
 func getBestLegalMoves(board:Board,thisTeam:Team,turnCounter:Int)->[AIMove]{
 	//creates AImove objects for each of AIs possible legal moves, calculates benefit
@@ -324,140 +327,8 @@ func getBestLegalMoves(board:Board,thisTeam:Team,turnCounter:Int)->[AIMove]{
 	var availableMoves = [AIMove]()
 	
 	for p in teamsPieces{
-
-		if (p.getCanAttack()){
-			var bestMove: Int = p.location
-			var largestAttackBenefit: Double = 0.0
-			for s in (p.getSurroundingCells(board: board)){//finds largest benefit of attack moves around piece
-				let pieceAtCell: Piece? = board.getPieceAtLocation(location: s)
-				if (pieceAtCell != nil && pieceAtCell?.team != thisTeam && pieceAtCell?.location != 64){
-
-					//print("piece can attack piece at \(s)")
-					let attackProb: Double = Double(7 - p.getMinRollNeeded(pieceToAttack: pieceAtCell!.type))/6.0
-					let currentBenefit: Double = attackProb * Double(pieceAtCell!.pieceValue)
-					if (currentBenefit > largestAttackBenefit){
-						bestMove = s
-						largestAttackBenefit = currentBenefit
-					availableMoves.append(AIMove(pieceToMove: p, attackedPiece: pieceAtCell, oldPos: p.location, newPos: bestMove, isAttackMove: true,moveBenefit:largestAttackBenefit))
-					}
-
-				}
-			}
-		}
-		//now have largest benefit of attacking without moving first
-		if (p.getCanMove()){
-			let bestMove: Int = p.location
-			var largestMoveBenefit: Double = 0.0
-			for lm1 in getLegalMovesForPiece(board: board, thisPiece: p){//finds largest benefit of all legal moves
-				//check if making this move exposes king, decrease benefit of move
-				
-				var moveExposesKing:Bool = false
-				let oldPieceLocation: Int = p.location
-				let oldKingThreatsCount: Int = getKingThreats(board: board).count
-				let oldVulnerableCellCount: Int = getKingsVulnerableCells(board: board).count
-				p.changeLocation(location: lm1)//temp set piece at location to consider whether king in more danger after move
-				moveExposesKing = (getKingThreats(board: board).count > oldKingThreatsCount || getKingsVulnerableCells(board: board).count > oldVulnerableCellCount) ? true : false
-				p.changeLocation(location: oldPieceLocation) //change back
-	
-				let firstLMPiece: Piece? = board.getPieceAtLocation(location: lm1)
-				if (firstLMPiece == nil && !moveExposesKing){
-					
-				largestMoveBenefit = minMaxTraversal(lm1: lm1, otherTeamsPieces: otherTeamsPieces, p: p, turnCounter: turnCounter, largestMoveBenefit: largestMoveBenefit, bestMove: bestMove)
-					p.changeLocation(location: lm1)
-				for lm2 in getLegalMovesForPiece(board: board, thisPiece: p){//finds largest benefit of all legal moves
-					if (board.getPieceAtLocation(location: lm2) == nil){
-						largestMoveBenefit = minMaxTraversal(lm1: lm1, otherTeamsPieces: otherTeamsPieces, p: p, turnCounter: turnCounter, largestMoveBenefit: largestMoveBenefit, bestMove: -1)
-					}
-					}
-					p.location = oldPieceLocation
-
-					
-//					var attackProb: Double = 0.0 // the chance this piece will capture another
-//					let denominator: Double = 6.0
-//					let rowIncentive: Double = Double(lm1 / 8) / 100.0 //more benefit to spots further down board
-//					var neighboringPiecesArray = [Piece]()
-//					for otp in otherTeamsPieces {//builds array of other teams pieces neighboring legal move iteration
-//						let dist = getTileIndexDistance(fromLocation: lm1, toLocation: otp.location)
-//						if (dist == 1){
-//							neighboringPiecesArray.append(otp)
-//						}
-//					}
-//
-//					for np in neighboringPiecesArray{//calculates the greatest move benefit of all the pieces neighboring legal move
-//						attackProb = Double(7 - p.getMinRollNeeded(pieceToAttack: np.type))/denominator
-//						var currentMaxBenefit = 0.0
-//						if (turnCounter == 2){
-//							currentMaxBenefit = (Double(np.pieceValue) * attackProb + rowIncentive)/2
-//						} else {
-//							currentMaxBenefit = ((Double(np.pieceValue) * attackProb)/2 + rowIncentive)/2
-//						}
-//						if (currentMaxBenefit >= largestMoveBenefit){
-//							bestMove = lm1
-//							largestMoveBenefit = currentMaxBenefit
-//						}
-//
-//					}
-//					p.changeLocation(location: lm1)//temp set piece at location to consider whether king in more danger after move
-
-//					for lm2 in getLegalMovesForPiece(board: board, thisPiece: p){//finds largest benefit of all legal moves
-//						if (board.getPieceAtLocation(location: lm2) == nil){
-//							var attackProb: Double = 0.0 // the chance this piece will capture another
-//							let denominator: Double = 6.0
-//							let rowIncentive: Double = Double(lm1 / 8) / 100.0 //more benefit to spots further down board
-//							var neighboringPiecesArray = [Piece]()
-//							for otp in otherTeamsPieces {//builds array of other teams pieces neighboring legal move iteration
-//								let dist = getTileIndexDistance(fromLocation: lm2, toLocation: otp.location)
-//								if (dist == 1){
-//									neighboringPiecesArray.append(otp)
-//								}
-//							}
-//							for np in neighboringPiecesArray{//calculates the greatest move benefit of all the pieces neighboring legal move
-//								attackProb = Double(7 - p.getMinRollNeeded(pieceToAttack: np.type))/denominator
-//								var currentMaxBenefit = 0.0
-//								if (turnCounter == 2){
-//									currentMaxBenefit = (Double(np.pieceValue) * attackProb + rowIncentive)/2
-//								} else {
-//									currentMaxBenefit = ((Double(np.pieceValue) * attackProb)/2 + rowIncentive)/2
-//								}
-//								if (currentMaxBenefit > largestMoveBenefit){
-//									bestMove = lm1
-//									largestMoveBenefit = currentMaxBenefit
-//								}
-//
-//							}
-//
-//						}
-//					}
-//					p.changeLocation(location: oldPieceLocation )
-
-				}
-				
-			}
-			if (largestMoveBenefit == 0){
-				for f in board.aiFirstWavePieces{
-					if ( f.location != 64){
-						for lm in getLegalMovesForPiece(board: board, thisPiece: f){
-							if (board.getPieceAtLocation(location: lm) == nil){
-								let randomVal = Double(GKRandomDistribution.init(lowestValue: 0, highestValue: 10).nextInt())
-								let oldRow = f.location / 8
-								let newRow = lm / 8
-								//print("random ben: \(randomBenefit)")
-								if (newRow > oldRow){//don't add any moves that have piece moving backward
-									availableMoves.append(AIMove(pieceToMove: f, attackedPiece: nil, oldPos: f.location, newPos: lm, isAttackMove: false, moveBenefit:randomVal))
-									
-								}
-							}
-							
-						}
-					}
-
-				}
-			} else if (largestMoveBenefit > 0 && p.location != 64) {
-				availableMoves.append(AIMove(pieceToMove: p, attackedPiece: nil, oldPos: p.location, newPos: bestMove, isAttackMove: false,moveBenefit:largestMoveBenefit))
-			}
-		}
-				//print("considering \(p.type) to \(bestMove) to attack \(attkPiece)")
-
+		print("piece")
+		availableMoves += perPieceMoves(p: p, board: board, thisTeam: thisTeam, turnCounter: turnCounter, otherTeamsPieces: otherTeamsPieces)
 	}
 //	for a in availableMoves{
 //		print("\(a.isAttackMove ? "attack \(a.attackedPiece) at":"move to") \(a.newPos) with benefit \(a.moveBenefit)")
@@ -512,15 +383,19 @@ func getTileIndexDistance(fromLocation:Int,toLocation:Int) -> Int {//accepts two
 func getMoveByDifficulty(movesArray:[AIMove],difficulty:Int)->AIMove{
 	var chosenAIMove:AIMove = movesArray.first!
 
+	
+	
 	switch difficulty {
 		case 0://picks random element from moves array
 			//should be reconfigured so that it only picks a random element with a move benefit > 0
-			let sortedMoves = movesArray.sorted(by: {$0.moveBenefit < $1.moveBenefit})
+			//let sortedMoves = movesArray.sorted(by: {$0.moveBenefit < $1.moveBenefit})
 			var count = 0
-			let midwayVal: Double = Double(movesArray.count) / 1.1
+			var runningTotal:Double = 0.0
 			var movesArray2 = [AIMove]();
-			for s in sortedMoves{
-				if (Double(count) > midwayVal){
+			for s in movesArray{
+				runningTotal += s.moveBenefit
+				print("Moving \(s.pieceToMove.type) at \(s.oldPos) to \(s.newPos) has a benefit of \(s.moveBenefit) \(s.isAttackMove ? "and is an attack move":"")")
+				if (s.moveBenefit > runningTotal/Double(count)){
 					movesArray2.append(s)
 				}
 				count += 1
@@ -566,24 +441,24 @@ func getMoveByDifficulty(movesArray:[AIMove],difficulty:Int)->AIMove{
 			}
 			
 		case 2:
-			for m in movesArray{//finds and returns the aimove with the greatest movebenefit
-				if (m.moveBenefit > chosenAIMove.moveBenefit){
-					chosenAIMove = m
-				}
-			}
+			let sortedMoves = movesArray.sorted(by: {$0.moveBenefit < $1.moveBenefit})
+			chosenAIMove = sortedMoves.last!
+			for s in sortedMoves{
+				print("Moving \(s.pieceToMove.type) at \(s.oldPos) to \(s.newPos) has a benefit of \(s.moveBenefit) \(s.isAttackMove ? "and is an attack move":"")")
+		}
 		default:
 		print("something went wrong")
 	}
+	
 	return chosenAIMove
 }
 
-func minMaxTraversal(lm1:Int,otherTeamsPieces:[Piece],p:Piece,turnCounter:Int,largestMoveBenefit:Double,bestMove:Int)->Double{
+func minMaxTraversal(lm1:Int,otherTeamsPieces:[Piece],p:Piece,turnCounter:Int)->Double{
 	var attackProb: Double = 0.0 // the chance this piece will capture another
 	let denominator: Double = 6.0
 	let rowIncentive: Double = Double(lm1 / 8) / 100.0 //more benefit to spots further down board
+	var largestBenefit = 0.0
 	var neighboringPiecesArray = [Piece]()
-	var lmb = largestMoveBenefit
-	var bm = bestMove
 	for otp in otherTeamsPieces {//builds array of other teams pieces neighboring legal move iteration
 		let dist = getTileIndexDistance(fromLocation: lm1, toLocation: otp.location)
 		if (dist == 1){
@@ -599,15 +474,102 @@ func minMaxTraversal(lm1:Int,otherTeamsPieces:[Piece],p:Piece,turnCounter:Int,la
 		} else {
 			currentMaxBenefit = ((Double(np.pieceValue) * attackProb)/2 + rowIncentive)/2
 		}
-		if (currentMaxBenefit >= largestMoveBenefit){
-			if (bestMove != -1){
-				bm = lm1
-			}
-			lmb = currentMaxBenefit
-		}
-		
+		largestBenefit = (currentMaxBenefit > largestBenefit) ? currentMaxBenefit : largestBenefit
 	}
-	bM = bm
-	return lmb
+
+	return largestBenefit
+}
+
+func perPieceMoves(p:Piece,board:Board,thisTeam:Team,turnCounter:Int,otherTeamsPieces:[Piece])->[AIMove]{
+	var am:[AIMove] = []
+	
+	if (p.getCanAttack()){
+		var bestMove: Int = p.location
+		var largestAttackBenefit: Double = 0.0
+		for s in (p.getSurroundingCells(board: board)){//finds largest benefit of attack moves around piece
+			let pieceAtCell: Piece? = board.getPieceAtLocation(location: s)
+			if (pieceAtCell != nil && pieceAtCell?.team != thisTeam && pieceAtCell?.location != 64){
+				
+				//print("piece can attack piece at \(s)")
+				let attackProb: Double = Double(7 - p.getMinRollNeeded(pieceToAttack: pieceAtCell!.type))/6.0
+				let currentBenefit: Double = attackProb * Double(pieceAtCell!.pieceValue)
+				if (currentBenefit > largestAttackBenefit){
+					bestMove = s
+					largestAttackBenefit = currentBenefit
+					am.append(AIMove(pieceToMove: p, attackedPiece: pieceAtCell, oldPos: p.location, newPos: bestMove, isAttackMove: true,moveBenefit:largestAttackBenefit))
+				}
+				
+			}
+		}
+	}
+	//now have largest benefit of attacking without moving first
+	
+	if (p.getCanMove()){
+		var bestMove: Int = 0
+		var largestMoveBenefit: Double = 0.0
+		
+		for lm1 in getLegalMovesForPiece(board: board, thisPiece: p){//finds largest benefit of all legal moves
+			//check if making this move exposes king, decrease benefit of move
+			
+			var moveExposesKing:Bool = false
+			let oldPieceLocation: Int = p.location
+			let oldKingThreatsCount: Int = getKingThreats(board: board).count
+			let oldVulnerableCellCount: Int = getKingsVulnerableCells(board: board).count
+			p.changeLocation(location: lm1)//temp set piece at location to consider whether king in more danger after move
+			moveExposesKing = (getKingThreats(board: board).count > oldKingThreatsCount || getKingsVulnerableCells(board: board).count > oldVulnerableCellCount) ? true : false
+			p.changeLocation(location: oldPieceLocation) //change back
+			
+			let firstLMPiece: Piece? = board.getPieceAtLocation(location: lm1)
+			if (firstLMPiece == nil && !moveExposesKing){
+				let nextBenefit = minMaxTraversal(lm1: lm1, otherTeamsPieces: otherTeamsPieces, p: p, turnCounter: turnCounter)
+				print("considering move for \(p.type) at \(p.location) to \(lm1), has a benefit of \(nextBenefit)")
+				
+				if (nextBenefit >= largestMoveBenefit){
+					bestMove = lm1
+					largestMoveBenefit = nextBenefit
+					print("best move for \(p.type) at \(p.location) has been updated to \(bestMove), next benefit for this piece is \(nextBenefit)")
+				}
+				
+				p.changeLocation(location: lm1)
+				for lm2 in getLegalMovesForPiece(board: board, thisPiece: p){//finds largest benefit of all legal moves
+					if (board.getPieceAtLocation(location: lm2) == nil){
+						let nextBenefit = minMaxTraversal(lm1: lm2, otherTeamsPieces: otherTeamsPieces, p: p, turnCounter: turnCounter)
+						print("considering move for \(p.type) at \(p.location) to \(lm2), has a benefit of \(nextBenefit). second level")
+						if (nextBenefit > largestMoveBenefit){
+							bestMove = lm1
+							largestMoveBenefit = nextBenefit
+							print("best move for \(p.type) at \(oldPieceLocation) has been updated to \(bestMove), has a new benefit of \(nextBenefit). second level")
+							
+						}
+					}
+				}
+				p.location = oldPieceLocation
+			}
+		}
+		if (largestMoveBenefit == 0){
+			for f in board.aiFirstWavePieces{
+				if ( f.location != 64){
+					for lm in getLegalMovesForPiece(board: board, thisPiece: f){
+						if (board.getPieceAtLocation(location: lm) == nil){
+							let randomVal = Double(GKRandomDistribution.init(lowestValue: 0, highestValue: 10).nextInt())
+							let oldRow = f.location / 8
+							let newRow = lm / 8
+							//print("random ben: \(randomBenefit)")
+							if (newRow > oldRow){//don't add any moves that have piece moving backward
+								am.append(AIMove(pieceToMove: f, attackedPiece: nil, oldPos: f.location, newPos: lm, isAttackMove: false, moveBenefit:randomVal/2))
+								
+							}
+						}
+						
+					}
+				}
+				
+			}
+		} else if (largestMoveBenefit > 0 && p.location != 64) {
+			am.append(AIMove(pieceToMove: p, attackedPiece: nil, oldPos: p.location, newPos: bestMove, isAttackMove: false,moveBenefit:largestMoveBenefit))
+		}
+	}
+	//print("considering \(p.type) to \(bestMove) to attack \(attkPiece)")
+	return am
 }
 
