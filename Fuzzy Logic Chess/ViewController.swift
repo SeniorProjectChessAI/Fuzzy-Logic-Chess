@@ -353,7 +353,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
                 for bp in board.blackPieces{
                     bp.firstMove = FirstAction.None //resets what AI piece did for first move
                 }
-                
+				
             }
         } else { // Two Player game
             playersTurn(indexPath: indexPath)
@@ -404,6 +404,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
             chosenMove = getMoveByDifficulty(movesArray: legalMovesArray, difficulty: DIFFICULTY)
             //print("chosen move: \(defendMove.pieceToMove.type) at \(defendMove.oldPos) to \(defendMove.newPos) with benefit value \(defendMove.moveBenefit). \(defendMove.isAttackMove ? "This is an attack move":"")")
         }
+		
             chosenMove = (chosenMove == nil) ? getBestLegalMoves(board: board, thisTeam: Team.Black, turnCounter: turnCounter).first: chosenMove
 
                 let fromPos = chosenMove.oldPos
@@ -476,7 +477,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
                         turnCounter += 1
                         updateTurnDisplay()
                         turnCounter -= 1
-                        if (blackPiecesRemoved < 15) {
+                        if (blackPiecesRemoved < 15 || (cellsCanAttackAIKing(board: board) != nil && AIKing.getCanAttack())) {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
                             self.turnCounter += 1
                             self.AITurn()
@@ -982,7 +983,7 @@ class ViewController: UIViewController , UICollectionViewDataSource, UICollectio
             turnCounter += 1
             updateTurnDisplay()
             turnCounter -= 1
-            if (blackPiecesRemoved < 15) {
+			if (blackPiecesRemoved < 15 || (cellsCanAttackAIKing(board: board) != nil && AIKing.getCanAttack())) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: {
                     self.turnCounter += 1
                     self.AITurn()

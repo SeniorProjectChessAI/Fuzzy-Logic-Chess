@@ -520,7 +520,7 @@ func perPieceMoves(p:Piece,board:Board,thisTeam:Team,turnCounter:Int,otherTeamsP
 			p.changeLocation(location: oldPieceLocation) //change back
 			
 			let firstLMPiece: Piece? = board.getPieceAtLocation(location: lm1)
-			if (firstLMPiece == nil && !moveExposesKing){
+			if (firstLMPiece == nil && (!moveExposesKing || board.blackPieces.count <= 3)){
 				let nextBenefit = minMaxTraversal(lm1: lm1, otherTeamsPieces: otherTeamsPieces, p: p, turnCounter: turnCounter)
 				print("considering move for \(p.type) at \(p.location) to \(lm1), has a benefit of \(nextBenefit)")
 				
