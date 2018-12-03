@@ -44,7 +44,7 @@ Fuzzy Logic Chess is a variant of chess that has integrated various war game ide
 * iOS Versions 12.0 and later
 
 ## Authors
-* Illya Blalakin(illyab2009): Lead Developer
+* Illya Blalakin(illyabalakin): Lead Developer
 * Brian Iruka(brianiruka): Lead Developer
 * Pouya R.(pranjba1): Front-End Developer
 * Nick Curtin(NickCurtin): Front-End Developer
